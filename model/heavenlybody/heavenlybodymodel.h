@@ -7,8 +7,8 @@
 #include <QModelIndex>
 
 #include "data/heavenlybody/heavenlybodyrepository.h"
-#include "data/heavenlybody/heavenlybodytablemodel.h"
-#include "data/heavenlybody/heavenlybody.h"
+#include "model/heavenlybody/heavenlybodytablemodel.h"
+#include "model/heavenlybody/heavenlybody.h"
 
 class HeavenlyBodyModel : public QWidget
 {

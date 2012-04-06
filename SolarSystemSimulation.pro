@@ -24,10 +24,12 @@ SOURCES += main.cpp \
     forms/heavenlybody/heavenlybodyoverview.cpp \
     model/heavenlybody/heavenlybodymodel.cpp \
     data/heavenlybody/heavenlybodyrepository.cpp \
-    data/heavenlybody/heavenlybodytablemodel.cpp \
-    data/heavenlybody/heavenlybody.cpp \
     database/postgresqldatabase.cpp \
-    forms/heavenlybody/heavenlybodydetails.cpp
+    forms/heavenlybody/heavenlybodydetails.cpp \
+    model/heavenlybody/heavenlybodytablemodel.cpp \
+    model/heavenlybody/heavenlybody.cpp \
+    data/solarsystem/solarsystemrepository.cpp \
+    model/solarsystem/solarsystem.cpp
 
 HEADERS  += forms/main/mainwindow.h \
     OpenGL/glvector.h \
@@ -46,10 +48,12 @@ HEADERS  += forms/main/mainwindow.h \
     forms/heavenlybody/heavenlybodyoverview.h \
     model/heavenlybody/heavenlybodymodel.h \
     data/heavenlybody/heavenlybodyrepository.h \
-    data/heavenlybody/heavenlybodytablemodel.h \
-    data/heavenlybody/heavenlybody.h \
     database/postgresqldatabase.h \
-    forms/heavenlybody/heavenlybodydetails.h
+    forms/heavenlybody/heavenlybodydetails.h \
+    model/heavenlybody/heavenlybodytablemodel.h \
+    model/heavenlybody/heavenlybody.h \
+    data/solarsystem/solarsystemrepository.h \
+    model/solarsystem/solarsystem.h
 
 FORMS    += forms/main/mainwindow.ui \
     forms/simulation/simulationview.ui \

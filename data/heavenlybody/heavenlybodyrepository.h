@@ -8,8 +8,8 @@
 #include <QSqlRecord>
 #include <QDebug>
 
-#include "heavenlybody.h"
 #include "database/postgresqldatabase.h"
+#include "model/heavenlybody/heavenlybody.h"
 
 class HeavenlyBodyRepository
 {
