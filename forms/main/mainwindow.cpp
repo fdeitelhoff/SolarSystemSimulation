@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "forms/heavenlybody/heavenlybodyoverview.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,4 +20,10 @@ void MainWindow::on_actionHeavenlyBodyOverview_triggered()
 {
     HeavenlyBodyOverview *heavenlyBodyOverview = new HeavenlyBodyOverview(this);
     heavenlyBodyOverview->show();
+}
+
+void MainWindow::on_actionSolarSystemOverview_triggered()
+{
+    SolarSystemOverview *solarSystemOverview = new SolarSystemOverview(this);
+    solarSystemOverview->show();
 }

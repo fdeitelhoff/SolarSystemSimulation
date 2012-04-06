@@ -29,15 +29,6 @@ public:
 
     void removeHeavenlyBody(HeavenlyBody *heavenlyBody);
 
-//    Qt::ItemFlags flags(const QModelIndex &index) const;
-//    bool setData(const QModelIndex &index, const QVariant &value,
-//                 int role = Qt::EditRole);
-
-//    bool insertRows(int position, int rows, const QModelIndex &parent = QModelIndex());
-//    bool insertColumns(int position, int columns, const QModelIndex &parent = QModelIndex());
-//    bool removeRows(int position, int rows, const QModelIndex &parent = QModelIndex());
-//    bool removeColumns(int position, int columns, const QModelIndex &parent = QModelIndex());
-
 private:
     QList<HeavenlyBody *> entities;
 };

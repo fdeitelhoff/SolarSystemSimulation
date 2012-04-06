@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+
+#include "forms/heavenlybody/heavenlybodyoverview.h"
+#include "forms/solarsystem/solarsystemoverview.h"
 #include "forms/simulation/simulationview.h"
 
 namespace Ui {
@@ -23,6 +26,7 @@ private:
 
 private slots:
     void on_actionHeavenlyBodyOverview_triggered();
+    void on_actionSolarSystemOverview_triggered();
 };
 
 #endif // MAINWINDOW_H

@@ -10,6 +10,7 @@ class HeavenlyBody
 public:
     HeavenlyBody();
     HeavenlyBody(qint64 id, QString name, int diameter, QColor color, QString type);
+    HeavenlyBody(qint64 id, QString name, int diameter, QString colorString, QString type);
 
     qint64 getId() { return id; }
     QString getName() { return name; }

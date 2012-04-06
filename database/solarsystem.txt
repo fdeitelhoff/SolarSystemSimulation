@@ -1,0 +1,2 @@
+INSERT INTO solarsystem(name, centralstarid) VALUES ('Sonnensystem 1', 9);
+INSERT INTO solarsystem(name, centralstarid) VALUES ('Sonnensystem 2', 11);

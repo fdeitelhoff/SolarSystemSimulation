@@ -34,7 +34,14 @@
     </property>
     <addaction name="actionHeavenlyBodyOverview"/>
    </widget>
+   <widget class="QMenu" name="menuSolar_System">
+    <property name="title">
+     <string>Solar System</string>
+    </property>
+    <addaction name="actionSolarSystemOverview"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuSolar_System"/>
    <addaction name="menuHeavenly_Body"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -47,6 +54,11 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionHeavenlyBodyOverview">
+   <property name="text">
+    <string>Overview</string>
+   </property>
+  </action>
+  <action name="actionSolarSystemOverview">
    <property name="text">
     <string>Overview</string>
    </property>
