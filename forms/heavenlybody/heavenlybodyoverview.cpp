@@ -8,10 +8,33 @@ HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent) :
     ui->setupUi(this);
 
     heavenlyBodyModel = new HeavenlyBodyModel();
-    heavenlyBodyModel->loadAllHeavenlyBodies();
+
+    ui->heavenlyBodyTableView->setModel(heavenlyBodyModel->getHeavenlyBodyTableModel());
+    heavenlyBodyModel->setSelectionModel(ui->heavenlyBodyTableView->selectionModel());
+
+    heavenlyBodyModel->loadAllHeavenlyBodyEntities();
+
+    ui->heavenlyBodyTableView->selectRow(0);
 }
 
 HeavenlyBodyOverview::~HeavenlyBodyOverview()
 {
     delete ui;
+}
+
+void HeavenlyBodyOverview::on_add_clicked()
+{
+    HeavenlyBodyDetails *heavenlyBodyDetails = new HeavenlyBodyDetails(this, heavenlyBodyModel, false);
+    heavenlyBodyDetails->show();
+}
+
+void HeavenlyBodyOverview::on_edit_clicked()
+{
+    HeavenlyBodyDetails *heavenlyBodyDetails = new HeavenlyBodyDetails(this, heavenlyBodyModel, true);
+    heavenlyBodyDetails->show();
+}
+
+void HeavenlyBodyOverview::on_deleteEntity_clicked()
+{
+    heavenlyBodyModel->deleteEntity();
 }

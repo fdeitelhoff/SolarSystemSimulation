@@ -26,7 +26,8 @@ SOURCES += main.cpp \
     data/heavenlybody/heavenlybodyrepository.cpp \
     data/heavenlybody/heavenlybodytablemodel.cpp \
     data/heavenlybody/heavenlybody.cpp \
-    database/postgresqldatabase.cpp
+    database/postgresqldatabase.cpp \
+    forms/heavenlybody/heavenlybodydetails.cpp
 
 HEADERS  += forms/main/mainwindow.h \
     OpenGL/glvector.h \
@@ -47,11 +48,13 @@ HEADERS  += forms/main/mainwindow.h \
     data/heavenlybody/heavenlybodyrepository.h \
     data/heavenlybody/heavenlybodytablemodel.h \
     data/heavenlybody/heavenlybody.h \
-    database/postgresqldatabase.h
+    database/postgresqldatabase.h \
+    forms/heavenlybody/heavenlybodydetails.h
 
 FORMS    += forms/main/mainwindow.ui \
     forms/simulation/simulationview.ui \
-    forms/heavenlybody/heavenlybodyoverview.ui
+    forms/heavenlybody/heavenlybodyoverview.ui \
+    forms/heavenlybody/heavenlybodydetails.ui
 
 # UI_HEADERS_DIR += src/forms
 
@@ -61,4 +64,5 @@ LIBS += -L \
     -lfreeglut
 
 OTHER_FILES += \
-    database/DDL.txt
+    database/DDL.txt \
+    database/heavenlybody.txt
