@@ -6,7 +6,7 @@
 #include <QVariant>
 #include <QList>
 
-#include "data/heavenlybody/heavenlybody.h"
+#include "model/heavenlybody/heavenlybody.h"
 
 class HeavenlyBodyTableModel : public QAbstractTableModel
 {

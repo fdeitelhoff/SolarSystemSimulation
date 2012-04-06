@@ -1,8 +1,7 @@
 #include "heavenlybody.h"
 
 HeavenlyBody::HeavenlyBody()
-{
-}
+{ }
 
 HeavenlyBody::HeavenlyBody(qint64 id, QString name, int diameter, QColor color, QString type)
 {
