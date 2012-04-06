@@ -1,0 +1,24 @@
+CREATE TABLE SolarSystemToHeavenlyBody (
+  SolarSystemID  int8 NOT NULL,
+  HeavenlyBodyID int8 NOT NULL,
+  Excentricity   float8 NOT NULL,
+  SemimajorAxis  float8 NOT NULL,
+  PRIMARY KEY (SolarSystemID,
+  HeavenlyBodyID,
+  Excentricity,
+  SemimajorAxis));
+CREATE TABLE SolarSystem (
+  SolarSystemID  BIGSERIAL NOT NULL,
+  Name          varchar(255) NOT NULL UNIQUE,
+  CentralStarID int8 NOT NULL,
+  PRIMARY KEY (SolarSystemID));
+CREATE TABLE HeavenlyBody (
+  HeavenlyBodyID  BIGSERIAL NOT NULL,
+  Name           varchar(255) NOT NULL UNIQUE,
+  Diameter       int4 NOT NULL,
+  Color          char(15) NOT NULL,
+  Type           char(1) NOT NULL CHECK (Type in ('P', 'S')),
+  PRIMARY KEY (HeavenlyBodyID));
+ALTER TABLE SolarSystem ADD CONSTRAINT FKSolarSyste811064 FOREIGN KEY (CentralStarID) REFERENCES HeavenlyBody (HeavenlyBodyID);
+ALTER TABLE SolarSystemToHeavenlyBody ADD CONSTRAINT FKSolarSyste525796 FOREIGN KEY (SolarSystemID) REFERENCES SolarSystem (SolarSystemID) ON UPDATE Cascade ON DELETE Cascade;
+ALTER TABLE SolarSystemToHeavenlyBody ADD CONSTRAINT FKSolarSyste194587 FOREIGN KEY (HeavenlyBodyID) REFERENCES HeavenlyBody (HeavenlyBodyID);
