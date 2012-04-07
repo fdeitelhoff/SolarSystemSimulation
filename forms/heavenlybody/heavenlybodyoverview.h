@@ -2,6 +2,7 @@
 #define HEAVENLYBODYOVERVIEW_H
 
 #include <QDialog>
+#include <QMessageBox>
 
 #include "model/heavenlybody/heavenlybodymodel.h"
 #include "forms/heavenlybody/heavenlybodydetails.h"

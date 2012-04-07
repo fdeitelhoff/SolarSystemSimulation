@@ -36,5 +36,15 @@ void HeavenlyBodyOverview::on_edit_clicked()
 
 void HeavenlyBodyOverview::on_deleteEntity_clicked()
 {
-    heavenlyBodyModel->deleteEntity();
+    try
+    {
+        heavenlyBodyModel->deleteEntity();
+    }
+    catch (const DeleteEntityFailedException &exception)
+    {
+        QMessageBox::information(this,
+                                 "Error while deleting",
+                                 exception.getMessage() + "\n\nSQL-Error:\n" + exception.getSqlError(),
+                                 QMessageBox::Ok);
+    }
 }

@@ -66,9 +66,12 @@ void HeavenlyBodyRepository::deleteEntity(HeavenlyBody *heavenlyBody)
     QSqlQuery query;
     query.prepare("DELETE FROM heavenlybody WHERE heavenlybodyid = :heavenlybodyid");
     query.bindValue(":heavenlybodyid", heavenlyBody->getId());
-    query.exec();
 
-    qDebug() << query.lastError();
+    if (!query.exec())
+    {
+        throw DeleteEntityFailedException("The Heavenly Body entity could not be deleted!",
+                                          query.lastError().text());
+    }
 }
 
 QString HeavenlyBodyRepository::colorToString(QColor color)

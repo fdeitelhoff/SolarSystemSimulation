@@ -9,6 +9,7 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
 
     this->solarSystemModel = solarSystemModel;
 
+    ui->planetsTableView->setModel(solarSystemModel->getSolarSystemHeavenlyBodyTableModel());
     ui->stars->setModel(solarSystemModel->getStarsComboBoxModel());
     ui->planets->setModel(solarSystemModel->getPlanetsComboBoxModel());
 

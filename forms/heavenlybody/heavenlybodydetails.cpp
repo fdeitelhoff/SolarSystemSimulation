@@ -65,6 +65,7 @@ void HeavenlyBodyDetails::on_chooseColor_clicked()
 
 void HeavenlyBodyDetails::on_ok_clicked()
 {
+    // Put this into a method of class HeavenlyBodyModel(?)
     if (!isEdit)
     {
         currentEntity = new HeavenlyBody();

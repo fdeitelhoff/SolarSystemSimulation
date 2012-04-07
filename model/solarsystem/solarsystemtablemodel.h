@@ -21,13 +21,9 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation,
                         int role = Qt::DisplayRole) const;
 
-    void addData(QList<SolarSystem *> entities);
+    void setData(QList<SolarSystem *> entities);
 
     SolarSystem* getSolarSystem(int row);
-
-    //void addHeavenlyBody(HeavenlyBody *heavenlyBody);
-
-    //void removeHeavenlyBody(HeavenlyBody *heavenlyBody);
 
 private:
     QList<SolarSystem *> entities;

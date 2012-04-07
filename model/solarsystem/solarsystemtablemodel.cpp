@@ -73,7 +73,7 @@ QVariant SolarSystemTableModel::headerData(int section, Qt::Orientation orientat
     return columnHeader;
 }
 
-void SolarSystemTableModel::addData(QList<SolarSystem *> entities)
+void SolarSystemTableModel::setData(QList<SolarSystem *> entities)
 {
     this->entities.append(entities);
 }

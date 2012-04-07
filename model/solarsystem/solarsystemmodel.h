@@ -5,6 +5,7 @@
 #include "model/solarsystem/solarsystemtablemodel.h"
 #include "model/heavenlybody/heavenlybodycomboboxmodel.h"
 #include "data/heavenlybody/heavenlybodyrepository.h"
+#include "model/solarsystem/solarsystemheavenlybodytablemodel.h"
 
 class SolarSystemModel
 {
@@ -12,21 +13,22 @@ class SolarSystemModel
 public:
     SolarSystemModel();
 
-    SolarSystemTableModel* getSolarSystemTableModel();
-
     void loadAllSolarSystemEntities();
 
     void loadOtherEntities();
+
+    SolarSystemTableModel* getSolarSystemTableModel();
+    SolarSystemHeavenlyBodyTableModel* getSolarSystemHeavenlyBodyTableModel();
 
     HeavenlyBodyComboBoxModel* getStarsComboBoxModel();
     HeavenlyBodyComboBoxModel* getPlanetsComboBoxModel();
 
 private:
     SolarSystemRepository *solarSystemRepository;
-    SolarSystemTableModel *solarSystemTableModel;
-
     HeavenlyBodyRepository *heavenlyBodyRepository;
 
+    SolarSystemTableModel *solarSystemTableModel;
+    SolarSystemHeavenlyBodyTableModel *solarSystemHeavenlyBodyTableModel;
     HeavenlyBodyComboBoxModel *starsComboBoxModel;
     HeavenlyBodyComboBoxModel *planetsComboBoxModel;
 };

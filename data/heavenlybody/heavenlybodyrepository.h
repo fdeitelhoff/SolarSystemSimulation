@@ -10,6 +10,7 @@
 
 #include "database/postgresqldatabase.h"
 #include "model/heavenlybody/heavenlybody.h"
+#include "data/exceptions/deleteentityfailedexception.h"
 
 class HeavenlyBodyRepository
 {
