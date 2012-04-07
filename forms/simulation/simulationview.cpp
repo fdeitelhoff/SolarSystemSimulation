@@ -83,8 +83,6 @@ void SimulationView::paintGL()
 
 
         static float phi = 0.0;
-        static float step = 0.1;
-
 
 
     GLLight light;
@@ -118,7 +116,9 @@ void SimulationView::paintGL()
     qDebug() << "x = " << x << "    y = " << y << "    r = " << r << "   my = " << my;
     qDebug() << "Momentangeschwindigkeit: " << instantaneous_velocity;
 
+    glRotatef(45.0, 0.0, 0.0, 1.0);
     glTranslated(x , y, 0.0);
+
 
     // Mit einem Dreisatz den zu überschreitenden Winkel bestimmen:
     // alpha / øalpha ~ v / øv
@@ -138,7 +138,10 @@ void SimulationView::paintGL()
     glPopMatrix();
 
 
+    glPushMatrix();
+    glRotatef(45.0, 0.0, 0.0, 1.0);
     drawEllipse(a, b, e);
+    glPopMatrix();
 
         glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cl_Yellow.fv());
         glutSolidSphere(0.7,32,32);
@@ -195,11 +198,13 @@ void SimulationView::drawEllipse(float a, float b, float e)
                 float x,y,z;
                 float t;
             glBegin(GL_POINTS);
+
             for(t = 0; t <= 2 * PI; t += PI / 720)
                         {
                 x = cos(t) * a + e;
                 y = sin(t) * b;
                   z = 0;
+                            glRotatef(45.0, 1.0, 1.0, 1.0);
                   glVertex3f(x,y,z);
                         }
             glEnd();

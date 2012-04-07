@@ -81,9 +81,13 @@ FORMS    += forms/main/mainwindow.ui \
 # UI_HEADERS_DIR += src/forms
 
 # Das müssen wir noch irgendwie Plattform unabhängig machen.
-LIBS += -L \
-    "E:/Programme/QtSDK/mingw/freeglut/lib" \
-    -lfreeglut
+#LIBS += -L \
+#    "E:/Programme/QtSDK/mingw/freeglut/lib" \
+ #   -lfreeglut
+
+LIBS += -lglut \
+    -lGL \
+    -lGLU
 
 OTHER_FILES += \
     database/DDL.txt \
