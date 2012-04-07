@@ -3,8 +3,11 @@
 SolarSystemModel::SolarSystemModel()
 {
     solarSystemRepository = new SolarSystemRepository();
+    heavenlyBodyRepository = new HeavenlyBodyRepository();
 
     solarSystemTableModel = 0;
+    starsComboBoxModel = 0;
+    planetsComboBoxModel = 0;
 }
 
 SolarSystemTableModel* SolarSystemModel::getSolarSystemTableModel()
@@ -25,4 +28,33 @@ void SolarSystemModel::loadAllSolarSystemEntities()
     QList<SolarSystem *> entities = solarSystemRepository->fetchAllSolarSystemEntities();
 
     solarSystemTableModel->addData(entities);
+}
+
+HeavenlyBodyComboBoxModel* SolarSystemModel::getStarsComboBoxModel()
+{
+    if (!starsComboBoxModel)
+    {
+        starsComboBoxModel = new HeavenlyBodyComboBoxModel();
+    }
+
+    return starsComboBoxModel;
+}
+
+HeavenlyBodyComboBoxModel* SolarSystemModel::getPlanetsComboBoxModel()
+{
+    if (!planetsComboBoxModel)
+    {
+        planetsComboBoxModel = new HeavenlyBodyComboBoxModel();
+    }
+
+    return planetsComboBoxModel;
+}
+
+void SolarSystemModel::loadOtherEntities()
+{
+    QList<HeavenlyBody *> stars = heavenlyBodyRepository->fetchExplizitTypedEntities("S");
+    QList<HeavenlyBody *> planets = heavenlyBodyRepository->fetchExplizitTypedEntities("P");
+
+    starsComboBoxModel->setData(stars);
+    planetsComboBoxModel->setData(planets);
 }

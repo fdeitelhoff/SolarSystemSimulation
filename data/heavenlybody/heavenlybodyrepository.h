@@ -19,6 +19,8 @@ public:
 
     QList<HeavenlyBody *> fetchAllHeavenlyBodyEntities();
 
+    QList<HeavenlyBody *> fetchExplizitTypedEntities(QString type);
+
     void updateEntity(HeavenlyBody *heavenlyBody);
     void addEntity(HeavenlyBody *heavenlyBody);
     void deleteEntity(HeavenlyBody *heavenlyBody);

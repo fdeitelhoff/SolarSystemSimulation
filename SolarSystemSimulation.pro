@@ -34,7 +34,8 @@ SOURCES += main.cpp \
     forms/solarsystem/solarsystemoverview.cpp \
     model/solarsystem/solarsystemmodel.cpp \
     model/solarsystem/solarsystemtablemodel.cpp \
-    forms/solarsystem/solarsystemdetails.cpp
+    forms/solarsystem/solarsystemdetails.cpp \
+    model/heavenlybody/heavenlybodycomboboxmodel.cpp
 
 HEADERS  += forms/main/mainwindow.h \
     OpenGL/glvector.h \
@@ -63,7 +64,8 @@ HEADERS  += forms/main/mainwindow.h \
     forms/solarsystem/solarsystemoverview.h \
     model/solarsystem/solarsystemmodel.h \
     model/solarsystem/solarsystemtablemodel.h \
-    forms/solarsystem/solarsystemdetails.h
+    forms/solarsystem/solarsystemdetails.h \
+    model/heavenlybody/heavenlybodycomboboxmodel.h
 
 FORMS    += forms/main/mainwindow.ui \
     forms/simulation/simulationview.ui \

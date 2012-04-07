@@ -21,7 +21,7 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation,
                         int role = Qt::DisplayRole) const;
 
-    void addData(QList<HeavenlyBody *> entities);
+    void setData(QList<HeavenlyBody *> entities);
 
     HeavenlyBody* getHeavenlyBody(int row);
 

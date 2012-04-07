@@ -21,6 +21,6 @@ SolarSystemOverview::~SolarSystemOverview()
 
 void SolarSystemOverview::on_add_clicked()
 {
-    SolarSystemDetails *solarSystemDetails = new SolarSystemDetails(this);
+    SolarSystemDetails *solarSystemDetails = new SolarSystemDetails(this, solarSystemModel, false);
     solarSystemDetails->show();
 }

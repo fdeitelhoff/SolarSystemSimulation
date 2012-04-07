@@ -15,7 +15,7 @@ void HeavenlyBodyModel::loadAllHeavenlyBodyEntities()
 
     QList<HeavenlyBody *> entities = heavenlyBodyRepository->fetchAllHeavenlyBodyEntities();
 
-    heavenlyBodyTableModel->addData(entities);
+    heavenlyBodyTableModel->setData(entities);
 }
 
 void HeavenlyBodyModel::setSelectionModel(QItemSelectionModel *selectionModel)

@@ -20,17 +20,8 @@ QList<HeavenlyBody *> HeavenlyBodyRepository::fetchAllHeavenlyBodyEntities()
         qint64 id = query.value(0).toLongLong();
         QString name = query.value(1).toString();
         int diameter = query.value(2).toInt();
-        QString colorString = query.value(3).toString();
+        QString color = query.value(3).toString();
         QString type = query.value(4).toString();
-
-        QColor color;
-
-        QStringList parts = colorString.split(":", QString::SkipEmptyParts);
-
-        color.setRed(parts.at(0).toInt());
-        color.setGreen(parts.at(1).toInt());
-        color.setBlue(parts.at(2).toInt());
-        color.setAlpha(parts.at(3).toInt());
 
         entities.append(new HeavenlyBody(id, name, diameter, color, type));
     }
@@ -89,4 +80,39 @@ QString HeavenlyBodyRepository::colorToString(QColor color)
     colorString = colorString.arg(color.alpha());
 
     return colorString;
+}
+
+QList<HeavenlyBody *> HeavenlyBodyRepository::fetchExplizitTypedEntities(QString type)
+{
+    QSqlQuery query;
+    query.prepare("SELECT "
+                  "     heavenlybodyid, "
+                  "     name, "
+                  "     diameter, "
+                  "     color, "
+                  "     type "
+                  "FROM "
+                  "     heavenlybody "
+                  "WHERE "
+                  "     type = :type");
+    query.bindValue(":type", type);
+
+    query.exec();
+
+    qDebug() << query.lastError();
+
+    QList<HeavenlyBody *> entities;
+
+    while (query.next())
+    {
+        qint64 id = query.value(0).toLongLong();
+        QString name = query.value(1).toString();
+        int diameter = query.value(2).toInt();
+        QString color = query.value(3).toString();
+        QString type = query.value(4).toString();
+
+        entities.append(new HeavenlyBody(id, name, diameter, color, type));
+    }
+
+    return entities;
 }
