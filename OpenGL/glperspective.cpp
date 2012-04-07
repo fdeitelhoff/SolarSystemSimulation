@@ -31,6 +31,16 @@ GLPerspective::GLPerspective()
   _Far = 100.0; 
 }
 
+GLPerspective::GLPerspective(GLVector camera_position)
+{
+  _Center = v_Zero;
+  _Camera = camera_position;
+  _Up = v_Y;
+  _Fovy = 45.0;
+  _Aspect = 1.0;
+  _Near = 1.0;
+  _Far = 100.0;
+}
 
 GLPerspective::~GLPerspective()
 {

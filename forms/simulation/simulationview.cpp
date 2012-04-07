@@ -5,95 +5,26 @@
 #include <QKeyEvent>
 #include "OpenGL/glcolorrgba.h"
 #include "OpenGL/gllight.h"
-#include "OpenGL/GL/glut.h"
+#include <GL/glut.h>
+
 
 SimulationView::SimulationView(QWidget *parent) :
-    QGLWidget(parent),
-    ui(new Ui::SimulationView)
+        QGLWidget(parent)//,
+        //   ui(new Ui::SimulationView)
 {
-    ui->setupUi(this);
-
     //ui->setupUi(this);
-    _Perspective = new GLPerspective();
+    _Perspective = new GLPerspective(25 * v_Z);
     setFocusPolicy(Qt::StrongFocus);
     setMouseTracking(true);
 
-
-//        glutIdleFunc(main_loop_function);
-//        glutMainLoop();
-        startTimer(20);
+    startTimer(20);
 }
 
 SimulationView::~SimulationView()
 {
-    delete ui;
+    //delete ui;
     delete _Perspective;
 }
-
-
-// Main loop
-void main_loop_function() {
-//// Z angle
-//	static float angle;
-//// Clear color (screen)
-//// And depth (used internally to block obstructed objects)
-//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//// Load identity matrix
-//	glLoadIdentity();
-//// Multiply in translation matrix
-//	glTranslatef(0, 0, -4);
-//// Multiply in rotation matrix
-//	glRotatef(angle, 0, 0, 1);
-//// Render colored quad
-//	glBegin(GL_QUADS);
-//
-//		glColor3ub(255, 000, 000);
-//		glVertex2f(-1, 0);
-//
-//		glColor3ub(000, 255, 000);
-//		glVertex2f(0, 1);
-//
-//		glColor3ub(000, 000, 255);
-//		glVertex2f(1, 0);
-//
-//		glColor3ub(255, 255, 255);
-//		glVertex2f(0, -1);
-//
-//	glEnd();
-//// Swap buffers (color buffers, makes previous render visible)
-//	glutSwapBuffers();
-//// Increase angle to rotate
-//	angle += 0.5;
-
-    while(TRUE)
-
-       qDebug("What happens");
-
-}
-
-//WorldView3d::WorldView3d(QWidget *parent) :
-//        QGLWidget(parent)//,
-//        //   ui(new Ui::WorldView3d)
-//{
-//    //ui->setupUi(this);
-//    _Perspective = new GLPerspective();
-//    setFocusPolicy(Qt::StrongFocus);
-//    setMouseTracking(true);
-
-
-////        glutIdleFunc(main_loop_function);
-////        glutMainLoop();
-//        startTimer(20);
-//}
-
-//WorldView3d::~WorldView3d()
-//{
-//    //delete ui;
-//    delete _Perspective;
-//}
-
-
-
 
 
 void SimulationView::initializeGL()
@@ -102,13 +33,11 @@ void SimulationView::initializeGL()
     glPolygonMode(GL_FRONT, GL_FILL);
     glPolygonMode(GL_BACK, GL_LINE);
     glEnable(GL_DEPTH_TEST);
-
-
 }
 
 void SimulationView::timerEvent(QTimerEvent *event)
 {
-    qDebug() << "Timer ID:" << event->timerId();
+    //qDebug() << "Timer ID:" << event->timerId();
     updateGL();
 }
 
@@ -116,9 +45,46 @@ void SimulationView::timerEvent(QTimerEvent *event)
 void SimulationView::paintGL()
 
 {
-    static float pos = 0.0;
-    static float step = .1;
-    static float radius = 10;
+        // Inputvariablen
+        static float a = 10; // Meter
+        static float epsilon = 0.5;
+        static float circumstance_time = 400; // Sekunden
+
+        const float PI = 3.1415926535f;
+
+        float b = a * sqrt(1 - epsilon * epsilon );
+        float e = epsilon * a;
+
+        // Umfang der Ellipse nach Ramanujan
+        float lambda = ( a - b ) / ( a + b );
+        float circumstance = ( a + b ) * PI * ( 1 + 3 * lambda * lambda / ( 10 + sqrt( 4 - 3 * lambda * lambda )));
+
+        // Durchschnittsgeschwindigkeit bestimmen
+        float average_speed = circumstance / circumstance_time;
+        qDebug() << "Durchschnittsgeschwindigkeit: " << average_speed;
+
+        // Mittlere Winkelgeschwindigkeit
+        float omega_m = 2 * PI / circumstance_time;
+
+        // Geschwindigkeit im Aphel
+        float speed_aphel = omega_m * a * sqrt(( a - e ) / ( a + e ));
+        qDebug() << "Geschwindigkeit Aphel: " << speed_aphel;
+
+        // Geschwindigkeit im Perihel
+        float speed_perihel = omega_m * a * sqrt(( a + e ) / ( a - e ));
+        qDebug() << "Geschwindigkeit Perihel: " << speed_perihel;
+        qDebug() << "\n";
+
+        // My = Gravitationskonstante * Masse
+        float my = speed_aphel * speed_aphel / ( 2 / ( a + e ) - 1 / a );
+
+
+
+
+
+        static float phi = 0.0;
+        static float step = 0.1;
+
 
 
     GLLight light;
@@ -128,7 +94,7 @@ void SimulationView::paintGL()
 
     _Perspective->apply();
 
-    // drawScene();
+    drawScene();
 
 
 
@@ -139,24 +105,43 @@ void SimulationView::paintGL()
 
     glPushMatrix();
 
-    float a = cos(pos) * radius;
-    float b = sin(pos) * radius;
-
-    glTranslated(a , b, 0.0);
-    pos += step;
-    if (pos > 360)
-        pos = 0;
+    float x = cos(phi) * a + e;
+    float y = sin(phi) * b;
 
 
-    qDebug("pos: ");
-    qDebug() << pos;
+    // Betrag des Vektors vom Brennpunk zum Planeten
+    float r = sqrt( x * x + y * y);
+
+    // Momentangeschwindigkeit des Planeten nach der Vis-Viva-Gleichung
+    float instantaneous_velocity = sqrt( my * ( 2 / r - 1 / a ));
+    qDebug() << "Phi: " << phi * 360 / ( 2 * PI );
+    qDebug() << "x = " << x << "    y = " << y << "    r = " << r << "   my = " << my;
+    qDebug() << "Momentangeschwindigkeit: " << instantaneous_velocity;
+
+    glTranslated(x , y, 0.0);
+
+    // Mit einem Dreisatz den zu überschreitenden Winkel bestimmen:
+    // alpha / øalpha ~ v / øv
+    float orbit_points_count = circumstance_time;
+    float average_angle = 2 * PI / orbit_points_count;
+    float alpha = average_angle * instantaneous_velocity / average_speed;
+
+    phi += alpha;
+    if (phi > 2 * PI)
+        phi = 0;
+
+
 
     glMateriali(GL_FRONT, GL_SHININESS, 100);
     light.switchOn();
-    glutSolidSphere(0.7,32,32);
+    glutSolidSphere(0.3,32,32);
     glPopMatrix();
 
 
+    drawEllipse(a, b, e);
+
+        glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cl_Yellow.fv());
+        glutSolidSphere(0.7,32,32);
 
 //
 //    // 1. Sicherung der Matrix
@@ -200,16 +185,37 @@ void SimulationView::paintGL()
     glFlush();
 }
 
+
+void SimulationView::drawEllipse(float a, float b, float e)
+{
+        const float PI = 3.1415926535f;
+        //Draws a ellpise made out of points.
+
+            glColor3f(0,0,0);
+                float x,y,z;
+                float t;
+            glBegin(GL_POINTS);
+            for(t = 0; t <= 2 * PI; t += PI / 720)
+                        {
+                x = cos(t) * a + e;
+                y = sin(t) * b;
+                  z = 0;
+                  glVertex3f(x,y,z);
+                        }
+            glEnd();
+
+}
+
 void SimulationView::drawScene()
 {
     QVector <GLVector> points(6);
 
-    points[0] = GLVector(0.0,0.0,0.0);
-    points[1] = GLVector(1.0,0.0,0.0);
-    points[2] = GLVector(0.0,0.0,0.0);
-    points[3] = GLVector(0.0,1.0,0.0);
-    points[4] = GLVector(0.0,0.0,0.0);
-    points[5] = GLVector(0.0,0.0,1.0);
+    points[0] = GLVector(-100.0,0.0,0.0);
+    points[1] = GLVector(100.0,0.0,0.0);
+    points[2] = GLVector(0.0,-100.0,0.0);
+    points[3] = GLVector(0.0,100.0,0.0);
+    points[4] = GLVector(0.0,0.0,-100.0);
+    points[5] = GLVector(0.0,0.0,100.0);
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_DOUBLE, sizeof(GLVector), points[0].dv());
@@ -239,14 +245,14 @@ void SimulationView::drawScene()
 
 void SimulationView::loopToPaintOrbit()
 {
-    while(TRUE)
-        updateGL();
+        while(TRUE)
+                updateGL();
 }
 
 
 void SimulationView::keyPressEvent(QKeyEvent *ke)
 {
-    qDebug("KeyboardEvent");
+        qDebug("KeyboardEvent");
     if (ke->modifiers() == Qt::ShiftModifier)
         {
         switch (ke->key())
@@ -265,11 +271,11 @@ void SimulationView::keyPressEvent(QKeyEvent *ke)
             break;
             case Qt::Key_PageDown:
             qDebug("Hier geht wa schief (down)");
-            shiftSceneForwardBackward(0.99);
+            shiftSceneForwardBackward(-1.0);
             break;
             case Qt::Key_PageUp:
             qDebug("Hier geht wa schief (up)");
-            shiftSceneForwardBackward(1.01);
+            shiftSceneForwardBackward(1.0);
             break;
             default:
             break;

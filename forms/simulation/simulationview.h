@@ -42,6 +42,7 @@ private:
     void wheelEvent(QWheelEvent * wheelEvent);
     void drawScene();
     void timerEvent(QTimerEvent *event);
+    void drawEllipse(float a, float b, float e);
 };
 
 #endif // SIMULATIONVIEW_H
