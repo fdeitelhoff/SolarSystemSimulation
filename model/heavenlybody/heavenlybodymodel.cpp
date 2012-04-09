@@ -64,5 +64,10 @@ void HeavenlyBodyModel::deleteEntity()
     {
         heavenlyBodyRepository->deleteEntity(selectedEntity);
         heavenlyBodyTableModel->removeHeavenlyBody(selectedEntity);
+
+        if (heavenlyBodyTableModel->getEntityCount() == 0)
+        {
+            selectedEntity = 0;
+        }
     }
 }

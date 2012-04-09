@@ -87,6 +87,7 @@ QVariant SolarSystemHeavenlyBodyTableModel::headerData(int section, Qt::Orientat
 
 void SolarSystemHeavenlyBodyTableModel::setData(QList<SolarSystemHeavenlyBody *> entities)
 {
+    this->entities.clear();
     this->entities.append(entities);
 }
 
@@ -98,4 +99,28 @@ SolarSystemHeavenlyBody* SolarSystemHeavenlyBodyTableModel::getSolarSystemHeaven
     }
 
     return 0;
+}
+
+void SolarSystemHeavenlyBodyTableModel::addSolarSystemHeavenlyBody(SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
+{
+    if (solarSystemHeavenlyBody)
+    {
+        int size = entities.size() + 1;
+
+        beginInsertRows(QModelIndex(), size, size);
+        entities.append(solarSystemHeavenlyBody);
+        endInsertRows();
+    }
+}
+
+void SolarSystemHeavenlyBodyTableModel::deleteSolarSystemHeavenlyBody(SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
+{
+    if (solarSystemHeavenlyBody)
+    {
+        int size = entities.size() - 1;
+
+        beginRemoveRows(QModelIndex(), size, size);
+        entities.removeOne(solarSystemHeavenlyBody);
+        endRemoveRows();
+    }
 }

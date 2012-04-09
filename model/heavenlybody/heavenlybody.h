@@ -24,6 +24,8 @@ public:
     void setColor(QColor color) { this->color = color; }
     void setType(QString type) { this->type = type; }
 
+    bool operator==(const HeavenlyBody &heavenlyBody);
+
 private:
     qint64 id;
     QString name;

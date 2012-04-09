@@ -4,6 +4,7 @@
 #include <QList>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QSqlRecord>
 #include <QDebug>
 
 #include "database/postgresqldatabase.h"
@@ -16,6 +17,13 @@ public:
     SolarSystemRepository();
 
     QList<SolarSystem *> fetchAllSolarSystemEntities();
+
+    void addEntity(SolarSystem *solarSystem);
+    void updateEntity(SolarSystem *solarSystem);
+    void deleteEntity(SolarSystem *solarSystem);
+
+    void addPlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
+    void deletePlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
 
 private:
     PostgreSQLDatabase *database;

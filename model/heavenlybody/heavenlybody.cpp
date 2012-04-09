@@ -30,3 +30,11 @@ HeavenlyBody::HeavenlyBody(qint64 id, QString name, int diameter, QString colorS
 
     this->color = color;
 }
+
+bool HeavenlyBody::operator==(const HeavenlyBody &heavenlyBody)
+{
+    return id == heavenlyBody.id &&
+            name == heavenlyBody.name &&
+            diameter == heavenlyBody.diameter &&
+            type == heavenlyBody.type;
+}

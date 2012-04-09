@@ -89,3 +89,109 @@ QList<SolarSystem *> SolarSystemRepository::fetchAllSolarSystemEntities()
 
     return entities;
 }
+
+void SolarSystemRepository::addEntity(SolarSystem *solarSystem)
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO solarsystem "
+                  "     (name, "
+                  "      centralstarid) "
+                  "VALUES "
+                  "     (:name, "
+                  "      :centralstarid) "
+                  "RETURNING "
+                  "     solarsystemid");
+    query.bindValue(":name", solarSystem->getName());
+    query.bindValue(":centralstarid", solarSystem->getCentralStar()->getId());
+    query.exec();
+
+    qDebug() << query.lastError();
+
+    query.next();
+    qint64 id = query.record().value("solarsystemid").toLongLong();
+
+    solarSystem->setId(id);
+}
+
+void SolarSystemRepository::updateEntity(SolarSystem *solarSystem)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE "
+                  "     solarsystem "
+                  "SET "
+                  "     name = :name, "
+                  "     centralstarid = :centralstarid) "
+                  "WHERE "
+                  "     solarsystemid = :solarsystemid");
+    query.bindValue(":name", solarSystem->getName());
+    query.bindValue(":centralstarid", solarSystem->getCentralStar()->getId());
+    query.bindValue(":solarsystemid", solarSystem->getId());
+    query.exec();
+
+    qDebug() << query.lastError();
+}
+
+void SolarSystemRepository::addPlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO solarsystemtoheavenlybody"
+                  "     (solarsystemid, "
+                  "      heavenlybodyid, "
+                  "      excentricity, "
+                  "      semimajoraxis) "
+                  "VALUES "
+                  "     (:solarsystemid, "
+                  "      :heavenlybodyid, "
+                  "      :excentricity, "
+                  "      :semimajoraxis)");
+    query.bindValue(":solarsystemid", solarSystem->getId());
+    query.bindValue(":heavenlybodyid", solarSystemHeavenlyBody->getHeavenlyBody()->getId());
+    query.bindValue(":excentricity", solarSystemHeavenlyBody->getExcentricity());
+    query.bindValue(":semimajoraxis", solarSystemHeavenlyBody->getSemimajorAxis());
+    query.exec();
+
+    qDebug() << query.lastError();
+}
+
+void SolarSystemRepository::deletePlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM "
+                  "     solarsystemtoheavenlybody "
+                  "WHERE "
+                  "     solarsystemid = :solarsystemid "
+                  "AND "
+                  "     heavenlybodyid = :heavenlybodyid");
+    query.bindValue(":solarsystemid", solarSystem->getId());
+    query.bindValue(":heavenlybodyid", solarSystemHeavenlyBody->getHeavenlyBody()->getId());
+    query.exec();
+
+    qDebug() << query.lastError();
+}
+
+void SolarSystemRepository::deleteEntity(SolarSystem *solarSystem)
+{
+    database->getInstance()->transaction();
+
+    QSqlQuery deleteSolarSystemPlanetsQuery;
+    deleteSolarSystemPlanetsQuery.prepare("DELETE FROM "
+                  "     solarsystemtoheavenlybody "
+                  "WHERE "
+                  "     solarsystemid = :solarsystemid");
+    deleteSolarSystemPlanetsQuery.bindValue(":solarsystemid", solarSystem->getId());
+    deleteSolarSystemPlanetsQuery.exec();
+
+    qDebug() << deleteSolarSystemPlanetsQuery.lastError();
+
+    QSqlQuery deleteSolarSystemQuery;
+    deleteSolarSystemQuery.prepare("DELETE FROM "
+                  "     solarsystem "
+                  "WHERE "
+                  "     solarsystemid = :solarsystemid");
+    deleteSolarSystemQuery.bindValue(":solarsystemid", solarSystem->getId());
+    deleteSolarSystemQuery.exec();
+
+    qDebug() << deleteSolarSystemQuery.lastError();
+
+    database->getInstance()->commit();
+}

@@ -12,7 +12,7 @@ QModelIndex HeavenlyBodyComboBoxModel::index(int row, int column, const QModelIn
         return QModelIndex();
     }
 
-    return createIndex(row, column, entities.at(row));
+    return createIndex(row, column); //, entities.at(row));
 }
 
 QModelIndex HeavenlyBodyComboBoxModel::parent(const QModelIndex &index) const
@@ -42,5 +42,36 @@ QVariant HeavenlyBodyComboBoxModel::data(const QModelIndex &index, int role) con
 
 void HeavenlyBodyComboBoxModel::setData(QList<HeavenlyBody *> entities)
 {
+    this->entities.clear();
     this->entities.append(entities);
+}
+
+HeavenlyBody* HeavenlyBodyComboBoxModel::getHeavenlyBody(int index)
+{
+    if (index < 0 || index >= entities.size())
+    {
+        return 0;
+    }
+
+    return entities.at(index);
+}
+
+int HeavenlyBodyComboBoxModel::getHeavenlyBodyIndex(HeavenlyBody *heavenlyBody)
+{
+    if (!heavenlyBody)
+    {
+        return -1;
+    }
+
+    int row = -1;
+    foreach(HeavenlyBody *entity, entities)
+    {
+        row++;
+        if ((*entity) == (*heavenlyBody))
+        {
+            break;
+        }
+    }
+
+    return row;
 }
