@@ -16,7 +16,7 @@ class HeavenlyBodyOverview : public QDialog
     Q_OBJECT
     
 public:
-    explicit HeavenlyBodyOverview(QWidget *parent = 0);
+    explicit HeavenlyBodyOverview(QWidget *parent = 0, HeavenlyBodyModel *heavenlyBodyModel = 0);
     ~HeavenlyBodyOverview();
 
 public slots:

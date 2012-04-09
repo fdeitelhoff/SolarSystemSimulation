@@ -15,7 +15,7 @@ class SolarSystemOverview : public QDialog
     Q_OBJECT
     
 public:
-    explicit SolarSystemOverview(QWidget *parent = 0);
+    explicit SolarSystemOverview(QWidget *parent = 0, SolarSystemModel *solarSystemModel = 0);
     ~SolarSystemOverview();
     
 private:

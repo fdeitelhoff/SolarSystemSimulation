@@ -81,6 +81,7 @@ QVariant HeavenlyBodyTableModel::headerData(int section, Qt::Orientation orienta
 
 void HeavenlyBodyTableModel::setData(QList<HeavenlyBody*> entities)
 {
+    this->entities.clear();
     this->entities.append(entities);
 }
 

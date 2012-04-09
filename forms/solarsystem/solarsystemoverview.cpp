@@ -1,18 +1,16 @@
 #include "solarsystemoverview.h"
 #include "ui_solarsystemoverview.h"
 
-SolarSystemOverview::SolarSystemOverview(QWidget *parent) :
+SolarSystemOverview::SolarSystemOverview(QWidget *parent, SolarSystemModel *solarSystemModel) :
     QDialog(parent),
     ui(new Ui::SolarSystemOverview)
 {
     ui->setupUi(this);
 
-    solarSystemModel = new SolarSystemModel();
+    this->solarSystemModel = solarSystemModel;
 
     ui->solarSystemTableView->setModel(solarSystemModel->getSolarSystemTableModel());
     solarSystemModel->setSolarSystemSelectionModel(ui->solarSystemTableView->selectionModel());
-
-    solarSystemModel->loadAllSolarSystemEntities();
 }
 
 SolarSystemOverview::~SolarSystemOverview()

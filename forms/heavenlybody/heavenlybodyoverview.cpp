@@ -1,18 +1,16 @@
 #include "heavenlybodyoverview.h"
 #include "ui_heavenlybodyoverview.h"
 
-HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent) :
+HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent, HeavenlyBodyModel *heavenlyBodyModel) :
     QDialog(parent),
     ui(new Ui::HeavenlyBodyOverview)
 {
     ui->setupUi(this);
 
-    heavenlyBodyModel = new HeavenlyBodyModel();
+    this->heavenlyBodyModel = heavenlyBodyModel;
 
     ui->heavenlyBodyTableView->setModel(heavenlyBodyModel->getHeavenlyBodyTableModel());
     heavenlyBodyModel->setSelectionModel(ui->heavenlyBodyTableView->selectionModel());
-
-    heavenlyBodyModel->loadAllHeavenlyBodyEntities();
 
     ui->heavenlyBodyTableView->selectRow(0);
 }

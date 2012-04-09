@@ -11,7 +11,6 @@ HeavenlyBodyModel::HeavenlyBodyModel()
 void HeavenlyBodyModel::loadAllHeavenlyBodyEntities()
 {
     HeavenlyBodyTableModel *heavenlyBodyTableModel = getHeavenlyBodyTableModel();
-    //heavenlyBodyTableModel->resetInternalData();
 
     QList<HeavenlyBody *> entities = heavenlyBodyRepository->fetchAllHeavenlyBodyEntities();
 

@@ -24,6 +24,9 @@ private:
 
     SimulationView *simulationView;
 
+    HeavenlyBodyModel *heavenlyBodyModel;
+    SolarSystemModel *solarSystemModel;
+
 private slots:
     void on_actionHeavenlyBodyOverview_triggered();
     void on_actionSolarSystemOverview_triggered();

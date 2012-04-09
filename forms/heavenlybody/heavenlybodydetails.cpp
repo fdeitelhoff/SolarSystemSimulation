@@ -52,7 +52,6 @@ void HeavenlyBodyDetails::on_chooseColor_clicked()
 {
     colorDialog->setCurrentColor(tmpColor);
 
-    // Maybe use a tmp color variable.
     if (colorDialog->exec() == QDialog::Accepted)
     {
         tmpColor = colorDialog->currentColor();

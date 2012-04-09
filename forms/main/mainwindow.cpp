@@ -9,6 +9,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     simulationView = new SimulationView(this);
     setCentralWidget(simulationView);
+
+    heavenlyBodyModel = new HeavenlyBodyModel();
+    heavenlyBodyModel->loadAllHeavenlyBodyEntities();
+
+    solarSystemModel = new SolarSystemModel();
+    solarSystemModel->loadAllSolarSystemEntities();
 }
 
 MainWindow::~MainWindow()
@@ -18,12 +24,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionHeavenlyBodyOverview_triggered()
 {
-    HeavenlyBodyOverview *heavenlyBodyOverview = new HeavenlyBodyOverview(this);
+    HeavenlyBodyOverview *heavenlyBodyOverview = new HeavenlyBodyOverview(this, heavenlyBodyModel);
     heavenlyBodyOverview->show();
 }
 
 void MainWindow::on_actionSolarSystemOverview_triggered()
 {
-    SolarSystemOverview *solarSystemOverview = new SolarSystemOverview(this);
+    SolarSystemOverview *solarSystemOverview = new SolarSystemOverview(this, solarSystemModel);
     solarSystemOverview->show();
 }
