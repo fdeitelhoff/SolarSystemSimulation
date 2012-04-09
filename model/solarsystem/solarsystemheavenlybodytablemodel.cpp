@@ -17,37 +17,56 @@ int SolarSystemHeavenlyBodyTableModel::columnCount(const QModelIndex &/*parent*/
 
 QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || role != Qt::DisplayRole)
+    if (!index.isValid())
     {
         return QVariant();
     }
 
     SolarSystemHeavenlyBody *entity = entities.at(index.row());
-    QVariant value;
 
-    switch (index.column())
+    if (role == Qt::DisplayRole)
     {
-    case 0:
-        value = QVariant(entity->getHeavenlyBody()->getId());
-        break;
-    case 1:
-        value = QVariant(entity->getHeavenlyBody()->getName());
-        break;
-    case 2:
-        value = QVariant(entity->getHeavenlyBody()->getDiameter());
-        break;
-    case 3:
-        value = QVariant(entity->getHeavenlyBody()->getColor());
-        break;
-    case 4:
-        value = QVariant(entity->getExcentricity());
-        break;
-    case 5:
-        value = QVariant(entity->getSemimajorAxis());
-        break;
-    }
+        QVariant value;
 
-    return value;
+        switch (index.column())
+        {
+        case 0:
+            value = QVariant(entity->getHeavenlyBody()->getId());
+            break;
+        case 1:
+            value = QVariant(entity->getHeavenlyBody()->getName());
+            break;
+        case 2:
+            value = QVariant(entity->getHeavenlyBody()->getDiameter());
+            break;
+        case 3:
+            value = QVariant(entity->getHeavenlyBody()->getColor());
+            break;
+        case 4:
+            value = QVariant(entity->getExcentricity());
+            break;
+        case 5:
+            value = QVariant(entity->getSemimajorAxis());
+            break;
+        }
+
+        return value;
+    }
+    else if (role == Qt::BackgroundRole)
+    {
+        if (index.column() == 3)
+        {
+            return QVariant(entity->getHeavenlyBody()->getColor());
+        }
+        else
+        {
+            return QVariant(QColor(Qt::white));
+        }
+    }
+    else
+    {
+        return QVariant();
+    }
 }
 
 QVariant SolarSystemHeavenlyBodyTableModel::headerData(int section, Qt::Orientation orientation,

@@ -12,8 +12,6 @@ public:
     DeleteEntityFailedException(const QString message, QString sqlError);
     virtual ~DeleteEntityFailedException() throw() {}
 
-    virtual const char* what() const throw();
-
     virtual const QString getMessage() const throw();
     virtual const QString getSqlError() const throw();
 

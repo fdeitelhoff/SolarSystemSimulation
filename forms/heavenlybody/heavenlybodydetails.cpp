@@ -64,25 +64,30 @@ void HeavenlyBodyDetails::on_chooseColor_clicked()
 
 void HeavenlyBodyDetails::on_ok_clicked()
 {
-    // Put this into a method of class HeavenlyBodyModel(?)
-    if (!isEdit)
+    try
     {
-        currentEntity = new HeavenlyBody();
+        if (isEdit)
+        {
+            heavenlyBodyModel->updateEntity(ui->name->text(),
+                                            ui->diameter->text().toInt(),
+                                            tmpColor,
+                                            ui->planet->isChecked() ? "P" : "S");
+        }
+        else
+        {
+            heavenlyBodyModel->addEntity(ui->name->text(),
+                                         ui->diameter->text().toInt(),
+                                         tmpColor,
+                                         ui->planet->isChecked() ? "P" : "S");
+        }
+
+        close();
     }
-
-    currentEntity->setName(ui->name->text());
-    currentEntity->setDiameter(ui->diameter->text().toInt());
-    currentEntity->setColor(tmpColor);
-    currentEntity->setType(ui->planet->isChecked() ? "P" : "S");
-
-    if (isEdit)
+    catch (const PropertyNotValidException &notValidException)
     {
-        heavenlyBodyModel->updateEntity(currentEntity);
+        QMessageBox::critical(this,
+                              QString("The field '%1' is not valid").arg(notValidException.getProperty()),
+                              notValidException.getMessage(),
+                              QMessageBox::Ok);
     }
-    else
-    {
-        heavenlyBodyModel->addEntity(currentEntity);
-    }
-
-    close();
 }

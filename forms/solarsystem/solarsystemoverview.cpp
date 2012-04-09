@@ -11,6 +11,10 @@ SolarSystemOverview::SolarSystemOverview(QWidget *parent, SolarSystemModel *sola
 
     ui->solarSystemTableView->setModel(solarSystemModel->getSolarSystemTableModel());
     solarSystemModel->setSolarSystemSelectionModel(ui->solarSystemTableView->selectionModel());
+
+    solarSystemModel->loadAllSolarSystemEntities();
+
+    ui->solarSystemTableView->selectRow(0);
 }
 
 SolarSystemOverview::~SolarSystemOverview()
@@ -33,4 +37,9 @@ void SolarSystemOverview::on_edit_clicked()
 void SolarSystemOverview::on_deleteEntity_clicked()
 {
     solarSystemModel->deleteSolarSystem();
+}
+
+void SolarSystemOverview::on_startSimulation_clicked()
+{
+    emit simulateSolarSystem(solarSystemModel->getCurrentSolarSystem());
 }

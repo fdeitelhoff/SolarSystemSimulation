@@ -30,6 +30,8 @@ private:
 private slots:
     void on_actionHeavenlyBodyOverview_triggered();
     void on_actionSolarSystemOverview_triggered();
+
+    void on_simulateSolarSystem(SolarSystem *solarSystem);
 };
 
 #endif // MAINWINDOW_H

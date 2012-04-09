@@ -23,11 +23,16 @@ public slots:
     void on_add_clicked();
     void on_edit_clicked();
     void on_deleteEntity_clicked();
-    
+
+    void doubleClicked(QModelIndex modelIndex);
+
 private:
     Ui::HeavenlyBodyOverview *ui;
 
     HeavenlyBodyModel *heavenlyBodyModel;
+
+private slots:
+    void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 };
 
 #endif // HEAVENLYBODYOVERVIEW_H

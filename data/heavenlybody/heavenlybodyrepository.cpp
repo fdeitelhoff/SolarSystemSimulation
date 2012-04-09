@@ -46,7 +46,7 @@ void HeavenlyBodyRepository::updateEntity(HeavenlyBody *heavenlyBody)
 void HeavenlyBodyRepository::addEntity(HeavenlyBody *heavenlyBody)
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO heavenlybody(heavenlybodyid, name, diameter, color, type) VALUES (DEFAULT, :name, :diameter, :color, :type) RETURNING heavenlybodyid");
+    query.prepare("INSERT INTO heavenlybody(name, diameter, color, type) VALUES (:name, :diameter, :color, :type) RETURNING heavenlybodyid");
     query.bindValue(":name", heavenlyBody->getName());
     query.bindValue(":diameter", heavenlyBody->getDiameter());
     query.bindValue(":color", colorToString(heavenlyBody->getColor()));

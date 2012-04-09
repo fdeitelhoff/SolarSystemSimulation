@@ -128,7 +128,7 @@ void SimulationView::paintGL()
 
     _Perspective->apply();
 
-    // drawScene();
+     drawScene();
 
 
 

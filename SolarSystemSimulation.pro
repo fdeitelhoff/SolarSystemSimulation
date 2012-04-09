@@ -37,7 +37,8 @@ SOURCES += main.cpp \
     forms/solarsystem/solarsystemdetails.cpp \
     model/heavenlybody/heavenlybodycomboboxmodel.cpp \
     model/solarsystem/solarsystemheavenlybodytablemodel.cpp \
-    data/exceptions/deleteentityfailedexception.cpp
+    data/exceptions/deleteentityfailedexception.cpp \
+    model/exceptions/propertynotvalidexception.cpp
 
 HEADERS  += forms/main/mainwindow.h \
     OpenGL/glvector.h \
@@ -69,7 +70,8 @@ HEADERS  += forms/main/mainwindow.h \
     forms/solarsystem/solarsystemdetails.h \
     model/heavenlybody/heavenlybodycomboboxmodel.h \
     model/solarsystem/solarsystemheavenlybodytablemodel.h \
-    data/exceptions/deleteentityfailedexception.h
+    data/exceptions/deleteentityfailedexception.h \
+    model/exceptions/propertynotvalidexception.h
 
 FORMS    += forms/main/mainwindow.ui \
     forms/simulation/simulationview.ui \

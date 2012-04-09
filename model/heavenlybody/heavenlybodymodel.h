@@ -24,9 +24,10 @@ public:
     void setSelectionModel(QItemSelectionModel *selectionModel);
 
     HeavenlyBody* getSelectedEntity() { return selectedEntity; }
+    bool isEntitySelected() { return selectedEntity != 0; }
 
-    void addEntity(HeavenlyBody *heavenlyBody);
-    void updateEntity(HeavenlyBody *heavenlyBody);
+    void addEntity(QString name, int diameter, QColor color, QString type);
+    void updateEntity(QString name, int diameter, QColor color, QString type);
     void deleteEntity();
 
 private slots:
