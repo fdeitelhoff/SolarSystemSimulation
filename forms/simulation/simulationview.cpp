@@ -92,13 +92,7 @@ void SimulationView::paintGL()
 
     _Perspective->apply();
 
-<<<<<<< HEAD
     drawScene();
-=======
-     drawScene();
->>>>>>> 904894007eccf2a935e4366cbedca4ac76f3fae0
-
-
 
     glEnable(GL_LIGHTING);
 
