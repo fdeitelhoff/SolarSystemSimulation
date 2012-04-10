@@ -23,7 +23,12 @@ public:
 
     void setData(QList<SolarSystemHeavenlyBody *> entities);
 
+    void addSolarSystemHeavenlyBody(SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
+    void deleteSolarSystemHeavenlyBody(SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
+
     SolarSystemHeavenlyBody* getSolarSystemHeavenlyBody(int row);
+
+    int getEntityCount() { return entities.size(); }
 
 private:
     QList<SolarSystemHeavenlyBody *> entities;

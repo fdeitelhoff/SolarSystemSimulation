@@ -15,7 +15,7 @@ class SolarSystemOverview : public QDialog
     Q_OBJECT
     
 public:
-    explicit SolarSystemOverview(QWidget *parent = 0);
+    explicit SolarSystemOverview(QWidget *parent = 0, SolarSystemModel *solarSystemModel = 0);
     ~SolarSystemOverview();
     
 private:
@@ -23,9 +23,15 @@ private:
 
     SolarSystemModel *solarSystemModel;
 
+signals:
+    void simulateSolarSystem(SolarSystem *solarSystem);
+
 private slots:
     void on_add_clicked();
+    void on_edit_clicked();
+    void on_deleteEntity_clicked();
 
+    void on_startSimulation_clicked();
 };
 
 #endif // SOLARSYSTEMOVERVIEW_H

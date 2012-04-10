@@ -11,7 +11,6 @@ HeavenlyBodyModel::HeavenlyBodyModel()
 void HeavenlyBodyModel::loadAllHeavenlyBodyEntities()
 {
     HeavenlyBodyTableModel *heavenlyBodyTableModel = getHeavenlyBodyTableModel();
-    //heavenlyBodyTableModel->resetInternalData();
 
     QList<HeavenlyBody *> entities = heavenlyBodyRepository->fetchAllHeavenlyBodyEntities();
 
@@ -46,13 +45,20 @@ HeavenlyBodyTableModel* HeavenlyBodyModel::getHeavenlyBodyTableModel()
     return heavenlyBodyTableModel;
 }
 
-void HeavenlyBodyModel::updateEntity(HeavenlyBody *heavenlyBody)
+void HeavenlyBodyModel::updateEntity(QString name, int diameter, QColor color, QString type)
 {
-    heavenlyBodyRepository->updateEntity(heavenlyBody);
+    selectedEntity->setName(name);
+    selectedEntity->setDiameter(diameter);
+    selectedEntity->setColor(color);
+    selectedEntity->setType(type);
+
+    heavenlyBodyRepository->updateEntity(selectedEntity);
 }
 
-void HeavenlyBodyModel::addEntity(HeavenlyBody *heavenlyBody)
+void HeavenlyBodyModel::addEntity(QString name, int diameter, QColor color, QString type)
 {
+    HeavenlyBody *heavenlyBody = new HeavenlyBody(name, diameter, color, type);
+
     heavenlyBodyRepository->addEntity(heavenlyBody);
 
     heavenlyBodyTableModel->addHeavenlyBody(heavenlyBody);
@@ -60,9 +66,14 @@ void HeavenlyBodyModel::addEntity(HeavenlyBody *heavenlyBody)
 
 void HeavenlyBodyModel::deleteEntity()
 {
-    if (selectedEntity)
+    if (isEntitySelected())
     {
         heavenlyBodyRepository->deleteEntity(selectedEntity);
         heavenlyBodyTableModel->removeHeavenlyBody(selectedEntity);
+
+        if (heavenlyBodyTableModel->getEntityCount() == 0)
+        {
+            selectedEntity = 0;
+        }
     }
 }

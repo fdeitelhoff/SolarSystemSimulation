@@ -17,34 +17,53 @@ int HeavenlyBodyTableModel::columnCount(const QModelIndex &/*parent*/) const
 
 QVariant HeavenlyBodyTableModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || role != Qt::DisplayRole)
+    if (!index.isValid())
     {
         return QVariant();
     }
 
     HeavenlyBody *entity = entities.at(index.row());
-    QVariant value;
 
-    switch (index.column())
+    if (role == Qt::DisplayRole)
     {
-    case 0:
-        value = QVariant(entity->getId());
-        break;
-    case 1:
-        value = QVariant(entity->getName());
-        break;
-    case 2:
-        value = QVariant(entity->getDiameter());
-        break;
-    case 3:
-        value = QVariant(entity->getColor());
-        break;
-    case 4:
-        value = QVariant(entity->getType());
-        break;
-    }
+        QVariant value;
 
-    return value;
+        switch (index.column())
+        {
+        case 0:
+            value = QVariant(entity->getId());
+            break;
+        case 1:
+            value = QVariant(entity->getName());
+            break;
+        case 2:
+            value = QVariant(entity->getDiameter());
+            break;
+        case 3:
+            value = QVariant(entity->getColor());
+            break;
+        case 4:
+            value = QVariant(entity->getType());
+            break;
+        }
+
+        return value;
+    }
+    else if (role == Qt::BackgroundRole)
+    {
+        if (index.column() == 3)
+        {
+            return QVariant(entity->getColor());
+        }
+        else
+        {
+            return QVariant(QColor(Qt::white));
+        }
+    }
+    else
+    {
+        return QVariant();
+    }
 }
 
 QVariant HeavenlyBodyTableModel::headerData(int section, Qt::Orientation orientation,
@@ -81,6 +100,7 @@ QVariant HeavenlyBodyTableModel::headerData(int section, Qt::Orientation orienta
 
 void HeavenlyBodyTableModel::setData(QList<HeavenlyBody*> entities)
 {
+    this->entities.clear();
     this->entities.append(entities);
 }
 

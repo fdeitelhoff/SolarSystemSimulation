@@ -15,6 +15,10 @@ private:
 
 public:
     static PostgreSQLDatabase* getInstance();
+
+    void transaction();
+    void commit();
+    void rollback();
 };
 
 #endif // POSTGRESQLDATABASE_H

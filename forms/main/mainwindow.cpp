@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     simulationView = new SimulationView(this);
     setCentralWidget(simulationView);
+
+    // With the current architecture this should not be necessary here.
+    heavenlyBodyModel = new HeavenlyBodyModel();
+    solarSystemModel = new SolarSystemModel();
 }
 
 MainWindow::~MainWindow()
@@ -18,12 +22,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionHeavenlyBodyOverview_triggered()
 {
-    HeavenlyBodyOverview *heavenlyBodyOverview = new HeavenlyBodyOverview(this);
+    HeavenlyBodyOverview *heavenlyBodyOverview = new HeavenlyBodyOverview(this, heavenlyBodyModel);
     heavenlyBodyOverview->show();
 }
 
 void MainWindow::on_actionSolarSystemOverview_triggered()
 {
-    SolarSystemOverview *solarSystemOverview = new SolarSystemOverview(this);
+    SolarSystemOverview *solarSystemOverview = new SolarSystemOverview(this, solarSystemModel);
+
+    QObject::connect(solarSystemOverview,
+                     SIGNAL(simulateSolarSystem(SolarSystem*)),
+                     this,
+                     SLOT(on_simulateSolarSystem(SolarSystem*)));
+
     solarSystemOverview->show();
+}
+
+void MainWindow::on_simulateSolarSystem(SolarSystem *solarSystem)
+{
+    qDebug() << solarSystem->getName();
 }

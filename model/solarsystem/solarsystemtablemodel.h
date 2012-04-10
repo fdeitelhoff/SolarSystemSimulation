@@ -22,6 +22,8 @@ public:
                         int role = Qt::DisplayRole) const;
 
     void setData(QList<SolarSystem *> entities);
+    void addSolarSystem(SolarSystem *solarSystem);
+    void deleteSolarSystem(SolarSystem *solarSystem);
 
     SolarSystem* getSolarSystem(int row);
 

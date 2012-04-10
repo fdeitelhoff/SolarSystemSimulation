@@ -75,6 +75,7 @@ QVariant SolarSystemTableModel::headerData(int section, Qt::Orientation orientat
 
 void SolarSystemTableModel::setData(QList<SolarSystem *> entities)
 {
+    this->entities.clear();
     this->entities.append(entities);
 }
 
@@ -86,4 +87,28 @@ SolarSystem* SolarSystemTableModel::getSolarSystem(int row)
     }
 
     return 0;
+}
+
+void SolarSystemTableModel::addSolarSystem(SolarSystem *solarSystem)
+{
+    if (solarSystem)
+    {
+        int size = entities.size() + 1;
+
+        beginInsertRows(QModelIndex(), size, size);
+        entities.append(solarSystem);
+        endInsertRows();
+    }
+}
+
+void SolarSystemTableModel::deleteSolarSystem(SolarSystem *solarSystem)
+{
+    if (solarSystem)
+    {
+        int size = entities.size() - 1;
+
+        beginRemoveRows(QModelIndex(), size, size);
+        entities.removeOne(solarSystem);
+        endRemoveRows();
+    }
 }

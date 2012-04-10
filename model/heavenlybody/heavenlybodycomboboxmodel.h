@@ -1,6 +1,7 @@
 #ifndef HEAVENLYBODYCOMBOBOXMODEL_H
 #define HEAVENLYBODYCOMBOBOXMODEL_H
 
+#include <QDebug>
 #include <QAbstractItemModel>
 
 #include "model/heavenlybody/heavenlybody.h"
@@ -20,6 +21,9 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
     void setData(QList<HeavenlyBody *> entities);
+
+    HeavenlyBody* getHeavenlyBody(int index);
+    int getHeavenlyBodyIndex(HeavenlyBody *heavenlyBody);
 
 private:
     QList<HeavenlyBody *> entities;

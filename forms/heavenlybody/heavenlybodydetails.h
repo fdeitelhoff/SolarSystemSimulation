@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QColorDialog>
+#include <QMessageBox>
 
 #include "model/heavenlybody/heavenlybodymodel.h"
 

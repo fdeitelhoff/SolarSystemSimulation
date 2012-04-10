@@ -29,6 +29,8 @@ public:
 
     void removeHeavenlyBody(HeavenlyBody *heavenlyBody);
 
+    int getEntityCount() { return entities.size(); }
+
 private:
     QList<HeavenlyBody *> entities;
 };

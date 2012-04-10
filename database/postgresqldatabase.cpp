@@ -32,3 +32,18 @@ PostgreSQLDatabase* PostgreSQLDatabase::getInstance()
 
     return instance;
 }
+
+void PostgreSQLDatabase::transaction()
+{
+    qDebug() << database.transaction();
+}
+
+void PostgreSQLDatabase::commit()
+{
+    qDebug() << database.commit();
+}
+
+void PostgreSQLDatabase::rollback()
+{
+    qDebug() << database.rollback();
+}

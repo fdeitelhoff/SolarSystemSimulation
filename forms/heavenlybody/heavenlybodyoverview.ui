@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Heavenly Body overview</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -33,28 +33,46 @@
        <property name="selectionBehavior">
         <enum>QAbstractItemView::SelectRows</enum>
        </property>
+       <property name="cornerButtonEnabled">
+        <bool>false</bool>
+       </property>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
       </widget>
      </item>
      <item row="1" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="add">
+         <property name="toolTip">
+          <string>Create a new Heavenly Body.</string>
+         </property>
          <property name="text">
-          <string>Add</string>
+          <string>&amp;Add</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="edit">
+         <property name="toolTip">
+          <string>Edit the current selected Heavenly Body.</string>
+         </property>
          <property name="text">
-          <string>Edit</string>
+          <string>&amp;Edit</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="deleteEntity">
+         <property name="toolTip">
+          <string>Delete the current selected Heavenly Body.</string>
+         </property>
          <property name="text">
-          <string>Delete</string>
+          <string>&amp;Delete</string>
          </property>
         </widget>
        </item>
