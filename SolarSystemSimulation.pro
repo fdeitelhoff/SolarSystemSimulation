@@ -82,10 +82,9 @@ FORMS    += forms/main/mainwindow.ui \
 
 # UI_HEADERS_DIR += src/forms
 
-# Unter Linux lässt sich das so übersetzen
-
+# Seperate the Win32 and Unix freeglut libs.
 win32   {   LIBS += -L \
-            "E:/Programme/QtSDK/mingw/freeglut/lib" \
+            "OpenGL/freeglut/win32" \
             -lfreeglut
         }
 
@@ -98,4 +97,6 @@ OTHER_FILES += \
     database/DDL.txt \
     database/heavenlybody.txt \
     database/solarsystem.txt \
-    database/solarsystemtoheavenlybody.txt
+    database/solarsystemtoheavenlybody.txt \
+    OpenGL/freeglut/win32/libfreeglut_static.a \
+    OpenGL/freeglut/win32/libfreeglut.a
