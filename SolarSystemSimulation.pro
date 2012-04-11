@@ -38,7 +38,11 @@ SOURCES += main.cpp \
     model/heavenlybody/heavenlybodycomboboxmodel.cpp \
     model/solarsystem/solarsystemheavenlybodytablemodel.cpp \
     data/exceptions/deleteentityfailedexception.cpp \
-    model/exceptions/propertynotvalidexception.cpp
+    model/exceptions/propertynotvalidexception.cpp \
+    simulation/solarsystemsimulation.cpp \
+    visualization/heavenlybody/heavenlybody3d.cpp \
+    visualization/heavenlybody/star3d.cpp \
+    visualization/heavenlybody/planet3d.cpp
 
 HEADERS  += forms/main/mainwindow.h \
     OpenGL/glvector.h \
@@ -71,7 +75,11 @@ HEADERS  += forms/main/mainwindow.h \
     model/heavenlybody/heavenlybodycomboboxmodel.h \
     model/solarsystem/solarsystemheavenlybodytablemodel.h \
     data/exceptions/deleteentityfailedexception.h \
-    model/exceptions/propertynotvalidexception.h
+    model/exceptions/propertynotvalidexception.h \
+    simulation/solarsystemsimulation.h \
+    visualization/heavenlybody/heavenlybody3d.h \
+    visualization/heavenlybody/star3d.h \
+    visualization/heavenlybody/planet3d.h
 
 FORMS    += forms/main/mainwindow.ui \
     forms/simulation/simulationview.ui \
@@ -84,7 +92,8 @@ FORMS    += forms/main/mainwindow.ui \
 
 # Seperate the Win32 and Unix freeglut libs.
 win32   {   LIBS += -L \
-            "OpenGL/freeglut/win32" \
+            "E:/Programme/QtSDK/mingw/freeglut/lib" \
+            #"/OpenGL/freeglut/win32" \
             -lfreeglut
         }
 

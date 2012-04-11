@@ -42,4 +42,6 @@ void SolarSystemOverview::on_deleteEntity_clicked()
 void SolarSystemOverview::on_startSimulation_clicked()
 {
     emit simulateSolarSystem(solarSystemModel->getCurrentSolarSystem());
+
+    close();
 }

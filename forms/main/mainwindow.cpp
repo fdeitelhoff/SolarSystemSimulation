@@ -40,5 +40,5 @@ void MainWindow::on_actionSolarSystemOverview_triggered()
 
 void MainWindow::on_simulateSolarSystem(SolarSystem *solarSystem)
 {
-    qDebug() << solarSystem->getName();
+    simulationView->setSolarSystem(solarSystem);
 }

@@ -3,9 +3,11 @@
 
 #include <QWidget>
 #include <QGLWidget>
+
 #include "OpenGL/glperspective.h"
 #include "OpenGL/gllight.h"
 #include "OpenGL/glcube.h"
+#include "simulation/solarsystemsimulation.h"
 
 namespace Ui {
 class SimulationView;
@@ -18,12 +20,17 @@ class SimulationView : public QGLWidget
 public:
     explicit SimulationView(QWidget *parent = 0);
     ~SimulationView();
+
+    void setSolarSystem(SolarSystem *solarSystem);
     
 protected:
     void keyPressEvent(QKeyEvent *ke);
 
 private:
     Ui::SimulationView *ui;
+
+    SolarSystemSimulation *solarSystemSimulation;
+
     GLPerspective * _Perspective;
     GLLight * _light;
     void initializeGL();

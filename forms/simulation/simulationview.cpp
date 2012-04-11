@@ -17,7 +17,9 @@ SimulationView::SimulationView(QWidget *parent) :
     setFocusPolicy(Qt::StrongFocus);
     setMouseTracking(true);
 
-    startTimer(20);
+    solarSystemSimulation = new SolarSystemSimulation();
+
+    //startTimer(20);
 }
 
 SimulationView::~SimulationView()
@@ -26,6 +28,11 @@ SimulationView::~SimulationView()
     delete _Perspective;
 }
 
+void SimulationView::setSolarSystem(SolarSystem *solarSystem)
+{
+    startTimer(20);
+    solarSystemSimulation->setSolarSystem(solarSystem);
+}
 
 void SimulationView::initializeGL()
 {
@@ -41,11 +48,9 @@ void SimulationView::timerEvent(QTimerEvent *event)
     updateGL();
 }
 
-
 void SimulationView::paintGL()
-
 {
-        // Inputvariablen
+        /*// Inputvariablen
         static float a = 10; // Meter
         static float epsilon = 0.5;
         static float circumstance_time = 400; // Sekunden
@@ -82,10 +87,11 @@ void SimulationView::paintGL()
 
 
 
-        static float phi = 0.0;
+        static float phi = 0.0;*/
 
 
     GLLight light;
+    light.setShowLightSource(false);
 
     glColor3d(1.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -93,13 +99,15 @@ void SimulationView::paintGL()
     _Perspective->apply();
 
     drawScene();
-
+    light.switchOn();
     glEnable(GL_LIGHTING);
 
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cl_Red.fv());
+    //glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cl_Red.fv());
     glMaterialfv(GL_FRONT, GL_SPECULAR, cl_White.fv());
 
-    glPushMatrix();
+    solarSystemSimulation->paintSolarSystem3d();
+
+    /*glPushMatrix();
 
     float x = cos(phi) * a + e;
     float y = sin(phi) * b;
@@ -118,8 +126,8 @@ void SimulationView::paintGL()
     glTranslated(x , y, 0.0);
 
 
-    // Mit einem Dreisatz den zu überschreitenden Winkel bestimmen:
-    // alpha / øalpha ~ v / øv
+    // Mit einem Dreisatz den zu ueberschreitenden Winkel bestimmen:
+    // alpha / Ã¸alpha ~ v / Ã¸v
     float orbit_points_count = circumstance_time;
     float average_angle = 2 * PI / orbit_points_count;
     float alpha = average_angle * instantaneous_velocity / average_speed;
@@ -142,7 +150,7 @@ void SimulationView::paintGL()
     glPopMatrix();
 
         glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cl_Yellow.fv());
-        glutSolidSphere(0.7,32,32);
+        glutSolidSphere(0.7,32,32);*/
 
 //
 //    // 1. Sicherung der Matrix
@@ -230,7 +238,7 @@ void SimulationView::drawScene()
     colors[0] = GLColorRGBA(1.0, 0.0, 0.0, 1.0);
     colors[1] = GLColorRGBA(1.0, 0.0, 0.0, 1.0);
 
-    // grün.
+    // gruen.
     colors[2] = GLColorRGBA(0.0, 1.0, 0.0, 1.0);
     colors[3] = GLColorRGBA(0.0, 1.0, 0.0, 1.0);
 
@@ -243,7 +251,8 @@ void SimulationView::drawScene()
 
     glDrawArrays(GL_LINES, 0, 6);
 
-
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 void SimulationView::loopToPaintOrbit()
@@ -316,10 +325,10 @@ void SimulationView::mouseMoveEvent(QMouseEvent *me)
 
     Qt::KeyboardModifiers modifiers = me->modifiers();
 
-    // Ist CTRL gedrückt?
+    // Ist CTRL gedrueckt?
     if (modifiers & Qt::ControlModifier)
         {
-        // Ist ALT gedrückt?
+        // Ist ALT gedrueckt?
         if (modifiers & Qt::AltModifier)
             {
             if ((x - me->x()) < 0)
@@ -341,7 +350,7 @@ void SimulationView::mouseMoveEvent(QMouseEvent *me)
                 }
             }
 
-        // Ist SHIFT gedrückt?
+        // Ist SHIFT gedrueckt?
         if (modifiers & Qt::ShiftModifier)
             {
             if ((x - me->x()) < 0)

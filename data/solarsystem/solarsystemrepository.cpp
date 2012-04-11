@@ -146,7 +146,7 @@ void SolarSystemRepository::addPlanetEntity(SolarSystem *solarSystem, SolarSyste
                   "      :semimajoraxis)");
     query.bindValue(":solarsystemid", solarSystem->getId());
     query.bindValue(":heavenlybodyid", solarSystemHeavenlyBody->getHeavenlyBody()->getId());
-    query.bindValue(":excentricity", solarSystemHeavenlyBody->getExcentricity());
+    query.bindValue(":excentricity", solarSystemHeavenlyBody->getNumericExcentricity());
     query.bindValue(":semimajoraxis", solarSystemHeavenlyBody->getSemimajorAxis());
     query.exec();
 

@@ -43,7 +43,7 @@ QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int r
             value = QVariant(entity->getHeavenlyBody()->getColor());
             break;
         case 4:
-            value = QVariant(entity->getExcentricity());
+            value = QVariant(entity->getNumericExcentricity());
             break;
         case 5:
             value = QVariant(entity->getSemimajorAxis());
