@@ -14,13 +14,18 @@ class HeavenlyBody3d
 public:
     HeavenlyBody3d(HeavenlyBody *heavenlyBody);
 
-    virtual void paintHeavenlyBody3d();
+    virtual void paintHeavenlyBody3d();    
+
+    void setOrbitVisisble(bool orbitVisisble);
 
 protected:
     GLColorRGBA color;
 
+    bool isOrbitVisisble();
+
 private:
     GLdouble radius;
+    bool orbitVisisble;
 };
 
 #endif // HEAVENLYBODY3D_H

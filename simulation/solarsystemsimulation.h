@@ -16,6 +16,8 @@ public:
 
     void setSolarSystem(SolarSystem *solarSystem);
 
+    void setOrbitVisible(bool orbitVisible);
+
 private:
     QList<HeavenlyBody3d *> heavenlyBodies3d;
 };

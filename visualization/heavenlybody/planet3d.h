@@ -5,6 +5,7 @@
 #include <QDebug>
 
 #include "visualization/heavenlybody/heavenlybody3d.h"
+#include "visualization/orbit/orbit3d.h"
 #include "model/heavenlybody/heavenlybody.h"
 #include "model/solarsystem/solarsystemheavenlybody.h"
 
@@ -12,11 +13,10 @@ class Planet3d : public HeavenlyBody3d
 {
 
 public:
-    Planet3d(SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
+    Planet3d(SolarSystemHeavenlyBody *solarSystemHeavenlyBody, const float keplerConstant);
+    ~Planet3d();
 
-    void paintHeavenlyBody3d();
-
-    void setCircumstanceTime(float circumstanceTime);
+    void paintHeavenlyBody3d();    
 
 private:
     float a;
@@ -27,11 +27,15 @@ private:
     float my;
 
     float average_speed;
-    float circumstance_time;
+    float circumstanceTime;
+
+    Orbit3d *orbit3d;
 
     void init();
 
     void drawEllipse(float a, float b, float e);
+
+    void setKeplerConstant(const float keplerConstant);
 };
 
 #endif // PLANET3D_H

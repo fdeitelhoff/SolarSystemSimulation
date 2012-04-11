@@ -22,6 +22,11 @@ public:
     ~SimulationView();
 
     void setSolarSystem(SolarSystem *solarSystem);
+
+    void startSimulation();
+    void stopSimulation();
+
+    void setOrbitVisible(bool orbitVisible);
     
 protected:
     void keyPressEvent(QKeyEvent *ke);
@@ -30,6 +35,7 @@ private:
     Ui::SimulationView *ui;
 
     SolarSystemSimulation *solarSystemSimulation;
+    int timerId;
 
     GLPerspective * _Perspective;
     GLLight * _light;
@@ -43,13 +49,11 @@ private:
     void shiftSceneLeftRight(double distance);
     void shiftSceneForwardBackward(double distance);
     void mouseMoveEvent(QMouseEvent *me);
-    void loopToPaintOrbit();
     int x;
     int y;
     void wheelEvent(QWheelEvent * wheelEvent);
-    void drawScene();
+    void drawAxes();
     void timerEvent(QTimerEvent *event);
-    void drawEllipse(float a, float b, float e);
 };
 
 #endif // SIMULATIONVIEW_H

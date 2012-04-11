@@ -17,3 +17,13 @@ void HeavenlyBody3d::paintHeavenlyBody3d()
 
     glutSolidSphere(radius, 32, 32);
 }
+
+void HeavenlyBody3d::setOrbitVisisble(bool orbitVisisble)
+{
+    this->orbitVisisble = orbitVisisble;
+}
+
+bool HeavenlyBody3d::isOrbitVisisble()
+{
+    return orbitVisisble;
+}

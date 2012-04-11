@@ -1,25 +1,31 @@
 #include "planet3d.h"
 
-Planet3d::Planet3d(SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
+Planet3d::Planet3d(SolarSystemHeavenlyBody *solarSystemHeavenlyBody, const float keplerConstant)
     : HeavenlyBody3d(solarSystemHeavenlyBody->getHeavenlyBody())
 {
     a = solarSystemHeavenlyBody->getSemimajorAxis();
     epsilon = solarSystemHeavenlyBody->getNumericExcentricity();
 
+    setKeplerConstant(keplerConstant);
+
+    orbit3d = new Orbit3d(color);
+
     init();
+    setOrbitVisisble(true);
 }
 
-void Planet3d::setCircumstanceTime(float circumstanceTime)
+Planet3d::~Planet3d()
 {
-    this->circumstance_time = circumstanceTime;
+    delete orbit3d;
+}
+
+void Planet3d::setKeplerConstant(const float keplerConstant)
+{
+    circumstanceTime = sqrt(keplerConstant * pow(a * ((sqrt(1 - epsilon) + 1) / 2), 3));
 }
 
 void Planet3d::init()
 {
-    // Inputvariablen
-    float circumstance_time = 400; // Sekunden
-    setCircumstanceTime(circumstance_time);
-
     const float PI = M_PI; // 3.14159265358979323846 3.1415926535f;
 
     b = a * sqrt(1 - epsilon * epsilon );
@@ -30,11 +36,11 @@ void Planet3d::init()
     float circumstance = ( a + b ) * PI * ( 1 + 3 * lambda * lambda / ( 10 + sqrt( 4 - 3 * lambda * lambda )));
 
     // Durchschnittsgeschwindigkeit bestimmen
-    average_speed = circumstance / circumstance_time;
+    average_speed = circumstance / circumstanceTime;
     qDebug() << "Durchschnittsgeschwindigkeit: " << average_speed;
 
     // Mittlere Winkelgeschwindigkeit
-    float omega_m = 2 * PI / circumstance_time;
+    float omega_m = 2 * PI / circumstanceTime;
 
     // Geschwindigkeit im Aphel
     float speed_aphel = omega_m * a * sqrt(( a - e ) / ( a + e ));
@@ -74,7 +80,7 @@ void Planet3d::paintHeavenlyBody3d()
 
     // Mit einem Dreisatz den zu ueberschreitenden Winkel bestimmen:
     // alpha / øalpha ~ v / øv
-    float orbit_points_count = circumstance_time;
+    float orbit_points_count = circumstanceTime;
     float average_angle = 2 * PI / orbit_points_count;
     float alpha = average_angle * instantaneous_velocity / average_speed;
 
@@ -86,34 +92,8 @@ void Planet3d::paintHeavenlyBody3d()
 
     glPopMatrix();
 
-    glPushMatrix();
-    glRotatef(45.0, 0.0, 0.0, 1.0);
-    drawEllipse(a, b, e);
-    glPopMatrix();
-}
-
-void Planet3d::drawEllipse(float a, float b, float e)
-{
-        const float PI = 3.1415926535f;
-        //Draws a ellpise made out of points.
-        glDisable(GL_LIGHTING);
-        //glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, GLColorRGBA(1.0, 0.0, 0.0).fv());
-//glMateriali(GL_FRONT, GL_SHININESS, 100);
-//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color.fv());
-            //glMaterialf(GL_FRONT_AND_BACK, pname: TGLenum; param: TGLfloat);
-        glColor3f(color.red(),color.green(),color.blue());
-                float x,y,z;
-                float t;
-            glBegin(GL_LINE_LOOP);
-
-            for(t = 0; t <= 2 * PI; t += PI / 720)
-                        {
-                x = cos(t) * a + e;
-                y = sin(t) * b;
-                  z = 0;
-                            glRotatef(45.0, 1.0, 1.0, 1.0);
-                  glVertex3f(x,y,z);
-                        }
-            glEnd();
-glEnable(GL_LIGHTING);
+    if (isOrbitVisisble())
+    {
+        orbit3d->paintOrbit3d(a, b, e);
+    }
 }

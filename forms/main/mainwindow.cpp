@@ -20,6 +20,16 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::on_actionStartSimulation_triggered()
+{
+    simulationView->startSimulation();
+}
+
+void MainWindow::on_actionStopSimulation_triggered()
+{
+    simulationView->stopSimulation();
+}
+
 void MainWindow::on_actionHeavenlyBodyOverview_triggered()
 {
     HeavenlyBodyOverview *heavenlyBodyOverview = new HeavenlyBodyOverview(this, heavenlyBodyModel);
@@ -41,4 +51,10 @@ void MainWindow::on_actionSolarSystemOverview_triggered()
 void MainWindow::on_simulateSolarSystem(SolarSystem *solarSystem)
 {
     simulationView->setSolarSystem(solarSystem);
+    simulationView->setOrbitVisible(ui->actionOrbitVisible->isChecked());
+}
+
+void MainWindow::on_actionOrbitVisible_triggered()
+{
+    simulationView->setOrbitVisible(ui->actionOrbitVisible->isChecked());
 }
