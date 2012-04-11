@@ -10,25 +10,30 @@
 #include "OpenGL/GL/glut.h"
 
 SimulationView::SimulationView(QWidget *parent) :
-    QGLWidget(parent)//,
-  //   ui(new Ui::SimulationView)
+    QGLWidget(parent)
 {
-    //ui->setupUi(this);
-    _Perspective = new GLPerspective(25 * v_Z);
+    perspective = new GLPerspective();
+    perspective->setCamera(25 * v_Z);
+
     setFocusPolicy(Qt::StrongFocus);
     setMouseTracking(true);
 
     solarSystemSimulation = new SolarSystemSimulation();
 
-    //startTimer(20);
+    timer = new QTimer(this);
+    connect(timer,
+            SIGNAL(timeout()),
+            this,
+            SLOT(timerEvent()));
 }
 
 SimulationView::~SimulationView()
 {
     stopSimulation();
 
-    delete _Perspective;
+    delete perspective;
     delete solarSystemSimulation;
+    delete timer;
 }
 
 void SimulationView::setOrbitVisible(bool orbitVisible)
@@ -36,24 +41,33 @@ void SimulationView::setOrbitVisible(bool orbitVisible)
     solarSystemSimulation->setOrbitVisible(orbitVisible);
 }
 
+void SimulationView::resetPerspective()
+{
+    perspective->setCamera(solarSystemSimulation->getMaxSemimajorAxis() * 3.5 * v_Z);
+    perspective->setCenter(v_Zero);
+    axisLength = perspective->distance() * 2;
+}
+
 void SimulationView::startSimulation()
 {
-    if (timerId != -1)
+    if (!timer->isActive())
     {
-        timerId = startTimer(20);
+        timer->start(20);
     }
 }
 
 void SimulationView::stopSimulation()
 {
-    killTimer(timerId);
-    timerId = -1;
+    if (timer->isActive())
+    {
+        timer->stop();
+    }
 }
 
 void SimulationView::setSolarSystem(SolarSystem *solarSystem)
 {
     solarSystemSimulation->setSolarSystem(solarSystem);
-    startSimulation();
+    resetPerspective();
 }
 
 void SimulationView::initializeGL()
@@ -64,31 +78,49 @@ void SimulationView::initializeGL()
     glEnable(GL_DEPTH_TEST);
 }
 
-void SimulationView::timerEvent(QTimerEvent *event)
+void SimulationView::timerEvent()
 {
+    solarSystemSimulation->calculateSolarSystem3d();
+
     updateGL();
 }
 
 void SimulationView::paintGL()
 {
-    GLLight light;
-    //light.setPosition(GLVector(5, 5, 5));
-    light.setShowLightSource(false);
-
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    _Perspective->apply();
+    perspective->apply();
 
     drawAxes();
-    light.switchOn();
 
     glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+
+    GLfloat pos[4];
+    pos[0] = 0;
+    pos[1] = 0;
+    pos[2] = 0;
+    pos[3] = 1;
+
+    GLfloat direc[4];
+    direc[0] = 3;
+    direc[1] = 3;
+    direc[2] = 3;
+    direc[3] = 1;
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT, GLColorRGBA(cl_White * 0.2).fv() );
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, cl_White.fv() );
+    glLightfv(GL_LIGHT0, GL_SPECULAR, cl_White.fv() );
+
+    glLightfv(GL_LIGHT0, GL_POSITION, pos );
+    //glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, direc );
+    //glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 180); // angle is 0 to 180
+    //glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 180); // exponent is 0 to 128
 
     glMaterialfv(GL_FRONT, GL_SPECULAR, cl_White.fv());
 
     solarSystemSimulation->paintSolarSystem3d();
 
-    light.switchOff();
     glDisable(GL_LIGHTING);
 
     glFlush();
@@ -98,12 +130,12 @@ void SimulationView::drawAxes()
 {
     QVector <GLVector> points(6);
 
-    points[0] = GLVector(-100.0,0.0,0.0);
-    points[1] = GLVector(100.0,0.0,0.0);
-    points[2] = GLVector(0.0,-100.0,0.0);
-    points[3] = GLVector(0.0,100.0,0.0);
-    points[4] = GLVector(0.0,0.0,-100.0);
-    points[5] = GLVector(0.0,0.0,100.0);
+    points[0] = GLVector(-axisLength,0.0,0.0);
+    points[1] = GLVector(axisLength,0.0,0.0);
+    points[2] = GLVector(0.0,-axisLength, 0.0);
+    points[3] = GLVector(0.0,axisLength,0.0);
+    points[4] = GLVector(0.0,0.0,-axisLength);
+    points[5] = GLVector(0.0,0.0,axisLength);
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_DOUBLE, sizeof(GLVector), points[0].dv());
@@ -131,6 +163,13 @@ void SimulationView::drawAxes()
     glDisableClientState(GL_VERTEX_ARRAY);
 }
 
+void SimulationView::updateOpenGL()
+{
+    axisLength = perspective->distance() * 2; // / 10.0;
+
+    updateGL();
+}
+
 void SimulationView::keyPressEvent(QKeyEvent *ke)
 {
     if (ke->modifiers() == Qt::ShiftModifier)
@@ -150,11 +189,9 @@ void SimulationView::keyPressEvent(QKeyEvent *ke)
             shiftSceneLeftRight(-0.1);
             break;
         case Qt::Key_PageDown:
-            qDebug("Hier geht wa schief (down)");
             shiftSceneForwardBackward(-1.0);
             break;
         case Qt::Key_PageUp:
-            qDebug("Hier geht wa schief (up)");
             shiftSceneForwardBackward(1.0);
             break;
         default:
@@ -181,6 +218,8 @@ void SimulationView::keyPressEvent(QKeyEvent *ke)
             break;
         }
     }
+
+    updateOpenGL();
 }
 
 void SimulationView::mouseMoveEvent(QMouseEvent *me)
@@ -210,6 +249,8 @@ void SimulationView::mouseMoveEvent(QMouseEvent *me)
             {
                 turnCameraUpDown(1.0);
             }
+
+            updateOpenGL();
         }
 
         // Ist SHIFT gedrueckt?
@@ -217,26 +258,27 @@ void SimulationView::mouseMoveEvent(QMouseEvent *me)
         {
             if ((x - me->x()) < 0)
             {
-                shiftSceneLeftRight(-0.1);
+                shiftSceneLeftRight(-0.5);
             }
             else if ((x - me->x()) > 0)
             {
-                shiftSceneLeftRight(0.1);
+                shiftSceneLeftRight(0.5);
             }
 
             if ((y - me->y()) > 0)
             {
-                shiftSceneUpDown(-0.1);
+                shiftSceneUpDown(-0.5);
             }
             else if ((y - me->y()) < 0)
             {
-                shiftSceneUpDown(0.1);
+                shiftSceneUpDown(0.5);
             }
+
+            updateOpenGL();
         }
     }
     x = me->x();
     y = me->y();
-    //updateGL();
 }
 
 void SimulationView::wheelEvent(QWheelEvent * wheelEvent)
@@ -246,7 +288,6 @@ void SimulationView::wheelEvent(QWheelEvent * wheelEvent)
     if (modifiers & Qt::ControlModifier)
     {
         int delta = wheelEvent->delta();
-        qDebug() << delta;
 
         // Nach unten.
         if (delta < 0)
@@ -258,41 +299,42 @@ void SimulationView::wheelEvent(QWheelEvent * wheelEvent)
         {
             stretchCameraDistance(0.85);
         }
-        //  updateGL();
+
+        updateOpenGL();
     }
 }
 
 void SimulationView::resizeGL(int width, int height)
 {
-    _Perspective->setViewport(width, height);
+    perspective->setViewport(width, height);
 }
 
 void SimulationView::turnCameraUpDown(double angle)
 {
-    _Perspective->turnCameraUpDown(angle);
+    perspective->turnCameraUpDown(angle);
 }
 
 void SimulationView::turnCameraLeftRight(double angle)
 {
-    _Perspective->turnCameraLeftRight(angle);
+    perspective->turnCameraLeftRight(angle);
 }
 
 void SimulationView::stretchCameraDistance(double factor)
 {
-    _Perspective->stretchCameraDistance(factor);
+    perspective->stretchCameraDistance(factor);
 }
 
 void SimulationView::shiftSceneUpDown(double distance)
 {
-    _Perspective->shiftSceneUpDown(distance);
+    perspective->shiftSceneUpDown(distance);
 }
 
 void SimulationView::shiftSceneLeftRight(double distance)
 {
-    _Perspective->shiftSceneLeftRight(distance);
+    perspective->shiftSceneLeftRight(distance);
 }
 
 void SimulationView::shiftSceneForwardBackward(double distance)
 {
-    _Perspective->shiftSceneForwardBackward(distance);
+    perspective->shiftSceneForwardBackward(distance);
 }

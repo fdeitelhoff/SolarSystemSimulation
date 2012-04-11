@@ -48,6 +48,7 @@
     <addaction name="actionStopSimulation"/>
     <addaction name="separator"/>
     <addaction name="actionOrbitVisible"/>
+    <addaction name="actionResetPerspective"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSimulation"/>
@@ -74,11 +75,17 @@
    </property>
   </action>
   <action name="actionStartSimulation">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Start</string>
    </property>
   </action>
   <action name="actionStopSimulation">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Stop</string>
    </property>
@@ -92,6 +99,11 @@
    </property>
    <property name="text">
     <string>Orbit visible</string>
+   </property>
+  </action>
+  <action name="actionResetPerspective">
+   <property name="text">
+    <string>Reset perspective</string>
    </property>
   </action>
  </widget>

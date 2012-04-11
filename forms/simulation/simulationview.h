@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QGLWidget>
+#include <QTimer>
 
 #include "OpenGL/glperspective.h"
 #include "OpenGL/gllight.h"
@@ -27,18 +28,21 @@ public:
     void stopSimulation();
 
     void setOrbitVisible(bool orbitVisible);
+
+    void resetPerspective();
     
 protected:
     void keyPressEvent(QKeyEvent *ke);
 
 private:
-    Ui::SimulationView *ui;
-
     SolarSystemSimulation *solarSystemSimulation;
-    int timerId;
 
-    GLPerspective * _Perspective;
-    GLLight * _light;
+    QTimer *timer;
+
+    GLPerspective * perspective;
+
+    GLdouble axisLength;
+
     void initializeGL();
     void resizeGL(int width, int height);
     void paintGL();
@@ -53,7 +57,10 @@ private:
     int y;
     void wheelEvent(QWheelEvent * wheelEvent);
     void drawAxes();
-    void timerEvent(QTimerEvent *event);
+    void updateOpenGL();
+
+private slots:
+    void timerEvent();
 };
 
 #endif // SIMULATIONVIEW_H

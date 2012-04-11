@@ -54,6 +54,7 @@ void SolarSystemDetails::setPlanetManagementActive(bool isActive)
     ui->planets->setEnabled(isActive);
     ui->excentricity->setEnabled(isActive);
     ui->semimajorAxis->setEnabled(isActive);
+    ui->angle->setEnabled(isActive);
     ui->addPlanet->setEnabled(isActive);
 }
 
@@ -106,7 +107,8 @@ void SolarSystemDetails::on_addPlanet_clicked()
 {
     solarSystemModel->addPlanet(ui->planets->currentIndex(),
                                 currentExcentricity,
-                                ui->semimajorAxis->text().toDouble());
+                                ui->semimajorAxis->text().toDouble(),
+                                ui->angle->text().toInt());
 }
 
 void SolarSystemDetails::on_deletePlanet_clicked()

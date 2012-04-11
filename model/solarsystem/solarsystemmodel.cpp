@@ -135,10 +135,10 @@ void SolarSystemModel::updateSolarSystem(QString name, int centralStarIndex)
     solarSystemRepository->updateEntity(currentSolarSystem);
 }
 
-void SolarSystemModel::addPlanet(int planetIndex, double excentricity, double semimajorAxis)
+void SolarSystemModel::addPlanet(int planetIndex, double excentricity, double semimajorAxis, int angle)
 {
     SolarSystemHeavenlyBody *solarSystemHeavenlyBody = new SolarSystemHeavenlyBody(planetsComboBoxModel->getHeavenlyBody(planetIndex),
-                                                                                   excentricity, semimajorAxis);
+                                                                                   excentricity, semimajorAxis, angle);
 
     solarSystemRepository->addPlanetEntity(currentSolarSystem, solarSystemHeavenlyBody);
     solarSystemHeavenlyBodyTableModel->addSolarSystemHeavenlyBody(solarSystemHeavenlyBody);

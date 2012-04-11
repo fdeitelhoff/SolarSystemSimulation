@@ -37,7 +37,7 @@ public:
     void updateSolarSystem(QString name, int centralStarIndex);
     void deleteSolarSystem();
 
-    void addPlanet(int planetIndex, double excentricity, double semimajorAxis);
+    void addPlanet(int planetIndex, double excentricity, double semimajorAxis, int angle);
     void deletePlanet();
 
 signals:

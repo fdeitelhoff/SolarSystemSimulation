@@ -3,11 +3,12 @@
 SolarSystemHeavenlyBody::SolarSystemHeavenlyBody()
 { }
 
-SolarSystemHeavenlyBody::SolarSystemHeavenlyBody(HeavenlyBody *heavenlyBody, double excentricity, double semimajorAxis)
+SolarSystemHeavenlyBody::SolarSystemHeavenlyBody(HeavenlyBody *heavenlyBody, double excentricity, double semimajorAxis, int angle)
 {
     this->heavenlyBody = heavenlyBody;
     this->numericExcentricity = excentricity;
     this->semimajorAxis = semimajorAxis;
+    this->angle = angle;
 }
 
 HeavenlyBody* SolarSystemHeavenlyBody::getHeavenlyBody()
@@ -23,4 +24,9 @@ double SolarSystemHeavenlyBody::getNumericExcentricity()
 double SolarSystemHeavenlyBody::getSemimajorAxis()
 {
     return semimajorAxis;
+}
+
+int SolarSystemHeavenlyBody::getAngle()
+{
+    return angle;
 }

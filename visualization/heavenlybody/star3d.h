@@ -6,8 +6,12 @@
 
 class Star3d : public HeavenlyBody3d
 {
+
 public:
     Star3d(HeavenlyBody *heavenlyBody);
+
+    void paintHeavenlyBody3d();
+
 };
 
 #endif // STAR3D_H

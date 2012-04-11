@@ -15,6 +15,7 @@ public:
     HeavenlyBody3d(HeavenlyBody *heavenlyBody);
 
     virtual void paintHeavenlyBody3d();    
+    virtual void calculateHeavenlyBody3d();
 
     void setOrbitVisisble(bool orbitVisisble);
 

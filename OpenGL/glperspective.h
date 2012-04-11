@@ -41,8 +41,6 @@ class GLPerspective{
 public:
     GLPerspective();
 
-    GLPerspective(GLVector camera_position);
-
     ~GLPerspective();
     /** Applies the perspective settings to projection and modelview matrices. 
       * Old matrix values will be overwritten. To be called once before rendering the scene.

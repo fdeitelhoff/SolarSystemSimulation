@@ -12,7 +12,7 @@ int SolarSystemHeavenlyBodyTableModel::rowCount(const QModelIndex &/*parent*/) c
 
 int SolarSystemHeavenlyBodyTableModel::columnCount(const QModelIndex &/*parent*/) const
 {
-    return 6;
+    return 7;
 }
 
 QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int role) const
@@ -47,6 +47,9 @@ QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int r
             break;
         case 5:
             value = QVariant(entity->getSemimajorAxis());
+            break;
+        case 6:
+            value = QVariant(entity->getAngle());
             break;
         }
 
@@ -98,6 +101,9 @@ QVariant SolarSystemHeavenlyBodyTableModel::headerData(int section, Qt::Orientat
         break;
     case 5:
         columnHeader = "Semimajor Axis";
+        break;
+    case 6:
+        columnHeader = "Angle";
         break;
     }
 

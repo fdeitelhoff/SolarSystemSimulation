@@ -18,6 +18,9 @@ void HeavenlyBody3d::paintHeavenlyBody3d()
     glutSolidSphere(radius, 32, 32);
 }
 
+void HeavenlyBody3d::calculateHeavenlyBody3d()
+{ }
+
 void HeavenlyBody3d::setOrbitVisisble(bool orbitVisisble)
 {
     this->orbitVisisble = orbitVisisble;

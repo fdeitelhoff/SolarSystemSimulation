@@ -9,7 +9,9 @@ void SolarSystemSimulation::setSolarSystem(SolarSystem *solarSystem)
 {
     heavenlyBodies3d.clear();
 
-    const float keplerConstant = 160;
+    const float keplerConstant = 80;
+
+    maxSemimajorAxis = 0;
 
     // Add the star.
     heavenlyBodies3d.append(new Star3d(solarSystem->getCentralStar()));
@@ -19,6 +21,26 @@ void SolarSystemSimulation::setSolarSystem(SolarSystem *solarSystem)
     foreach (solarSystemHeavenlyBody, solarSystem->getHeavenlyBodies())
     {
         heavenlyBodies3d.append(new Planet3d(solarSystemHeavenlyBody, keplerConstant));
+
+        if (solarSystemHeavenlyBody->getSemimajorAxis() > maxSemimajorAxis)
+        {
+            maxSemimajorAxis = solarSystemHeavenlyBody->getSemimajorAxis();
+        }
+    }
+}
+
+float SolarSystemSimulation::getMaxSemimajorAxis()
+{
+    return maxSemimajorAxis;
+}
+
+void SolarSystemSimulation::calculateSolarSystem3d()
+{
+    // Loop through all 3D objects and calculate them.
+    HeavenlyBody3d *heavenlyBody3d;
+    foreach (heavenlyBody3d, heavenlyBodies3d)
+    {
+        heavenlyBody3d->calculateHeavenlyBody3d();
     }
 }
 

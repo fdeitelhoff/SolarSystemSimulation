@@ -13,13 +13,18 @@ public:
     SolarSystemSimulation();
 
     void paintSolarSystem3d();
+    void calculateSolarSystem3d();
 
     void setSolarSystem(SolarSystem *solarSystem);
 
     void setOrbitVisible(bool orbitVisible);
 
+    float getMaxSemimajorAxis();
+
 private:
     QList<HeavenlyBody3d *> heavenlyBodies3d;
+
+    float maxSemimajorAxis;
 };
 
 #endif // SOLARSYSTEMSIMULATION_H

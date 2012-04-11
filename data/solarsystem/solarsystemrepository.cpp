@@ -21,7 +21,9 @@ QList<SolarSystem *> SolarSystemRepository::fetchAllSolarSystemEntities()
                   "INNER JOIN "
                   "     heavenlybody "
                   "ON "
-                  "     centralstarid = heavenlybodyid");
+                  "     centralstarid = heavenlybodyid "
+                  "ORDER BY "
+                  "     solarsystemid ");
     query.exec();
 
     qDebug() << query.lastError();
@@ -32,6 +34,7 @@ QList<SolarSystem *> SolarSystemRepository::fetchAllSolarSystemEntities()
     innerQuery.prepare("SELECT"
                   "     excentricity, "
                   "     semimajoraxis, "
+                  "     angle, "
                   "     heavenlybody.heavenlybodyid, "
                   "     heavenlybody.name, "
                   "     diameter, "
@@ -44,7 +47,9 @@ QList<SolarSystem *> SolarSystemRepository::fetchAllSolarSystemEntities()
                   "ON "
                   "     solarsystemtoheavenlybody.heavenlybodyid = heavenlybody.heavenlybodyid "
                   "WHERE "
-                  "     solarsystemid = :solarsystemid");
+                  "     solarsystemid = :solarsystemid "
+                  "ORDER BY "
+                  "     semimajoraxis");
 
     while (query.next())
     {
@@ -73,13 +78,14 @@ QList<SolarSystem *> SolarSystemRepository::fetchAllSolarSystemEntities()
         {
             // The planet within the solar system.
             SolarSystemHeavenlyBody *solarSystemHeavenlyBody = new SolarSystemHeavenlyBody(
-                        new HeavenlyBody(innerQuery.value(2).toLongLong(),
-                                         innerQuery.value(3).toString(),
-                                         innerQuery.value(4).toInt(),
-                                         innerQuery.value(5).toString(),
-                                         innerQuery.value(6).toString()),
+                        new HeavenlyBody(innerQuery.value(3).toLongLong(),
+                                         innerQuery.value(4).toString(),
+                                         innerQuery.value(5).toInt(),
+                                         innerQuery.value(6).toString(),
+                                         innerQuery.value(7).toString()),
                         innerQuery.value(0).toDouble(),
-                        innerQuery.value(1).toDouble());
+                        innerQuery.value(1).toDouble(),
+                        innerQuery.value(2).toInt());
 
             solarSystem->addHeavenlyBody(solarSystemHeavenlyBody);
         }
@@ -138,16 +144,19 @@ void SolarSystemRepository::addPlanetEntity(SolarSystem *solarSystem, SolarSyste
                   "     (solarsystemid, "
                   "      heavenlybodyid, "
                   "      excentricity, "
-                  "      semimajoraxis) "
+                  "      semimajoraxis, "
+                  "      angle) "
                   "VALUES "
                   "     (:solarsystemid, "
                   "      :heavenlybodyid, "
                   "      :excentricity, "
-                  "      :semimajoraxis)");
+                  "      :semimajoraxis, "
+                  "      :angle)");
     query.bindValue(":solarsystemid", solarSystem->getId());
     query.bindValue(":heavenlybodyid", solarSystemHeavenlyBody->getHeavenlyBody()->getId());
     query.bindValue(":excentricity", solarSystemHeavenlyBody->getNumericExcentricity());
     query.bindValue(":semimajoraxis", solarSystemHeavenlyBody->getSemimajorAxis());
+    query.bindValue(":angle", solarSystemHeavenlyBody->getAngle());
     query.exec();
 
     qDebug() << query.lastError();

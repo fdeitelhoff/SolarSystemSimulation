@@ -8,16 +8,18 @@ class SolarSystemHeavenlyBody
 
 public:
     SolarSystemHeavenlyBody();
-    SolarSystemHeavenlyBody(HeavenlyBody *heavenlyBody, double numericExcentricity, double semimajorAxis);
+    SolarSystemHeavenlyBody(HeavenlyBody *heavenlyBody, double numericExcentricity, double semimajorAxis, int angle);
 
     HeavenlyBody* getHeavenlyBody();
     double getNumericExcentricity();
     double getSemimajorAxis();
+    int getAngle();
 
 private:
     HeavenlyBody *heavenlyBody;
     double numericExcentricity;
     double semimajorAxis;
+    int angle;
 
 };
 

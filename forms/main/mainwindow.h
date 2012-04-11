@@ -33,6 +33,7 @@ private slots:
     void on_actionStartSimulation_triggered();
     void on_actionStopSimulation_triggered();
     void on_actionOrbitVisible_triggered();
+    void on_actionResetPerspective_triggered();
 
     void on_simulateSolarSystem(SolarSystem *solarSystem);
 };

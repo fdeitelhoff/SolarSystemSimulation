@@ -16,15 +16,20 @@ public:
     Planet3d(SolarSystemHeavenlyBody *solarSystemHeavenlyBody, const float keplerConstant);
     ~Planet3d();
 
-    void paintHeavenlyBody3d();    
+    void paintHeavenlyBody3d();
+    void calculateHeavenlyBody3d();
 
 private:
+    int orbitAngle;
+
     float a;
     float b;
     float epsilon;
     float e;
     float phi;
     float my;
+    float x;
+    float y;
 
     float average_speed;
     float circumstanceTime;
