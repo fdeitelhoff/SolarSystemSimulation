@@ -7,7 +7,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    simulationView = new SimulationView(this);
+    solarSystemSimulation = new SolarSystemSimulation();
+
+    simulationView = new SimulationView(this, solarSystemSimulation);
+    connect(simulationView,
+            SIGNAL(simulationStopped()),
+            this,
+            SLOT(simulationStopped()));
+    connect(simulationView,
+            SIGNAL(collisionDetectionDeactivated()),
+            this,
+            SLOT(collisionDetectionDeactivated()));
+
     setCentralWidget(simulationView);
 
     // With the current architecture this should not be necessary here.
@@ -23,15 +34,15 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionStartSimulation_triggered()
 {
     simulationView->startSimulation();
-    ui->actionStartSimulation->setChecked(true);
-    ui->actionStopSimulation->setChecked(false);
+
+    setSimulationMenuState(false);
 }
 
 void MainWindow::on_actionStopSimulation_triggered()
 {
     simulationView->stopSimulation();
-    ui->actionStartSimulation->setChecked(false);
-    ui->actionStopSimulation->setChecked(true);
+
+    setSimulationMenuState(false);
 }
 
 void MainWindow::on_actionHeavenlyBodyOverview_triggered()
@@ -55,14 +66,14 @@ void MainWindow::on_actionSolarSystemOverview_triggered()
 void MainWindow::on_simulateSolarSystem(SolarSystem *solarSystem)
 {
     simulationView->setSolarSystem(solarSystem);
-    simulationView->setOrbitVisible(ui->actionOrbitVisible->isChecked());
+    solarSystemSimulation->setOrbitVisible(ui->actionOrbitVisible->isChecked());
 
     on_actionStartSimulation_triggered();
 }
 
 void MainWindow::on_actionOrbitVisible_triggered()
 {
-    simulationView->setOrbitVisible(ui->actionOrbitVisible->isChecked());
+    solarSystemSimulation->setOrbitVisible(ui->actionOrbitVisible->isChecked());
 }
 
 void MainWindow::on_actionResetPerspective_triggered()
@@ -70,7 +81,30 @@ void MainWindow::on_actionResetPerspective_triggered()
     simulationView->resetPerspective();
 }
 
+
 //void MainWindow::on_actionKeplersLawDefault_triggered()
 //{
 //    simulationView->toggleKeplersLaw();
 //}
+
+void MainWindow::simulationStopped()
+{
+    setSimulationMenuState(false);
+}
+
+void MainWindow::on_actionDetectCollisions_triggered()
+{
+    solarSystemSimulation->activateCollisionDetection(ui->actionDetectCollisions->isChecked());
+}
+
+void MainWindow::setSimulationMenuState(bool isSimulationStarted)
+{
+    ui->actionStartSimulation->setChecked(isSimulationStarted);
+    ui->actionStopSimulation->setChecked(!isSimulationStarted);
+}
+
+void MainWindow::collisionDetectionDeactivated()
+{
+    ui->actionDetectCollisions->setChecked(false);
+}
+

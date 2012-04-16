@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QGLWidget>
 #include <QTimer>
+#include <QMessageBox>
+#include <QAbstractButton>
 
 #include "OpenGL/glperspective.h"
 #include "OpenGL/gllight.h"
@@ -19,15 +21,13 @@ class SimulationView : public QGLWidget
     Q_OBJECT
     
 public:
-    explicit SimulationView(QWidget *parent = 0);
+    explicit SimulationView(QWidget *parent = 0, SolarSystemSimulation *solarSystemSimulation = 0);
     ~SimulationView();
 
     void setSolarSystem(SolarSystem *solarSystem);
 
     void startSimulation();
     void stopSimulation();
-
-    void setOrbitVisible(bool orbitVisible);
 
     void resetPerspective();
     
@@ -61,6 +61,12 @@ private:
 
 private slots:
     void timerEvent();
+    void collisionDetected(HeavenlyBody3d *firstHeavenlyBody3d, HeavenlyBody3d *secondHeavenlyBody3d);
+
+signals:
+    void simulationStopped();
+    void collisionDetectionDeactivated();
+
 };
 
 #endif // SIMULATIONVIEW_H

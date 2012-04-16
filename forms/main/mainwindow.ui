@@ -48,6 +48,8 @@
     <addaction name="actionStopSimulation"/>
     <addaction name="separator"/>
     <addaction name="actionOrbitVisible"/>
+    <addaction name="actionDetectCollisions"/>
+    <addaction name="separator"/>
     <addaction name="actionResetPerspective"/>
     <addaction name="actionKeplers_Law_default"/>
    </widget>
@@ -107,7 +109,11 @@
     <string>Reset perspective</string>
    </property>
   </action>
+<<<<<<< HEAD
   <action name="actionKeplers_Law_default">
+=======
+  <action name="actionDetectCollisions">
+>>>>>>> bbb764a88a4a2dbcb50cf7c91a600ce6130f2ef9
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -115,7 +121,11 @@
     <bool>true</bool>
    </property>
    <property name="text">
+<<<<<<< HEAD
     <string>Keplers Law default</string>
+=======
+    <string>Detect collisions</string>
+>>>>>>> bbb764a88a4a2dbcb50cf7c91a600ce6130f2ef9
    </property>
   </action>
  </widget>

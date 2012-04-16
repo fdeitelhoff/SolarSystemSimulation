@@ -9,7 +9,7 @@
 #include "OpenGL/gllight.h"
 #include "OpenGL/GL/glut.h"
 
-SimulationView::SimulationView(QWidget *parent) :
+SimulationView::SimulationView(QWidget *parent, SolarSystemSimulation *solarSystemSimulation) :
     QGLWidget(parent)
 {
     perspective = new GLPerspective();
@@ -18,7 +18,11 @@ SimulationView::SimulationView(QWidget *parent) :
     setFocusPolicy(Qt::StrongFocus);
     setMouseTracking(true);
 
-    solarSystemSimulation = new SolarSystemSimulation();
+    this->solarSystemSimulation = solarSystemSimulation;
+    connect(solarSystemSimulation,
+            SIGNAL(collisionDetected(HeavenlyBody3d*,HeavenlyBody3d*)),
+            this,
+            SLOT(collisionDetected(HeavenlyBody3d*,HeavenlyBody3d*)));
 
     timer = new QTimer(this);
     connect(timer,
@@ -32,13 +36,7 @@ SimulationView::~SimulationView()
     stopSimulation();
 
     delete perspective;
-    delete solarSystemSimulation;
     delete timer;
-}
-
-void SimulationView::setOrbitVisible(bool orbitVisible)
-{
-    solarSystemSimulation->setOrbitVisible(orbitVisible);
 }
 
 void SimulationView::resetPerspective()
@@ -61,6 +59,7 @@ void SimulationView::stopSimulation()
     if (timer->isActive())
     {
         timer->stop();
+        emit simulationStopped();
     }
 }
 
@@ -83,6 +82,32 @@ void SimulationView::timerEvent()
     solarSystemSimulation->calculateSolarSystem3d();
 
     updateGL();
+}
+
+void SimulationView::collisionDetected(HeavenlyBody3d *firstHeavenlyBody3d, HeavenlyBody3d *secondHeavenlyBody3d)
+{
+    QMessageBox msgBox;
+
+    QPushButton *stopSimulationButton = msgBox.addButton("Stop simulation", QMessageBox::ActionRole);
+    QPushButton *ignoreCollisionsButton = msgBox.addButton("Ignore collisions", QMessageBox::ActionRole);
+
+    msgBox.setWindowTitle("Collision detected");
+    msgBox.setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+    msgBox.setText(QString("A collision was detected between the two objects '%1' and '%2'!\n\nWhat would you like to do?").arg(firstHeavenlyBody3d->getName(),
+                                                                                                             secondHeavenlyBody3d->getName()));
+    msgBox.setDefaultButton(stopSimulationButton);
+
+    msgBox.exec();
+
+    if (msgBox.clickedButton() == (QAbstractButton*)stopSimulationButton)
+    {
+        stopSimulation();
+    }
+    else if (msgBox.clickedButton() == (QAbstractButton*)ignoreCollisionsButton)
+    {
+        solarSystemSimulation->activateCollisionDetection(false);
+        emit collisionDetectionDeactivated();
+    }
 }
 
 void SimulationView::paintGL()

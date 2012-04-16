@@ -42,6 +42,39 @@ void SolarSystemSimulation::calculateSolarSystem3d()
     {
         heavenlyBody3d->calculateHeavenlyBody3d();
     }
+
+    if (collisionDectection)
+    {
+        detectCollisions();
+    }
+}
+
+void SolarSystemSimulation::activateCollisionDetection(bool active)
+{
+    collisionDectection = active;
+}
+
+void SolarSystemSimulation::detectCollisions()
+{
+    HeavenlyBody3d *firstHeavenlyBody3d;
+    HeavenlyBody3d *secondHeavenlyBody3d;
+    double distance;
+    foreach (firstHeavenlyBody3d, heavenlyBodies3d)
+    {
+        foreach (secondHeavenlyBody3d, heavenlyBodies3d)
+        {
+            if (firstHeavenlyBody3d != secondHeavenlyBody3d)
+            {
+                distance = firstHeavenlyBody3d->calculateDistance(secondHeavenlyBody3d);
+
+                if (firstHeavenlyBody3d->getRadius() + secondHeavenlyBody3d->getRadius() >= distance)
+                {
+                    emit collisionDetected(firstHeavenlyBody3d, secondHeavenlyBody3d);
+                    return;
+                }
+            }
+        }
+    }
 }
 
 void SolarSystemSimulation::paintSolarSystem3d()
