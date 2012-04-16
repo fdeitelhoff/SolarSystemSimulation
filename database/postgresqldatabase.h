@@ -3,6 +3,8 @@
 
 #include <QSqlDatabase>
 
+#include "database/exceptions/databaseconnectionfailedexception.h"
+
 class PostgreSQLDatabase
 {
 protected:

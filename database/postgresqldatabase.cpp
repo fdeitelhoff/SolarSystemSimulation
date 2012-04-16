@@ -7,20 +7,21 @@ PostgreSQLDatabase* PostgreSQLDatabase::instance = 0;
 PostgreSQLDatabase::PostgreSQLDatabase()
 {
     // Connection over ODBC!. "SolarSystem" is the name of the ODBC data source.
-//    database = QSqlDatabase::addDatabase("QODBC");
-//    database.setDatabaseName("SolarSystemSimulation");
-//    bool ok = database.open();
+    database = QSqlDatabase::addDatabase("QODBC");
+    database.setDatabaseName("SolarSystemSimulation");
 
     // Connection through the native PostgreSQL driver.
-     database = QSqlDatabase::addDatabase("QPSQL");
+/*     database = QSqlDatabase::addDatabase("QPSQL");
      database.setHostName("localhost");
      database.setDatabaseName("SolarSystemSimulation");
      database.setUserName("postgres");
-     database.setPassword("postgres");
-     bool ok = database.open();
+     database.setPassword("postgres");*/
 
-    qDebug() << "DB-Connection: " << ok;
-    qDebug() << "Last-error: " << database.lastError();
+    if (!database.open())
+    {
+        throw DatabaseConnectionFailedException("The database connection could not be opened!",
+                                                database.lastError().text());
+    }
 }
 
 PostgreSQLDatabase* PostgreSQLDatabase::getInstance()

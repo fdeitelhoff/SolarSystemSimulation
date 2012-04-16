@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 
 #include "forms/heavenlybody/heavenlybodyoverview.h"
 #include "forms/solarsystem/solarsystemoverview.h"
@@ -31,6 +32,8 @@ private:
 
     void setSimulationMenuState(bool isSimulationStarted);
 
+    enum ErrorCodes { DatabaseConnectionError = 1 };
+
 private slots:
     void on_actionHeavenlyBodyOverview_triggered();
     void on_actionSolarSystemOverview_triggered();
@@ -40,7 +43,7 @@ private slots:
     void on_actionResetPerspective_triggered();
     void on_actionDetectCollisions_triggered();
 
-    void on_simulateSolarSystem(SolarSystem *solarSystem);
+    void simulateSolarSystem(SolarSystem *solarSystem);
 
     void simulationStopped();
     void collisionDetectionDeactivated();

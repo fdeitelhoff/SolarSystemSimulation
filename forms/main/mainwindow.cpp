@@ -21,9 +21,21 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setCentralWidget(simulationView);
 
-    // With the current architecture this should not be necessary here.
-    heavenlyBodyModel = new HeavenlyBodyModel();
-    solarSystemModel = new SolarSystemModel();
+    try
+    {
+        // With the current architecture this should not be necessary here.
+        heavenlyBodyModel = new HeavenlyBodyModel();
+        solarSystemModel = new SolarSystemModel();
+    }
+    catch (const DatabaseConnectionFailedException &dbConnectionFailed)
+    {
+        QMessageBox::critical(this,
+                              "Database connection error",
+                              QString("The database connection could not be opened!\n\nError:\n\n%1").arg(dbConnectionFailed.getSqlError()),
+                              QMessageBox::Ok);
+
+        exit(DatabaseConnectionError);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -58,12 +70,12 @@ void MainWindow::on_actionSolarSystemOverview_triggered()
     QObject::connect(solarSystemOverview,
                      SIGNAL(simulateSolarSystem(SolarSystem*)),
                      this,
-                     SLOT(on_simulateSolarSystem(SolarSystem*)));
+                     SLOT(simulateSolarSystem(SolarSystem*)));
 
     solarSystemOverview->show();
 }
 
-void MainWindow::on_simulateSolarSystem(SolarSystem *solarSystem)
+void MainWindow::simulateSolarSystem(SolarSystem *solarSystem)
 {
     simulationView->setSolarSystem(solarSystem);
     solarSystemSimulation->setOrbitVisible(ui->actionOrbitVisible->isChecked());

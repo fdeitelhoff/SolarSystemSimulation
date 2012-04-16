@@ -43,7 +43,8 @@ SOURCES += main.cpp \
     visualization/heavenlybody/heavenlybody3d.cpp \
     visualization/heavenlybody/star3d.cpp \
     visualization/heavenlybody/planet3d.cpp \
-    visualization/orbit/orbit3d.cpp
+    visualization/orbit/orbit3d.cpp \
+    database/exceptions/databaseconnectionfailedexception.cpp
 
 HEADERS  += forms/main/mainwindow.h \
     OpenGL/glvector.h \
@@ -81,7 +82,8 @@ HEADERS  += forms/main/mainwindow.h \
     visualization/heavenlybody/heavenlybody3d.h \
     visualization/heavenlybody/star3d.h \
     visualization/heavenlybody/planet3d.h \
-    visualization/orbit/orbit3d.h
+    visualization/orbit/orbit3d.h \
+    database/exceptions/databaseconnectionfailedexception.h
 
 FORMS    += forms/main/mainwindow.ui \
     forms/simulation/simulationview.ui \
