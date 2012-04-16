@@ -6,8 +6,9 @@
 #include "visualization/heavenlybody/star3d.h"
 #include "visualization/heavenlybody/planet3d.h"
 
-class SolarSystemSimulation
+class SolarSystemSimulation : public QObject
 {
+    Q_OBJECT
 
 public:
     SolarSystemSimulation();
@@ -18,6 +19,7 @@ public:
     void setSolarSystem(SolarSystem *solarSystem);
 
     void setOrbitVisible(bool orbitVisible);
+    void activateCollisionDetection(bool active);
 
     float getMaxSemimajorAxis();
 
@@ -25,6 +27,13 @@ private:
     QList<HeavenlyBody3d *> heavenlyBodies3d;
 
     float maxSemimajorAxis;
+    bool collisionDectection;
+
+    void detectCollisions();
+
+signals:
+    void collisionDetected(HeavenlyBody3d *firstHeavenlyBody3d, HeavenlyBody3d *secondHeavenlyBody3d);
+
 };
 
 #endif // SOLARSYSTEMSIMULATION_H

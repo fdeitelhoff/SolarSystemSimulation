@@ -6,6 +6,7 @@
 #include "forms/heavenlybody/heavenlybodyoverview.h"
 #include "forms/solarsystem/solarsystemoverview.h"
 #include "forms/simulation/simulationview.h"
+#include "simulation/solarsystemsimulation.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,9 +24,12 @@ private:
     Ui::MainWindow *ui;
 
     SimulationView *simulationView;
+    SolarSystemSimulation *solarSystemSimulation;
 
     HeavenlyBodyModel *heavenlyBodyModel;
     SolarSystemModel *solarSystemModel;
+
+    void setSimulationMenuState(bool isSimulationStarted);
 
 private slots:
     void on_actionHeavenlyBodyOverview_triggered();
@@ -34,8 +38,12 @@ private slots:
     void on_actionStopSimulation_triggered();
     void on_actionOrbitVisible_triggered();
     void on_actionResetPerspective_triggered();
+    void on_actionDetectCollisions_triggered();
 
     void on_simulateSolarSystem(SolarSystem *solarSystem);
+
+    void simulationStopped();
+    void collisionDetectionDeactivated();
 };
 
 #endif // MAINWINDOW_H

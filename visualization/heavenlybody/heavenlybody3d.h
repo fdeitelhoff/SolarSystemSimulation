@@ -19,14 +19,23 @@ public:
 
     void setOrbitVisisble(bool orbitVisisble);
 
+    double getRadius();
+    GLVector getCenter();
+    QString getName();
+    double calculateDistance(HeavenlyBody3d *heavenlyBody3d);
+
 protected:
     GLColorRGBA color;
+
+    float x;
+    float y;
 
     bool isOrbitVisisble();
 
 private:
     GLdouble radius;
     bool orbitVisisble;
+    QString name;
 };
 
 #endif // HEAVENLYBODY3D_H
