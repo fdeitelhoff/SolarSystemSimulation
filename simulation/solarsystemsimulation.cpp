@@ -95,3 +95,13 @@ void SolarSystemSimulation::setOrbitVisible(bool orbitVisible)
         heavenlyBody3d->setOrbitVisisble(orbitVisible);
     }
 }
+
+void SolarSystemSimulation::setKeplersLawDefault(bool keplerDefault)
+{
+    HeavenlyBody3d *heavenlyBody3d;
+    foreach (heavenlyBody3d, heavenlyBodies3d)
+    {
+        heavenlyBody3d->setKeplerDefault(keplerDefault);
+    }
+}
+

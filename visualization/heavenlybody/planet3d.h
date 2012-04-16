@@ -39,6 +39,7 @@ private:
     void drawEllipse(float a, float b, float e);
 
     void setKeplerConstant(const float keplerConstant);
+
 };
 
 #endif // PLANET3D_H

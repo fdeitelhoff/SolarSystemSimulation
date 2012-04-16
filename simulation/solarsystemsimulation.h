@@ -20,6 +20,7 @@ public:
 
     void setOrbitVisible(bool orbitVisible);
     void activateCollisionDetection(bool active);
+    void setKeplersLawDefault(bool keplerDefault);
 
     float getMaxSemimajorAxis();
 
