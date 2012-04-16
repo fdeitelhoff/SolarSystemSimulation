@@ -49,6 +49,7 @@
     <addaction name="separator"/>
     <addaction name="actionOrbitVisible"/>
     <addaction name="actionResetPerspective"/>
+    <addaction name="actionKeplers_Law_default"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSimulation"/>
@@ -104,6 +105,17 @@
   <action name="actionResetPerspective">
    <property name="text">
     <string>Reset perspective</string>
+   </property>
+  </action>
+  <action name="actionKeplers_Law_default">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Keplers Law default</string>
    </property>
   </action>
  </widget>

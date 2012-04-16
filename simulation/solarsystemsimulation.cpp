@@ -9,7 +9,7 @@ void SolarSystemSimulation::setSolarSystem(SolarSystem *solarSystem)
 {
     heavenlyBodies3d.clear();
 
-    const float keplerConstant = 80;
+    const float keplerConstant = 160;
 
     maxSemimajorAxis = 0;
 

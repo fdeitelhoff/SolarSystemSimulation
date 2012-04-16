@@ -22,7 +22,9 @@ Planet3d::~Planet3d()
 
 void Planet3d::setKeplerConstant(const float keplerConstant)
 {
-    circumstanceTime = sqrt(keplerConstant * pow(a * ((sqrt(1 - epsilon) + 1) / 2), 3));
+    //circumstanceTime = sqrt(keplerConstant * pow(a * ((sqrt(1 - epsilon) + 1) / 2), 3));
+    circumstanceTime = sqrt(keplerConstant * pow(a , 3));
+    qDebug() << "Umlaufgeschwindigkeit: " << circumstanceTime;
 }
 
 void Planet3d::init()
@@ -49,7 +51,8 @@ void Planet3d::init()
     phi = 0.0;
 
     // My = Gravitationskonstante * Masse
-    my = speed_aphel * speed_aphel / ( 2 / ( a + e ) - 1 / a );
+    //my = speed_aphel * speed_aphel / ( 2 / ( a + e ) - 1 / a );
+    my = speed_aphel * speed_aphel * (a + e) * a / ( a - e );
 }
 
 void Planet3d::calculateHeavenlyBody3d()
@@ -66,6 +69,7 @@ void Planet3d::calculateHeavenlyBody3d()
     // Mit einem Dreisatz den zu ueberschreitenden Winkel bestimmen:
     // alpha / øalpha ~ v / øv
     float orbit_points_count = circumstanceTime;
+    qDebug() << "Punkte Orbit: " << orbit_points_count;
     float average_angle = 2 * M_PI / orbit_points_count;
     float alpha = average_angle * instantaneous_velocity / average_speed;
 
@@ -74,6 +78,7 @@ void Planet3d::calculateHeavenlyBody3d()
     {
         phi = 0;
     }
+    qDebug() << "Phi: " << phi;
 }
 
 void Planet3d::paintHeavenlyBody3d()

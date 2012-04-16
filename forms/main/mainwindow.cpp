@@ -69,3 +69,8 @@ void MainWindow::on_actionResetPerspective_triggered()
 {
     simulationView->resetPerspective();
 }
+
+//void MainWindow::on_actionKeplersLawDefault_triggered()
+//{
+//    simulationView->toggleKeplersLaw();
+//}
