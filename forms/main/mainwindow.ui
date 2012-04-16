@@ -48,6 +48,8 @@
     <addaction name="actionStopSimulation"/>
     <addaction name="separator"/>
     <addaction name="actionOrbitVisible"/>
+    <addaction name="actionDetectCollisions"/>
+    <addaction name="separator"/>
     <addaction name="actionResetPerspective"/>
    </widget>
    <addaction name="menuFile"/>
@@ -104,6 +106,17 @@
   <action name="actionResetPerspective">
    <property name="text">
     <string>Reset perspective</string>
+   </property>
+  </action>
+  <action name="actionDetectCollisions">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Detect collisions</string>
    </property>
   </action>
  </widget>

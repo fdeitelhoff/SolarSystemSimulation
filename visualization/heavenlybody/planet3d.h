@@ -28,8 +28,6 @@ private:
     float e;
     float phi;
     float my;
-    float x;
-    float y;
 
     float average_speed;
     float circumstanceTime;
