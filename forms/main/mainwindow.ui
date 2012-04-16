@@ -51,6 +51,8 @@
     <addaction name="actionDetectCollisions"/>
     <addaction name="separator"/>
     <addaction name="actionResetPerspective"/>
+    <addaction name="separator"/>
+    <addaction name="actionKeplersLawDefault"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSimulation"/>
@@ -117,6 +119,14 @@
    </property>
    <property name="text">
     <string>Detect collisions</string>
+   </property>
+  </action>
+  <action name="actionKeplersLawDefault">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Keplers law default</string>
    </property>
   </action>
  </widget>
