@@ -52,7 +52,6 @@
     <addaction name="separator"/>
     <addaction name="actionResetPerspective"/>
     <addaction name="separator"/>
-    <addaction name="actionKeplersLawDefault"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSimulation"/>

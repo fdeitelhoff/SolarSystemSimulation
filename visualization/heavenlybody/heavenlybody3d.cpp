@@ -36,16 +36,6 @@ bool HeavenlyBody3d::isOrbitVisisble()
     return orbitVisisble;
 }
 
-void HeavenlyBody3d::setKeplerDefault(bool keplerDefault)
-{
-    this->keplerDefault = keplerDefault;
-}
-
-bool HeavenlyBody3d::isKeplerDefault()
-{
-    return keplerDefault;
-}
-
 double HeavenlyBody3d::getRadius()
 {
     return radius;

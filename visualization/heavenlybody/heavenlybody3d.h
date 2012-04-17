@@ -18,8 +18,6 @@ public:
     virtual void calculateHeavenlyBody3d();
 
     void setOrbitVisisble(bool orbitVisisble);
-    void setKeplerDefault(bool keplerDefault);
-    bool isKeplerDefault();
     bool keplerDefault;
 
 

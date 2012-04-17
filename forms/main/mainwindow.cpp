@@ -93,12 +93,6 @@ void MainWindow::on_actionResetPerspective_triggered()
     simulationView->resetPerspective();
 }
 
-void MainWindow::on_actionKeplersLawDefault_triggered()
-{
-    qDebug() << "Keplers law default triggered";
-    qDebug() << ui->actionKeplersLawDefault->isChecked();
-    solarSystemSimulation->setKeplersLawDefault(!ui->actionKeplersLawDefault->isChecked());
-}
 
 void MainWindow::simulationStopped()
 {

@@ -42,7 +42,6 @@ private slots:
     void on_actionOrbitVisible_triggered();
     void on_actionResetPerspective_triggered();
     void on_actionDetectCollisions_triggered();
-    void on_actionKeplersLawDefault_triggered();
 
     void simulateSolarSystem(SolarSystem *solarSystem);
 

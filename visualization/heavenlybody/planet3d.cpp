@@ -22,15 +22,7 @@ Planet3d::~Planet3d()
 
 void Planet3d::setKeplerConstant(const float keplerConstant)
 {
-    qDebug() << "Kepler default: " << keplerDefault;
-    if(keplerDefault)
-    {
-        circumstanceTime = sqrt(keplerConstant * pow(a * ((sqrt(1 - epsilon) + 1) / 2), 3));
-    }
-    else
-    {
-        circumstanceTime = sqrt(keplerConstant * pow(a , 3));
-    }
+    circumstanceTime = sqrt(keplerConstant * pow(a , 3));
 }
 
 void Planet3d::init()
@@ -55,6 +47,7 @@ void Planet3d::init()
     //float speed_perihel = omega_m * a * sqrt(( a + e ) / ( a - e ));
 
     phi = 0.0;
+    pointsCounter = 0;
 
     // My = Gravitationskonstante * Masse
     my = speed_aphel * speed_aphel * (a + e) * a / ( a - e );
@@ -78,10 +71,16 @@ void Planet3d::calculateHeavenlyBody3d()
     float alpha = average_angle * instantaneous_velocity / average_speed;
 
     phi += alpha;
-    if (phi > 2 * M_PI)
+    if ( pointsCounter == (int) orbit_points_count / 2)
+    {
+        phi = M_PI;
+    }
+    if ( pointsCounter > orbit_points_count)
     {
         phi = 0;
+        pointsCounter = 0;
     }
+    pointsCounter++;
 }
 
 void Planet3d::paintHeavenlyBody3d()
