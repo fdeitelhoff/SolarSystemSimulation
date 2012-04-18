@@ -7,15 +7,15 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
 {
     ui->setupUi(this);
 
+    QObject::connect(ui->stars,
+                     SIGNAL(currentIndexChanged(int)),
+                     this,
+                     SLOT(on_starSelected(int)),
+                     Qt::DirectConnection);
+
     this->solarSystemModel = solarSystemModel;
 
     this->isEdit = isEdit;
-
-    QObject::connect(this->solarSystemModel,
-                     SIGNAL(starSelectionChanged(int)),
-                     this,
-                     SLOT(on_starSelectionChanged(int)),
-                     Qt::DirectConnection);
 
     ui->planetsTableView->setModel(solarSystemModel->getSolarSystemHeavenlyBodyTableModel());
     ui->stars->setModel(solarSystemModel->getStarsComboBoxModel());
@@ -24,11 +24,6 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
     solarSystemModel->setSolarSystemHeavenlyBodySelectionModel(ui->planetsTableView->selectionModel());
 
     solarSystemModel->loadOtherEntities();
-
-    ui->planets->setCurrentIndex(0);
-    ui->stars->setCurrentIndex(0);
-
-    currentExcentricity = 0;
 
     if (isEdit)
     {
@@ -40,6 +35,21 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
 
         setWindowTitle(QString("Edit Solar System '%1'").arg(solarSystemModel->getCurrentSolarSystem()->getName()));
     }
+
+    QObject::connect(this->solarSystemModel,
+                     SIGNAL(starSelectionChanged(int)),
+                     this,
+                     SLOT(on_starSelectionChanged(int)),
+                     Qt::DirectConnection);
+
+    QObject::connect(ui->planetsTableView->selectionModel(),
+                     SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+                     this,
+                     SLOT(selectionChanged(QItemSelection,QItemSelection)),
+                     Qt::DirectConnection);
+
+    ui->planets->setCurrentIndex(0);
+    ui->stars->setCurrentIndex(0);
 }
 
 SolarSystemDetails::~SolarSystemDetails()
@@ -47,12 +57,17 @@ SolarSystemDetails::~SolarSystemDetails()
     delete ui;
 }
 
+void SolarSystemDetails::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
+{
+    ui->deletePlanet->setEnabled(selected.size() == 1);
+}
+
 void SolarSystemDetails::setPlanetManagementActive(bool isActive)
 {
     ui->planetsTableView->setEnabled(isActive);
-    ui->deletePlanet->setEnabled(isActive);
     ui->planets->setEnabled(isActive);
     ui->excentricity->setEnabled(isActive);
+    ui->excentricityEdit->setEnabled(isActive);
     ui->semimajorAxis->setEnabled(isActive);
     ui->angle->setEnabled(isActive);
     ui->addPlanet->setEnabled(isActive);
@@ -63,10 +78,23 @@ void SolarSystemDetails::on_starSelectionChanged(int index)
     ui->stars->setCurrentIndex(index);
 }
 
+void SolarSystemDetails::on_starSelected(int index)
+{
+    HeavenlyBody *heavenlyBody = solarSystemModel->getStarsComboBoxModel()->getHeavenlyBody(index);
+
+    if (heavenlyBody)
+    {
+        ui->diameterLabel->setText(QString("Diameter: %1").arg(heavenlyBody->getDiameter()));
+
+        QPalette palette = ui->colorLabel->palette();
+        palette.setColor(QPalette::Background, heavenlyBody->getColor());
+        ui->colorLabel->setPalette(palette);
+    }
+}
+
 void SolarSystemDetails::on_excentricity_valueChanged()
 {
-    currentExcentricity = ui->excentricity->value() / 100.0;
-    ui->excentricityLabel->setText("Excentricity: " + QString::number(currentExcentricity));
+    ui->excentricityEdit->setText(QString::number(ui->excentricity->value() / 100.0));
 }
 
 void SolarSystemDetails::on_cancel_clicked()
@@ -76,42 +104,99 @@ void SolarSystemDetails::on_cancel_clicked()
 
 void SolarSystemDetails::on_accept_clicked()
 {
-    if (!isEdit)
+    if (updateOrCreateSolarSystem())
     {
-        solarSystemModel->createSolarSystem(ui->name->text(), ui->stars->currentIndex());
         setPlanetManagementActive(true);
 
         isEdit = true;
-    }
-    else
-    {
-        solarSystemModel->updateSolarSystem(ui->name->text(), ui->stars->currentIndex());
     }
 }
 
 void SolarSystemDetails::on_ok_clicked()
 {
-    if (!isEdit)
+    if (updateOrCreateSolarSystem())
     {
-        solarSystemModel->createSolarSystem(ui->name->text(), ui->stars->currentIndex());
+        close();
     }
-    else
+}
+
+bool SolarSystemDetails::updateOrCreateSolarSystem()
+{
+    bool ok = true;
+
+    try
     {
-        solarSystemModel->updateSolarSystem(ui->name->text(), ui->stars->currentIndex());
+        if (!isEdit)
+        {
+            solarSystemModel->createSolarSystem(ui->name->text(), ui->stars->currentIndex());
+        }
+        else
+        {
+            solarSystemModel->updateSolarSystem(ui->name->text(), ui->stars->currentIndex());
+        }
+    }
+    catch (const PropertyNotValidException &notValidException)
+    {
+        ok = false;
+
+        QMessageBox::critical(this,
+                              QString("The field '%1' is not valid").arg(notValidException.getProperty()),
+                              notValidException.getMessage(),
+                              QMessageBox::Ok);
     }
 
-    close();
+    return ok;
 }
 
 void SolarSystemDetails::on_addPlanet_clicked()
 {
-    solarSystemModel->addPlanet(ui->planets->currentIndex(),
-                                currentExcentricity,
-                                ui->semimajorAxis->text().toDouble(),
-                                ui->angle->text().toInt());
+    bool ok = true;
+    double currentExcentricity = ui->excentricityEdit->text().toDouble(&ok);
+
+    if (!ok)
+    {
+        currentExcentricity = -1;
+    }
+
+    int angle = ui->angle->text().toInt(&ok);
+
+    if (!ok)
+    {
+        angle = -1;
+    }
+
+    try
+    {
+        solarSystemModel->addPlanet(ui->planets->currentIndex(),
+                                    currentExcentricity,
+                                    ui->semimajorAxis->text().toDouble(),
+                                    angle);
+
+        ui->planetsTableView->selectRow(ui->planetsTableView->model()->rowCount() - 1);
+    }
+    catch (const PropertyNotValidException &notValidException)
+    {
+        QMessageBox::critical(this,
+                              QString("The field '%1' is not valid").arg(notValidException.getProperty()),
+                              notValidException.getMessage() + "\n\nThe planet could not be added to the solar system!",
+                              QMessageBox::Ok);
+    }
 }
 
 void SolarSystemDetails::on_deletePlanet_clicked()
 {
-    solarSystemModel->deletePlanet();
+    if (solarSystemModel->getCurrentSolarSystemHeavenlyBody())
+    {
+        QString name = solarSystemModel->getCurrentSolarSystemHeavenlyBody()->getHeavenlyBody()->getName();
+
+        int result = QMessageBox::question(this,
+                                           "Delete Heavenly Body",
+                                           QString("Would you like to delete the Heavenly Body '%1'?").arg(name),
+                                           QMessageBox::Yes | QMessageBox::No);
+
+        if (result == QMessageBox::Yes)
+        {
+            solarSystemModel->deletePlanet();
+        }
+    }
 }

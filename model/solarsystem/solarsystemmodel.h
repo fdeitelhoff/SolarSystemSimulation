@@ -32,6 +32,7 @@ public:
     HeavenlyBodyComboBoxModel* getPlanetsComboBoxModel();
 
     SolarSystem* getCurrentSolarSystem() { return currentSolarSystem; }
+    SolarSystemHeavenlyBody* getCurrentSolarSystemHeavenlyBody() { return currentSolarSystemHeavenlyBody; }
 
     void createSolarSystem(QString name, int centralStarIndex);
     void updateSolarSystem(QString name, int centralStarIndex);
@@ -39,6 +40,8 @@ public:
 
     void addPlanet(int planetIndex, double excentricity, double semimajorAxis, int angle);
     void deletePlanet();
+
+    bool isEntitySelected();
 
 signals:
     void starSelectionChanged(const int index);

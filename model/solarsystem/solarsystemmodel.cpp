@@ -13,6 +13,11 @@ SolarSystemModel::SolarSystemModel()
     currentSolarSystem = 0;
 }
 
+bool SolarSystemModel::isEntitySelected()
+{
+    return currentSolarSystem != 0;
+}
+
 void SolarSystemModel::loadEntityData()
 {
     if (currentSolarSystem)

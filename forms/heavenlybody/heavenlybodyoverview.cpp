@@ -7,6 +7,15 @@ HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent, HeavenlyBodyModel *h
 {
     ui->setupUi(this);
 
+    this->heavenlyBodyModel = heavenlyBodyModel;
+
+    ui->heavenlyBodyTableView->setModel(heavenlyBodyModel->getHeavenlyBodyTableModel());
+    heavenlyBodyModel->setSelectionModel(ui->heavenlyBodyTableView->selectionModel());
+
+    heavenlyBodyModel->loadAllHeavenlyBodyEntities();
+
+    ui->heavenlyBodyTableView->selectRow(0);
+
     QObject::connect(ui->heavenlyBodyTableView,
                      SIGNAL(doubleClicked(QModelIndex)),
                      this,
@@ -18,15 +27,6 @@ HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent, HeavenlyBodyModel *h
                      this,
                      SLOT(selectionChanged(QItemSelection,QItemSelection)),
                      Qt::DirectConnection);
-
-    this->heavenlyBodyModel = heavenlyBodyModel;
-
-    ui->heavenlyBodyTableView->setModel(heavenlyBodyModel->getHeavenlyBodyTableModel());
-    heavenlyBodyModel->setSelectionModel(ui->heavenlyBodyTableView->selectionModel());
-
-    heavenlyBodyModel->loadAllHeavenlyBodyEntities();
-
-    ui->heavenlyBodyTableView->selectRow(0);
 }
 
 HeavenlyBodyOverview::~HeavenlyBodyOverview()

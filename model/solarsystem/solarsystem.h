@@ -6,14 +6,16 @@
 
 #include "model/heavenlybody/heavenlybody.h"
 #include "model/solarsystem/solarsystemheavenlybody.h"
+#include "model/exceptions/propertynotvalidexception.h"
 
 class SolarSystem
 {
 
 public:
-    SolarSystem();
     SolarSystem(QString name, HeavenlyBody *centralStar);
     SolarSystem(qint64 id, QString name, HeavenlyBody *centralStar);
+
+    void init(QString name, HeavenlyBody *centralStar);
 
     qint64 getId() { return id; }
     QString getName() { return name; }
@@ -21,9 +23,9 @@ public:
     int getPlanetCount() { return heavenlyBodies.size(); }
     QList<SolarSystemHeavenlyBody *> getHeavenlyBodies() { return heavenlyBodies; }
 
-    void setId(qint64 id) { this->id = id; }
-    void setName(QString name) { this->name = name; }
-    void setCentralStar(HeavenlyBody *centralStar) { this->centralStar = centralStar; }
+    void setId(qint64 id);
+    void setName(QString name);
+    void setCentralStar(HeavenlyBody *centralStar);
 
     void addHeavenlyBody(SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
     void removeHeavenlyBody(SolarSystemHeavenlyBody *solarSystemHeavenlyBody);

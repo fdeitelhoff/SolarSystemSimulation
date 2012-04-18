@@ -64,7 +64,7 @@ void HeavenlyBody::setName(QString name)
 
     if (name.length() <= 0 || name.length() > 255)
     {
-        throw PropertyNotValidException("Name", "The field '%1' has to be between 0 and 255 characters long!");
+        throw PropertyNotValidException("Name", "The field '%1' has to be between 1 and 255 characters long!");
     }
 
     this->name = name;

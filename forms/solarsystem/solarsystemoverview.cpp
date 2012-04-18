@@ -15,11 +15,38 @@ SolarSystemOverview::SolarSystemOverview(QWidget *parent, SolarSystemModel *sola
     solarSystemModel->loadAllSolarSystemEntities();
 
     ui->solarSystemTableView->selectRow(0);
+
+    QObject::connect(ui->solarSystemTableView,
+                     SIGNAL(doubleClicked(QModelIndex)),
+                     this,
+                     SLOT(doubleClicked(QModelIndex)),
+                     Qt::DirectConnection);
+
+    QObject::connect(ui->solarSystemTableView->selectionModel(),
+                     SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+                     this,
+                     SLOT(selectionChanged(QItemSelection,QItemSelection)),
+                     Qt::DirectConnection);
 }
 
 SolarSystemOverview::~SolarSystemOverview()
 {
     delete ui;
+}
+
+void SolarSystemOverview::doubleClicked(QModelIndex modelIndex)
+{
+    if (solarSystemModel->isEntitySelected())
+    {
+        SolarSystemDetails *solarSystemDetails = new SolarSystemDetails(this, solarSystemModel, true);
+        solarSystemDetails->show();
+    }
+}
+
+void SolarSystemOverview::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
+{
+    ui->edit->setEnabled(selected.size() == 1);
+    ui->deleteEntity->setEnabled(selected.size() == 1);
 }
 
 void SolarSystemOverview::on_add_clicked()
