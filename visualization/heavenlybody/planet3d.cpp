@@ -35,7 +35,7 @@ void Planet3d::init()
     float circumstance = ( a + b ) * M_PI * ( 1 + 3 * lambda * lambda / ( 10 + sqrt( 4 - 3 * lambda * lambda )));
 
     // Durchschnittsgeschwindigkeit bestimmen
-    average_speed = circumstance / circumstanceTime;
+    averageSpeed = circumstance / circumstanceTime;
 
     // Mittlere Winkelgeschwindigkeit
     float omega_m = 2 * M_PI / circumstanceTime;
@@ -66,16 +66,16 @@ void Planet3d::calculateHeavenlyBody3d()
 
     // Mit einem Dreisatz den zu ueberschreitenden Winkel bestimmen:
     // alpha / øalpha ~ v / øv
-    float orbit_points_count = circumstanceTime;
-    float average_angle = 2 * M_PI / orbit_points_count;
-    float alpha = average_angle * instantaneous_velocity / average_speed;
+    float orbitPointsCount = circumstanceTime;
+    double averageAngle = 2 * M_PI / orbitPointsCount;
+    double alpha = averageAngle * instantaneous_velocity / averageSpeed;
 
     phi += alpha;
-    if ( pointsCounter == (int) orbit_points_count / 2)
+    if ( pointsCounter == (int) orbitPointsCount / 2)
     {
         phi = M_PI;
     }
-    if ( pointsCounter > orbit_points_count)
+    if ( pointsCounter > orbitPointsCount)
     {
         phi = 0;
         pointsCounter = 0;
