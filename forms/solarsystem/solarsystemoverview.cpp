@@ -27,6 +27,8 @@ SolarSystemOverview::SolarSystemOverview(QWidget *parent, SolarSystemModel *sola
                      this,
                      SLOT(selectionChanged(QItemSelection,QItemSelection)),
                      Qt::DirectConnection);
+
+    ui->solarSystemTableView->setColumnWidth(1, 320);
 }
 
 SolarSystemOverview::~SolarSystemOverview()

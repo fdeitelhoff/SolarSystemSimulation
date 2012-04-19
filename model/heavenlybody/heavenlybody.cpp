@@ -2,12 +2,14 @@
 
 HeavenlyBody::HeavenlyBody(QString name, int diameter, QColor color, QString type)
 {
+    id = -1;
+
     init(name, diameter, color, type);
 }
 
 HeavenlyBody::HeavenlyBody(qint64 id, QString name, int diameter, QColor color, QString type)
 {
-    this->setId(id);
+    setId(id);
 
     init(name, diameter, color, type);
 }

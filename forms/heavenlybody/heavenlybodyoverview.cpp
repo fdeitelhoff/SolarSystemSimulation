@@ -27,6 +27,8 @@ HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent, HeavenlyBodyModel *h
                      this,
                      SLOT(selectionChanged(QItemSelection,QItemSelection)),
                      Qt::DirectConnection);
+
+    ui->heavenlyBodyTableView->setColumnWidth(1, 300);
 }
 
 HeavenlyBodyOverview::~HeavenlyBodyOverview()

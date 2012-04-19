@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QLayout>
 #include <QCloseEvent>
+#include <QLocale>
 
 #include "forms/heavenlybody/heavenlybodyoverview.h"
 #include "forms/solarsystem/solarsystemoverview.h"

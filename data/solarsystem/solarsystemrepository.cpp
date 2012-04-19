@@ -23,7 +23,8 @@ QList<SolarSystem *> SolarSystemRepository::fetchAllSolarSystemEntities()
                              "ON "
                              "     centralstarid = heavenlybodyid "
                              "ORDER BY "
-                             "     solarsystemid ");
+                             "     solarsystem.name, "
+                             "     solarsystemid");
 
     if (!solarSystemQuery.exec())
     {
@@ -272,9 +273,12 @@ bool SolarSystemRepository::isEntityUnique(SolarSystem *solarSystem)
                              "FROM "
                              "     solarsystem "
                              "WHERE "
-                             "     name = :name");
+                             "     name = :name "
+                             "AND "
+                             "     solarsystemid <> :solarsystemid");
 
     solarSystemQuery.bindValue(":name", solarSystem->getName());
+    solarSystemQuery.bindValue(":solarsystemid", solarSystem->getId());
 
     if (!solarSystemQuery.exec())
     {

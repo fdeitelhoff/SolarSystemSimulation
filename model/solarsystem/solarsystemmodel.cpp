@@ -134,10 +134,16 @@ void SolarSystemModel::createSolarSystem(QString name, int centralStarIndex)
 
 void SolarSystemModel::updateSolarSystem(QString name, int centralStarIndex)
 {
-    currentSolarSystem->setName(name);
-    currentSolarSystem->setCentralStar(starsComboBoxModel->getHeavenlyBody(centralStarIndex));
+    HeavenlyBody *centralStar = starsComboBoxModel->getHeavenlyBody(centralStarIndex);
 
-    solarSystemRepository->updateEntity(currentSolarSystem);
+    // Create a temporary object first.
+    SolarSystem *solarSystem = new SolarSystem(currentSolarSystem->getId(), name, centralStar);
+
+    solarSystemRepository->updateEntity(solarSystem);
+
+    // Update the original entity when there was no database error!
+    currentSolarSystem->setName(name);
+    currentSolarSystem->setCentralStar(centralStar);
 }
 
 void SolarSystemModel::addPlanet(int planetIndex, double excentricity, double semimajorAxis, int angle)

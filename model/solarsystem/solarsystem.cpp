@@ -1,14 +1,16 @@
 #include "solarsystem.h"
 
-SolarSystem::SolarSystem(qint64 id, QString name, HeavenlyBody *centralStar)
+SolarSystem::SolarSystem(QString name, HeavenlyBody *centralStar)
 {
-    setId(id);
+    id = -1;
 
     init(name, centralStar);
 }
 
-SolarSystem::SolarSystem(QString name, HeavenlyBody *centralStar)
+SolarSystem::SolarSystem(qint64 id, QString name, HeavenlyBody *centralStar)
 {
+    setId(id);
+
     init(name, centralStar);
 }
 

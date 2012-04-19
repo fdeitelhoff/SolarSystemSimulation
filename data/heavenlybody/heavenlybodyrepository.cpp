@@ -15,7 +15,10 @@ QList<HeavenlyBody *> HeavenlyBodyRepository::fetchAllHeavenlyBodyEntities()
                                     "     color, "
                                     "     type "
                                     "FROM "
-                                    "     heavenlybody");
+                                    "     heavenlybody "
+                                    "ORDER BY "
+                                    "     type, "
+                                    "     name");
 
     if (!heavenlyBodyEntityQuery.exec())
     {
@@ -166,7 +169,9 @@ QList<HeavenlyBody *> HeavenlyBodyRepository::fetchExplizitTypedEntities(QString
                                     "FROM "
                                     "     heavenlybody "
                                     "WHERE "
-                                    "     type = :type");
+                                    "     type = :type "
+                                    "ORDER BY "
+                                    "     name");
 
     fetchTypedEntitiesQuery.bindValue(":type", type);
 
@@ -200,9 +205,12 @@ bool HeavenlyBodyRepository::isEntityUnique(HeavenlyBody *heavenlyBody)
                               "FROM "
                               "     heavenlybody "
                               "WHERE "
-                              "     name = :name");
+                              "     name = :name "
+                              "AND "
+                              "     heavenlybodyid <> :heavenlybodyid");
 
     heavenlyBodyQuery.bindValue(":name", heavenlyBody->getName());
+    heavenlyBodyQuery.bindValue(":heavenlybodyid", heavenlyBody->getId());
 
     if (!heavenlyBodyQuery.exec())
     {

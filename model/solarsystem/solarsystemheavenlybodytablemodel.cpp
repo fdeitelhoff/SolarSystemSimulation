@@ -37,10 +37,7 @@ QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int r
             value = QVariant(entity->getHeavenlyBody()->getName());
             break;
         case 2:
-            value = QVariant(entity->getHeavenlyBody()->getDiameter());
-            break;
-        case 3:
-            value = QVariant(entity->getHeavenlyBody()->getColor());
+            value = QVariant(QString("%L1").arg(entity->getHeavenlyBody()->getDiameter()));
             break;
         case 4:
             value = QVariant(entity->getNumericExcentricity());
@@ -50,6 +47,31 @@ QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int r
             break;
         case 6:
             value = QVariant(entity->getAngle());
+            break;
+        }
+
+        return value;
+    }
+    else if (role == Qt::TextAlignmentRole)
+    {
+        QVariant value;
+
+        switch (index.column())
+        {
+        case 2:
+            value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
+            break;
+        case 4:
+            value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
+            break;
+        case 5:
+            value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
+            break;
+        case 6:
+            value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
+            break;
+        default:
+            value = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
             break;
         }
 

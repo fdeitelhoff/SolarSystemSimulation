@@ -47,12 +47,16 @@ HeavenlyBodyTableModel* HeavenlyBodyModel::getHeavenlyBodyTableModel()
 
 void HeavenlyBodyModel::updateEntity(QString name, int diameter, QColor color, QString type)
 {
+    // Create a temporary object first.
+    HeavenlyBody *heavenlyBody = new HeavenlyBody(selectedEntity->getId(), name, diameter, color, type);
+
+    heavenlyBodyRepository->updateEntity(heavenlyBody);
+
+    // Update the "real" object when there was no error during the update!
     selectedEntity->setName(name);
     selectedEntity->setDiameter(diameter);
     selectedEntity->setColor(color);
     selectedEntity->setType(type);
-
-    heavenlyBodyRepository->updateEntity(selectedEntity);
 }
 
 void HeavenlyBodyModel::addEntity(QString name, int diameter, QColor color, QString type)

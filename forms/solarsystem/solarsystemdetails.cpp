@@ -84,7 +84,7 @@ void SolarSystemDetails::on_starSelected(int index)
 
     if (heavenlyBody)
     {
-        ui->diameterLabel->setText(QString("Diameter: %1").arg(heavenlyBody->getDiameter()));
+        ui->diameterLabel->setText(QString("Diameter: %L1").arg(heavenlyBody->getDiameter()));
 
         QPalette palette = ui->colorLabel->palette();
         palette.setColor(QPalette::Background, heavenlyBody->getColor());
