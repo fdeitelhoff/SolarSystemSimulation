@@ -3,10 +3,13 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QLayout>
+#include <QCloseEvent>
 
 #include "forms/heavenlybody/heavenlybodyoverview.h"
 #include "forms/solarsystem/solarsystemoverview.h"
 #include "forms/simulation/simulationview.h"
+#include "forms/main/about.h"
 #include "simulation/solarsystemsimulation.h"
 #include "data/exceptions/sqlqueryexception.h"
 
@@ -38,6 +41,8 @@ private:
     void startSimulation();
     void stopSimulation();
 
+    void closeEvent(QCloseEvent *event);
+
     enum ErrorCodes { DatabaseConnectionError = 1 };
 
 private slots:
@@ -49,6 +54,8 @@ private slots:
     void on_actionOrbitVisible_triggered();
     void on_actionResetPerspective_triggered();
     void on_actionDetectCollisions_triggered();
+
+    void on_actionAboutThisApplication_triggered();
 
     void simulateSolarSystem(SolarSystem *solarSystem);
 

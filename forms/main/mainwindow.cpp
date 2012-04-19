@@ -49,29 +49,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionExit_triggered()
 {
-    if (solarSystemSimulationView->isSimulationStarted())
-    {
-        int result = QMessageBox::question(this,
-                                           "Exit application",
-                                           "There is already a running simulation. Would you like to close the application?",
-                                           QMessageBox::Yes | QMessageBox::No);
-
-        if (result == QMessageBox::Yes)
-        {
-            closeApplication();
-        }
-    }
-    else
-    {
-        closeApplication();
-    }
+    close();
 }
 
 void MainWindow::closeApplication()
 {
     solarSystemSimulationView->stopSimulation();
-
-    close();
 }
 
 void MainWindow::on_actionStartSimulation_triggered()
@@ -196,3 +179,35 @@ void MainWindow::collisionDetectionDeactivated()
     ui->actionDetectCollisions->setChecked(false);
 }
 
+void MainWindow::on_actionAboutThisApplication_triggered()
+{
+    About *about = new About(this);
+    about->show();
+    about->setFixedSize(about->size());
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (solarSystemSimulationView->isSimulationStarted())
+    {
+        int result = QMessageBox::question(this,
+                                           "Exit application",
+                                           "There is already a solar system simulation running. Would you like to close the application?",
+                                           QMessageBox::Yes | QMessageBox::No);
+
+        if (result == QMessageBox::Yes)
+        {
+            closeApplication();
+            event->accept();
+        }
+        else
+        {
+            event->ignore();
+        }
+    }
+    else
+    {
+        closeApplication();
+        event->accept();
+    }
+}
