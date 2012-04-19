@@ -7,21 +7,31 @@ HeavenlyBodyRepository::HeavenlyBodyRepository()
 
 QList<HeavenlyBody *> HeavenlyBodyRepository::fetchAllHeavenlyBodyEntities()
 {
-    QSqlQuery query;
-    query.prepare("SELECT heavenlybodyid, name, diameter, color, type FROM heavenlybody");
-    query.exec();
+    QSqlQuery heavenlyBodyEntityQuery;
+    heavenlyBodyEntityQuery.prepare("SELECT "
+                                    "     heavenlybodyid, "
+                                    "     name, "
+                                    "     diameter, "
+                                    "     color, "
+                                    "     type "
+                                    "FROM "
+                                    "     heavenlybody");
 
-    qDebug() << query.lastError();
+    if (!heavenlyBodyEntityQuery.exec())
+    {
+        throw SqlQueryException("The heavenly body entities could not be fetched!",
+                                heavenlyBodyEntityQuery.lastError().text());
+    }
 
     QList<HeavenlyBody *> entities;
 
-    while (query.next())
+    while (heavenlyBodyEntityQuery.next())
     {
-        qint64 id = query.value(0).toLongLong();
-        QString name = query.value(1).toString();
-        int diameter = query.value(2).toInt();
-        QString color = query.value(3).toString();
-        QString type = query.value(4).toString();
+        qint64 id = heavenlyBodyEntityQuery.value(0).toLongLong();
+        QString name = heavenlyBodyEntityQuery.value(1).toString();
+        int diameter = heavenlyBodyEntityQuery.value(2).toInt();
+        QString color = heavenlyBodyEntityQuery.value(3).toString();
+        QString type = heavenlyBodyEntityQuery.value(4).toString();
 
         entities.append(new HeavenlyBody(id, name, diameter, color, type));
     }
@@ -31,46 +41,105 @@ QList<HeavenlyBody *> HeavenlyBodyRepository::fetchAllHeavenlyBodyEntities()
 
 void HeavenlyBodyRepository::updateEntity(HeavenlyBody *heavenlyBody)
 {
-    QSqlQuery query;
-    query.prepare("UPDATE heavenlybody SET name = :name, diameter = :diameter, color = :color, type = :type WHERE heavenlybodyid = :heavenlybodyid");
-    query.bindValue(":name", heavenlyBody->getName());
-    query.bindValue(":diameter", heavenlyBody->getDiameter());
-    query.bindValue(":color", colorToString(heavenlyBody->getColor()));
-    query.bindValue(":type", heavenlyBody->getType());
-    query.bindValue(":heavenlybodyid", heavenlyBody->getId());
-    query.exec();
+    // Check if the heavenly body is unique (the name until now).
+    if (!isEntityUnique(heavenlyBody))
+    {
+        throw EntityNotUniqueException("The name of the heavenly body is not unique! Please choose another one.");
+    }
 
-    qDebug() << query.lastError();
+    QSqlQuery updateHeavenlyBodyQuery;
+    updateHeavenlyBodyQuery.prepare("UPDATE "
+                                    "     heavenlybody "
+                                    "SET "
+                                    "     name = :name, "
+                                    "     diameter = :diameter, "
+                                    "     color = :color, "
+                                    "     type = :type "
+                                    "WHERE "
+                                    "     heavenlybodyid = :heavenlybodyid");
+
+    updateHeavenlyBodyQuery.bindValue(":name", heavenlyBody->getName());
+    updateHeavenlyBodyQuery.bindValue(":diameter", heavenlyBody->getDiameter());
+    updateHeavenlyBodyQuery.bindValue(":color", colorToString(heavenlyBody->getColor()));
+    updateHeavenlyBodyQuery.bindValue(":type", heavenlyBody->getType());
+    updateHeavenlyBodyQuery.bindValue(":heavenlybodyid", heavenlyBody->getId());
+
+    if (!updateHeavenlyBodyQuery.exec())
+    {
+        throw SqlQueryException("The heavenly body could not be updated!",
+                                updateHeavenlyBodyQuery.lastError().text());
+    }
 }
 
-void HeavenlyBodyRepository::addEntity(HeavenlyBody *heavenlyBody)
+void HeavenlyBodyRepository::insertEntity(HeavenlyBody *heavenlyBody)
 {
-    QSqlQuery query;
-    query.prepare("INSERT INTO heavenlybody(name, diameter, color, type) VALUES (:name, :diameter, :color, :type) RETURNING heavenlybodyid");
-    query.bindValue(":name", heavenlyBody->getName());
-    query.bindValue(":diameter", heavenlyBody->getDiameter());
-    query.bindValue(":color", colorToString(heavenlyBody->getColor()));
-    query.bindValue(":type", heavenlyBody->getType());
-    query.exec();
+    // Check if the heavenly body is unique (the name until now).
+    if (!isEntityUnique(heavenlyBody))
+    {
+        throw EntityNotUniqueException("The name of the heavenly body is not unique! Please choose another one.");
+    }
 
-    qDebug() << query.lastError();
+    QSqlQuery addHeavenlyBodyQuery;
+    addHeavenlyBodyQuery.prepare("INSERT INTO heavenlybody "
+                                 "      ( "
+                                 "       name, "
+                                 "       diameter, "
+                                 "       color, "
+                                 "       type "
+                                 "      ) "
+                                 "VALUES "
+                                 "      ( "
+                                 "       :name, "
+                                 "       :diameter, "
+                                 "       :color, "
+                                 "       :type "
+                                 "      ) "
+                                 "RETURNING "
+                                 "      heavenlybodyid");
 
-    query.next();
-    qint64 id = query.record().value("heavenlybodyid").toLongLong();
+    addHeavenlyBodyQuery.bindValue(":name", heavenlyBody->getName());
+    addHeavenlyBodyQuery.bindValue(":diameter", heavenlyBody->getDiameter());
+    addHeavenlyBodyQuery.bindValue(":color", colorToString(heavenlyBody->getColor()));
+    addHeavenlyBodyQuery.bindValue(":type", heavenlyBody->getType());
+
+    if (!addHeavenlyBodyQuery.exec())
+    {
+        throw SqlQueryException("The heavenly body could not be inserted!",
+                                addHeavenlyBodyQuery.lastError().text());
+    }
+
+    // Get the last inserted id.
+    if (!addHeavenlyBodyQuery.next())
+    {
+        throw new SqlQueryException("The last inserted heavenly body id could not be retrieved!",
+                                    addHeavenlyBodyQuery.lastError().text());
+    }
+
+    qint64 id = addHeavenlyBodyQuery.record().value("heavenlybodyid").toLongLong();
+
+    if (id <= 0)
+    {
+        throw new SqlQueryException("The last inserted heavenly body id could not be retrieved!",
+                                    addHeavenlyBodyQuery.lastError().text());
+    }
 
     heavenlyBody->setId(id);
 }
 
 void HeavenlyBodyRepository::deleteEntity(HeavenlyBody *heavenlyBody)
 {
-    QSqlQuery query;
-    query.prepare("DELETE FROM heavenlybody WHERE heavenlybodyid = :heavenlybodyid");
-    query.bindValue(":heavenlybodyid", heavenlyBody->getId());
+    QSqlQuery deleteHeavenlyBodyQuery;
+    deleteHeavenlyBodyQuery.prepare("DELETE FROM "
+                                    "       heavenlybody "
+                                    "WHERE "
+                                    "       heavenlybodyid = :heavenlybodyid");
 
-    if (!query.exec())
+    deleteHeavenlyBodyQuery.bindValue(":heavenlybodyid", heavenlyBody->getId());
+
+    if (!deleteHeavenlyBodyQuery.exec())
     {
-        throw DeleteEntityFailedException("The Heavenly Body entity could not be deleted!",
-                                          query.lastError().text());
+        throw DeleteEntityFailedException("The heavenly body could not be deleted!",
+                                          deleteHeavenlyBodyQuery.lastError().text());
     }
 }
 
@@ -87,35 +156,65 @@ QString HeavenlyBodyRepository::colorToString(QColor color)
 
 QList<HeavenlyBody *> HeavenlyBodyRepository::fetchExplizitTypedEntities(QString type)
 {
-    QSqlQuery query;
-    query.prepare("SELECT "
-                  "     heavenlybodyid, "
-                  "     name, "
-                  "     diameter, "
-                  "     color, "
-                  "     type "
-                  "FROM "
-                  "     heavenlybody "
-                  "WHERE "
-                  "     type = :type");
-    query.bindValue(":type", type);
+    QSqlQuery fetchTypedEntitiesQuery;
+    fetchTypedEntitiesQuery.prepare("SELECT "
+                                    "     heavenlybodyid, "
+                                    "     name, "
+                                    "     diameter, "
+                                    "     color, "
+                                    "     type "
+                                    "FROM "
+                                    "     heavenlybody "
+                                    "WHERE "
+                                    "     type = :type");
 
-    query.exec();
+    fetchTypedEntitiesQuery.bindValue(":type", type);
 
-    qDebug() << query.lastError();
+    if (!fetchTypedEntitiesQuery.exec())
+    {
+        throw SqlQueryException("The explizit typed heavenly bodies could not be retrieved!",
+                                fetchTypedEntitiesQuery.lastError().text());
+    }
 
     QList<HeavenlyBody *> entities;
 
-    while (query.next())
+    while (fetchTypedEntitiesQuery.next())
     {
-        qint64 id = query.value(0).toLongLong();
-        QString name = query.value(1).toString();
-        int diameter = query.value(2).toInt();
-        QString color = query.value(3).toString();
-        QString type = query.value(4).toString();
+        qint64 id = fetchTypedEntitiesQuery.value(0).toLongLong();
+        QString name = fetchTypedEntitiesQuery.value(1).toString();
+        int diameter = fetchTypedEntitiesQuery.value(2).toInt();
+        QString color = fetchTypedEntitiesQuery.value(3).toString();
+        QString type = fetchTypedEntitiesQuery.value(4).toString();
 
         entities.append(new HeavenlyBody(id, name, diameter, color, type));
     }
 
     return entities;
+}
+
+bool HeavenlyBodyRepository::isEntityUnique(HeavenlyBody *heavenlyBody)
+{
+    QSqlQuery heavenlyBodyQuery;
+    heavenlyBodyQuery.prepare("SELECT"
+                              "     COUNT(*) AS count "
+                              "FROM "
+                              "     heavenlybody "
+                              "WHERE "
+                              "     name = :name");
+
+    heavenlyBodyQuery.bindValue(":name", heavenlyBody->getName());
+
+    if (!heavenlyBodyQuery.exec())
+    {
+        throw SqlQueryException("The heavenly body entity could not checked if it is unique!",
+                                heavenlyBodyQuery.lastError().text());
+    }
+
+    if (!heavenlyBodyQuery.next())
+    {
+        throw SqlQueryException("The heavenly body entity could not checked if it is unique!",
+                                heavenlyBodyQuery.lastError().text());
+    }
+
+    return heavenlyBodyQuery.record().value("count").toInt() == 0;
 }

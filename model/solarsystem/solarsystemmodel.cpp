@@ -126,7 +126,7 @@ void SolarSystemModel::createSolarSystem(QString name, int centralStarIndex)
 {    
     SolarSystem *solarSystem = new SolarSystem(name, starsComboBoxModel->getHeavenlyBody(centralStarIndex));
 
-    solarSystemRepository->addEntity(solarSystem);
+    solarSystemRepository->insertEntity(solarSystem);
     solarSystemTableModel->addSolarSystem(solarSystem);
 
     currentSolarSystem = solarSystem;
@@ -145,7 +145,7 @@ void SolarSystemModel::addPlanet(int planetIndex, double excentricity, double se
     SolarSystemHeavenlyBody *solarSystemHeavenlyBody = new SolarSystemHeavenlyBody(planetsComboBoxModel->getHeavenlyBody(planetIndex),
                                                                                    excentricity, semimajorAxis, angle);
 
-    solarSystemRepository->addPlanetEntity(currentSolarSystem, solarSystemHeavenlyBody);
+    solarSystemRepository->insertPlanetEntity(currentSolarSystem, solarSystemHeavenlyBody);
     solarSystemHeavenlyBodyTableModel->addSolarSystemHeavenlyBody(solarSystemHeavenlyBody);
     currentSolarSystem->addHeavenlyBody(solarSystemHeavenlyBody);
 }

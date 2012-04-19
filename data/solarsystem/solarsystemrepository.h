@@ -9,6 +9,8 @@
 
 #include "database/postgresqldatabase.h"
 #include "model/solarsystem/solarsystem.h"
+#include "data/exceptions/sqlqueryexception.h"
+#include "data/exceptions/entitynotuniqueexception.h"
 
 class SolarSystemRepository
 {
@@ -18,16 +20,17 @@ public:
 
     QList<SolarSystem *> fetchAllSolarSystemEntities();
 
-    void addEntity(SolarSystem *solarSystem);
+    void insertEntity(SolarSystem *solarSystem);
     void updateEntity(SolarSystem *solarSystem);
     void deleteEntity(SolarSystem *solarSystem);
 
-    void addPlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
+    void insertPlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
     void deletePlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
 
 private:
     PostgreSQLDatabase *database;
 
+    bool isEntityUnique(SolarSystem *solarSystem);
 };
 
 #endif // SOLARSYSTEMREPOSITORY_H

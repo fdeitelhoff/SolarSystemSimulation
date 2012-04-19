@@ -144,6 +144,24 @@ bool SolarSystemDetails::updateOrCreateSolarSystem()
                               notValidException.getMessage(),
                               QMessageBox::Ok);
     }
+    catch (const EntityNotUniqueException &notUniqueException)
+    {
+        ok = false;
+
+        QMessageBox::critical(this,
+                              "Not unique",
+                              notUniqueException.getMessage(),
+                              QMessageBox::Ok);
+    }
+    catch (const SqlQueryException &sqlQueryException)
+    {
+        ok = false;
+
+        QMessageBox::critical(this,
+                              "Database SQL error",
+                              QString("There was an error with an SQL statement!\n\nError:\n\n%1").arg(sqlQueryException.getSqlError()),
+                              QMessageBox::Ok);
+    }
 
     return ok;
 }

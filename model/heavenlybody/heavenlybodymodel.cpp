@@ -59,7 +59,7 @@ void HeavenlyBodyModel::addEntity(QString name, int diameter, QColor color, QStr
 {
     HeavenlyBody *heavenlyBody = new HeavenlyBody(name, diameter, color, type);
 
-    heavenlyBodyRepository->addEntity(heavenlyBody);
+    heavenlyBodyRepository->insertEntity(heavenlyBody);
 
     heavenlyBodyTableModel->addHeavenlyBody(heavenlyBody);
 }

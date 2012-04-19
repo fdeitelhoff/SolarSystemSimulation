@@ -90,4 +90,18 @@ void HeavenlyBodyDetails::on_ok_clicked()
                               notValidException.getMessage(),
                               QMessageBox::Ok);
     }
+    catch (const EntityNotUniqueException &notUniqueException)
+    {
+        QMessageBox::critical(this,
+                              "Not unique",
+                              notUniqueException.getMessage(),
+                              QMessageBox::Ok);
+    }
+    catch (const SqlQueryException &sqlQueryException)
+    {
+        QMessageBox::critical(this,
+                              "Database SQL error",
+                              QString("There was an error with an SQL statement!\n\nError:\n\n%1").arg(sqlQueryException.getSqlError()),
+                              QMessageBox::Ok);
+    }
 }

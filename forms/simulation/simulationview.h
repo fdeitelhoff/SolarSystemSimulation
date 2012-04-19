@@ -30,6 +30,7 @@ public:
     void stopSimulation();
 
     void resetPerspective();
+    bool isSimulationStarted();
     
 protected:
     void keyPressEvent(QKeyEvent *ke);

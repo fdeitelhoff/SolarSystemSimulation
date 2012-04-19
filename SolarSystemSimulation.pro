@@ -44,7 +44,9 @@ SOURCES += main.cpp \
     visualization/heavenlybody/star3d.cpp \
     visualization/heavenlybody/planet3d.cpp \
     visualization/orbit/orbit3d.cpp \
-    database/exceptions/databaseconnectionfailedexception.cpp
+    database/exceptions/databaseconnectionfailedexception.cpp \
+    data/exceptions/sqlqueryexception.cpp \
+    data/exceptions/entitynotuniqueexception.cpp
 
 HEADERS  += forms/main/mainwindow.h \
     OpenGL/glvector.h \
@@ -83,7 +85,9 @@ HEADERS  += forms/main/mainwindow.h \
     visualization/heavenlybody/star3d.h \
     visualization/heavenlybody/planet3d.h \
     visualization/orbit/orbit3d.h \
-    database/exceptions/databaseconnectionfailedexception.h
+    database/exceptions/databaseconnectionfailedexception.h \
+    data/exceptions/sqlqueryexception.h \
+    data/exceptions/entitynotuniqueexception.h
 
 FORMS    += forms/main/mainwindow.ui \
     forms/simulation/simulationview.ui \
