@@ -27,10 +27,10 @@ private:
     float b;
     float epsilon;
     float e;
-    float phi;
+    double phi;
     float my;
 
-    float average_speed;
+    float averageSpeed;
     float circumstanceTime;
 
     Orbit3d *orbit3d;
