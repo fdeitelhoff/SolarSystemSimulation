@@ -62,13 +62,13 @@ void Planet3d::calculateHeavenlyBody3d()
     float r = sqrt( x * x + y * y);
 
     // Momentangeschwindigkeit des Planeten nach der Vis-Viva-Gleichung
-    float instantaneous_velocity = sqrt( my * ( 2 / r - 1 / a ));
+    float instantaneousVelocity = sqrt( my * ( 2 / r - 1 / a ));
 
     // Mit einem Dreisatz den zu ueberschreitenden Winkel bestimmen:
     // alpha / øalpha ~ v / øv
     float orbitPointsCount = circumstanceTime;
     double averageAngle = 2 * M_PI / orbitPointsCount;
-    double alpha = averageAngle * instantaneous_velocity / averageSpeed;
+    double alpha = averageAngle * instantaneousVelocity / averageSpeed;
 
     phi += alpha;
     if ( pointsCounter == (int) orbitPointsCount / 2)
