@@ -32,6 +32,9 @@ private slots:
     void on_deleteEntity_clicked();
 
     void on_startSimulation_clicked();
+
+    void doubleClicked(QModelIndex modelIndex);
+    void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 };
 
 #endif // SOLARSYSTEMOVERVIEW_H

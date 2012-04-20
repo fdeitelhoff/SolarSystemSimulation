@@ -11,6 +11,8 @@
 #include "database/postgresqldatabase.h"
 #include "model/heavenlybody/heavenlybody.h"
 #include "data/exceptions/deleteentityfailedexception.h"
+#include "data/exceptions/sqlqueryexception.h"
+#include "data/exceptions/entitynotuniqueexception.h"
 
 class HeavenlyBodyRepository
 {
@@ -23,13 +25,14 @@ public:
     QList<HeavenlyBody *> fetchExplizitTypedEntities(QString type);
 
     void updateEntity(HeavenlyBody *heavenlyBody);
-    void addEntity(HeavenlyBody *heavenlyBody);
+    void insertEntity(HeavenlyBody *heavenlyBody);
     void deleteEntity(HeavenlyBody *heavenlyBody);
 
 private:
     PostgreSQLDatabase *database;
 
     QString colorToString(QColor color);
+    bool isEntityUnique(HeavenlyBody *heavenlyBody);
 };
 
 #endif // HEAVENLYBODYREPOSITORY_H

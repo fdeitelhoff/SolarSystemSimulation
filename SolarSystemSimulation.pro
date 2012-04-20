@@ -44,7 +44,10 @@ SOURCES += main.cpp \
     visualization/heavenlybody/star3d.cpp \
     visualization/heavenlybody/planet3d.cpp \
     visualization/orbit/orbit3d.cpp \
-    database/exceptions/databaseconnectionfailedexception.cpp
+    database/exceptions/databaseconnectionfailedexception.cpp \
+    data/exceptions/sqlqueryexception.cpp \
+    data/exceptions/entitynotuniqueexception.cpp \
+    forms/main/about.cpp
 
 HEADERS  += forms/main/mainwindow.h \
     OpenGL/glvector.h \
@@ -83,14 +86,18 @@ HEADERS  += forms/main/mainwindow.h \
     visualization/heavenlybody/star3d.h \
     visualization/heavenlybody/planet3d.h \
     visualization/orbit/orbit3d.h \
-    database/exceptions/databaseconnectionfailedexception.h
+    database/exceptions/databaseconnectionfailedexception.h \
+    data/exceptions/sqlqueryexception.h \
+    data/exceptions/entitynotuniqueexception.h \
+    forms/main/about.h
 
 FORMS    += forms/main/mainwindow.ui \
     forms/simulation/simulationview.ui \
     forms/heavenlybody/heavenlybodyoverview.ui \
     forms/heavenlybody/heavenlybodydetails.ui \
     forms/solarsystem/solarsystemoverview.ui \
-    forms/solarsystem/solarsystemdetails.ui
+    forms/solarsystem/solarsystemdetails.ui \
+    forms/main/about.ui
 
 # UI_HEADERS_DIR += src/forms
 
@@ -113,3 +120,6 @@ OTHER_FILES += \
     database/solarsystemtoheavenlybody.txt \
     OpenGL/freeglut/win32/libfreeglut_static.a \
     OpenGL/freeglut/win32/libfreeglut.a
+
+RESOURCES += \
+    forms/ressources/Ressources.qrc

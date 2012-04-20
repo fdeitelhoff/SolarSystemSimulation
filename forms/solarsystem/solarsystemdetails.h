@@ -2,6 +2,7 @@
 #define SOLARSYSTEMDETAILS_H
 
 #include <QDialog>
+#include <QMessageBox>
 
 #include "model/solarsystem/solarsystemmodel.h"
 
@@ -25,9 +26,9 @@ private:
     SolarSystemModel *solarSystemModel;
 
     bool isEdit;
-    double currentExcentricity;
 
     void setPlanetManagementActive(bool isActive);
+    bool updateOrCreateSolarSystem();
 
 private slots:
     void on_accept_clicked();
@@ -40,6 +41,9 @@ private slots:
     void on_deletePlanet_clicked();
 
     void on_starSelectionChanged(int index);
+    void on_starSelected(int index);
+
+    void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 };
 
 #endif // SOLARSYSTEMDETAILS_H

@@ -17,7 +17,7 @@ int SolarSystemTableModel::columnCount(const QModelIndex &/*parent*/) const
 
 QVariant SolarSystemTableModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || role != Qt::DisplayRole)
+    if (!index.isValid())
     {
         return QVariant();
     }
@@ -25,20 +25,34 @@ QVariant SolarSystemTableModel::data(const QModelIndex &index, int role) const
     SolarSystem *entity = entities.at(index.row());
     QVariant value;
 
-    switch (index.column())
+    if (role == Qt::DisplayRole)
     {
-    case 0:
-        value = QVariant(entity->getId());
-        break;
-    case 1:
-        value = QVariant(entity->getName());
-        break;
-    case 2:
-        value = QVariant(entity->getCentralStar()->getName());
-        break;
-    case 3:
-        value = QVariant(entity->getPlanetCount());
-        break;
+        switch (index.column())
+        {
+        case 0:
+            value = QVariant(entity->getId());
+            break;
+        case 1:
+            value = QVariant(entity->getName());
+            break;
+        case 2:
+            value = QVariant(entity->getCentralStar()->getName());
+            break;
+        case 3:
+            value = QVariant(entity->getPlanetCount());
+            break;
+        }
+    }
+    else if (role == Qt::TextAlignmentRole)
+    {
+        if (index.column() == 3)
+        {
+            value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
+        }
+        else
+        {
+            value = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+        }
     }
 
     return value;

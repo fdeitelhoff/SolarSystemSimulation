@@ -7,6 +7,15 @@ HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent, HeavenlyBodyModel *h
 {
     ui->setupUi(this);
 
+    this->heavenlyBodyModel = heavenlyBodyModel;
+
+    ui->heavenlyBodyTableView->setModel(heavenlyBodyModel->getHeavenlyBodyTableModel());
+    heavenlyBodyModel->setSelectionModel(ui->heavenlyBodyTableView->selectionModel());
+
+    heavenlyBodyModel->loadAllHeavenlyBodyEntities();
+
+    ui->heavenlyBodyTableView->selectRow(0);
+
     QObject::connect(ui->heavenlyBodyTableView,
                      SIGNAL(doubleClicked(QModelIndex)),
                      this,
@@ -19,14 +28,7 @@ HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent, HeavenlyBodyModel *h
                      SLOT(selectionChanged(QItemSelection,QItemSelection)),
                      Qt::DirectConnection);
 
-    this->heavenlyBodyModel = heavenlyBodyModel;
-
-    ui->heavenlyBodyTableView->setModel(heavenlyBodyModel->getHeavenlyBodyTableModel());
-    heavenlyBodyModel->setSelectionModel(ui->heavenlyBodyTableView->selectionModel());
-
-    heavenlyBodyModel->loadAllHeavenlyBodyEntities();
-
-    ui->heavenlyBodyTableView->selectRow(0);
+    ui->heavenlyBodyTableView->setColumnWidth(1, 300);
 }
 
 HeavenlyBodyOverview::~HeavenlyBodyOverview()
@@ -38,8 +40,18 @@ void HeavenlyBodyOverview::doubleClicked(QModelIndex modelIndex)
 {
     if (heavenlyBodyModel->isEntitySelected())
     {
-        HeavenlyBodyDetails *heavenlyBodyDetails = new HeavenlyBodyDetails(this, heavenlyBodyModel, true);
-        heavenlyBodyDetails->show();
+        try
+        {
+            HeavenlyBodyDetails *heavenlyBodyDetails = new HeavenlyBodyDetails(this, heavenlyBodyModel, true);
+            heavenlyBodyDetails->show();
+        }
+        catch (const SqlQueryException &sqlQueryException)
+        {
+            QMessageBox::critical(this,
+                                  "Database SQL error",
+                                  QString("There was an error with an SQL statement!\n\nError:\n\n%1").arg(sqlQueryException.getSqlError()),
+                                  QMessageBox::Ok);
+        }
     }
 }
 
@@ -51,38 +63,61 @@ void HeavenlyBodyOverview::selectionChanged(const QItemSelection &selected, cons
 
 void HeavenlyBodyOverview::on_add_clicked()
 {
-    HeavenlyBodyDetails *heavenlyBodyDetails = new HeavenlyBodyDetails(this, heavenlyBodyModel, false);
-    heavenlyBodyDetails->show();
+    try
+    {
+        HeavenlyBodyDetails *heavenlyBodyDetails = new HeavenlyBodyDetails(this, heavenlyBodyModel, false);
+        heavenlyBodyDetails->show();
+    }
+    catch (const SqlQueryException &sqlQueryException)
+    {
+        QMessageBox::critical(this,
+                              "Database SQL error",
+                              QString("There was an error with an SQL statement!\n\nError:\n\n%1").arg(sqlQueryException.getSqlError()),
+                              QMessageBox::Ok);
+    }
 }
 
 void HeavenlyBodyOverview::on_edit_clicked()
 {
     if (heavenlyBodyModel->isEntitySelected())
     {
-        HeavenlyBodyDetails *heavenlyBodyDetails = new HeavenlyBodyDetails(this, heavenlyBodyModel, true);
-        heavenlyBodyDetails->show();
+        try
+        {
+            HeavenlyBodyDetails *heavenlyBodyDetails = new HeavenlyBodyDetails(this, heavenlyBodyModel, true);
+            heavenlyBodyDetails->show();
+        }
+        catch (const SqlQueryException &sqlQueryException)
+        {
+            QMessageBox::critical(this,
+                                  "Database SQL error",
+                                  QString("There was an error with an SQL statement!\n\nError:\n\n%1").arg(sqlQueryException.getSqlError()),
+                                  QMessageBox::Ok);
+        }
     }
 }
 
 void HeavenlyBodyOverview::on_deleteEntity_clicked()
 {
-    try
+    if (heavenlyBodyModel->getSelectedEntity())
     {
-        int result = QMessageBox::question(this,
-                                           "Delete a Heavenly Body",
-                                           QString("Would you like to delete the Heavenly Body '%1'?").arg(heavenlyBodyModel->getSelectedEntity()->getName()),
-                                           QMessageBox::Yes | QMessageBox::No);
-
-        if (result == QMessageBox::Yes)
+        try
         {
-            heavenlyBodyModel->deleteEntity();
+            int result = QMessageBox::question(this,
+                                               "Delete a Heavenly Body",
+                                               QString("Would you like to delete the Heavenly Body '%1'?").arg(heavenlyBodyModel->getSelectedEntity()->getName()),
+                                               QMessageBox::Yes | QMessageBox::No);
+
+            if (result == QMessageBox::Yes)
+            {
+                heavenlyBodyModel->deleteEntity();
+            }
         }
-    }
-    catch (const DeleteEntityFailedException &exception)
-    {
-        QMessageBox::critical(this,
-                              "Error while deleting",
-                              exception.getMessage() + "\n\nSQL-Error:\n" + exception.getSqlError(),
-                              QMessageBox::Ok);
+        catch (const DeleteEntityFailedException &exception)
+        {
+            QMessageBox::critical(this,
+                                  "Error while deleting",
+                                  exception.getMessage() + "\n\nSQL-Error:\n" + exception.getSqlError(),
+                                  QMessageBox::Ok);
+        }
     }
 }

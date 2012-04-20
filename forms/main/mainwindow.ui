@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Solar System Simulation</string>
   </property>
   <widget class="QWidget" name="centralWidget"/>
   <widget class="QMenuBar" name="menuBar">
@@ -27,6 +27,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHeavenly_Body">
     <property name="title">
@@ -53,20 +54,25 @@
     <addaction name="actionResetPerspective"/>
     <addaction name="separator"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionShowHelp"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionAboutThisApplication"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSimulation"/>
    <addaction name="menuSolar_System"/>
    <addaction name="menuHeavenly_Body"/>
+   <addaction name="menuHelp"/>
+   <addaction name="menuAbout"/>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionHeavenlyBodyOverview">
    <property name="text">
     <string>Overview</string>
@@ -88,6 +94,9 @@
   <action name="actionStopSimulation">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Stop</string>
@@ -126,6 +135,21 @@
    </property>
    <property name="text">
     <string>Keplers law default</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionShowHelp">
+   <property name="text">
+    <string>Show Help</string>
+   </property>
+  </action>
+  <action name="actionAboutThisApplication">
+   <property name="text">
+    <string>About this application</string>
    </property>
   </action>
  </widget>

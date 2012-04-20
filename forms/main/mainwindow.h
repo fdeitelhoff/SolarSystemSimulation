@@ -3,11 +3,16 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QLayout>
+#include <QCloseEvent>
+#include <QLocale>
 
 #include "forms/heavenlybody/heavenlybodyoverview.h"
 #include "forms/solarsystem/solarsystemoverview.h"
 #include "forms/simulation/simulationview.h"
+#include "forms/main/about.h"
 #include "simulation/solarsystemsimulation.h"
+#include "data/exceptions/sqlqueryexception.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,7 +29,7 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    SimulationView *simulationView;
+    SimulationView *solarSystemSimulationView;
     SolarSystemSimulation *solarSystemSimulation;
 
     HeavenlyBodyModel *heavenlyBodyModel;
@@ -32,9 +37,17 @@ private:
 
     void setSimulationMenuState(bool isSimulationStarted);
 
+    void showSolarSystemOverview();
+    void closeApplication();
+    void startSimulation();
+    void stopSimulation();
+
+    void closeEvent(QCloseEvent *event);
+
     enum ErrorCodes { DatabaseConnectionError = 1 };
 
 private slots:
+    void on_actionExit_triggered();
     void on_actionHeavenlyBodyOverview_triggered();
     void on_actionSolarSystemOverview_triggered();
     void on_actionStartSimulation_triggered();
@@ -42,6 +55,8 @@ private slots:
     void on_actionOrbitVisible_triggered();
     void on_actionResetPerspective_triggered();
     void on_actionDetectCollisions_triggered();
+
+    void on_actionAboutThisApplication_triggered();
 
     void simulateSolarSystem(SolarSystem *solarSystem);
 

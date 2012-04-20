@@ -37,10 +37,7 @@ QVariant HeavenlyBodyTableModel::data(const QModelIndex &index, int role) const
             value = QVariant(entity->getName());
             break;
         case 2:
-            value = QVariant(entity->getDiameter());
-            break;
-        case 3:
-            value = QVariant(entity->getColor());
+            value = QVariant(QString("%L1").arg(entity->getDiameter()));
             break;
         case 4:
             value = QVariant(entity->getType());
@@ -59,6 +56,25 @@ QVariant HeavenlyBodyTableModel::data(const QModelIndex &index, int role) const
         {
             return QVariant(QColor(Qt::white));
         }
+    }
+    else if (role == Qt::TextAlignmentRole)
+    {
+        QVariant value;
+
+        switch(index.column())
+        {
+        case 2:
+            value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
+            break;
+        case 4:
+            value = QVariant(Qt::AlignCenter);
+            break;
+        default:
+            value = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+            break;
+        }
+
+        return value;
     }
     else
     {

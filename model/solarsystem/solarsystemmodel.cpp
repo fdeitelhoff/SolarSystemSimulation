@@ -13,6 +13,11 @@ SolarSystemModel::SolarSystemModel()
     currentSolarSystem = 0;
 }
 
+bool SolarSystemModel::isEntitySelected()
+{
+    return currentSolarSystem != 0;
+}
+
 void SolarSystemModel::loadEntityData()
 {
     if (currentSolarSystem)
@@ -121,7 +126,7 @@ void SolarSystemModel::createSolarSystem(QString name, int centralStarIndex)
 {    
     SolarSystem *solarSystem = new SolarSystem(name, starsComboBoxModel->getHeavenlyBody(centralStarIndex));
 
-    solarSystemRepository->addEntity(solarSystem);
+    solarSystemRepository->insertEntity(solarSystem);
     solarSystemTableModel->addSolarSystem(solarSystem);
 
     currentSolarSystem = solarSystem;
@@ -129,10 +134,16 @@ void SolarSystemModel::createSolarSystem(QString name, int centralStarIndex)
 
 void SolarSystemModel::updateSolarSystem(QString name, int centralStarIndex)
 {
-    currentSolarSystem->setName(name);
-    currentSolarSystem->setCentralStar(starsComboBoxModel->getHeavenlyBody(centralStarIndex));
+    HeavenlyBody *centralStar = starsComboBoxModel->getHeavenlyBody(centralStarIndex);
 
-    solarSystemRepository->updateEntity(currentSolarSystem);
+    // Create a temporary object first.
+    SolarSystem *solarSystem = new SolarSystem(currentSolarSystem->getId(), name, centralStar);
+
+    solarSystemRepository->updateEntity(solarSystem);
+
+    // Update the original entity when there was no database error!
+    currentSolarSystem->setName(name);
+    currentSolarSystem->setCentralStar(centralStar);
 }
 
 void SolarSystemModel::addPlanet(int planetIndex, double excentricity, double semimajorAxis, int angle)
@@ -140,7 +151,7 @@ void SolarSystemModel::addPlanet(int planetIndex, double excentricity, double se
     SolarSystemHeavenlyBody *solarSystemHeavenlyBody = new SolarSystemHeavenlyBody(planetsComboBoxModel->getHeavenlyBody(planetIndex),
                                                                                    excentricity, semimajorAxis, angle);
 
-    solarSystemRepository->addPlanetEntity(currentSolarSystem, solarSystemHeavenlyBody);
+    solarSystemRepository->insertPlanetEntity(currentSolarSystem, solarSystemHeavenlyBody);
     solarSystemHeavenlyBodyTableModel->addSolarSystemHeavenlyBody(solarSystemHeavenlyBody);
     currentSolarSystem->addHeavenlyBody(solarSystemHeavenlyBody);
 }

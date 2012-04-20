@@ -7,6 +7,8 @@ SolarSystemSimulation::SolarSystemSimulation()
 
 void SolarSystemSimulation::setSolarSystem(SolarSystem *solarSystem)
 {
+    name = solarSystem->getName();
+
     heavenlyBodies3d.clear();
 
     const float keplerConstant = 160;
@@ -27,6 +29,16 @@ void SolarSystemSimulation::setSolarSystem(SolarSystem *solarSystem)
             maxSemimajorAxis = solarSystemHeavenlyBody->getSemimajorAxis();
         }
     }
+}
+
+QString SolarSystemSimulation::getSolarSystemName()
+{
+    return name;
+}
+
+bool SolarSystemSimulation::isSolarSystemAvailable()
+{
+    return heavenlyBodies3d.count() > 0;
 }
 
 float SolarSystemSimulation::getMaxSemimajorAxis()

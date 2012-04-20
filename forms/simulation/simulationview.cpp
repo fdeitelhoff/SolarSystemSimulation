@@ -39,6 +39,11 @@ SimulationView::~SimulationView()
     delete timer;
 }
 
+bool SimulationView::isSimulationStarted()
+{
+    return timer->isActive();
+}
+
 void SimulationView::resetPerspective()
 {
     perspective->setCamera(solarSystemSimulation->getMaxSemimajorAxis() * 3.5 * v_Z);

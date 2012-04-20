@@ -24,9 +24,14 @@ public:
 
     float getMaxSemimajorAxis();
 
+    bool isSolarSystemAvailable();
+
+    QString getSolarSystemName();
+
 private:
     QList<HeavenlyBody3d *> heavenlyBodies3d;
 
+    QString name;
     float maxSemimajorAxis;
     bool collisionDectection;
 
