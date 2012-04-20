@@ -44,13 +44,16 @@ void Planet3d::init()
     float speed_aphel = omega_m * a * sqrt(( a - e ) / ( a + e ));
 
     // Geschwindigkeit im Perihel
-    //float speed_perihel = omega_m * a * sqrt(( a + e ) / ( a - e ));
+    float speed_perihel = omega_m * a * sqrt(( a + e ) / ( a - e ));
 
     phi = 0.0;
     pointsCounter = 0;
 
     // My = Gravitationskonstante * Masse
-    my = speed_aphel * speed_aphel * (a + e) * a / ( a - e );
+    float my_a = speed_aphel * speed_aphel * (a + e) * a / ( a - e );
+    float my_p = speed_perihel * speed_perihel * (a - e) * a / ( a + e );
+    my = ( my_a + my_p ) / 2;
+    qDebug() << my_a << "     " << my_p << "     " << my << "     ";
 }
 
 void Planet3d::calculateHeavenlyBody3d()

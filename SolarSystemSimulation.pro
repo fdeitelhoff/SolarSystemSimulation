@@ -13,13 +13,13 @@ TEMPLATE = app
 SOURCES += main.cpp \
     forms/main/mainwindow.cpp \
     OpenGL/glvector.cpp \
-    OpenGL/glpoint.cpp \
+#    OpenGL/glpoint.cpp \
     OpenGL/glperspective.cpp \
     OpenGL/glmatrix.cpp \
-    OpenGL/gllight.cpp \
-    OpenGL/glcube.cpp \
+#    OpenGL/gllight.cpp \
+#    OpenGL/glcube.cpp \
     OpenGL/glcolorrgba.cpp \
-    OpenGL/glbody.cpp \
+#    OpenGL/glbody.cpp \
     forms/simulation/simulationview.cpp \
     forms/heavenlybody/heavenlybodyoverview.cpp \
     model/heavenlybody/heavenlybodymodel.cpp \
@@ -48,13 +48,13 @@ SOURCES += main.cpp \
 
 HEADERS  += forms/main/mainwindow.h \
     OpenGL/glvector.h \
-    OpenGL/glpoint.h \
+#    OpenGL/glpoint.h \
     OpenGL/glperspective.h \
     OpenGL/glmatrix.h \
-    OpenGL/gllight.h \
-    OpenGL/glcube.h \
+#    OpenGL/gllight.h \
+#    OpenGL/glcube.h \
     OpenGL/glcolorrgba.h \
-    OpenGL/glbody.h \
+#    OpenGL/glbody.h \
     OpenGL/GL/glut.h \
     OpenGL/GL/freeglut_std.h \
     OpenGL/GL/freeglut_ext.h \

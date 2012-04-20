@@ -15,6 +15,8 @@ SolarSystemOverview::SolarSystemOverview(QWidget *parent, SolarSystemModel *sola
     solarSystemModel->loadAllSolarSystemEntities();
 
     ui->solarSystemTableView->selectRow(0);
+
+    qDebug() << "Now";
 }
 
 SolarSystemOverview::~SolarSystemOverview()
