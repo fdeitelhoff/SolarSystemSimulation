@@ -1,0 +1,9 @@
+INSERT INTO heavenlybody(name, diameter, color, type) VALUES ('Erde', 2000, '100:100:100:255', 'P');
+INSERT INTO heavenlybody(name, diameter, color, type) VALUES ('Sonne', 8000, '200:200:200:255', 'S');
+
+INSERT INTO solarsystem(name, centralstarid) VALUES ('Sonnensystem 1', 2);
+INSERT INTO solarsystem(name, centralstarid) VALUES ('Sonnensystem 2', 2);
+
+INSERT INTO solarsystemtoheavenlybody(solarsystemid, heavenlybodyid, excentricity, semimajoraxis, angle) VALUES (3, 1, 0.5, 10, 45);
+INSERT INTO solarsystemtoheavenlybody(solarsystemid, heavenlybodyid, excentricity, semimajoraxis, angle) VALUES (3, 1, 0.7, 15, 90);
+INSERT INTO solarsystemtoheavenlybody(solarsystemid, heavenlybodyid, excentricity, semimajoraxis, angle) VALUES (4, 1, 0.1, 20, 135);
