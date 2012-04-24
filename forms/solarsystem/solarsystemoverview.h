@@ -2,6 +2,7 @@
 #define SOLARSYSTEMOVERVIEW_H
 
 #include <QDialog>
+#include <QObject>
 
 #include "model/solarsystem/solarsystemmodel.h"
 #include "forms/solarsystem/solarsystemdetails.h"

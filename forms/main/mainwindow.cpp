@@ -19,7 +19,6 @@ MainWindow::MainWindow(QWidget *parent) :
             SIGNAL(collisionDetectionDeactivated()),
             this,
             SLOT(collisionDetectionDeactivated()));
-
     try
     {
         heavenlyBodyModel = new HeavenlyBodyModel();
@@ -115,24 +114,14 @@ void MainWindow::on_actionSolarSystemOverview_triggered()
 
 void MainWindow::showSolarSystemOverview()
 {
-    try
-    {
-        SolarSystemOverview *solarSystemOverview = new SolarSystemOverview(this, solarSystemModel);
+    SolarSystemOverview *solarSystemOverview = new SolarSystemOverview(this, solarSystemModel);
 
-        QObject::connect(solarSystemOverview,
-                         SIGNAL(simulateSolarSystem(SolarSystem*)),
-                         this,
-                         SLOT(simulateSolarSystem(SolarSystem*)));
+    QObject::connect(solarSystemOverview,
+                     SIGNAL(simulateSolarSystem(SolarSystem*)),
+                     this,
+                     SLOT(simulateSolarSystem(SolarSystem*)));
 
-        solarSystemOverview->show();
-    }
-    catch (const SqlQueryException &sqlQueryException)
-    {
-        QMessageBox::critical(this,
-                              "Database SQL error",
-                              QString("There was an error with an SQL statement!\n\nError:\n\n%1").arg(sqlQueryException.getSqlError()),
-                              QMessageBox::Ok);
-    }
+    solarSystemOverview->show();
 }
 
 void MainWindow::simulateSolarSystem(SolarSystem *solarSystem)

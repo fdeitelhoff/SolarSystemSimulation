@@ -44,13 +44,15 @@ void Planet3d::init()
     float speed_aphel = omega_m * a * sqrt(( a - e ) / ( a + e ));
 
     // Geschwindigkeit im Perihel
-    //float speed_perihel = omega_m * a * sqrt(( a + e ) / ( a - e ));
+    float speed_perihel = omega_m * a * sqrt(( a + e ) / ( a - e ));
 
     phi = 0.0;
     pointsCounter = 0;
 
     // My = Gravitationskonstante * Masse
-    my = speed_aphel * speed_aphel * (a + e) * a / ( a - e );
+    float my_a = speed_aphel * speed_aphel * (a + e) * a / ( a - e );
+    float my_p = speed_perihel * speed_perihel * (a - e) * a / ( a + e );
+    my = ( my_a + my_p ) / 2;
 }
 
 void Planet3d::calculateHeavenlyBody3d()
@@ -62,20 +64,20 @@ void Planet3d::calculateHeavenlyBody3d()
     float r = sqrt( x * x + y * y);
 
     // Momentangeschwindigkeit des Planeten nach der Vis-Viva-Gleichung
-    float instantaneous_velocity = sqrt( my * ( 2 / r - 1 / a ));
+    float instantaneousVelocity = sqrt( my * ( 2 / r - 1 / a ));
 
     // Mit einem Dreisatz den zu ueberschreitenden Winkel bestimmen:
     // alpha / øalpha ~ v / øv
     float orbitPointsCount = circumstanceTime;
     double averageAngle = 2 * M_PI / orbitPointsCount;
-    double alpha = averageAngle * instantaneous_velocity / averageSpeed;
+    double alpha = averageAngle * instantaneousVelocity / averageSpeed;
 
     phi += alpha;
-    if ( pointsCounter == (int) orbitPointsCount / 2)
+    if ( pointsCounter == (int) orbitPointsCount / 2 + 2)
     {
         phi = M_PI;
     }
-    if ( pointsCounter > orbitPointsCount)
+    if ( pointsCounter > orbitPointsCount + 2)
     {
         phi = 0;
         pointsCounter = 0;
