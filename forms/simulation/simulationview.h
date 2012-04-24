@@ -10,6 +10,7 @@
 #include "OpenGL/glperspective.h"
 #include "simulation/solarsystemsimulation.h"
 #include "visualization/light/light.h"
+#include "visualization/environment/environment.h"
 
 namespace Ui {
 class SimulationView;
@@ -32,7 +33,7 @@ public:
     bool isSimulationStarted();
     
 protected:
-    void keyPressEvent(QKeyEvent *ke);
+    void keyPressEvent(QKeyEvent *keyEvent);
 
 private:
     SolarSystemSimulation *solarSystemSimulation;
@@ -41,6 +42,7 @@ private:
 
     GLPerspective *perspective;
     Light *light;
+    Environment *environment;
 
     GLdouble axisLength;
 
@@ -57,7 +59,6 @@ private:
     int x;
     int y;
     void wheelEvent(QWheelEvent * wheelEvent);
-    void drawAxes();
     void updateOpenGL();
 
 private slots:

@@ -44,7 +44,8 @@ SOURCES += main.cpp \
     data/exceptions/sqlqueryexception.cpp \
     data/exceptions/entitynotuniqueexception.cpp \
     forms/main/about.cpp \
-    visualization/light/light.cpp
+    visualization/light/light.cpp \
+    visualization/environment/environment.cpp
 
 HEADERS  += forms/main/mainwindow.h \
     OpenGL/glvector.h \
@@ -83,7 +84,8 @@ HEADERS  += forms/main/mainwindow.h \
     data/exceptions/sqlqueryexception.h \
     data/exceptions/entitynotuniqueexception.h \
     forms/main/about.h \
-    visualization/light/light.h
+    visualization/light/light.h \
+    visualization/environment/environment.h
 
 FORMS    += forms/main/mainwindow.ui \
     forms/simulation/simulationview.ui \
