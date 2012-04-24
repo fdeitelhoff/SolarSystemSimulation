@@ -9,10 +9,7 @@ Planet3d::Planet3d(SolarSystemHeavenlyBody *solarSystemHeavenlyBody, const float
 
     setKeplerConstant(keplerConstant);
 
-    orbit3d = new Orbit3d(orbitAngle, color);
-
-    init();
-    setOrbitVisisble(true);
+    init();    
 }
 
 Planet3d::~Planet3d()
@@ -53,6 +50,9 @@ void Planet3d::init()
     float my_a = speed_aphel * speed_aphel * (a + e) * a / ( a - e );
     float my_p = speed_perihel * speed_perihel * (a - e) * a / ( a + e );
     my = ( my_a + my_p ) / 2;
+
+    orbit3d = new Orbit3d(orbitAngle, color, a, b, e);
+    setOrbitVisisble(true);
 }
 
 void Planet3d::calculateHeavenlyBody3d()
@@ -98,6 +98,6 @@ void Planet3d::paintHeavenlyBody3d()
 
     if (isOrbitVisisble())
     {
-        orbit3d->paintOrbit3d(a, b, e);
+        orbit3d->paintOrbit3d();
     }
 }
