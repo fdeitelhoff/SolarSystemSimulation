@@ -55,7 +55,7 @@ void SimulationView::startSimulation()
 {
     if (!timer->isActive())
     {
-        timer->start(80);
+        timer->start(10);
     }
 }
 

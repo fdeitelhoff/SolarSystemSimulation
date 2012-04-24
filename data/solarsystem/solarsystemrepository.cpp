@@ -294,3 +294,4 @@ bool SolarSystemRepository::isEntityUnique(SolarSystem *solarSystem)
 
     return solarSystemQuery.record().value("count").toInt() == 0;
 }
+

@@ -5,6 +5,7 @@
 #include <QStringList>
 #include <QVariant>
 #include <QList>
+#include <QDebug>
 
 #include "model/heavenlybody/heavenlybody.h"
 

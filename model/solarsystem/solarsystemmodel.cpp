@@ -76,10 +76,10 @@ SolarSystemTableModel* SolarSystemModel::getSolarSystemTableModel()
 
 SolarSystemHeavenlyBodyTableModel* SolarSystemModel::getSolarSystemHeavenlyBodyTableModel()
 {
-    //if (!solarSystemHeavenlyBodyTableModel)
-    //{
+    if (!solarSystemHeavenlyBodyTableModel)
+    {
         solarSystemHeavenlyBodyTableModel = new SolarSystemHeavenlyBodyTableModel();
-    //}
+    }
 
     return solarSystemHeavenlyBodyTableModel;
 }

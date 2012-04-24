@@ -53,7 +53,6 @@ void Planet3d::init()
     float my_a = speed_aphel * speed_aphel * (a + e) * a / ( a - e );
     float my_p = speed_perihel * speed_perihel * (a - e) * a / ( a + e );
     my = ( my_a + my_p ) / 2;
-    qDebug() << my_a << "     " << my_p << "     " << my << "     ";
 }
 
 void Planet3d::calculateHeavenlyBody3d()
@@ -74,11 +73,11 @@ void Planet3d::calculateHeavenlyBody3d()
     double alpha = averageAngle * instantaneousVelocity / averageSpeed;
 
     phi += alpha;
-    if ( pointsCounter == (int) orbitPointsCount / 2)
+    if ( pointsCounter == (int) orbitPointsCount / 2 + 2)
     {
         phi = M_PI;
     }
-    if ( pointsCounter > orbitPointsCount)
+    if ( pointsCounter > orbitPointsCount + 2)
     {
         phi = 0;
         pointsCounter = 0;
