@@ -5,8 +5,8 @@
 
 #include "model/heavenlybody/heavenlybody.h"
 #include "OpenGL/glcolorrgba.h"
-#include "OpenGL/gllight.h"
 #include "OpenGL/GL/glut.h"
+#include "OpenGL/glvector.h"
 
 class HeavenlyBody3d
 {
@@ -18,8 +18,6 @@ public:
     virtual void calculateHeavenlyBody3d();
 
     void setOrbitVisisble(bool orbitVisisble);
-    bool keplerDefault;
-
 
     double getRadius();
     GLVector getCenter();

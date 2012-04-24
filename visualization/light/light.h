@@ -2,7 +2,6 @@
 #define LIGHT_H
 
 #include "OpenGL/glcolorrgba.h"
-#include "OpenGL/gllight.h"
 #include "OpenGL/GL/glut.h"
 
 class Light

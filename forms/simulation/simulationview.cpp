@@ -6,7 +6,6 @@
 #include <QKeyEvent>
 
 #include "OpenGL/glcolorrgba.h"
-#include "OpenGL/gllight.h"
 #include "OpenGL/GL/glut.h"
 
 SimulationView::SimulationView(QWidget *parent, SolarSystemSimulation *solarSystemSimulation) :

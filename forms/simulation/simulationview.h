@@ -8,8 +8,6 @@
 #include <QAbstractButton>
 
 #include "OpenGL/glperspective.h"
-#include "OpenGL/gllight.h"
-#include "OpenGL/glcube.h"
 #include "simulation/solarsystemsimulation.h"
 #include "visualization/light/light.h"
 
