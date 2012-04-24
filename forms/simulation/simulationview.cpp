@@ -15,6 +15,8 @@ SimulationView::SimulationView(QWidget *parent, SolarSystemSimulation *solarSyst
     perspective = new GLPerspective();
     perspective->setCamera(25 * v_Z);
 
+    light = new Light();
+
     setFocusPolicy(Qt::StrongFocus);
     setMouseTracking(true);
 
@@ -36,6 +38,7 @@ SimulationView::~SimulationView()
     stopSimulation();
 
     delete perspective;
+    delete light;
     delete timer;
 }
 
@@ -119,39 +122,19 @@ void SimulationView::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    // Apply the current camera view.
     perspective->apply();
 
     drawAxes();
 
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
+    // Enable the positional light source.
+    light->enable();
 
-    GLfloat pos[4];
-    pos[0] = 0;
-    pos[1] = 0;
-    pos[2] = 0;
-    pos[3] = 1;
-
-    GLfloat direc[4];
-    direc[0] = 3;
-    direc[1] = 3;
-    direc[2] = 3;
-    direc[3] = 1;
-
-    glLightfv(GL_LIGHT0, GL_AMBIENT, GLColorRGBA(cl_White * 0.2).fv() );
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, cl_White.fv() );
-    glLightfv(GL_LIGHT0, GL_SPECULAR, cl_White.fv() );
-
-    glLightfv(GL_LIGHT0, GL_POSITION, pos );
-    //glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, direc );
-    //glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 180); // angle is 0 to 180
-    //glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 180); // exponent is 0 to 128
-
-    glMaterialfv(GL_FRONT, GL_SPECULAR, cl_White.fv());
-
+    // Paint the solar system (planets and the star).
     solarSystemSimulation->paintSolarSystem3d();
 
-    glDisable(GL_LIGHTING);
+    // Disable all lighting.
+    light->disable();
 
     glFlush();
 }
@@ -172,15 +155,15 @@ void SimulationView::drawAxes()
 
     QVector <GLColorRGBA> colors(6);
 
-    // rot. GLfloat r, GLfloat g, GLfloat b, GLfloat a =1.0
+    // red. GLfloat r, GLfloat g, GLfloat b, GLfloat a =1.0
     colors[0] = GLColorRGBA(1.0, 0.0, 0.0, 1.0);
     colors[1] = GLColorRGBA(1.0, 0.0, 0.0, 1.0);
 
-    // gruen.
+    // green.
     colors[2] = GLColorRGBA(0.0, 1.0, 0.0, 1.0);
     colors[3] = GLColorRGBA(0.0, 1.0, 0.0, 1.0);
 
-    // blau.
+    // blue.
     colors[4] = GLColorRGBA(0.0, 0.0, 1.0, 1.0);
     colors[5] = GLColorRGBA(0.0, 0.0, 1.0, 1.0);
 
@@ -195,7 +178,7 @@ void SimulationView::drawAxes()
 
 void SimulationView::updateOpenGL()
 {
-    axisLength = perspective->distance() * 2; // / 10.0;
+    axisLength = perspective->distance() * 2;
 
     updateGL();
 }

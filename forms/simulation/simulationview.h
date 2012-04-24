@@ -11,6 +11,7 @@
 #include "OpenGL/gllight.h"
 #include "OpenGL/glcube.h"
 #include "simulation/solarsystemsimulation.h"
+#include "visualization/light/light.h"
 
 namespace Ui {
 class SimulationView;
@@ -40,7 +41,8 @@ private:
 
     QTimer *timer;
 
-    GLPerspective * perspective;
+    GLPerspective *perspective;
+    Light *light;
 
     GLdouble axisLength;
 
