@@ -10,7 +10,7 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
     QObject::connect(ui->stars,
                      SIGNAL(currentIndexChanged(int)),
                      this,
-                     SLOT(on_starSelected(int)),
+                     SLOT(starSelected(int)),
                      Qt::DirectConnection);
 
     this->solarSystemModel = solarSystemModel;
@@ -37,7 +37,7 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
     QObject::connect(this->solarSystemModel,
                      SIGNAL(starSelectionChanged(int)),
                      this,
-                     SLOT(on_starSelectionChanged(int)),
+                     SLOT(starSelectionChanged(int)),
                      Qt::DirectConnection);
 
     QObject::connect(ui->planetsTableView->selectionModel(),
@@ -78,12 +78,12 @@ void SolarSystemDetails::setPlanetManagementActive(bool isActive)
     ui->addPlanet->setEnabled(isActive);
 }
 
-void SolarSystemDetails::on_starSelectionChanged(int index)
+void SolarSystemDetails::starSelectionChanged(int index)
 {
     ui->stars->setCurrentIndex(index);
 }
 
-void SolarSystemDetails::on_starSelected(int index)
+void SolarSystemDetails::starSelected(int index)
 {
     HeavenlyBody *heavenlyBody = solarSystemModel->getStarsComboBoxModel()->getHeavenlyBody(index);
 

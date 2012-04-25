@@ -40,8 +40,8 @@ private slots:
     void on_addPlanet_clicked();
     void on_deletePlanet_clicked();
 
-    void on_starSelectionChanged(int index);
-    void on_starSelected(int index);
+    void starSelectionChanged(int index);
+    void starSelected(int index);
 
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 };
