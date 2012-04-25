@@ -60,15 +60,20 @@ void SolarSystemSimulation::calculateSolarSystem3d()
         heavenlyBody3d->calculateHeavenlyBody3d();
     }
 
-    if (collisionDectection)
+    if (calculationCount < 10)
+    {
+        calculationCount++;
+    }
+
+    if (collisionDetection && calculationCount > 10)
     {
         detectCollisions();
     }
 }
 
-void SolarSystemSimulation::activateCollisionDetection(bool active)
+void SolarSystemSimulation::setCollisionDetection(bool collisionDetection)
 {
-    collisionDectection = active;
+    collisionDetection = collisionDetection;
 }
 
 void SolarSystemSimulation::detectCollisions()

@@ -149,6 +149,51 @@ void SolarSystemRepository::insertEntity(SolarSystem *solarSystem)
     solarSystem->setId(id);
 }
 
+void SolarSystemRepository::updatePlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody,
+                                               SolarSystemHeavenlyBody *oldSolarSystemHeavenlyBody)
+{
+    QSqlQuery editPlanetQuery;
+    editPlanetQuery.prepare("UPDATE "
+                            "       solarsystemtoheavenlybody "
+                            "SET "
+                            "       heavenlybodyid = :heavenlybodyid, "
+                            "       excentricity = :excentricity, "
+                            "       semimajoraxis = :semimajoraxis, "
+                            "       angle = :angle, "
+                            "       orbitalplaneangle = :orbitalplaneangle "
+                            "WHERE "
+                            "       solarsystemid = :solarsystemid "
+                            "AND "
+                            "       heavenlybodyid = :oldHeavenlybodyid "
+                            "AND "
+                            "       excentricity = :oldExcentricity "
+                            "AND "
+                            "       semimajoraxis = :oldSemimajoraxis "
+                            "AND "
+                            "       angle = :oldAngle "
+                            "AND "
+                            "       orbitalplaneangle = :oldOrbitalplaneangle");
+
+    editPlanetQuery.bindValue(":solarsystemid", solarSystem->getId());
+    editPlanetQuery.bindValue(":heavenlybodyid", solarSystemHeavenlyBody->getHeavenlyBody()->getId());
+    editPlanetQuery.bindValue(":excentricity", solarSystemHeavenlyBody->getNumericExcentricity());
+    editPlanetQuery.bindValue(":semimajoraxis", solarSystemHeavenlyBody->getSemimajorAxis());
+    editPlanetQuery.bindValue(":angle", solarSystemHeavenlyBody->getAngle());
+    editPlanetQuery.bindValue(":orbitalplaneangle", solarSystemHeavenlyBody->getOrbitalPlaneAngle());
+
+    editPlanetQuery.bindValue(":oldHeavenlybodyid", oldSolarSystemHeavenlyBody->getHeavenlyBody()->getId());
+    editPlanetQuery.bindValue(":oldExcentricity", oldSolarSystemHeavenlyBody->getNumericExcentricity());
+    editPlanetQuery.bindValue(":oldSemimajoraxis", oldSolarSystemHeavenlyBody->getSemimajorAxis());
+    editPlanetQuery.bindValue(":oldAngle", oldSolarSystemHeavenlyBody->getAngle());
+    editPlanetQuery.bindValue(":oldOrbitalplaneangle", oldSolarSystemHeavenlyBody->getOrbitalPlaneAngle());
+
+    if (!editPlanetQuery.exec())
+    {
+        throw SqlQueryException("The planet could not updated in the database!",
+                                editPlanetQuery.lastError().text());
+    }
+}
+
 void SolarSystemRepository::updateEntity(SolarSystem *solarSystem)
 {
     // Check if the solar system is unique (only the name until now).
@@ -217,10 +262,22 @@ void SolarSystemRepository::deletePlanetEntity(SolarSystem *solarSystem, SolarSy
                               "WHERE "
                               "     solarsystemid = :solarsystemid "
                               "AND "
-                              "     heavenlybodyid = :heavenlybodyid");
+                              "     heavenlybodyid = :heavenlybodyid "
+                              "AND "
+                              "     excentricity = :excentricity "
+                              "AND "
+                              "     semimajoraxis = :semimajoraxis "
+                              "AND "
+                              "     angle = :angle "
+                              "AND "
+                              "     orbitalplaneangle = :orbitalplaneangle");
 
     deletePlanetQuery.bindValue(":solarsystemid", solarSystem->getId());
     deletePlanetQuery.bindValue(":heavenlybodyid", solarSystemHeavenlyBody->getHeavenlyBody()->getId());
+    deletePlanetQuery.bindValue(":excentricity", solarSystemHeavenlyBody->getNumericExcentricity());
+    deletePlanetQuery.bindValue(":semimajoraxis", solarSystemHeavenlyBody->getSemimajorAxis());
+    deletePlanetQuery.bindValue(":angle", solarSystemHeavenlyBody->getAngle());
+    deletePlanetQuery.bindValue(":orbitalplaneangle", solarSystemHeavenlyBody->getOrbitalPlaneAngle());
 
     if (!deletePlanetQuery.exec())
     {

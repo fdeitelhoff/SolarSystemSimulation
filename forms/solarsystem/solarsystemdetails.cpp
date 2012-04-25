@@ -23,6 +23,12 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
 
     solarSystemModel->setSolarSystemHeavenlyBodySelectionModel(ui->planetsTableView->selectionModel());
 
+    connect(ui->planetsTableView->selectionModel(),
+            SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+            this,
+            SLOT(currentPlanetsRowChanged(QModelIndex,QModelIndex)),
+            Qt::DirectConnection);
+
     if (solarSystemModel->getStarsComboBoxModel()->rowCount() > 0)
     {
         ui->stars->setCurrentIndex(0);
@@ -38,7 +44,7 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
 
         setWindowTitle(QString("Edit Solar System '%1'").arg(solarSystemModel->getCurrentSolarSystem()->getName()));
 
-        ui->stars->setCurrentIndex(solarSystemModel->getSelectedStar());
+        ui->stars->setCurrentIndex(solarSystemModel->getSelectedStarIndex());
     }
 
     QObject::connect(ui->planetsTableView->selectionModel(),
@@ -60,6 +66,76 @@ SolarSystemDetails::~SolarSystemDetails()
     delete ui;
 }
 
+void SolarSystemDetails::currentPlanetsRowChanged(const QModelIndex &current, const QModelIndex &previous)
+{
+    SolarSystemHeavenlyBody *solarSystemHeavenlyBody = solarSystemModel->getCurrentSolarSystemHeavenlyBody();
+
+    if (solarSystemHeavenlyBody)
+    {
+        ui->planets->setCurrentIndex(solarSystemModel->getSelectedPlanetIndex());
+        ui->excentricity->setValue(solarSystemHeavenlyBody->getNumericExcentricity() * 100);
+        ui->excentricityEdit->setText(QString::number(solarSystemHeavenlyBody->getNumericExcentricity()));
+        ui->semimajorAxis->setText(QString::number(solarSystemHeavenlyBody->getSemimajorAxis()));
+        ui->angle->setText(QString::number(solarSystemHeavenlyBody->getAngle()));
+        ui->orbitalPlaneAngle->setText(QString::number(solarSystemHeavenlyBody->getOrbitalPlaneAngle()));
+    }
+}
+
+void SolarSystemDetails::on_editPlanet_clicked()
+{
+    try
+    {
+        bool ok = true;
+        double currentExcentricity = ui->excentricityEdit->text().toDouble(&ok);
+
+        if (!ok)
+        {
+            currentExcentricity = -1;
+        }
+
+        double angle = ui->angle->text().toDouble(&ok);
+
+        if (!ok)
+        {
+            angle = 500;
+        }
+
+        double orbitalPlaneAngle = ui->orbitalPlaneAngle->text().toDouble(&ok);
+
+        if (!ok)
+        {
+            orbitalPlaneAngle = 500;
+        }
+
+        solarSystemModel->updatePlanet(ui->planets->currentIndex(),
+                                       currentExcentricity,
+                                       ui->semimajorAxis->text().toDouble(),
+                                       angle,
+                                       orbitalPlaneAngle);
+    }
+    catch (const PropertyNotValidException &notValidException)
+    {
+        QMessageBox::critical(this,
+                              QString("The field '%1' is not valid").arg(notValidException.getProperty()),
+                              notValidException.getMessage(),
+                              QMessageBox::Ok);
+    }
+    catch (const EntityNotUniqueException &notUniqueException)
+    {
+        QMessageBox::critical(this,
+                              "Not unique",
+                              notUniqueException.getMessage(),
+                              QMessageBox::Ok);
+    }
+    catch (const SqlQueryException &sqlQueryException)
+    {
+        QMessageBox::critical(this,
+                              "Database SQL error",
+                              QString("There was an error with an SQL statement!\n\nError:\n\n%1").arg(sqlQueryException.getSqlError()),
+                              QMessageBox::Ok);
+    }
+}
+
 void SolarSystemDetails::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
     ui->deletePlanet->setEnabled(selected.size() == 1);
@@ -75,6 +151,7 @@ void SolarSystemDetails::setPlanetManagementActive(bool isActive)
     ui->angle->setEnabled(isActive);
     ui->orbitalPlaneAngle->setEnabled(isActive);
     ui->addPlanet->setEnabled(isActive);
+    ui->editPlanet->setEnabled(isActive);
 }
 
 void SolarSystemDetails::starSelected(int index)

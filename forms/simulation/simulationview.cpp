@@ -115,7 +115,7 @@ void SimulationView::collisionDetected(HeavenlyBody3d *firstHeavenlyBody3d, Heav
     }
     else if (msgBox.clickedButton() == (QAbstractButton*)ignoreCollisionsButton)
     {
-        solarSystemSimulation->activateCollisionDetection(false);
+        solarSystemSimulation->setCollisionDetection(false);
         emit collisionDetectionDeactivated();
     }
 }

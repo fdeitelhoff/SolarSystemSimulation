@@ -26,7 +26,7 @@ void SolarSystemModel::loadEntityData()
     }
 }
 
-int SolarSystemModel::getSelectedStar()
+int SolarSystemModel::getSelectedStarIndex()
 {
     if (!currentSolarSystem)
     {
@@ -34,6 +34,16 @@ int SolarSystemModel::getSelectedStar()
     }
 
     return starsComboBoxModel->getHeavenlyBodyIndex(currentSolarSystem->getCentralStar());
+}
+
+int SolarSystemModel::getSelectedPlanetIndex()
+{
+    if (!currentSolarSystemHeavenlyBody)
+    {
+        return -1;
+    }
+
+    return planetsComboBoxModel->getHeavenlyBodyIndex(currentSolarSystemHeavenlyBody->getHeavenlyBody());
 }
 
 void SolarSystemModel::setSolarSystemSelectionModel(QItemSelectionModel *solarSystemSelectionModel)
@@ -157,6 +167,24 @@ void SolarSystemModel::addPlanet(int planetIndex, double excentricity, double se
     solarSystemRepository->insertPlanetEntity(currentSolarSystem, solarSystemHeavenlyBody);
     solarSystemHeavenlyBodyTableModel->addSolarSystemHeavenlyBody(solarSystemHeavenlyBody);
     currentSolarSystem->addHeavenlyBody(solarSystemHeavenlyBody);
+}
+
+void SolarSystemModel::updatePlanet(int planetIndex, double excentricity, double semimajorAxis, double angle, double orbitalPlaneAngle)
+{
+    // Create the tmp object first!
+    SolarSystemHeavenlyBody *solarSystemHeavenlyBody = new SolarSystemHeavenlyBody(planetsComboBoxModel->getHeavenlyBody(planetIndex),
+                                                                                   excentricity, semimajorAxis, angle, orbitalPlaneAngle);
+
+    solarSystemRepository->updatePlanetEntity(currentSolarSystem, solarSystemHeavenlyBody, currentSolarSystemHeavenlyBody);
+
+    // Change the current selected planet.
+    currentSolarSystemHeavenlyBody->setHeavenlyBody(solarSystemHeavenlyBody->getHeavenlyBody());
+    currentSolarSystemHeavenlyBody->setNumericExcentricity(solarSystemHeavenlyBody->getNumericExcentricity());
+    currentSolarSystemHeavenlyBody->setSemimajorAxis(solarSystemHeavenlyBody->getSemimajorAxis());
+    currentSolarSystemHeavenlyBody->setAngle(solarSystemHeavenlyBody->getAngle());
+    currentSolarSystemHeavenlyBody->setOrbitalPlaneAngle(solarSystemHeavenlyBody->getOrbitalPlaneAngle());
+
+    solarSystemHeavenlyBodyTableModel->reset();
 }
 
 void SolarSystemModel::deletePlanet()

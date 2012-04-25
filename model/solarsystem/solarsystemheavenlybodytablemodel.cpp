@@ -15,6 +15,11 @@ int SolarSystemHeavenlyBodyTableModel::columnCount(const QModelIndex &/*parent*/
     return 8;
 }
 
+void SolarSystemHeavenlyBodyTableModel::reset()
+{
+    QAbstractTableModel::reset();
+}
+
 QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())

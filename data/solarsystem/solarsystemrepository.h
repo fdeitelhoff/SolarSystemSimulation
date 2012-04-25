@@ -25,6 +25,7 @@ public:
     void deleteEntity(SolarSystem *solarSystem);
 
     void insertPlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
+    void updatePlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody, SolarSystemHeavenlyBody *oldSolarSystemHeavenlyBody);
     void deletePlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
 
 private:

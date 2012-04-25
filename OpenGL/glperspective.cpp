@@ -46,6 +46,7 @@ void GLPerspective::apply(){
                  _Aspect, //aspect
                  _Near,    //near
                  _Far);  //far
+
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   gluLookAt(_Camera.x(), _Camera.y(), _Camera.z(), //eye

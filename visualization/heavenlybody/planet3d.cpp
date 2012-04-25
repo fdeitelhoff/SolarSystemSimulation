@@ -102,6 +102,8 @@ void Planet3d::paintHeavenlyBody3d()
 
     heavenlyBodyCenter = GLVector(matrix[12]/matrix[15], matrix[13]/matrix[15], matrix[14]/matrix[15]);
 
+    heavenlyBodyCenter.debugOutput(getName());
+
     glPopMatrix();
 
     if (isOrbitVisisble())

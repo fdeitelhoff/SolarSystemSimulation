@@ -38,11 +38,13 @@ private slots:
     void on_excentricity_valueChanged();
 
     void on_addPlanet_clicked();
+    void on_editPlanet_clicked();
     void on_deletePlanet_clicked();
 
     void starSelected(int index);
 
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+    void currentPlanetsRowChanged(const QModelIndex &current, const QModelIndex &previous);
 };
 
 #endif // SOLARSYSTEMDETAILS_H

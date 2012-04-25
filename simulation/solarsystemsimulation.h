@@ -19,7 +19,7 @@ public:
     void setSolarSystem(SolarSystem *solarSystem);
 
     void setOrbitVisible(bool orbitVisible);
-    void activateCollisionDetection(bool active);
+    void setCollisionDetection(bool collisionDetection);
     void setKeplersLawDefault(bool keplerDefault);
 
     float getMaxSemimajorAxis();
@@ -33,7 +33,8 @@ private:
 
     QString name;
     float maxSemimajorAxis;
-    bool collisionDectection;
+    bool collisionDetection;
+    int calculationCount;
 
     void detectCollisions();
 

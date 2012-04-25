@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1025</width>
-    <height>481</height>
+    <height>545</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -300,6 +300,16 @@
               </size>
              </property>
             </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="editPlanet">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Edit Planet</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="addPlanet">

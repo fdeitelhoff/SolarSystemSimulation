@@ -30,6 +30,8 @@ public:
 
     int getEntityCount() { return entities.size(); }
 
+    void reset();
+
 private:
     QList<SolarSystemHeavenlyBody *> entities;
 };

@@ -39,11 +39,13 @@ public:
     void deleteSolarSystem();
 
     void addPlanet(int planetIndex, double excentricity, double semimajorAxis, double angle, double orbitalPlaneAngle);
+    void updatePlanet(int planetIndex, double excentricity, double semimajorAxis, double angle, double orbitalPlaneAngle);
     void deletePlanet();
 
     bool isEntitySelected();
 
-    int getSelectedStar();
+    int getSelectedStarIndex();
+    int getSelectedPlanetIndex();
 
 private slots:
     void currentSolarSystemRowChanged(const QModelIndex &current, const QModelIndex &previous);
