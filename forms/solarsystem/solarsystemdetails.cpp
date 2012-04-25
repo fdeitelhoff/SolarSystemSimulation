@@ -204,6 +204,15 @@ void SolarSystemDetails::on_addPlanet_clicked()
                               notValidException.getMessage() + "\n\nThe planet could not be added to the solar system!",
                               QMessageBox::Ok);
     }
+    catch (const SqlQueryException &sqlQueryException)
+    {
+        ok = false;
+
+        QMessageBox::critical(this,
+                              "Database SQL error",
+                              QString("There was an error with an SQL statement!\n\nError:\n\n%1").arg(sqlQueryException.getSqlError()),
+                              QMessageBox::Ok);
+    }
 }
 
 void SolarSystemDetails::on_deletePlanet_clicked()
