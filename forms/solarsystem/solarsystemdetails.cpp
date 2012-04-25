@@ -23,6 +23,11 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
 
     solarSystemModel->setSolarSystemHeavenlyBodySelectionModel(ui->planetsTableView->selectionModel());
 
+    if (solarSystemModel->getStarsComboBoxModel()->rowCount() > 0)
+    {
+        ui->stars->setCurrentIndex(0);
+    }
+
     if (isEdit)
     {
         ui->name->setText(solarSystemModel->getCurrentSolarSystem()->getName());
@@ -32,13 +37,9 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
         setPlanetManagementActive(true);
 
         setWindowTitle(QString("Edit Solar System '%1'").arg(solarSystemModel->getCurrentSolarSystem()->getName()));
-    }
 
-    QObject::connect(this->solarSystemModel,
-                     SIGNAL(starSelectionChanged(int)),
-                     this,
-                     SLOT(starSelectionChanged(int)),
-                     Qt::DirectConnection);
+        ui->stars->setCurrentIndex(solarSystemModel->getSelectedStar());
+    }
 
     QObject::connect(ui->planetsTableView->selectionModel(),
                      SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
@@ -49,11 +50,6 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
     if (solarSystemModel->getPlanetsComboBoxModel()->rowCount() > 0)
     {
         ui->planets->setCurrentIndex(0);
-    }
-
-    if (solarSystemModel->getStarsComboBoxModel()->rowCount() > 0)
-    {
-        ui->stars->setCurrentIndex(0);
     }
 
     ui->planetsTableView->setColumnWidth(0, 50);
@@ -79,11 +75,6 @@ void SolarSystemDetails::setPlanetManagementActive(bool isActive)
     ui->angle->setEnabled(isActive);
     ui->orbitalPlaneAngle->setEnabled(isActive);
     ui->addPlanet->setEnabled(isActive);
-}
-
-void SolarSystemDetails::starSelectionChanged(int index)
-{
-    ui->stars->setCurrentIndex(index);
 }
 
 void SolarSystemDetails::starSelected(int index)

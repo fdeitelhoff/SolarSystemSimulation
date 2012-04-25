@@ -43,8 +43,7 @@ public:
 
     bool isEntitySelected();
 
-signals:
-    void starSelectionChanged(const int index);
+    int getSelectedStar();
 
 private slots:
     void currentSolarSystemRowChanged(const QModelIndex &current, const QModelIndex &previous);

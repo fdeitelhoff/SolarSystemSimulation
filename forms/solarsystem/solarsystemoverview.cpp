@@ -72,7 +72,6 @@ void SolarSystemOverview::showSolarSystemDetails(bool isEdit)
                                   "No star found",
                                   "There is at least one star needed to create a new solar system!\n\nPlease create one first.",
                                   QMessageBox::Ok);
-
         }
         else
         {

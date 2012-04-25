@@ -112,5 +112,3 @@ void SolarSystemSimulation::setOrbitVisible(bool orbitVisible)
         heavenlyBody3d->setOrbitVisisble(orbitVisible);
     }
 }
-
-

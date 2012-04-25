@@ -43,7 +43,7 @@ double HeavenlyBody3d::getRadius()
 
 GLVector HeavenlyBody3d::getCenter()
 {
-    return GLVector(x, y, 0);
+    return heavenlyBodyCenter;
 }
 
 QString HeavenlyBody3d::getName()
@@ -55,6 +55,7 @@ double HeavenlyBody3d::calculateDistance(HeavenlyBody3d *heavenlyBody3d)
 {
     double x = pow(heavenlyBody3d->getCenter().x() - getCenter().x(), 2);
     double y = pow(heavenlyBody3d->getCenter().y() - getCenter().y(), 2);
+    double z = pow(heavenlyBody3d->getCenter().z() - getCenter().z(), 2);
 
-    return sqrt(x + y);
+    return sqrt(x + y + z);
 }

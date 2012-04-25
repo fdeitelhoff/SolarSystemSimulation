@@ -30,6 +30,8 @@ protected:
     float x;
     float y;
 
+    GLVector heavenlyBodyCenter;
+
     bool isOrbitVisisble();
 
 private:

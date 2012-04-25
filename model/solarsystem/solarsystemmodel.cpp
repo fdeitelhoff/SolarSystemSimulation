@@ -23,9 +23,17 @@ void SolarSystemModel::loadEntityData()
     if (currentSolarSystem)
     {
         solarSystemHeavenlyBodyTableModel->setData(currentSolarSystem->getHeavenlyBodies());
-
-        emit starSelectionChanged(starsComboBoxModel->getHeavenlyBodyIndex(currentSolarSystem->getCentralStar()));
     }
+}
+
+int SolarSystemModel::getSelectedStar()
+{
+    if (!currentSolarSystem)
+    {
+        return -1;
+    }
+
+    return starsComboBoxModel->getHeavenlyBodyIndex(currentSolarSystem->getCentralStar());
 }
 
 void SolarSystemModel::setSolarSystemSelectionModel(QItemSelectionModel *solarSystemSelectionModel)
