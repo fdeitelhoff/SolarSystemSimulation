@@ -38,21 +38,7 @@ SolarSystemOverview::~SolarSystemOverview()
 
 void SolarSystemOverview::doubleClicked(QModelIndex modelIndex)
 {
-    if (solarSystemModel->isEntitySelected())
-    {
-        try
-        {
-            SolarSystemDetails *solarSystemDetails = new SolarSystemDetails(this, solarSystemModel, true);
-            solarSystemDetails->show();
-        }
-        catch (const SqlQueryException &sqlQueryException)
-        {
-            QMessageBox::critical(this,
-                                  "Database SQL error",
-                                  QString("There was an error with an SQL statement!\n\nError:\n\n%1").arg(sqlQueryException.getSqlError()),
-                                  QMessageBox::Ok);
-        }
-    }
+    on_edit_clicked();
 }
 
 void SolarSystemOverview::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
@@ -68,7 +54,10 @@ void SolarSystemOverview::on_add_clicked()
 
 void SolarSystemOverview::on_edit_clicked()
 {
-    showSolarSystemDetails(true);
+    if (solarSystemModel->isEntitySelected())
+    {
+        showSolarSystemDetails(true);
+    }
 }
 
 void SolarSystemOverview::showSolarSystemDetails(bool isEdit)

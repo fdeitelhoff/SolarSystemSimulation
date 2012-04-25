@@ -118,8 +118,8 @@ void SolarSystemModel::loadOtherEntities()
     QList<HeavenlyBody *> stars = heavenlyBodyRepository->fetchExplizitTypedEntities("S");
     QList<HeavenlyBody *> planets = heavenlyBodyRepository->fetchExplizitTypedEntities("P");
 
-    starsComboBoxModel->setData(stars);
-    planetsComboBoxModel->setData(planets);
+    getStarsComboBoxModel()->setData(stars);
+    getPlanetsComboBoxModel()->setData(planets);
 }
 
 void SolarSystemModel::createSolarSystem(QString name, int centralStarIndex)

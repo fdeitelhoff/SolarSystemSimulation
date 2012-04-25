@@ -29,6 +29,11 @@ void SolarSystemSimulation::setSolarSystem(SolarSystem *solarSystem)
             maxSemimajorAxis = solarSystemHeavenlyBody->getSemimajorAxis();
         }
     }
+
+    if (maxSemimajorAxis < 1)
+    {
+        maxSemimajorAxis = 1;
+    }
 }
 
 QString SolarSystemSimulation::getSolarSystemName()
