@@ -118,6 +118,8 @@ void HeavenlyBodyTableModel::setData(QList<HeavenlyBody*> entities)
 {
     this->entities.clear();
     this->entities.append(entities);
+
+    reset();
 }
 
 HeavenlyBody* HeavenlyBodyTableModel::getHeavenlyBody(int row)

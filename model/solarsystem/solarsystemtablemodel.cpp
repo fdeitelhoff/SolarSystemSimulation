@@ -91,6 +91,8 @@ void SolarSystemTableModel::setData(QList<SolarSystem *> entities)
 {
     this->entities.clear();
     this->entities.append(entities);
+
+    reset();
 }
 
 SolarSystem* SolarSystemTableModel::getSolarSystem(int row)

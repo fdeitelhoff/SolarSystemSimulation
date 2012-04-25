@@ -44,6 +44,8 @@ void HeavenlyBodyComboBoxModel::setData(QList<HeavenlyBody *> entities)
 {
     this->entities.clear();
     this->entities.append(entities);
+
+    reset();
 }
 
 HeavenlyBody* HeavenlyBodyComboBoxModel::getHeavenlyBody(int index)

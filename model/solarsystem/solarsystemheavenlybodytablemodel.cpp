@@ -136,6 +136,8 @@ void SolarSystemHeavenlyBodyTableModel::setData(QList<SolarSystemHeavenlyBody *>
 {
     this->entities.clear();
     this->entities.append(entities);
+
+    reset();
 }
 
 SolarSystemHeavenlyBody* SolarSystemHeavenlyBodyTableModel::getSolarSystemHeavenlyBody(int row)

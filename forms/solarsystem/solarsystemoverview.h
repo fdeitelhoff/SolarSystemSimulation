@@ -24,6 +24,8 @@ private:
 
     SolarSystemModel *solarSystemModel;
 
+    void showSolarSystemDetails(bool isEdit);
+
 signals:
     void simulateSolarSystem(SolarSystem *solarSystem);
 

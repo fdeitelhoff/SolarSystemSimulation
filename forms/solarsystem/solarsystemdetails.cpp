@@ -23,8 +23,6 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
 
     solarSystemModel->setSolarSystemHeavenlyBodySelectionModel(ui->planetsTableView->selectionModel());
 
-    solarSystemModel->loadOtherEntities();
-
     if (isEdit)
     {
         ui->name->setText(solarSystemModel->getCurrentSolarSystem()->getName());
@@ -48,8 +46,15 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
                      SLOT(selectionChanged(QItemSelection,QItemSelection)),
                      Qt::DirectConnection);
 
-    ui->planets->setCurrentIndex(0);
-    ui->stars->setCurrentIndex(0);
+    if (solarSystemModel->getPlanetsComboBoxModel()->rowCount() > 0)
+    {
+        ui->planets->setCurrentIndex(0);
+    }
+
+    if (solarSystemModel->getStarsComboBoxModel()->rowCount() > 0)
+    {
+        ui->stars->setCurrentIndex(0);
+    }
 }
 
 SolarSystemDetails::~SolarSystemDetails()

@@ -63,26 +63,33 @@ void SolarSystemOverview::selectionChanged(const QItemSelection &selected, const
 
 void SolarSystemOverview::on_add_clicked()
 {
-    try
-    {
-        SolarSystemDetails *solarSystemDetails = new SolarSystemDetails(this, solarSystemModel, false);
-        solarSystemDetails->show();
-    }
-    catch (const SqlQueryException &sqlQueryException)
-    {
-        QMessageBox::critical(this,
-                              "Database SQL error",
-                              QString("There was an error with an SQL statement!\n\nError:\n\n%1").arg(sqlQueryException.getSqlError()),
-                              QMessageBox::Ok);
-    }
+    showSolarSystemDetails(false);
 }
 
 void SolarSystemOverview::on_edit_clicked()
 {
+    showSolarSystemDetails(true);
+}
+
+void SolarSystemOverview::showSolarSystemDetails(bool isEdit)
+{
     try
     {
-        SolarSystemDetails *solarSystemDetails = new SolarSystemDetails(this, solarSystemModel, true);
-        solarSystemDetails->show();
+        solarSystemModel->loadOtherEntities();
+
+        if (solarSystemModel->getStarsComboBoxModel()->rowCount() <= 0)
+        {
+            QMessageBox::critical(this,
+                                  "No star found",
+                                  "There is at least one star needed to create a new solar system!\n\nPlease create one first.",
+                                  QMessageBox::Ok);
+
+        }
+        else
+        {
+            SolarSystemDetails *solarSystemDetails = new SolarSystemDetails(this, solarSystemModel, isEdit);
+            solarSystemDetails->show();
+        }
     }
     catch (const SqlQueryException &sqlQueryException)
     {
