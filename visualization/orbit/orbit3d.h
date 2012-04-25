@@ -11,14 +11,16 @@ class Orbit3d
 {
 
 public:
-    Orbit3d(int angle, GLColorRGBA color, float a, float b, float e);
+    Orbit3d(double angle, double orbitalPlaneAngle, GLColorRGBA color, float a, float b, float e);
 
     void paintOrbit3d();
 
     void drawEllipse();
 
 private:
-    int angle;
+    double angle;
+    double orbitalPlaneAngle;
+
     GLColorRGBA color;
     QVector<GLVector> ellipsePoints;
 

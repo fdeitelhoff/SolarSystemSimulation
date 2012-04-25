@@ -4,6 +4,7 @@ Planet3d::Planet3d(SolarSystemHeavenlyBody *solarSystemHeavenlyBody, const float
     : HeavenlyBody3d(solarSystemHeavenlyBody->getHeavenlyBody())
 {
     orbitAngle = solarSystemHeavenlyBody->getAngle();
+    orbitalPlaneAngle = solarSystemHeavenlyBody->getOrbitalPlaneAngle();
     a = solarSystemHeavenlyBody->getSemimajorAxis();
     epsilon = solarSystemHeavenlyBody->getNumericExcentricity();
 
@@ -51,7 +52,7 @@ void Planet3d::init()
     float my_p = speed_perihel * speed_perihel * (a - e) * a / ( a + e );
     my = ( my_a + my_p ) / 2;
 
-    orbit3d = new Orbit3d(orbitAngle, color, a, b, e);
+    orbit3d = new Orbit3d(orbitAngle, orbitalPlaneAngle, color, a, b, e);
     setOrbitVisisble(true);
 }
 
@@ -73,11 +74,11 @@ void Planet3d::calculateHeavenlyBody3d()
     double alpha = averageAngle * instantaneousVelocity / averageSpeed;
 
     phi += alpha;
-    if ( pointsCounter == (int) orbitPointsCount / 2 + 2)
+    if (pointsCounter == (int) orbitPointsCount / 2 + 2)
     {
         phi = M_PI;
     }
-    if ( pointsCounter > orbitPointsCount + 2)
+    if (pointsCounter > orbitPointsCount + 2)
     {
         phi = 0;
         pointsCounter = 0;
@@ -89,7 +90,9 @@ void Planet3d::paintHeavenlyBody3d()
 {
     glPushMatrix();
 
+    glRotatef(orbitalPlaneAngle, 1.0, 0.0, 0.0);
     glRotatef(orbitAngle, 0.0, 0.0, 1.0);
+
     glTranslated(x , y, 0.0);
 
     HeavenlyBody3d::paintHeavenlyBody3d();

@@ -38,7 +38,7 @@ public:
     void updateSolarSystem(QString name, int centralStarIndex);
     void deleteSolarSystem();
 
-    void addPlanet(int planetIndex, double excentricity, double semimajorAxis, int angle);
+    void addPlanet(int planetIndex, double excentricity, double semimajorAxis, double angle, double orbitalPlaneAngle);
     void deletePlanet();
 
     bool isEntitySelected();

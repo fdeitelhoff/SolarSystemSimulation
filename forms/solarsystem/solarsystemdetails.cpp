@@ -55,6 +55,8 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
     {
         ui->stars->setCurrentIndex(0);
     }
+
+    ui->planetsTableView->setColumnWidth(0, 50);
 }
 
 SolarSystemDetails::~SolarSystemDetails()
@@ -75,6 +77,7 @@ void SolarSystemDetails::setPlanetManagementActive(bool isActive)
     ui->excentricityEdit->setEnabled(isActive);
     ui->semimajorAxis->setEnabled(isActive);
     ui->angle->setEnabled(isActive);
+    ui->orbitalPlaneAngle->setEnabled(isActive);
     ui->addPlanet->setEnabled(isActive);
 }
 
@@ -181,11 +184,18 @@ void SolarSystemDetails::on_addPlanet_clicked()
         currentExcentricity = -1;
     }
 
-    int angle = ui->angle->text().toInt(&ok);
+    double angle = ui->angle->text().toDouble(&ok);
 
     if (!ok)
     {
-        angle = -1;
+        angle = 500;
+    }
+
+    double orbitalPlaneAngle = ui->orbitalPlaneAngle->text().toDouble(&ok);
+
+    if (!ok)
+    {
+        orbitalPlaneAngle = 500;
     }
 
     try
@@ -193,7 +203,8 @@ void SolarSystemDetails::on_addPlanet_clicked()
         solarSystemModel->addPlanet(ui->planets->currentIndex(),
                                     currentExcentricity,
                                     ui->semimajorAxis->text().toDouble(),
-                                    angle);
+                                    angle,
+                                    orbitalPlaneAngle);
 
         ui->planetsTableView->selectRow(ui->planetsTableView->model()->rowCount() - 1);
     }

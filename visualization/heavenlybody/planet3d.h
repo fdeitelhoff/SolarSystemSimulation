@@ -21,6 +21,7 @@ public:
 
 private:
     int orbitAngle;
+    int orbitalPlaneAngle;
     int pointsCounter;
 
     float a;

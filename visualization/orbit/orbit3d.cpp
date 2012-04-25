@@ -1,8 +1,9 @@
 #include "orbit3d.h"
 
-Orbit3d::Orbit3d(int angle, GLColorRGBA color, float a, float b, float e)
+Orbit3d::Orbit3d(double angle, double orbitalPlaneAngle, GLColorRGBA color, float a, float b, float e)
 {
     this->angle = angle;
+    this->orbitalPlaneAngle = orbitalPlaneAngle;
     this->color = color;
 
     calculateEllipse(a, b, e);
@@ -12,6 +13,7 @@ void Orbit3d::paintOrbit3d()
 {
     glPushMatrix();
 
+    glRotatef(orbitalPlaneAngle, 1.0, 0.0, 0.0);
     glRotatef(angle, 0.0, 0.0, 1.0);
 
     drawEllipse();

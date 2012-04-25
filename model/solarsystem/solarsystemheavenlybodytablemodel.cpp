@@ -12,7 +12,7 @@ int SolarSystemHeavenlyBodyTableModel::rowCount(const QModelIndex &/*parent*/) c
 
 int SolarSystemHeavenlyBodyTableModel::columnCount(const QModelIndex &/*parent*/) const
 {
-    return 7;
+    return 8;
 }
 
 QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int role) const
@@ -48,6 +48,9 @@ QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int r
         case 6:
             value = QVariant(entity->getAngle());
             break;
+        case 7:
+            value = QVariant(entity->getOrbitalPlaneAngle());
+            break;
         }
 
         return value;
@@ -68,6 +71,9 @@ QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int r
             value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
             break;
         case 6:
+            value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
+            break;
+        case 7:
             value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
             break;
         default:
@@ -126,6 +132,9 @@ QVariant SolarSystemHeavenlyBodyTableModel::headerData(int section, Qt::Orientat
         break;
     case 6:
         columnHeader = "Angle";
+        break;
+    case 7:
+        columnHeader = "Orbital Plane Angle";
         break;
     }
 

@@ -76,12 +76,7 @@ SolarSystemTableModel* SolarSystemModel::getSolarSystemTableModel()
 
 SolarSystemHeavenlyBodyTableModel* SolarSystemModel::getSolarSystemHeavenlyBodyTableModel()
 {
-    if (!solarSystemHeavenlyBodyTableModel)
-    {
-        solarSystemHeavenlyBodyTableModel = new SolarSystemHeavenlyBodyTableModel();
-    }
-
-    return solarSystemHeavenlyBodyTableModel;
+    return solarSystemHeavenlyBodyTableModel = new SolarSystemHeavenlyBodyTableModel();
 }
 
 HeavenlyBodyComboBoxModel* SolarSystemModel::getStarsComboBoxModel()
@@ -146,10 +141,10 @@ void SolarSystemModel::updateSolarSystem(QString name, int centralStarIndex)
     currentSolarSystem->setCentralStar(centralStar);
 }
 
-void SolarSystemModel::addPlanet(int planetIndex, double excentricity, double semimajorAxis, int angle)
+void SolarSystemModel::addPlanet(int planetIndex, double excentricity, double semimajorAxis, double angle, double orbitalPlaneAngle)
 {
     SolarSystemHeavenlyBody *solarSystemHeavenlyBody = new SolarSystemHeavenlyBody(planetsComboBoxModel->getHeavenlyBody(planetIndex),
-                                                                                   excentricity, semimajorAxis, angle);
+                                                                                   excentricity, semimajorAxis, angle, orbitalPlaneAngle);
 
     solarSystemRepository->insertPlanetEntity(currentSolarSystem, solarSystemHeavenlyBody);
     solarSystemHeavenlyBodyTableModel->addSolarSystemHeavenlyBody(solarSystemHeavenlyBody);

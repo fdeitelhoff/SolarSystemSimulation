@@ -39,6 +39,7 @@ QList<SolarSystem *> SolarSystemRepository::fetchAllSolarSystemEntities()
                   "     excentricity, "
                   "     semimajoraxis, "
                   "     angle, "
+                  "     orbitalplaneangle, "
                   "     heavenlybody.heavenlybodyid, "
                   "     heavenlybody.name, "
                   "     diameter, "
@@ -85,14 +86,15 @@ QList<SolarSystem *> SolarSystemRepository::fetchAllSolarSystemEntities()
         {
             // The planet within the solar system.
             SolarSystemHeavenlyBody *solarSystemHeavenlyBody = new SolarSystemHeavenlyBody(
-                        new HeavenlyBody(innerQuery.value(3).toLongLong(),
-                                         innerQuery.value(4).toString(),
-                                         innerQuery.value(5).toInt(),
-                                         innerQuery.value(6).toString(),
-                                         innerQuery.value(7).toString()),
+                        new HeavenlyBody(innerQuery.value(4).toLongLong(),
+                                         innerQuery.value(5).toString(),
+                                         innerQuery.value(6).toInt(),
+                                         innerQuery.value(7).toString(),
+                                         innerQuery.value(8).toString()),
                         innerQuery.value(0).toDouble(),
                         innerQuery.value(1).toDouble(),
-                        innerQuery.value(2).toInt());
+                        innerQuery.value(2).toDouble(),
+                        innerQuery.value(3).toDouble());
 
             solarSystem->addHeavenlyBody(solarSystemHeavenlyBody);
         }
@@ -183,19 +185,22 @@ void SolarSystemRepository::insertPlanetEntity(SolarSystem *solarSystem, SolarSy
                               "      heavenlybodyid, "
                               "      excentricity, "
                               "      semimajoraxis, "
-                              "      angle) "
+                              "      angle, "
+                              "      orbitalplaneangle) "
                               "VALUES "
                               "     (:solarsystemid, "
                               "      :heavenlybodyid, "
                               "      :excentricity, "
                               "      :semimajoraxis, "
-                              "      :angle)");
+                              "      :angle, "
+                              "      :orbitalplaneangle)");
 
     insertPlanetQuery.bindValue(":solarsystemid", solarSystem->getId());
     insertPlanetQuery.bindValue(":heavenlybodyid", solarSystemHeavenlyBody->getHeavenlyBody()->getId());
     insertPlanetQuery.bindValue(":excentricity", solarSystemHeavenlyBody->getNumericExcentricity());
     insertPlanetQuery.bindValue(":semimajoraxis", solarSystemHeavenlyBody->getSemimajorAxis());
     insertPlanetQuery.bindValue(":angle", solarSystemHeavenlyBody->getAngle());
+    insertPlanetQuery.bindValue(":orbitalplaneangle", solarSystemHeavenlyBody->getOrbitalPlaneAngle());
 
     if (!insertPlanetQuery.exec())
     {

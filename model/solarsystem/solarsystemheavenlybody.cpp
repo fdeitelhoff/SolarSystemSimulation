@@ -1,36 +1,17 @@
 #include "solarsystemheavenlybody.h"
 
-SolarSystemHeavenlyBody::SolarSystemHeavenlyBody(HeavenlyBody *heavenlyBody, double excentricity, double semimajorAxis, int angle)
+SolarSystemHeavenlyBody::SolarSystemHeavenlyBody(HeavenlyBody *heavenlyBody, double excentricity, double semimajorAxis, double angle, double orbitalPlaneAngle)
 {
-    init(heavenlyBody, excentricity, semimajorAxis, angle);
+    init(heavenlyBody, excentricity, semimajorAxis, angle, orbitalPlaneAngle);
 }
 
-void SolarSystemHeavenlyBody::init(HeavenlyBody *heavenlyBody, double numericExcentricity, double semimajorAxis, int angle)
+void SolarSystemHeavenlyBody::init(HeavenlyBody *heavenlyBody, double numericExcentricity, double semimajorAxis, int angle, double orbitalPlaneAngle)
 {
     setHeavenlyBody(heavenlyBody);
     setNumericExcentricity(numericExcentricity);
     setSemimajorAxis(semimajorAxis);
     setAngle(angle);
-}
-
-HeavenlyBody* SolarSystemHeavenlyBody::getHeavenlyBody()
-{
-    return heavenlyBody;
-}
-
-double SolarSystemHeavenlyBody::getNumericExcentricity()
-{
-    return numericExcentricity;
-}
-
-double SolarSystemHeavenlyBody::getSemimajorAxis()
-{
-    return semimajorAxis;
-}
-
-int SolarSystemHeavenlyBody::getAngle()
-{
-    return angle;
+    setOrbitalPlaneAngle(orbitalPlaneAngle);
 }
 
 void SolarSystemHeavenlyBody::setHeavenlyBody(HeavenlyBody *heavenlyBody)
@@ -63,12 +44,22 @@ void SolarSystemHeavenlyBody::setSemimajorAxis(double semimajorAxis)
     this->semimajorAxis = semimajorAxis;
 }
 
-void SolarSystemHeavenlyBody::setAngle(int angle)
+void SolarSystemHeavenlyBody::setAngle(double angle)
 {
-    if (angle < 0 || angle > 360)
+    if (angle < -360 || angle > 360)
     {
-        throw PropertyNotValidException("Angle", "The field '%1' has to be between 0 and 360 degrees!");
+        throw PropertyNotValidException("Angle", "The field '%1' has to be between -360 and +360 degrees!");
     }
 
     this->angle = angle;
+}
+
+void SolarSystemHeavenlyBody::setOrbitalPlaneAngle(double orbitalPlaneAngle)
+{
+    if (orbitalPlaneAngle < -360 || orbitalPlaneAngle > 360)
+    {
+        throw PropertyNotValidException("OrbitalPlaneAngle", "The field '%1' has to be between -360 and +360 degrees!");
+    }
+
+    this->orbitalPlaneAngle = orbitalPlaneAngle;
 }

@@ -1,12 +1,16 @@
 CREATE TABLE SolarSystemToHeavenlyBody (
-  SolarSystemID  int8 NOT NULL,
-  HeavenlyBodyID int8 NOT NULL,
-  Excentricity   float8 NOT NULL,
-  SemimajorAxis  float8 NOT NULL,
+  SolarSystemID     int8 NOT NULL,
+  HeavenlyBodyID    int8 NOT NULL,
+  Excentricity      float8 NOT NULL,
+  SemimajorAxis     float8 NOT NULL,
+  Angle             float4 NOT NULL,
+  OrbitalPlaneAngle float4 NOT NULL,
   PRIMARY KEY (SolarSystemID,
   HeavenlyBodyID,
   Excentricity,
-  SemimajorAxis));
+  SemimajorAxis,
+  Angle,
+  OrbitalPlaneAngle));
 CREATE TABLE SolarSystem (
   SolarSystemID  BIGSERIAL NOT NULL,
   Name          varchar(255) NOT NULL UNIQUE,

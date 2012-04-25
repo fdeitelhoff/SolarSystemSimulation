@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>937</width>
+    <width>1025</width>
     <height>481</height>
    </rect>
   </property>
@@ -31,7 +31,7 @@
           <widget class="QLineEdit" name="name">
            <property name="minimumSize">
             <size>
-             <width>642</width>
+             <width>702</width>
              <height>0</height>
             </size>
            </property>
@@ -141,7 +141,7 @@
            </property>
            <property name="minimumSize">
             <size>
-             <width>710</width>
+             <width>770</width>
              <height>0</height>
             </size>
            </property>
@@ -244,7 +244,7 @@
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>1</string>
+              <string>5</string>
              </property>
             </widget>
            </item>
@@ -261,7 +261,27 @@
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>45</string>
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>Orbital Plane Angle:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="orbitalPlaneAngle">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="inputMask">
+              <string/>
+             </property>
+             <property name="text">
+              <string>0</string>
              </property>
             </widget>
            </item>
