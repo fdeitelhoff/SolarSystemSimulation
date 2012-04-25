@@ -128,6 +128,7 @@ void MainWindow::simulateSolarSystem(SolarSystem *solarSystem)
 {
     solarSystemSimulationView->setSolarSystem(solarSystem);
     solarSystemSimulation->setOrbitVisible(ui->actionOrbitVisible->isChecked());
+    solarSystemSimulation->activateCollisionDetection(ui->actionDetectCollisions->isChecked());
 
     on_actionStartSimulation_triggered();
 }
