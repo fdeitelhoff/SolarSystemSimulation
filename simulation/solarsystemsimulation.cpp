@@ -67,7 +67,7 @@ void SolarSystemSimulation::calculateSolarSystem3d()
         calculationCount++;
     }
 
-    if (collisionDetection && calculationCount > 10)
+    if (collisionDetection && calculationCount >= 10)
     {
         detectCollisions();
     }
@@ -75,7 +75,7 @@ void SolarSystemSimulation::calculateSolarSystem3d()
 
 void SolarSystemSimulation::setCollisionDetection(bool collisionDetection)
 {
-    collisionDetection = collisionDetection;
+    this->collisionDetection = collisionDetection;
 }
 
 void SolarSystemSimulation::detectCollisions()
