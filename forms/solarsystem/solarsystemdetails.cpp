@@ -87,6 +87,7 @@ void SolarSystemDetails::currentPlanetsRowChanged(const QModelIndex &current, co
 void SolarSystemDetails::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
     ui->deletePlanet->setEnabled(selected.size() == 1);
+    ui->editPlanet->setEnabled(selected.size() == 1);
 }
 
 void SolarSystemDetails::setPlanetManagementActive(bool isActive)
@@ -99,7 +100,6 @@ void SolarSystemDetails::setPlanetManagementActive(bool isActive)
     ui->angle->setEnabled(isActive);
     ui->orbitalPlaneAngle->setEnabled(isActive);
     ui->addPlanet->setEnabled(isActive);
-    ui->editPlanet->setEnabled(isActive);
 }
 
 void SolarSystemDetails::starSelected(int index)

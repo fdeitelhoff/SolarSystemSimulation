@@ -345,7 +345,7 @@ bool SolarSystemRepository::isSolarSystemUnique(SolarSystem *solarSystem)
                              "FROM "
                              "     solarsystem "
                              "WHERE "
-                             "     name = :name "
+                             "     lower(name) = lower(:name) "
                              "AND "
                              "     solarsystemid <> :solarsystemid");
 

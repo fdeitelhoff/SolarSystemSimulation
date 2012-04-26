@@ -266,7 +266,7 @@ bool HeavenlyBodyRepository::isEntityUnique(HeavenlyBody *heavenlyBody)
                               "FROM "
                               "     heavenlybody "
                               "WHERE "
-                              "     name = :name "
+                              "     lower(name) = lower(:name) "
                               "AND "
                               "     heavenlybodyid <> :heavenlybodyid");
 

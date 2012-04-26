@@ -66,6 +66,9 @@ QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int r
 
         switch (index.column())
         {
+        case 0:
+            value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
+            break;
         case 2:
             value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
             break;

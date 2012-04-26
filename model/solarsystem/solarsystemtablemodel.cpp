@@ -45,7 +45,7 @@ QVariant SolarSystemTableModel::data(const QModelIndex &index, int role) const
     }
     else if (role == Qt::TextAlignmentRole)
     {
-        if (index.column() == 3)
+        if (index.column() == 0 || index.column() == 3)
         {
             value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
         }

@@ -134,7 +134,10 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Assigned Planets:</string>
+          <string>Ass&amp;igned Planets:</string>
+         </property>
+         <property name="buddy">
+          <cstring>planetsTableView</cstring>
          </property>
         </widget>
        </item>
