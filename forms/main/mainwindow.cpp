@@ -183,7 +183,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
         int result = QMessageBox::question(this,
                                            "Exit application",
                                            "There is already a solar system simulation running. Would you like to close the application?",
-                                           QMessageBox::Yes | QMessageBox::No);
+                                           QMessageBox::Yes | QMessageBox::No,
+                                           QMessageBox::No);
 
         if (result == QMessageBox::Yes)
         {

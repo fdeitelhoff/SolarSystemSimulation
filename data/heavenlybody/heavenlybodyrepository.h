@@ -13,6 +13,7 @@
 #include "data/exceptions/deleteentityfailedexception.h"
 #include "data/exceptions/sqlqueryexception.h"
 #include "data/exceptions/entitynotuniqueexception.h"
+#include "data/exceptions/heavenlybodytypeexception.h"
 
 class HeavenlyBodyRepository
 {

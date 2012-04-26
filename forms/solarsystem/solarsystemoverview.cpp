@@ -98,7 +98,8 @@ void SolarSystemOverview::on_deleteEntity_clicked()
         int result = QMessageBox::question(this,
                                            "Delete a Solar System",
                                            QString("Would you like to delete the Solar System '%1'?").arg(solarSystemModel->getCurrentSolarSystem()->getName()),
-                                           QMessageBox::Yes | QMessageBox::No);
+                                           QMessageBox::Yes | QMessageBox::No,
+                                           QMessageBox::No);
 
         if (result == QMessageBox::Yes)
         {
