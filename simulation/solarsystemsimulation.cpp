@@ -9,6 +9,8 @@ void SolarSystemSimulation::setSolarSystem(SolarSystem *solarSystem)
 {
     name = solarSystem->getName();
 
+    calculationCount = 0;
+
     heavenlyBodies3d.clear();
 
     const float keplerConstant = 160;
@@ -60,12 +62,12 @@ void SolarSystemSimulation::calculateSolarSystem3d()
         heavenlyBody3d->calculateHeavenlyBody3d();
     }
 
-    if (calculationCount < 1000)
+    if (calculationCount < 10)
     {
         calculationCount++;
     }
 
-    if (collisionDetection && calculationCount > 1000)
+    if (collisionDetection && calculationCount > 10)
     {
         detectCollisions();
     }
