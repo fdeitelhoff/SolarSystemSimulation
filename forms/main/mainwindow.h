@@ -55,6 +55,7 @@ private slots:
     void on_actionOrbitVisible_triggered();
     void on_actionResetPerspective_triggered();
     void on_actionDetectCollisions_triggered();
+    void on_actionCoordinatesVisible_triggered();
 
     void on_actionAboutThisApplication_triggered();
 

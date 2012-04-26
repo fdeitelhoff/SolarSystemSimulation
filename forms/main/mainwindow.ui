@@ -49,6 +49,7 @@
     <addaction name="actionStopSimulation"/>
     <addaction name="separator"/>
     <addaction name="actionOrbitVisible"/>
+    <addaction name="actionCoordinatesVisible"/>
     <addaction name="actionDetectCollisions"/>
     <addaction name="separator"/>
     <addaction name="actionResetPerspective"/>
@@ -202,6 +203,23 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="actionCoordinatesVisible">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Coordi&amp;nates visible</string>
+   </property>
+   <property name="toolTip">
+    <string>Hide or show the coordinate axes</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
  </widget>

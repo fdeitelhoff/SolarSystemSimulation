@@ -14,8 +14,12 @@ public:
 
     void drawAxes(GLdouble axisLength);
 
+    void toggleCoordinateAxesVisibility();
+
 private:
     QVector<GLColorRGBA> colors;
+
+    bool areCoordinateAxesVisible;
 
 };
 

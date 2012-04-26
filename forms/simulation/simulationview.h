@@ -31,6 +31,8 @@ public:
 
     void resetPerspective();
     bool isSimulationStarted();
+
+    void toggleCoordinateAxesVisibility();
     
 protected:
     void keyPressEvent(QKeyEvent *keyEvent);

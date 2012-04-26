@@ -176,6 +176,11 @@ void MainWindow::on_actionAboutThisApplication_triggered()
     about->setFixedSize(about->size());
 }
 
+void MainWindow::on_actionCoordinatesVisible_triggered()
+{
+    solarSystemSimulationView->toggleCoordinateAxesVisibility();
+}
+
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (solarSystemSimulationView->isSimulationStarted())

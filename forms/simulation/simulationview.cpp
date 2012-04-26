@@ -120,6 +120,13 @@ void SimulationView::collisionDetected(HeavenlyBody3d *firstHeavenlyBody3d, Heav
     }
 }
 
+void SimulationView::toggleCoordinateAxesVisibility()
+{
+    environment->toggleCoordinateAxesVisibility();
+
+    update();
+}
+
 void SimulationView::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
