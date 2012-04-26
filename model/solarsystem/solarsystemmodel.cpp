@@ -36,7 +36,7 @@ int SolarSystemModel::getSelectedStarIndex()
     return starsComboBoxModel->getHeavenlyBodyIndex(currentSolarSystem->getCentralStar());
 }
 
-int SolarSystemModel::getSelectedPlanetIndex()
+int SolarSystemModel::getSelectedHeavenlyBodyIndex()
 {
     if (!currentSolarSystemHeavenlyBody)
     {

@@ -63,3 +63,12 @@ void SolarSystemHeavenlyBody::setOrbitalPlaneAngle(double orbitalPlaneAngle)
 
     this->orbitalPlaneAngle = orbitalPlaneAngle;
 }
+
+bool SolarSystemHeavenlyBody::operator==(const SolarSystemHeavenlyBody &solarSystemHeavenlyBody)
+{
+    return solarSystemHeavenlyBody.heavenlyBody == getHeavenlyBody()
+            && solarSystemHeavenlyBody.numericExcentricity == getNumericExcentricity()
+            && solarSystemHeavenlyBody.semimajorAxis == getSemimajorAxis()
+            && solarSystemHeavenlyBody.angle == getAngle()
+            && solarSystemHeavenlyBody.orbitalPlaneAngle == getOrbitalPlaneAngle();
+}

@@ -307,7 +307,7 @@
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>Edit Planet</string>
+              <string>Accept Planet Data</string>
              </property>
             </widget>
            </item>

@@ -97,12 +97,6 @@ void Planet3d::paintHeavenlyBody3d()
 
     HeavenlyBody3d::paintHeavenlyBody3d();
 
-    glLoadIdentity();
-    glRotatef(orbitalPlaneAngle, 1.0, 0.0, 0.0);
-    glRotatef(orbitAngle, 0.0, 0.0, 1.0);
-
-    glTranslatef(x, y, 0);
-
     float matrix[16];
     glGetFloatv(GL_MODELVIEW_MATRIX, matrix);
 

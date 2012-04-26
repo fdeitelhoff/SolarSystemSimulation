@@ -30,6 +30,8 @@ public:
 
     int getEntityCount() { return entities.size(); }
 
+    int getSolarSystemHeavenlyBodyIndex(SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
+
     void reset();
 
 private:

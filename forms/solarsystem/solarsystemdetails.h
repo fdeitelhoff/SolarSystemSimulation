@@ -29,6 +29,7 @@ private:
 
     void setPlanetManagementActive(bool isActive);
     bool updateOrCreateSolarSystem();
+    void updateOrCreatePlanet(bool isUpdate);
 
 private slots:
     void on_accept_clicked();

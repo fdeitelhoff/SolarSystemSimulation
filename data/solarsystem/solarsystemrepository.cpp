@@ -108,7 +108,7 @@ QList<SolarSystem *> SolarSystemRepository::fetchAllSolarSystemEntities()
 void SolarSystemRepository::insertEntity(SolarSystem *solarSystem)
 {
     // Check if the solar system is unique (only the name until now).
-    if (!isEntityUnique(solarSystem))
+    if (!isSolarSystemUnique(solarSystem))
     {
         throw EntityNotUniqueException("The name of the solar system is not unique! Please choose another one.");
     }
@@ -152,6 +152,11 @@ void SolarSystemRepository::insertEntity(SolarSystem *solarSystem)
 void SolarSystemRepository::updatePlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody,
                                                SolarSystemHeavenlyBody *oldSolarSystemHeavenlyBody)
 {
+    if (!isSolarSystemHeavenlyBodyUnique(solarSystem, solarSystemHeavenlyBody))
+    {
+        throw EntityNotUniqueException("The solar system heavenly body is not unique!");
+    }
+
     QSqlQuery editPlanetQuery;
     editPlanetQuery.prepare("UPDATE "
                             "       solarsystemtoheavenlybody "
@@ -197,7 +202,7 @@ void SolarSystemRepository::updatePlanetEntity(SolarSystem *solarSystem, SolarSy
 void SolarSystemRepository::updateEntity(SolarSystem *solarSystem)
 {
     // Check if the solar system is unique (only the name until now).
-    if (!isEntityUnique(solarSystem))
+    if (!isSolarSystemUnique(solarSystem))
     {
         throw EntityNotUniqueException("The name of the solar system is not unique! Please choose another one.");
     }
@@ -224,6 +229,11 @@ void SolarSystemRepository::updateEntity(SolarSystem *solarSystem)
 
 void SolarSystemRepository::insertPlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
 {
+    if (!isSolarSystemHeavenlyBodyUnique(solarSystem, solarSystemHeavenlyBody))
+    {
+        throw EntityNotUniqueException("The solar system heavenly body is not unique!");
+    }
+
     QSqlQuery insertPlanetQuery;
     insertPlanetQuery.prepare("INSERT INTO solarsystemtoheavenlybody"
                               "     (solarsystemid, "
@@ -327,7 +337,7 @@ void SolarSystemRepository::deleteEntity(SolarSystem *solarSystem)
     database->getInstance()->commit();
 }
 
-bool SolarSystemRepository::isEntityUnique(SolarSystem *solarSystem)
+bool SolarSystemRepository::isSolarSystemUnique(SolarSystem *solarSystem)
 {
     QSqlQuery solarSystemQuery;
     solarSystemQuery.prepare("SELECT"
@@ -357,3 +367,44 @@ bool SolarSystemRepository::isEntityUnique(SolarSystem *solarSystem)
     return solarSystemQuery.record().value("count").toInt() == 0;
 }
 
+bool SolarSystemRepository::isSolarSystemHeavenlyBodyUnique(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
+{
+    QSqlQuery heavenlyBodyQuery;
+    heavenlyBodyQuery.prepare("SELECT"
+                              "     COUNT(*) AS count "
+                              "FROM "
+                              "     solarsystemtoheavenlybody "
+                              "WHERE "
+                              "     heavenlybodyid = :heavenlybodyid "
+                              "AND "
+                              "     excentricity = :excentricity "
+                              "AND "
+                              "     semimajoraxis = :semimajoraxis "
+                              "AND "
+                              "     angle = :angle "
+                              "AND "
+                              "     orbitalplaneangle = :orbitalplaneangle "
+                              "AND "
+                              "     solarsystemid = :solarsystemid");
+
+    heavenlyBodyQuery.bindValue(":solarsystemid", solarSystem->getId());
+    heavenlyBodyQuery.bindValue(":heavenlybodyid", solarSystemHeavenlyBody->getHeavenlyBody()->getId());
+    heavenlyBodyQuery.bindValue(":excentricity", solarSystemHeavenlyBody->getNumericExcentricity());
+    heavenlyBodyQuery.bindValue(":semimajoraxis", solarSystemHeavenlyBody->getSemimajorAxis());
+    heavenlyBodyQuery.bindValue(":angle", solarSystemHeavenlyBody->getAngle());
+    heavenlyBodyQuery.bindValue(":orbitalplaneangle", solarSystemHeavenlyBody->getOrbitalPlaneAngle());
+
+    if (!heavenlyBodyQuery.exec())
+    {
+        throw SqlQueryException("It could not be checked if the heavenly body is unique!",
+                                heavenlyBodyQuery.lastError().text());
+    }
+
+    if (!heavenlyBodyQuery.next())
+    {
+        throw SqlQueryException("It could not be checked if the heavenly body is unique!",
+                                heavenlyBodyQuery.lastError().text());
+    }
+
+    return heavenlyBodyQuery.record().value("count").toInt() == 0;
+}

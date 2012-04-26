@@ -72,67 +72,12 @@ void SolarSystemDetails::currentPlanetsRowChanged(const QModelIndex &current, co
 
     if (solarSystemHeavenlyBody)
     {
-        ui->planets->setCurrentIndex(solarSystemModel->getSelectedPlanetIndex());
+        ui->planets->setCurrentIndex(solarSystemModel->getSelectedHeavenlyBodyIndex());
         ui->excentricity->setValue(solarSystemHeavenlyBody->getNumericExcentricity() * 100);
         ui->excentricityEdit->setText(QString::number(solarSystemHeavenlyBody->getNumericExcentricity()));
         ui->semimajorAxis->setText(QString::number(solarSystemHeavenlyBody->getSemimajorAxis()));
         ui->angle->setText(QString::number(solarSystemHeavenlyBody->getAngle()));
         ui->orbitalPlaneAngle->setText(QString::number(solarSystemHeavenlyBody->getOrbitalPlaneAngle()));
-    }
-}
-
-void SolarSystemDetails::on_editPlanet_clicked()
-{
-    try
-    {
-        bool ok = true;
-        double currentExcentricity = ui->excentricityEdit->text().toDouble(&ok);
-
-        if (!ok)
-        {
-            currentExcentricity = -1;
-        }
-
-        double angle = ui->angle->text().toDouble(&ok);
-
-        if (!ok)
-        {
-            angle = 500;
-        }
-
-        double orbitalPlaneAngle = ui->orbitalPlaneAngle->text().toDouble(&ok);
-
-        if (!ok)
-        {
-            orbitalPlaneAngle = 500;
-        }
-
-        solarSystemModel->updatePlanet(ui->planets->currentIndex(),
-                                       currentExcentricity,
-                                       ui->semimajorAxis->text().toDouble(),
-                                       angle,
-                                       orbitalPlaneAngle);
-    }
-    catch (const PropertyNotValidException &notValidException)
-    {
-        QMessageBox::critical(this,
-                              QString("The field '%1' is not valid").arg(notValidException.getProperty()),
-                              notValidException.getMessage(),
-                              QMessageBox::Ok);
-    }
-    catch (const EntityNotUniqueException &notUniqueException)
-    {
-        QMessageBox::critical(this,
-                              "Not unique",
-                              notUniqueException.getMessage(),
-                              QMessageBox::Ok);
-    }
-    catch (const SqlQueryException &sqlQueryException)
-    {
-        QMessageBox::critical(this,
-                              "Database SQL error",
-                              QString("There was an error with an SQL statement!\n\nError:\n\n%1").arg(sqlQueryException.getSqlError()),
-                              QMessageBox::Ok);
     }
 }
 
@@ -242,7 +187,7 @@ bool SolarSystemDetails::updateOrCreateSolarSystem()
     return ok;
 }
 
-void SolarSystemDetails::on_addPlanet_clicked()
+void SolarSystemDetails::updateOrCreatePlanet(bool isUpdate)
 {
     bool ok = true;
     double currentExcentricity = ui->excentricityEdit->text().toDouble(&ok);
@@ -268,13 +213,26 @@ void SolarSystemDetails::on_addPlanet_clicked()
 
     try
     {
-        solarSystemModel->addPlanet(ui->planets->currentIndex(),
-                                    currentExcentricity,
-                                    ui->semimajorAxis->text().toDouble(),
-                                    angle,
-                                    orbitalPlaneAngle);
+        if (isUpdate)
+        {
+            solarSystemModel->updatePlanet(ui->planets->currentIndex(),
+                                           currentExcentricity,
+                                           ui->semimajorAxis->text().toDouble(),
+                                           angle,
+                                           orbitalPlaneAngle);
 
-        ui->planetsTableView->selectRow(ui->planetsTableView->model()->rowCount() - 1);
+            ui->planetsTableView->selectRow(solarSystemModel->getSelectedHeavenlyBodyIndex());
+        }
+        else
+        {
+            solarSystemModel->addPlanet(ui->planets->currentIndex(),
+                                        currentExcentricity,
+                                        ui->semimajorAxis->text().toDouble(),
+                                        angle,
+                                        orbitalPlaneAngle);
+
+            ui->planetsTableView->selectRow(ui->planetsTableView->model()->rowCount() - 1);
+        }
     }
     catch (const PropertyNotValidException &notValidException)
     {
@@ -283,15 +241,30 @@ void SolarSystemDetails::on_addPlanet_clicked()
                               notValidException.getMessage() + "\n\nThe planet could not be added to the solar system!",
                               QMessageBox::Ok);
     }
+    catch (const EntityNotUniqueException &notUniqueException)
+    {
+        QMessageBox::critical(this,
+                              "Not unique",
+                              notUniqueException.getMessage(),
+                              QMessageBox::Ok);
+    }
     catch (const SqlQueryException &sqlQueryException)
     {
-        ok = false;
-
         QMessageBox::critical(this,
                               "Database SQL error",
                               QString("There was an error with an SQL statement!\n\nError:\n\n%1").arg(sqlQueryException.getSqlError()),
                               QMessageBox::Ok);
     }
+}
+
+void SolarSystemDetails::on_addPlanet_clicked()
+{
+    updateOrCreatePlanet(false);
+}
+
+void SolarSystemDetails::on_editPlanet_clicked()
+{
+    updateOrCreatePlanet(true);
 }
 
 void SolarSystemDetails::on_deletePlanet_clicked()

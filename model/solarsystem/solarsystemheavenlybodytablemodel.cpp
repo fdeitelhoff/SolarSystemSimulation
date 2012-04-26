@@ -187,3 +187,23 @@ void SolarSystemHeavenlyBodyTableModel::deleteSolarSystemHeavenlyBody(SolarSyste
         endRemoveRows();
     }
 }
+
+int SolarSystemHeavenlyBodyTableModel::getSolarSystemHeavenlyBodyIndex(SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
+{
+    if (!solarSystemHeavenlyBody)
+    {
+        return -1;
+    }
+
+    int row = -1;
+    foreach(SolarSystemHeavenlyBody *entity, entities)
+    {
+        row++;
+        if ((*entity) == (*solarSystemHeavenlyBody))
+        {
+            break;
+        }
+    }
+
+    return row;
+}

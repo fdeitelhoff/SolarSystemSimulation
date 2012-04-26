@@ -45,7 +45,7 @@ public:
     bool isEntitySelected();
 
     int getSelectedStarIndex();
-    int getSelectedPlanetIndex();
+    int getSelectedHeavenlyBodyIndex();
 
 private slots:
     void currentSolarSystemRowChanged(const QModelIndex &current, const QModelIndex &previous);

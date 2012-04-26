@@ -31,7 +31,8 @@ public:
 private:
     PostgreSQLDatabase *database;
 
-    bool isEntityUnique(SolarSystem *solarSystem);
+    bool isSolarSystemUnique(SolarSystem *solarSystem);
+    bool isSolarSystemHeavenlyBodyUnique(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody);
 };
 
 #endif // SOLARSYSTEMREPOSITORY_H

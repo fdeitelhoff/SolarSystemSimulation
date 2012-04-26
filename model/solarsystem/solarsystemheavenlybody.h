@@ -22,6 +22,8 @@ public:
     void setAngle(double angle);
     void setOrbitalPlaneAngle(double orbitalPlaneAngle);
 
+    bool operator==(const SolarSystemHeavenlyBody &solarSystemHeavenlyBody);
+
 private:
     HeavenlyBody *heavenlyBody;
     double numericExcentricity;
