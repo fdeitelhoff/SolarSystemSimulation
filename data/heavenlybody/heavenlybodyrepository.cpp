@@ -50,6 +50,67 @@ void HeavenlyBodyRepository::updateEntity(HeavenlyBody *heavenlyBody)
         throw EntityNotUniqueException("The name of the heavenly body is not unique! Please choose another one.");
     }
 
+    // Check if the heavenlybody is used as a star, when it should be a planet!
+    if (heavenlyBody->getType() == "P")
+    {
+        QSqlQuery isHeavenlyBodyStarQuery;
+        isHeavenlyBodyStarQuery.prepare("SELECT "
+                                        "       COUNT(*) As count "
+                                        "FROM "
+                                        "       solarsystem "
+                                        "WHERE "
+                                        "       centralstarid = :centralstarid");
+
+        isHeavenlyBodyStarQuery.bindValue(":centralstarid", heavenlyBody->getId());
+
+        if (!isHeavenlyBodyStarQuery.exec())
+        {
+            throw SqlQueryException("The heavenly body could not be checked!",
+                                    isHeavenlyBodyStarQuery.lastError().text());
+        }
+
+        if (!isHeavenlyBodyStarQuery.next())
+        {
+            throw SqlQueryException("The heavenly body could not be checked!",
+                                    isHeavenlyBodyStarQuery.lastError().text());
+        }
+
+        if (isHeavenlyBodyStarQuery.record().value("count").toInt() != 0)
+        {
+            throw HeavenlyBodyTypeException(QString("The Heavenly Body '%1' could not changed to a planet!\n\nIt is used as a star in at least one solar system.").arg(heavenlyBody->getName()));
+        }
+    }
+    // Check if the heavenlybody is used as a planet, when it should be a star!
+    else if (heavenlyBody->getType() == "S")
+    {
+        QSqlQuery isHeavenlyBodyPlanetQuery;
+        isHeavenlyBodyPlanetQuery.prepare("SELECT "
+                                          "       COUNT(*) As count "
+                                          "FROM "
+                                          "       solarsystemtoheavenlybody "
+                                          "WHERE "
+                                          "       heavenlybodyid = :heavenlybodyid");
+
+        isHeavenlyBodyPlanetQuery.bindValue(":heavenlybodyid", heavenlyBody->getId());
+
+        if (!isHeavenlyBodyPlanetQuery.exec())
+        {
+            throw SqlQueryException("The heavenly body could not be checked!",
+                                    isHeavenlyBodyPlanetQuery.lastError().text());
+        }
+
+        if (!isHeavenlyBodyPlanetQuery.next())
+        {
+            throw SqlQueryException("The heavenly body could not be checked!",
+                                    isHeavenlyBodyPlanetQuery.lastError().text());
+        }
+
+        if (isHeavenlyBodyPlanetQuery.record().value("count").toInt() != 0)
+        {
+            throw HeavenlyBodyTypeException(QString("The Heavenly Body '%1' could not changed to a star!\n\nIt is used as a planet in at least one solar system.").arg(heavenlyBody->getName()));
+        }
+    }
+
     QSqlQuery updateHeavenlyBodyQuery;
     updateHeavenlyBodyQuery.prepare("UPDATE "
                                     "     heavenlybody "

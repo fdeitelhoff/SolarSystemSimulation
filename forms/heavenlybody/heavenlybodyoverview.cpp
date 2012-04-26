@@ -108,7 +108,8 @@ void HeavenlyBodyOverview::on_deleteEntity_clicked()
             int result = QMessageBox::question(this,
                                                "Delete a Heavenly Body",
                                                QString("Would you like to delete the Heavenly Body '%1'?").arg(heavenlyBodyModel->getSelectedEntity()->getName()),
-                                               QMessageBox::Yes | QMessageBox::No);
+                                               QMessageBox::Yes | QMessageBox::No,
+                                               QMessageBox::No);
 
             if (result == QMessageBox::Yes)
             {

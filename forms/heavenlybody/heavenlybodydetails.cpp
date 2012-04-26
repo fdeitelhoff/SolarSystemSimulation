@@ -99,6 +99,13 @@ void HeavenlyBodyDetails::on_ok_clicked()
                               notUniqueException.getMessage(),
                               QMessageBox::Ok);
     }
+    catch (const HeavenlyBodyTypeException &typeException)
+    {
+        QMessageBox::critical(this,
+                              "Type could not changed",
+                              typeException.getMessage(),
+                              QMessageBox::Ok);
+    }
     catch (const SqlQueryException &sqlQueryException)
     {
         QMessageBox::critical(this,

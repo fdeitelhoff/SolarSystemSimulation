@@ -45,7 +45,8 @@ SOURCES += main.cpp \
     data/exceptions/entitynotuniqueexception.cpp \
     forms/main/about.cpp \
     visualization/light/light.cpp \
-    visualization/environment/environment.cpp
+    visualization/environment/environment.cpp \
+    data/exceptions/heavenlybodytypeexception.cpp
 
 HEADERS  += forms/main/mainwindow.h \
     OpenGL/glvector.h \
@@ -85,7 +86,8 @@ HEADERS  += forms/main/mainwindow.h \
     data/exceptions/entitynotuniqueexception.h \
     forms/main/about.h \
     visualization/light/light.h \
-    visualization/environment/environment.h
+    visualization/environment/environment.h \
+    data/exceptions/heavenlybodytypeexception.h
 
 FORMS    += forms/main/mainwindow.ui \
     forms/simulation/simulationview.ui \
