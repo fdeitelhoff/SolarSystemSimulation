@@ -7,6 +7,8 @@ HeavenlyBodyDetails::HeavenlyBodyDetails(QWidget *parent, HeavenlyBodyModel *hea
 {
     ui->setupUi(this);
 
+    setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
+
     this->isEdit = isEdit;
 
     this->heavenlyBodyModel = heavenlyBodyModel;

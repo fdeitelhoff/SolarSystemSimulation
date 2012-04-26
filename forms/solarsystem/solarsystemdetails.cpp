@@ -7,6 +7,9 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
 {
     ui->setupUi(this);
 
+    setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
+    setWindowFlags(windowFlags() ^ Qt::WindowMaximizeButtonHint);
+
     QObject::connect(ui->stars,
                      SIGNAL(currentIndexChanged(int)),
                      this,

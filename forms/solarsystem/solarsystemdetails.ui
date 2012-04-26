@@ -23,7 +23,10 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Name:</string>
+            <string>&amp;Name:</string>
+           </property>
+           <property name="buddy">
+            <cstring>name</cstring>
            </property>
           </widget>
          </item>
@@ -40,7 +43,10 @@
          <item row="1" column="0">
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>Central Star:</string>
+            <string>Central Sta&amp;r:</string>
+           </property>
+           <property name="buddy">
+            <cstring>stars</cstring>
            </property>
           </widget>
          </item>
@@ -169,8 +175,11 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="toolTip">
+              <string>Deletes the current selected planet</string>
+             </property>
              <property name="text">
-              <string>Delete Planet</string>
+              <string>&amp;Delete Planet</string>
              </property>
             </widget>
            </item>
@@ -190,7 +199,10 @@
            <item>
             <widget class="QLabel" name="label_4">
              <property name="text">
-              <string>Planet:</string>
+              <string>&amp;Planet:</string>
+             </property>
+             <property name="buddy">
+              <cstring>planets</cstring>
              </property>
             </widget>
            </item>
@@ -204,7 +216,10 @@
            <item>
             <widget class="QLabel" name="excentricityLabel">
              <property name="text">
-              <string>Excentricity:</string>
+              <string>&amp;Excentricity:</string>
+             </property>
+             <property name="buddy">
+              <cstring>excentricityEdit</cstring>
              </property>
             </widget>
            </item>
@@ -234,7 +249,10 @@
            <item>
             <widget class="QLabel" name="label_6">
              <property name="text">
-              <string>Semimajor Axis:</string>
+              <string>Semima&amp;jor Axis:</string>
+             </property>
+             <property name="buddy">
+              <cstring>semimajorAxis</cstring>
              </property>
             </widget>
            </item>
@@ -251,7 +269,10 @@
            <item>
             <widget class="QLabel" name="label_5">
              <property name="text">
-              <string>Angle:</string>
+              <string>An&amp;gle:</string>
+             </property>
+             <property name="buddy">
+              <cstring>angle</cstring>
              </property>
             </widget>
            </item>
@@ -268,7 +289,10 @@
            <item>
             <widget class="QLabel" name="label_8">
              <property name="text">
-              <string>Orbital Plane Angle:</string>
+              <string>&amp;Orbital Plane Angle:</string>
+             </property>
+             <property name="buddy">
+              <cstring>orbitalPlaneAngle</cstring>
              </property>
             </widget>
            </item>
@@ -306,8 +330,11 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="toolTip">
+              <string>Saves the changed planet values of the current selected planet</string>
+             </property>
              <property name="text">
-              <string>Accept Planet Data</string>
+              <string>Accept Plane&amp;t Data</string>
              </property>
             </widget>
            </item>
@@ -316,8 +343,11 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="toolTip">
+              <string>Adds the data as a new planet</string>
+             </property>
              <property name="text">
-              <string>Add Planet</string>
+              <string>Add P&amp;lanet</string>
              </property>
             </widget>
            </item>
@@ -332,21 +362,24 @@
        <item>
         <widget class="QPushButton" name="accept">
          <property name="text">
-          <string>Accept</string>
+          <string>&amp;Accept</string>
+         </property>
+         <property name="default">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="ok">
          <property name="text">
-          <string>Save</string>
+          <string>&amp;Save</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="cancel">
          <property name="text">
-          <string>Cancel</string>
+          <string>&amp;Cancel</string>
          </property>
         </widget>
        </item>

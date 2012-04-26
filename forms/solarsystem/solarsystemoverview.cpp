@@ -7,6 +7,9 @@ SolarSystemOverview::SolarSystemOverview(QWidget *parent, SolarSystemModel *sola
 {
     ui->setupUi(this);
 
+    setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
+    setWindowFlags(windowFlags() ^ Qt::WindowMaximizeButtonHint);
+
     this->solarSystemModel = solarSystemModel;
 
     ui->solarSystemTableView->setModel(solarSystemModel->getSolarSystemTableModel());

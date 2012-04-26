@@ -7,6 +7,9 @@ HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent, HeavenlyBodyModel *h
 {
     ui->setupUi(this);
 
+    setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
+    setWindowFlags(windowFlags() ^ Qt::WindowMaximizeButtonHint);
+
     this->heavenlyBodyModel = heavenlyBodyModel;
 
     ui->heavenlyBodyTableView->setModel(heavenlyBodyModel->getHeavenlyBodyTableModel());
