@@ -17,8 +17,6 @@ HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent, HeavenlyBodyModel *h
 
     heavenlyBodyModel->loadAllHeavenlyBodyEntities();
 
-    ui->heavenlyBodyTableView->selectRow(0);
-
     QObject::connect(ui->heavenlyBodyTableView,
                      SIGNAL(doubleClicked(QModelIndex)),
                      this,
@@ -32,6 +30,8 @@ HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent, HeavenlyBodyModel *h
                      Qt::DirectConnection);
 
     ui->heavenlyBodyTableView->setColumnWidth(1, 300);
+
+    ui->heavenlyBodyTableView->selectRow(0);
 }
 
 HeavenlyBodyOverview::~HeavenlyBodyOverview()

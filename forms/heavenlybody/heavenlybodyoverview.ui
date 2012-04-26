@@ -64,6 +64,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="edit">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="toolTip">
           <string>Edit the current selected Heavenly Body.</string>
          </property>
@@ -74,6 +77,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="deleteEntity">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="toolTip">
           <string>Delete the current selected Heavenly Body.</string>
          </property>

@@ -76,6 +76,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="edit">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>&amp;Edit</string>
          </property>
@@ -83,6 +86,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="deleteEntity">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>&amp;Delete</string>
          </property>
@@ -103,6 +109,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="startSimulation">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="minimumSize">
           <size>
            <width>110</width>

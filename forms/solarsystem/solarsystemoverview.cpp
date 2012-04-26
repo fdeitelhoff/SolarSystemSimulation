@@ -17,8 +17,6 @@ SolarSystemOverview::SolarSystemOverview(QWidget *parent, SolarSystemModel *sola
 
     solarSystemModel->loadAllSolarSystemEntities();
 
-    ui->solarSystemTableView->selectRow(0);
-
     QObject::connect(ui->solarSystemTableView,
                      SIGNAL(doubleClicked(QModelIndex)),
                      this,
@@ -32,6 +30,8 @@ SolarSystemOverview::SolarSystemOverview(QWidget *parent, SolarSystemModel *sola
                      Qt::DirectConnection);
 
     ui->solarSystemTableView->setColumnWidth(1, 320);
+
+    ui->solarSystemTableView->selectRow(0);
 }
 
 SolarSystemOverview::~SolarSystemOverview()
@@ -48,6 +48,7 @@ void SolarSystemOverview::selectionChanged(const QItemSelection &selected, const
 {
     ui->edit->setEnabled(selected.size() == 1);
     ui->deleteEntity->setEnabled(selected.size() == 1);
+    ui->startSimulation->setEnabled(selected.size() == 1);
 }
 
 void SolarSystemOverview::on_add_clicked()
