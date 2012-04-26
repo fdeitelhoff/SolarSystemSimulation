@@ -120,7 +120,8 @@ OTHER_FILES += \
     OpenGL/freeglut/win32/libfreeglut.a \
     database/html/DDL_heavenlybody.html \
     database/html/DDL_solarsystem.html \
-    database/html/DDL_solarsystemtoheavenlybody.html
+    database/html/DDL_solarsystemtoheavenlybody.html \
+    database/backups/SolarSystemSimulation.backup
 
 RESOURCES += \
     forms/ressources/Ressources.qrc

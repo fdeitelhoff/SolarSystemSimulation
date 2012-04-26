@@ -1,3 +1,4 @@
+-- Create the table SolarSystemToHeavenlyBody.
 CREATE TABLE SolarSystemToHeavenlyBody (
   SolarSystemID     int8 NOT NULL,
   HeavenlyBodyID    int8 NOT NULL,
@@ -11,11 +12,17 @@ CREATE TABLE SolarSystemToHeavenlyBody (
   SemimajorAxis,
   Angle,
   OrbitalPlaneAngle));
+
+
+-- Create the table SolarSystem.
 CREATE TABLE SolarSystem (
   SolarSystemID  BIGSERIAL NOT NULL,
   Name          varchar(255) NOT NULL UNIQUE,
   CentralStarID int8 NOT NULL,
   PRIMARY KEY (SolarSystemID));
+
+
+-- Create the table HeavenlyBody.
 CREATE TABLE HeavenlyBody (
   HeavenlyBodyID  BIGSERIAL NOT NULL,
   Name           varchar(255) NOT NULL UNIQUE,
@@ -23,6 +30,59 @@ CREATE TABLE HeavenlyBody (
   Color          char(15) NOT NULL,
   Type           char(1) NOT NULL CHECK (Type in ('P', 'S')),
   PRIMARY KEY (HeavenlyBodyID));
+
+
+-- Add the constraints.
 ALTER TABLE SolarSystem ADD CONSTRAINT FKSolarSyste811064 FOREIGN KEY (CentralStarID) REFERENCES HeavenlyBody (HeavenlyBodyID);
 ALTER TABLE SolarSystemToHeavenlyBody ADD CONSTRAINT FKSolarSyste525796 FOREIGN KEY (SolarSystemID) REFERENCES SolarSystem (SolarSystemID) ON UPDATE Cascade ON DELETE Cascade;
 ALTER TABLE SolarSystemToHeavenlyBody ADD CONSTRAINT FKSolarSyste194587 FOREIGN KEY (HeavenlyBodyID) REFERENCES HeavenlyBody (HeavenlyBodyID);
+
+
+-- Recreate the function checkHeavenlyBodyStarType.
+CREATE OR REPLACE FUNCTION checkHeavenlyBodyStarType() RETURNS TRIGGER AS '
+DECLARE
+    type char(1);
+BEGIN
+    SELECT heavenlybody.type INTO type FROM heavenlybody WHERE heavenlybodyid = NEW.centralstarid;
+
+    IF type != ''S'' THEN
+        RAISE EXCEPTION ''The central star of a solar system must be a heavenly body of the type star.'';
+    END IF;
+
+    RETURN NULL;
+END;
+' LANGUAGE plpgsql;
+
+
+-- Drop and create the trigger centralstar on the table SolarSystem.
+drop trigger centralstar on solarsystem;
+
+CREATE TRIGGER centralstar BEFORE INSERT OR UPDATE
+ON solarsystem
+FOR EACH ROW
+EXECUTE PROCEDURE checkHeavenlyBodyStarType();
+
+
+-- Recreate the function checkHeavenlyBodyPlanetType.
+CREATE OR REPLACE FUNCTION checkHeavenlyBodyPlanetType() RETURNS TRIGGER AS '
+DECLARE
+    type char(1);
+BEGIN
+    SELECT heavenlybody.type INTO type FROM heavenlybody WHERE heavenlybodyid = NEW.heavenlybodyid;
+
+    IF type != ''P'' THEN
+        RAISE EXCEPTION ''The planet of a solar system must be a heavenly body of the type planet.'';
+    END IF;
+
+    RETURN NULL;
+END;
+' LANGUAGE plpgsql;
+
+
+-- Drop and create the trigger heavenlybody on the table SolarSystemToHeavenlyBody.
+drop trigger heavenlybody on solarsystemtoheavenlybody;
+
+CREATE TRIGGER heavenlybody BEFORE INSERT OR UPDATE
+ON solarsystemtoheavenlybody
+FOR EACH ROW
+EXECUTE PROCEDURE checkHeavenlyBodyPlanetType();
