@@ -28,32 +28,31 @@ void Planet3d::init()
     b = a * sqrt(1 - epsilon * epsilon );
     e = epsilon * a;
 
-    // Umfang der Ellipse nach Ramanujan
+    // Periphery of the ellipse according to Ramanujan
     float lambda = ( a - b ) / ( a + b );
     float circumstance = ( a + b ) * M_PI * ( 1 + 3 * lambda * lambda / ( 10 + sqrt( 4 - 3 * lambda * lambda )));
 
-    // Durchschnittsgeschwindigkeit bestimmen
+    // Average speed of the planet
     averageSpeed = circumstance / circumstanceTime;
 
-    // Mittlere Winkelgeschwindigkeit
-    float omega_m = 2 * M_PI / circumstanceTime;
+    // Average angular speed
+    float omegaM = 2 * M_PI / circumstanceTime;
 
-    // Geschwindigkeit im Aphel
-    float speed_aphel = omega_m * a * sqrt(( a - e ) / ( a + e ));
+    // Speed in Aphelion
+    float speedAphelion = omegaM * a * sqrt(( a - e ) / ( a + e ));
 
-    // Geschwindigkeit im Perihel
-    float speed_perihel = omega_m * a * sqrt(( a + e ) / ( a - e ));
+    // Speed in Perihelion
+    float speedPerihelion = omegaM * a * sqrt(( a + e ) / ( a - e ));
+
+    // mu = gravitation constant * mass
+    float muA = speedAphelion * speedAphelion * (a + e) * a / ( a - e );
+    float muP = speedPerihelion * speedPerihelion * (a - e) * a / ( a + e );
+    mu = ( muA + muP ) / 2;
+
+    orbit3d = new Orbit3d(orbitAngle, orbitalPlaneAngle, color, a, b, e);
 
     phi = 0.0;
     pointsCounter = 0;
-
-    // My = Gravitationskonstante * Masse
-    float my_a = speed_aphel * speed_aphel * (a + e) * a / ( a - e );
-    float my_p = speed_perihel * speed_perihel * (a - e) * a / ( a + e );
-    my = ( my_a + my_p ) / 2;
-
-    orbit3d = new Orbit3d(orbitAngle, orbitalPlaneAngle, color, a, b, e);
-    setOrbitVisisble(true);
 }
 
 void Planet3d::calculateHeavenlyBody3d()
@@ -61,13 +60,13 @@ void Planet3d::calculateHeavenlyBody3d()
     x = cos(phi) * a + e;
     y = sin(phi) * b;
 
-    // Betrag des Vektors vom Brennpunk zum Planeten
+    // Absolute value of the planet position vector
     float r = sqrt( x * x + y * y);
 
-    // Momentangeschwindigkeit des Planeten nach der Vis-Viva-Gleichung
-    float instantaneousVelocity = sqrt( my * ( 2 / r - 1 / a ));
+    // 	Instantaneous velocity of the planet according to the Vis-Viva-Equatation
+    float instantaneousVelocity = sqrt( mu * ( 2 / r - 1 / a ));
 
-    // Mit einem Dreisatz den zu ueberschreitenden Winkel bestimmen:
+    // Take a rule of three to calculate the transgrassing angle:
     // alpha / øalpha ~ v / øv
     float orbitPointsCount = circumstanceTime;
     double averageAngle = 2 * M_PI / orbitPointsCount;

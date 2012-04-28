@@ -29,7 +29,7 @@ private:
     float epsilon;
     float e;
     double phi;
-    float my;
+    float mu;
 
     float averageSpeed;
     float circumstanceTime;
