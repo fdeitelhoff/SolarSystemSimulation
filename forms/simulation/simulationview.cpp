@@ -212,11 +212,11 @@ void SimulationView::mouseMoveEvent(QMouseEvent *me)
 {
     Qt::KeyboardModifiers modifiers = me->modifiers();
 
-    // Ist CTRL gedrueckt?
+    // Is the CTRL key pressed?
     if (modifiers & Qt::ControlModifier)
     {
-        // Ist ALT gedrueckt?
-        if (modifiers & Qt::AltModifier)
+        // Is the windows or the alt key pressed.
+        if (modifiers & Qt::MetaModifier || modifiers & Qt::AltModifier)
         {
             if ((x - me->x()) < 0)
             {
@@ -239,7 +239,7 @@ void SimulationView::mouseMoveEvent(QMouseEvent *me)
             updateOpenGL();
         }
 
-        // Ist SHIFT gedrueckt?
+        // Is the SHIFT key pressed?
         if (modifiers & Qt::ShiftModifier)
         {
             if ((x - me->x()) < 0)
