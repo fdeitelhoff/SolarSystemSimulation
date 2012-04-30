@@ -6,6 +6,7 @@
 
 #include "model/heavenlybody/heavenlybodymodel.h"
 #include "forms/heavenlybody/heavenlybodydetails.h"
+#include "forms/heavenlybody/heavenlybodyitemdelegate.h"
 
 namespace Ui {
 class HeavenlyBodyOverview;

@@ -61,6 +61,8 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
         ui->planets->setCurrentIndex(0);
     }
 
+    ui->planetsTableView->setItemDelegate(new SolarSystemItemDelegate(solarSystemModel));
+
     ui->planetsTableView->setColumnWidth(0, 50);
 }
 

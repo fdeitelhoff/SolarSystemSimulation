@@ -45,7 +45,9 @@ SOURCES += main.cpp \
     forms/main/about.cpp \
     visualization/light/light.cpp \
     visualization/environment/environment.cpp \
-    data/exceptions/heavenlybodytypeexception.cpp
+    data/exceptions/heavenlybodytypeexception.cpp \
+    forms/heavenlybody/heavenlybodyitemdelegate.cpp \
+    forms/solarsystem/solarsystemitemdelegate.cpp
 
 HEADERS  += forms/main/mainwindow.h \
     OpenGL/glvector.h \
@@ -86,7 +88,9 @@ HEADERS  += forms/main/mainwindow.h \
     forms/main/about.h \
     visualization/light/light.h \
     visualization/environment/environment.h \
-    data/exceptions/heavenlybodytypeexception.h
+    data/exceptions/heavenlybodytypeexception.h \
+    forms/heavenlybody/heavenlybodyitemdelegate.h \
+    forms/solarsystem/solarsystemitemdelegate.h
 
 FORMS    += forms/main/mainwindow.ui \
     forms/simulation/simulationview.ui \

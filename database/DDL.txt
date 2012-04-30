@@ -49,7 +49,7 @@ BEGIN
         RAISE EXCEPTION ''The central star of a solar system must be a heavenly body of the type star.'';
     END IF;
 
-    RETURN NULL;
+    RETURN NEW;
 END;
 ' LANGUAGE plpgsql;
 
@@ -74,7 +74,7 @@ BEGIN
         RAISE EXCEPTION ''The planet of a solar system must be a heavenly body of the type planet.'';
     END IF;
 
-    RETURN NULL;
+    RETURN NEW;
 END;
 ' LANGUAGE plpgsql;
 

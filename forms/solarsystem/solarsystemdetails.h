@@ -5,6 +5,7 @@
 #include <QMessageBox>
 
 #include "model/solarsystem/solarsystemmodel.h"
+#include "forms/solarsystem/solarsystemitemdelegate.h"
 
 namespace Ui {
 class SolarSystemDetails;

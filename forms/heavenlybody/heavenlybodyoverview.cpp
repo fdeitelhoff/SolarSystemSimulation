@@ -29,6 +29,9 @@ HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent, HeavenlyBodyModel *h
                      SLOT(selectionChanged(QItemSelection,QItemSelection)),
                      Qt::DirectConnection);
 
+    // Set the ItemDelegate for the custom background selection color.
+    ui->heavenlyBodyTableView->setItemDelegate(new HeavenlyBodyItemDelegate(heavenlyBodyModel));
+
     ui->heavenlyBodyTableView->setColumnWidth(1, 300);
 
     ui->heavenlyBodyTableView->selectRow(0);

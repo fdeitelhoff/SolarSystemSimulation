@@ -94,7 +94,12 @@ SolarSystemTableModel* SolarSystemModel::getSolarSystemTableModel()
 
 SolarSystemHeavenlyBodyTableModel* SolarSystemModel::getSolarSystemHeavenlyBodyTableModel()
 {
-    return solarSystemHeavenlyBodyTableModel = new SolarSystemHeavenlyBodyTableModel();
+    if (!solarSystemHeavenlyBodyTableModel)
+    {
+        solarSystemHeavenlyBodyTableModel = new SolarSystemHeavenlyBodyTableModel();
+    }
+
+    return solarSystemHeavenlyBodyTableModel;
 }
 
 HeavenlyBodyComboBoxModel* SolarSystemModel::getStarsComboBoxModel()
