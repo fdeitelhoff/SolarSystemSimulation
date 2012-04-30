@@ -12,7 +12,6 @@ SimulationView::SimulationView(QWidget *parent, SolarSystemSimulation *solarSyst
     QGLWidget(parent)
 {
     perspective = new GLPerspective();
-    perspective->setCamera(25 * v_Z);
 
     light = new Light();
 
@@ -32,6 +31,18 @@ SimulationView::SimulationView(QWidget *parent, SolarSystemSimulation *solarSyst
             SIGNAL(timeout()),
             this,
             SLOT(timerEvent()));
+
+    // Some initial constants for the camera position and control.
+    cameraZFactor = 3.5;
+    axisLengthFactor = 2.0;
+    backgroundColor = Qt::white;
+    shiftSceneUpDownFactor = 0.5;
+    shiftSceneLeftRightFactor = 0.5;
+    shiftSceneForwardBackwardFactor = 1.0;
+    turnCameraUpDownFactor = 1.0;
+    turnCameraLeftRightFactor = 1.0;
+    stretchCameraDistanceForwardFactor = 0.85;
+    stretchCameraDistanceBackwardFactor = 1.15;
 }
 
 SimulationView::~SimulationView()
@@ -51,9 +62,9 @@ bool SimulationView::isSimulationStarted()
 
 void SimulationView::resetPerspective()
 {
-    perspective->setCamera(solarSystemSimulation->getMaxSemimajorAxis() * 3.5 * v_Z);
+    perspective->setCamera(solarSystemSimulation->getMaxSemimajorAxis() * cameraZFactor * v_Z);
     perspective->setCenter(v_Zero);
-    axisLength = perspective->distance() * 2;
+    axisLength = perspective->distance() * axisLengthFactor;
 }
 
 void SimulationView::startSimulation()
@@ -81,7 +92,8 @@ void SimulationView::setSolarSystem(SolarSystem *solarSystem)
 
 void SimulationView::initializeGL()
 {
-    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glClearColor(backgroundColor.red(), backgroundColor.green(),
+                 backgroundColor.blue(), backgroundColor.alpha());
     glPolygonMode(GL_FRONT, GL_FILL);
     glPolygonMode(GL_BACK, GL_LINE);
     glEnable(GL_DEPTH_TEST);
@@ -151,7 +163,7 @@ void SimulationView::paintGL()
 
 void SimulationView::updateOpenGL()
 {
-    axisLength = perspective->distance() * 2;
+    axisLength = perspective->distance() * axisLengthFactor;
 
     updateGL();
 }
@@ -163,22 +175,22 @@ void SimulationView::keyPressEvent(QKeyEvent *keyEvent)
         switch (keyEvent->key())
         {
         case Qt::Key_Up:
-            shiftSceneUpDown(0.1);
+            shiftSceneUpDown(shiftSceneUpDownFactor);
             break;
         case Qt::Key_Down:
-            shiftSceneUpDown(-0.1);
+            shiftSceneUpDown(-shiftSceneUpDownFactor);
             break;
         case Qt::Key_Left:
-            shiftSceneLeftRight(0.1);
+            shiftSceneLeftRight(shiftSceneLeftRightFactor);
             break;
         case Qt::Key_Right:
-            shiftSceneLeftRight(-0.1);
+            shiftSceneLeftRight(-shiftSceneLeftRightFactor);
             break;
         case Qt::Key_PageDown:
-            shiftSceneForwardBackward(-1.0);
+            shiftSceneForwardBackward(-shiftSceneForwardBackwardFactor);
             break;
         case Qt::Key_PageUp:
-            shiftSceneForwardBackward(1.0);
+            shiftSceneForwardBackward(shiftSceneForwardBackwardFactor);
             break;
         default:
             break;
@@ -188,17 +200,17 @@ void SimulationView::keyPressEvent(QKeyEvent *keyEvent)
     {
         switch (keyEvent->key())
         {
-        case Qt::Key_Up: turnCameraUpDown(1.0);
+        case Qt::Key_Up: turnCameraUpDown(turnCameraUpDownFactor);
             break;
-        case Qt::Key_Down: turnCameraUpDown(-1.0);
+        case Qt::Key_Down: turnCameraUpDown(-turnCameraUpDownFactor);
             break;
-        case Qt::Key_Left: turnCameraLeftRight(1.0);
+        case Qt::Key_Left: turnCameraLeftRight(turnCameraLeftRightFactor);
             break;
-        case Qt::Key_Right: turnCameraLeftRight(-1.0);
+        case Qt::Key_Right: turnCameraLeftRight(-turnCameraLeftRightFactor);
             break;
-        case Qt::Key_PageDown: stretchCameraDistance(0.99);
+        case Qt::Key_PageDown: stretchCameraDistance(stretchCameraDistanceBackwardFactor);
             break;
-        case Qt::Key_PageUp: stretchCameraDistance(1.01);
+        case Qt::Key_PageUp: stretchCameraDistance(stretchCameraDistanceForwardFactor);
             break;
         default:
             break;
@@ -220,20 +232,20 @@ void SimulationView::mouseMoveEvent(QMouseEvent *me)
         {
             if ((x - me->x()) < 0)
             {
-                turnCameraLeftRight(-1.0);
+                turnCameraLeftRight(-turnCameraLeftRightFactor);
             }
             else if (((x - me->x()) > 0))
             {
-                turnCameraLeftRight(1.0);
+                turnCameraLeftRight(turnCameraLeftRightFactor);
             }
 
             if ((y - me->y()) > 0)
             {
-                turnCameraUpDown(-1.0);
+                turnCameraUpDown(-turnCameraUpDownFactor);
             }
             else if ((y - me->y()) < 0)
             {
-                turnCameraUpDown(1.0);
+                turnCameraUpDown(turnCameraUpDownFactor);
             }
 
             updateOpenGL();
@@ -244,20 +256,20 @@ void SimulationView::mouseMoveEvent(QMouseEvent *me)
         {
             if ((x - me->x()) < 0)
             {
-                shiftSceneLeftRight(-0.5);
+                shiftSceneLeftRight(-shiftSceneLeftRightFactor);
             }
             else if ((x - me->x()) > 0)
             {
-                shiftSceneLeftRight(0.5);
+                shiftSceneLeftRight(shiftSceneLeftRightFactor);
             }
 
             if ((y - me->y()) > 0)
             {
-                shiftSceneUpDown(-0.5);
+                shiftSceneUpDown(-shiftSceneUpDownFactor);
             }
             else if ((y - me->y()) < 0)
             {
-                shiftSceneUpDown(0.5);
+                shiftSceneUpDown(shiftSceneUpDownFactor);
             }
 
             updateOpenGL();
@@ -278,12 +290,12 @@ void SimulationView::wheelEvent(QWheelEvent * wheelEvent)
         // Nach unten.
         if (delta < 0)
         {
-            stretchCameraDistance(1.15);
+            stretchCameraDistance(stretchCameraDistanceBackwardFactor);
         }
         // Nach oben.
         else
         {
-            stretchCameraDistance(0.85);
+            stretchCameraDistance(stretchCameraDistanceForwardFactor);
         }
 
         updateOpenGL();
