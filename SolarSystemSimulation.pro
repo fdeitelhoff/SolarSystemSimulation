@@ -9,7 +9,6 @@ QT       += core gui sql opengl
 TARGET = SolarSystemSimulation
 TEMPLATE = app
 
-
 SOURCES += main.cpp \
     forms/main/mainwindow.cpp \
     OpenGL/glvector.cpp \
@@ -97,12 +96,9 @@ FORMS    += forms/main/mainwindow.ui \
     forms/solarsystem/solarsystemdetails.ui \
     forms/main/about.ui
 
-# UI_HEADERS_DIR += src/forms
-
 # Seperate the Win32 and Unix freeglut libs.
 win32   {   LIBS += -L \
-            "E:/Programme/QtSDK/mingw/freeglut/lib" \
-            #"/OpenGL/freeglut/win32" \
+            "../SolarSystemSimulation/OpenGL/freeglut/win32" \
             -lfreeglut
         }
 
