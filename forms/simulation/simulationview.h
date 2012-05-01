@@ -63,6 +63,17 @@ private:
     void wheelEvent(QWheelEvent * wheelEvent);
     void updateOpenGL();
 
+    double cameraZFactor;
+    int axisLengthFactor;
+    QColor backgroundColor;
+    float shiftSceneUpDownFactor;
+    float shiftSceneLeftRightFactor;
+    float shiftSceneForwardBackwardFactor;
+    float turnCameraUpDownFactor;
+    float turnCameraLeftRightFactor;
+    float stretchCameraDistanceForwardFactor;
+    float stretchCameraDistanceBackwardFactor;
+
 private slots:
     void timerEvent();
     void collisionDetected(HeavenlyBody3d *firstHeavenlyBody3d, HeavenlyBody3d *secondHeavenlyBody3d);
