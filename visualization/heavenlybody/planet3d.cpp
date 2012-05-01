@@ -20,7 +20,7 @@ Planet3d::~Planet3d()
 
 void Planet3d::setKeplerConstant(const float keplerConstant)
 {
-    circumstanceTime = sqrt(keplerConstant * pow(a , 3));
+    timeOfCirculation = sqrt(keplerConstant * pow(a , 3));
 }
 
 void Planet3d::init()
@@ -29,14 +29,18 @@ void Planet3d::init()
     e = epsilon * a;
 
     // Periphery of the ellipse according to Ramanujan
-    float lambda = ( a - b ) / ( a + b );
-    float circumstance = ( a + b ) * M_PI * ( 1 + 3 * lambda * lambda / ( 10 + sqrt( 4 - 3 * lambda * lambda )));
+    double lambda = ( a - b ) / ( a + b );
+    double circumference = ( a + b ) * M_PI * ( 1 + 3 * lambda * lambda / ( 10 + sqrt( 4 - 3 * lambda * lambda )));
+
+    // Periphery of the ellipse according David Cantrell
+    /*double s = 0.825056;
+    double circumference = 4 * ( a + b ) - 2 * ( 4 - M_PI ) * a * b / pow( ( pow( a , s ) / 2 + pow( b, s ) / 2), 1 / s );*/
 
     // Average speed of the planet
-    averageSpeed = circumstance / circumstanceTime;
+    averageSpeed = circumference / timeOfCirculation;
 
     // Average angular speed
-    float omegaM = 2 * M_PI / circumstanceTime;
+    float omegaM = 2 * M_PI / timeOfCirculation;
 
     // Speed in Aphelion
     float speedAphelion = omegaM * a * sqrt(( a - e ) / ( a + e ));
@@ -68,7 +72,7 @@ void Planet3d::calculateHeavenlyBody3d()
 
     // Take a rule of three to calculate the transgrassing angle:
     // alpha / øalpha ~ v / øv
-    float orbitPointsCount = circumstanceTime;
+    float orbitPointsCount = timeOfCirculation;
     double averageAngle = 2 * M_PI / orbitPointsCount;
     double alpha = averageAngle * instantaneousVelocity / averageSpeed;
 
