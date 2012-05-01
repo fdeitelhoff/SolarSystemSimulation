@@ -6,16 +6,19 @@ PostgreSQLDatabase* PostgreSQLDatabase::instance = 0;
 
 PostgreSQLDatabase::PostgreSQLDatabase()
 {
+    #ifdef WIN32
     // Connection over ODBC!. "SolarSystem" is the name of the ODBC data source.
     database = QSqlDatabase::addDatabase("QODBC");
-    database.setDatabaseName("SolarSystemSimulation");
+    database.setDatabaseName("SolarSystemSimulation2");
 
+    #else
     // Connection through the native PostgreSQL driver.
-     /*database = QSqlDatabase::addDatabase("QPSQL");
-     database.setHostName("localhost");
-     database.setDatabaseName("SolarSystemSimulation2");
-     database.setUserName("postgres");
-     database.setPassword("postgres");*/
+    database = QSqlDatabase::addDatabase("QPSQL");
+    database.setHostName("localhost");
+    database.setDatabaseName("SolarSystemSimulation2");
+    database.setUserName("postgres");
+    database.setPassword("postgres");
+    #endif
 
     if (!database.open())
     {
