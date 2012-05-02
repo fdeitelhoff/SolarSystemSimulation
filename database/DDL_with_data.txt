@@ -1,0 +1,472 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.1.3
+-- Dumped by pg_dump version 9.1.3
+-- Started on 2012-05-03 00:31:55 CEST
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 2772 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: SCHEMA "public"; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA "public" IS 'standard public schema';
+
+
+--
+-- TOC entry 166 (class 3079 OID 12529)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS "plpgsql" WITH SCHEMA "pg_catalog";
+
+
+--
+-- TOC entry 2774 (class 0 OID 0)
+-- Dependencies: 166
+-- Name: EXTENSION "plpgsql"; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION "plpgsql" IS 'PL/pgSQL procedural language';
+
+
+SET search_path = "public", pg_catalog;
+
+--
+-- TOC entry 179 (class 1255 OID 16689)
+-- Dependencies: 5 500
+-- Name: checkheavenlybodyplanettype(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION "checkheavenlybodyplanettype"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+DECLARE
+    type char(1);
+BEGIN
+    SELECT heavenlybody.type INTO type FROM heavenlybody WHERE heavenlybodyid = NEW.heavenlybodyid;
+
+    IF type != 'P' THEN
+        RAISE EXCEPTION 'The planet of a solar system must be a heavenly body of the type planet.';
+    END IF;
+
+    RETURN NEW;
+END;
+$$;
+
+
+ALTER FUNCTION "public"."checkheavenlybodyplanettype"() OWNER TO "postgres";
+
+--
+-- TOC entry 178 (class 1255 OID 16690)
+-- Dependencies: 5 500
+-- Name: checkheavenlybodystartype(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION "checkheavenlybodystartype"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+DECLARE
+    type char(1);
+BEGIN
+    SELECT heavenlybody.type INTO type FROM heavenlybody WHERE heavenlybodyid = NEW.centralstarid;
+
+    IF type != 'S' THEN
+        RAISE EXCEPTION 'The central star of a solar system must be a heavenly body of the type star.';
+    END IF;
+
+    RETURN NEW;
+END;
+$$;
+
+
+ALTER FUNCTION "public"."checkheavenlybodystartype"() OWNER TO "postgres";
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 161 (class 1259 OID 16691)
+-- Dependencies: 2749 5
+-- Name: heavenlybody; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "heavenlybody" (
+    "heavenlybodyid" bigint NOT NULL,
+    "name" character varying(255) NOT NULL,
+    "diameter" integer NOT NULL,
+    "color" character(15) NOT NULL,
+    "type" character(1) NOT NULL,
+    CONSTRAINT "heavenlybody_type_check" CHECK (("type" = ANY (ARRAY['P'::"bpchar", 'S'::"bpchar"])))
+);
+
+
+ALTER TABLE "public"."heavenlybody" OWNER TO "postgres";
+
+--
+-- TOC entry 162 (class 1259 OID 16695)
+-- Dependencies: 5 161
+-- Name: heavenlybody_heavenlybodyid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "heavenlybody_heavenlybodyid_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "public"."heavenlybody_heavenlybodyid_seq" OWNER TO "postgres";
+
+--
+-- TOC entry 2775 (class 0 OID 0)
+-- Dependencies: 162
+-- Name: heavenlybody_heavenlybodyid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "heavenlybody_heavenlybodyid_seq" OWNED BY "heavenlybody"."heavenlybodyid";
+
+
+--
+-- TOC entry 2776 (class 0 OID 0)
+-- Dependencies: 162
+-- Name: heavenlybody_heavenlybodyid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"heavenlybody_heavenlybodyid_seq"', 41, true);
+
+
+--
+-- TOC entry 163 (class 1259 OID 16697)
+-- Dependencies: 5
+-- Name: solarsystem; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "solarsystem" (
+    "solarsystemid" bigint NOT NULL,
+    "name" character varying(255) NOT NULL,
+    "centralstarid" bigint NOT NULL
+);
+
+
+ALTER TABLE "public"."solarsystem" OWNER TO "postgres";
+
+--
+-- TOC entry 164 (class 1259 OID 16700)
+-- Dependencies: 163 5
+-- Name: solarsystem_solarsystemid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "solarsystem_solarsystemid_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "public"."solarsystem_solarsystemid_seq" OWNER TO "postgres";
+
+--
+-- TOC entry 2777 (class 0 OID 0)
+-- Dependencies: 164
+-- Name: solarsystem_solarsystemid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "solarsystem_solarsystemid_seq" OWNED BY "solarsystem"."solarsystemid";
+
+
+--
+-- TOC entry 2778 (class 0 OID 0)
+-- Dependencies: 164
+-- Name: solarsystem_solarsystemid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"solarsystem_solarsystemid_seq"', 35, true);
+
+
+--
+-- TOC entry 165 (class 1259 OID 16702)
+-- Dependencies: 5
+-- Name: solarsystemtoheavenlybody; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "solarsystemtoheavenlybody" (
+    "solarsystemid" bigint NOT NULL,
+    "heavenlybodyid" bigint NOT NULL,
+    "excentricity" double precision NOT NULL,
+    "semimajoraxis" double precision NOT NULL,
+    "angle" double precision NOT NULL,
+    "orbitalplaneangle" double precision NOT NULL
+);
+
+
+ALTER TABLE "public"."solarsystemtoheavenlybody" OWNER TO "postgres";
+
+--
+-- TOC entry 2748 (class 2604 OID 16705)
+-- Dependencies: 162 161
+-- Name: heavenlybodyid; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "heavenlybody" ALTER COLUMN "heavenlybodyid" SET DEFAULT "nextval"('"heavenlybody_heavenlybodyid_seq"'::"regclass");
+
+
+--
+-- TOC entry 2750 (class 2604 OID 16706)
+-- Dependencies: 164 163
+-- Name: solarsystemid; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "solarsystem" ALTER COLUMN "solarsystemid" SET DEFAULT "nextval"('"solarsystem_solarsystemid_seq"'::"regclass");
+
+
+--
+-- TOC entry 2766 (class 0 OID 16691)
+-- Dependencies: 161
+-- Data for Name: heavenlybody; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (9, 'Sonne21', 3001, '255:255:0:255  ', 'S');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (19, '12', 1000, '85:0:255:255   ', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (17, 'fff', 40, '0:255:0:255    ', 'S');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (13, 'Planet 2', 2000, '170:85:255:255 ', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (34, 'Sonne2', 8000, '0:255:0:255    ', 'S');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (12, 'Merkur', 600, '180:131:134:255', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (25, 'Venus', 1800, '200:204:212:255', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (26, 'Mars', 900, '255:88:38:255  ', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (27, 'Jupiter', 30000, '109:112:127:255', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (14, 'Planet 3a', 1250, '0:85:127:255   ', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (28, 'Saturn', 28000, '197:179:37:255 ', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (29, 'Uranus', 8001, '149:227:222:255', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (31, 'Pluto', 1800, '239:232:239:255', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (38, 'Ceres', 900, '119:124:166:255', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (30, 'Neptun', 8000, '85:0:255:255   ', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (37, '2003 UB313 (Eris)', 1800, '255:0:0:255    ', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (39, 'test', 1000, '255:0:0:255    ', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (16, 'Star X19', 1000, '255:255:0:255  ', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (11, 'Erde', 1800, '0:85:255:255   ', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (36, 'Sonne', 33, '0:255:0:255    ', 'S');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (40, 'erde', 1000, '0:255:0:255    ', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (41, 'Venus1', 3333, '0:255:0:255    ', 'P');
+INSERT INTO "heavenlybody" ("heavenlybodyid", "name", "diameter", "color", "type") VALUES (35, 'Mars2', 1000, '255:138:4:255  ', 'P');
+
+
+--
+-- TOC entry 2767 (class 0 OID 16697)
+-- Dependencies: 163
+-- Data for Name: solarsystem; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (1, 'Sonnensystem 1', 9);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (6, 'n', 9);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (7, 'bla', 9);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (13, 'Sonnensystem für den Test', 9);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (15, 'Testsystem', 9);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (16, 'Neues Sonnensystem', 16);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (18, 'Zeichnen', 9);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (2, 'Sonnensystem 2xyz', 9);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (12, 'fff', 9);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (4, 'asdfsdgfsdfgdsgsdfgdsfg', 9);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (3, 'Fabians Sonnensystem', 17);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (21, 'vvv', 17);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (20, 'n2', 17);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (22, 'Kollisionstest', 34);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (23, 'Christofs Sonnensystem', 34);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (24, 'sdfgdgdfg', 16);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (17, 'Unser Sonnensystem', 9);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (25, 'test', 16);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (26, 'ffff', 36);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (27, 'Test', 34);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (28, 'n1', 17);
+INSERT INTO "solarsystem" ("solarsystemid", "name", "centralstarid") VALUES (35, 'impulse', 17);
+
+
+--
+-- TOC entry 2768 (class 0 OID 16702)
+-- Dependencies: 165
+-- Data for Name: solarsystemtoheavenlybody; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (2, 12, 0, 1, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (20, 11, 0.299999999999999989, 0.5, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (12, 19, 0.299999999999999989, 1, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (17, 30, 0.0112999999999999993, 301, 45, 1.76899999999999991);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (12, 19, 0.140000000000000013, 18, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (2, 14, 0.100000000000000006, 1010, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (3, 11, 0.100000000000000006, 6, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (3, 12, 0.299999999999999989, 6, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (3, 14, 0.5, 6, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (3, 19, 0.200000000000000011, 555, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (6, 12, 0.100000000000000006, 222, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (7, 11, 0.530000000000000027, 10, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (13, 11, 0.5, 10, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (15, 11, 0, 10, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (16, 11, 0.100000000000000006, 10, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (16, 12, 0.299999999999999989, 15, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (16, 13, 0.5, 7, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (4, 11, 0.299999999999999989, 10, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (4, 13, 0.200000000000000011, 19, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (17, 31, 0.248799999999999993, 394, 45, 17.1600000000000001);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (17, 37, 0.440000000000000002, 680, 45, 44);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (17, 38, 0.0796000000000000041, 27.6700000000000017, 45, 10.5899999999999999);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (12, 19, 0.140000000000000013, 1, 45, 45.1000000000000014);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (12, 19, 0.140000000000000013, 1, 45, 45.1099999999999994);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (3, 19, 0.100000000000000006, 1, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (27, 37, 0.5, 10, 45, 33);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (12, 11, 0.100000000000000006, 1, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (1, 12, 0, 1, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (18, 12, 0, 1, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (21, 19, 0, 1, 45, 45);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (20, 19, 0.200000000000000011, 5, 199, 20);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (20, 19, 0.200000000000000011, 5, 77, 177);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (22, 11, 0.699999999999999956, 5, 0, 0);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (22, 26, 0.5, 5, 90, 0);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (23, 13, 0.5, 10, 45, 0);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (23, 13, 0.260000000000000009, 10, 45, 0);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (23, 13, 0.270000000000000018, 15, 90, 0);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (23, 13, 0.540000000000000036, 15, 75, 0);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (22, 19, 0.500560000000000005, 5, 90, 0);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (17, 12, 0.205600000000000005, 3.871, 45, 7);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (17, 25, 0.00679999999999999962, 7.23000000000000043, 45, 3.39500000000000002);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (17, 11, 0.0166999999999999996, 10, 45, 0);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (17, 26, 0.0934999999999999998, 15.1999999999999993, 45, 1.85000000000000009);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (17, 27, 0.0483999999999999986, 52, 45, 1.30499999999999994);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (17, 28, 0.0541499999999999967, 95.4000000000000057, 45, 2.48399999999999999);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (17, 29, 0.0471999999999999989, 192, 45, 0.770000000000000018);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (35, 35, 0.100000000000000006, 7, 30, 10);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (35, 35, 0.200000000000000011, 7, 60, 20);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (35, 35, 0.299999999999999989, 7, 90, 30);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (35, 35, 0.400000000000000022, 7, 120, 40);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (35, 35, 0.5, 7, 150, 50);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (35, 35, 0.599999999999999978, 7, 180, 60);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (35, 35, 0.699999999999999956, 7, 210, 70);
+INSERT INTO "solarsystemtoheavenlybody" ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle") VALUES (35, 35, 0, 7, 0, 0);
+
+
+--
+-- TOC entry 2752 (class 2606 OID 16708)
+-- Dependencies: 161 161
+-- Name: heavenlybody_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "heavenlybody"
+    ADD CONSTRAINT "heavenlybody_name_key" UNIQUE ("name");
+
+
+--
+-- TOC entry 2754 (class 2606 OID 16710)
+-- Dependencies: 161 161
+-- Name: heavenlybody_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "heavenlybody"
+    ADD CONSTRAINT "heavenlybody_pkey" PRIMARY KEY ("heavenlybodyid");
+
+
+--
+-- TOC entry 2756 (class 2606 OID 16712)
+-- Dependencies: 163 163
+-- Name: solarsystem_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "solarsystem"
+    ADD CONSTRAINT "solarsystem_name_key" UNIQUE ("name");
+
+
+--
+-- TOC entry 2758 (class 2606 OID 16714)
+-- Dependencies: 163 163
+-- Name: solarsystem_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "solarsystem"
+    ADD CONSTRAINT "solarsystem_pkey" PRIMARY KEY ("solarsystemid");
+
+
+--
+-- TOC entry 2760 (class 2606 OID 16716)
+-- Dependencies: 165 165 165 165 165 165 165
+-- Name: solarsystemtoheavenlybody_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "solarsystemtoheavenlybody"
+    ADD CONSTRAINT "solarsystemtoheavenlybody_pkey" PRIMARY KEY ("solarsystemid", "heavenlybodyid", "excentricity", "semimajoraxis", "angle", "orbitalplaneangle");
+
+
+--
+-- TOC entry 2764 (class 2620 OID 16782)
+-- Dependencies: 163 178
+-- Name: centralstar; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER "centralstar" BEFORE INSERT OR UPDATE ON "solarsystem" FOR EACH ROW EXECUTE PROCEDURE "checkheavenlybodystartype"();
+
+
+--
+-- TOC entry 2765 (class 2620 OID 16783)
+-- Dependencies: 165 179
+-- Name: heavenlybody; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER "heavenlybody" BEFORE INSERT OR UPDATE ON "solarsystemtoheavenlybody" FOR EACH ROW EXECUTE PROCEDURE "checkheavenlybodyplanettype"();
+
+
+--
+-- TOC entry 2762 (class 2606 OID 16719)
+-- Dependencies: 2753 165 161
+-- Name: fksolarsyste194587; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "solarsystemtoheavenlybody"
+    ADD CONSTRAINT "fksolarsyste194587" FOREIGN KEY ("heavenlybodyid") REFERENCES "heavenlybody"("heavenlybodyid");
+
+
+--
+-- TOC entry 2763 (class 2606 OID 16724)
+-- Dependencies: 2757 163 165
+-- Name: fksolarsyste525796; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "solarsystemtoheavenlybody"
+    ADD CONSTRAINT "fksolarsyste525796" FOREIGN KEY ("solarsystemid") REFERENCES "solarsystem"("solarsystemid") ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2761 (class 2606 OID 16729)
+-- Dependencies: 163 2753 161
+-- Name: fksolarsyste811064; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "solarsystem"
+    ADD CONSTRAINT "fksolarsyste811064" FOREIGN KEY ("centralstarid") REFERENCES "heavenlybody"("heavenlybodyid");
+
+
+--
+-- TOC entry 2773 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA "public" FROM PUBLIC;
+REVOKE ALL ON SCHEMA "public" FROM "postgres";
+GRANT ALL ON SCHEMA "public" TO "postgres";
+GRANT ALL ON SCHEMA "public" TO PUBLIC;
+
+
+-- Completed on 2012-05-03 00:31:55 CEST
+
+--
+-- PostgreSQL database dump complete
+--
+
