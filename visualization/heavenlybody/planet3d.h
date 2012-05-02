@@ -32,7 +32,7 @@ private:
     float mu;
 
     float averageSpeed;
-    float circumstanceTime;
+    float timeOfCirculation;
 
     Orbit3d *orbit3d;
 
