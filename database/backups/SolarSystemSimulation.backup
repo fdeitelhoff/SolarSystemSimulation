@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.1.3
 -- Dumped by pg_dump version 9.1.3
--- Started on 2012-05-02 22:39:14 CEST
+-- Started on 2012-05-02 22:51:36 CEST
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -183,7 +183,7 @@ ALTER SEQUENCE solarsystem_solarsystemid_seq OWNED BY solarsystem.solarsystemid;
 -- Name: solarsystem_solarsystemid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('solarsystem_solarsystemid_seq', 33, true);
+SELECT pg_catalog.setval('solarsystem_solarsystemid_seq', 34, true);
 
 
 --
@@ -229,7 +229,6 @@ ALTER TABLE ONLY solarsystem ALTER COLUMN solarsystemid SET DEFAULT nextval('sol
 --
 
 COPY heavenlybody (heavenlybodyid, name, diameter, color, type) FROM stdin;
-35	Mars2	1	0:255:0:255    	P
 9	Sonne21	3001	255:255:0:255  	S
 19	12	1000	85:0:255:255   	P
 17	fff	40	0:255:0:255    	S
@@ -252,6 +251,7 @@ COPY heavenlybody (heavenlybodyid, name, diameter, color, type) FROM stdin;
 36	Sonne	33	0:255:0:255    	S
 40	erde	1000	0:255:0:255    	P
 41	Venus1	3333	0:255:0:255    	P
+35	Mars2	1800	255:136:9:255  	P
 \.
 
 
@@ -284,6 +284,7 @@ COPY solarsystem (solarsystemid, name, centralstarid) FROM stdin;
 27	Test	34
 28	n1	17
 33	sdgsdg	17
+34	sshgsfh	17
 \.
 
 
@@ -346,6 +347,14 @@ COPY solarsystemtoheavenlybody (solarsystemid, heavenlybodyid, excentricity, sem
 33	11	0.299999999999999989	5	0	0
 33	11	0.400000000000000022	5	0	0
 33	11	0.5	5	0	0
+34	35	0	7	0	0
+34	35	0.100000000000000006	7	30	10
+34	35	0.200000000000000011	7	60	20
+34	35	0.299999999999999989	7	90	30
+34	35	0.400000000000000022	7	120	40
+34	35	0.5	7	150	50
+34	35	0.599999999999999978	7	180	60
+34	35	0.699999999999999956	7	210	70
 \.
 
 
@@ -459,7 +468,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2012-05-02 22:39:14 CEST
+-- Completed on 2012-05-02 22:51:36 CEST
 
 --
 -- PostgreSQL database dump complete
