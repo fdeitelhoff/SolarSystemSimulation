@@ -47,6 +47,8 @@ public:
     int getSelectedStarIndex();
     int getSelectedHeavenlyBodyIndex();
 
+    void resetSolarSystemEntityData();
+
 private slots:
     void currentSolarSystemRowChanged(const QModelIndex &current, const QModelIndex &previous);
     void currentPlanetsRowChanged(const QModelIndex &current, const QModelIndex &previous);

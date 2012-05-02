@@ -26,6 +26,11 @@ void SolarSystemModel::loadEntityData()
     }
 }
 
+void SolarSystemModel::resetSolarSystemEntityData()
+{
+    solarSystemHeavenlyBodyTableModel->resetData();
+}
+
 int SolarSystemModel::getSelectedStarIndex()
 {
     if (!currentSolarSystem)

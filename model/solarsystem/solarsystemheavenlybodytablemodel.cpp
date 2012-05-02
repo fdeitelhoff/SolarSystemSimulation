@@ -20,6 +20,13 @@ void SolarSystemHeavenlyBodyTableModel::reset()
     QAbstractTableModel::reset();
 }
 
+void SolarSystemHeavenlyBodyTableModel::resetData()
+{
+    entities.clear();
+
+    reset();
+}
+
 QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())

@@ -34,6 +34,8 @@ public:
 
     void reset();
 
+    void resetData();
+
 private:
     QList<SolarSystemHeavenlyBody *> entities;
 };
