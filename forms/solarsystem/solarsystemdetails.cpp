@@ -125,6 +125,7 @@ void SolarSystemDetails::on_excentricity_valueChanged()
 
 void SolarSystemDetails::on_cancel_clicked()
 {
+    solarSystemModel->resetSolarSystemEntityData();
     close();
 }
 
