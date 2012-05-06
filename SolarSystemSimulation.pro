@@ -114,12 +114,14 @@ unix    {   LIBS += -lglut \
 OTHER_FILES += \
     database/DDL.txt \
     database/DDL_with_data.txt \
+    database/DDL_presentation.sql \
     database/heavenlybody.txt \
     database/solarsystem.txt \
     database/solarsystemtoheavenlybody.txt \
     OpenGL/freeglut/win32/libfreeglut_static.a \
     OpenGL/freeglut/win32/libfreeglut.a \
-    database/backups/SolarSystemSimulation.backup
+    database/backups/SolarSystemSimulation.backup \
+    README.txt
 
 RESOURCES += \
     forms/ressources/Ressources.qrc
