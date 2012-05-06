@@ -37,6 +37,8 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
         ui->stars->setCurrentIndex(0);
     }
 
+    solarSystemModel->resetSolarSystemEntityData();
+
     if (isEdit)
     {
         ui->name->setText(solarSystemModel->getCurrentSolarSystem()->getName());
@@ -125,7 +127,6 @@ void SolarSystemDetails::on_excentricity_valueChanged()
 
 void SolarSystemDetails::on_cancel_clicked()
 {
-    solarSystemModel->resetSolarSystemEntityData();
     close();
 }
 
