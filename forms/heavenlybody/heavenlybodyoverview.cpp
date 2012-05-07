@@ -121,9 +121,16 @@ void HeavenlyBodyOverview::on_deleteEntity_clicked()
         }
         catch (const DeleteEntityFailedException &exception)
         {
+            QString message = exception.getMessage();
+
+            if (exception.getSqlError() != "")
+            {
+                message += "\n\nSQL-Error:\n" + exception.getSqlError();
+            }
+
             QMessageBox::critical(this,
                                   "Error while deleting",
-                                  exception.getMessage() + "\n\nSQL-Error:\n" + exception.getSqlError(),
+                                  message,
                                   QMessageBox::Ok);
         }
     }

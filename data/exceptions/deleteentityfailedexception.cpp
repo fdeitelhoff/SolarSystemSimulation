@@ -1,5 +1,11 @@
 #include "deleteentityfailedexception.h"
 
+DeleteEntityFailedException::DeleteEntityFailedException(QString message)
+{
+    this->message = message;
+    sqlError = "";
+}
+
 DeleteEntityFailedException::DeleteEntityFailedException(QString message, QString sqlError)
 {
     this->message = message;

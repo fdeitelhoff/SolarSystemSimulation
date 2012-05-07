@@ -27,6 +27,8 @@ public:
 
     SolarSystem* getSolarSystem(int row);
 
+    int getEntityCount();
+
 private:
     QList<SolarSystem *> entities;
 };

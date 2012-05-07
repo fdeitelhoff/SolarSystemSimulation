@@ -10,6 +10,7 @@ class DeleteEntityFailedException : public exception
 {
 public:
     DeleteEntityFailedException(const QString message, QString sqlError);
+    DeleteEntityFailedException(const QString message);
     virtual ~DeleteEntityFailedException() throw() {}
 
     virtual const QString getMessage() const throw();

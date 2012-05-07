@@ -204,7 +204,11 @@ void SolarSystemModel::deletePlanet()
 
     currentSolarSystem->removeHeavenlyBody(currentSolarSystemHeavenlyBody);
 
-    if (solarSystemHeavenlyBodyTableModel->getEntityCount() == 0)
+    if (solarSystemHeavenlyBodyTableModel->getEntityCount() > 0)
+    {
+        currentSolarSystemHeavenlyBody = solarSystemHeavenlyBodyTableModel->getSolarSystemHeavenlyBody(solarSystemHeavenlyBodySelectionModel->currentIndex().row());
+    }
+    else
     {
         currentSolarSystemHeavenlyBody = 0;
     }
@@ -212,9 +216,20 @@ void SolarSystemModel::deletePlanet()
 
 void SolarSystemModel::deleteSolarSystem()
 {
-    solarSystemRepository->deleteEntity(currentSolarSystem);
-    solarSystemTableModel->deleteSolarSystem(currentSolarSystem);
+    if (isEntitySelected())
+    {
+        solarSystemRepository->deleteEntity(currentSolarSystem);
+        solarSystemTableModel->deleteSolarSystem(currentSolarSystem);
 
-    currentSolarSystem = 0;
-    currentSolarSystemHeavenlyBody = 0;
+        if (solarSystemTableModel->getEntityCount() > 0)
+        {
+            currentSolarSystem = solarSystemTableModel->getSolarSystem(solarSystemSelectionModel->currentIndex().row());
+            currentSolarSystemHeavenlyBody = 0;
+        }
+        else
+        {
+            currentSolarSystem = 0;
+            currentSolarSystemHeavenlyBody = 0;
+        }
+    }
 }

@@ -121,7 +121,8 @@ OTHER_FILES += \
     OpenGL/freeglut/win32/libfreeglut_static.a \
     OpenGL/freeglut/win32/libfreeglut.a \
     database/backups/SolarSystemSimulation.backup \
-    README.txt
+    README.txt \
+    database/backups/SolarSystemSimulation_SecondPresentation.backup
 
 RESOURCES += \
     forms/ressources/Ressources.qrc

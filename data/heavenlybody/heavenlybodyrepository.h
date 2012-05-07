@@ -33,7 +33,10 @@ private:
     PostgreSQLDatabase *database;
 
     QString colorToString(QColor color);
+
     bool isEntityUnique(HeavenlyBody *heavenlyBody);
+    int isHeavenlyBodyUsedAsPlanet(HeavenlyBody *heavenlyBody);
+    int isHeavenlyBodyUsedAsStar(HeavenlyBody *heavenlyBody);
 };
 
 #endif // HEAVENLYBODYREPOSITORY_H

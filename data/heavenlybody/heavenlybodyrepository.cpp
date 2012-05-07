@@ -192,6 +192,20 @@ void HeavenlyBodyRepository::insertEntity(HeavenlyBody *heavenlyBody)
 
 void HeavenlyBodyRepository::deleteEntity(HeavenlyBody *heavenlyBody)
 {
+    int count = isHeavenlyBodyUsedAsPlanet(heavenlyBody);
+
+    if (count > 0)
+    {
+        throw DeleteEntityFailedException(QString("The heavenly body could not be deleted because it is used in %1 solar system(s) as a planet!").arg(count));
+    }
+
+    count = isHeavenlyBodyUsedAsStar(heavenlyBody);
+
+    if (count > 0)
+    {
+        throw DeleteEntityFailedException(QString("The heavenly body could not be deleted because it is used in %1 solar system(s) as a star!").arg(count));
+    }
+
     QSqlQuery deleteHeavenlyBodyQuery;
     deleteHeavenlyBodyQuery.prepare("DELETE FROM "
                                     "       heavenlybody "
@@ -286,4 +300,58 @@ bool HeavenlyBodyRepository::isEntityUnique(HeavenlyBody *heavenlyBody)
     }
 
     return heavenlyBodyQuery.record().value("count").toInt() == 0;
+}
+
+int HeavenlyBodyRepository::isHeavenlyBodyUsedAsPlanet(HeavenlyBody *heavenlyBody)
+{
+    QSqlQuery isHeavenlyBodyUsedQuery;
+    isHeavenlyBodyUsedQuery.prepare("SELECT"
+                                    "     COUNT(*) AS count "
+                                    "FROM "
+                                    "     solarsystemtoheavenlybody "
+                                    "WHERE "
+                                    "     heavenlybodyid = :heavenlybodyid");
+
+    isHeavenlyBodyUsedQuery.bindValue(":heavenlybodyid", heavenlyBody->getId());
+
+    if (!isHeavenlyBodyUsedQuery.exec())
+    {
+        throw SqlQueryException("It could not be checked it the heavenly body is used in a solar system!",
+                                isHeavenlyBodyUsedQuery.lastError().text());
+    }
+
+    if (!isHeavenlyBodyUsedQuery.next())
+    {
+        throw SqlQueryException("It could not be checked it the heavenly body is used in a solar system!",
+                                isHeavenlyBodyUsedQuery.lastError().text());
+    }
+
+    return isHeavenlyBodyUsedQuery.record().value("count").toInt();
+}
+
+int HeavenlyBodyRepository::isHeavenlyBodyUsedAsStar(HeavenlyBody *heavenlyBody)
+{
+    QSqlQuery isHeavenlyBodyUsedQuery;
+    isHeavenlyBodyUsedQuery.prepare("SELECT"
+                                    "     COUNT(*) AS count "
+                                    "FROM "
+                                    "     solarsystem "
+                                    "WHERE "
+                                    "     centralstarid = :heavenlybodyid");
+
+    isHeavenlyBodyUsedQuery.bindValue(":heavenlybodyid", heavenlyBody->getId());
+
+    if (!isHeavenlyBodyUsedQuery.exec())
+    {
+        throw SqlQueryException("It could not be checked it the heavenly body is used in a solar system!",
+                                isHeavenlyBodyUsedQuery.lastError().text());
+    }
+
+    if (!isHeavenlyBodyUsedQuery.next())
+    {
+        throw SqlQueryException("It could not be checked it the heavenly body is used in a solar system!",
+                                isHeavenlyBodyUsedQuery.lastError().text());
+    }
+
+    return isHeavenlyBodyUsedQuery.record().value("count").toInt();
 }

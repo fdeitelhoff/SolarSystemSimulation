@@ -128,3 +128,8 @@ void SolarSystemTableModel::deleteSolarSystem(SolarSystem *solarSystem)
         endRemoveRows();
     }
 }
+
+int SolarSystemTableModel::getEntityCount()
+{
+    return entities.size();
+}
