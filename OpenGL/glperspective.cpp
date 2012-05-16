@@ -67,6 +67,7 @@ void GLPerspective::turnCameraUpDown( double angleIncrement)  {
    latitude = 90.0;
   if (latitude < -90.0)
    latitude = -90.0;
+
   dist.setRadiusLongitudeLatitude(radius, longitude,latitude);
   setCamera(_Center + dist); //add dist to get new cam,era position
 }

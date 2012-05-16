@@ -2,6 +2,12 @@
 <ui version="4.0">
  <class>SolarSystemDetails</class>
  <widget class="QDialog" name="SolarSystemDetails">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>

@@ -170,50 +170,64 @@ void SimulationView::updateOpenGL()
 
 void SimulationView::keyPressEvent(QKeyEvent *keyEvent)
 {
-    if (keyEvent->modifiers() == Qt::ShiftModifier)
+    Qt::KeyboardModifiers modifiers = keyEvent->modifiers();
+    // Is the CTRL key pressed?
+    if (modifiers & Qt::ControlModifier)
     {
-        switch (keyEvent->key())
+        // Is the windows or the alt key pressed.
+        if (modifiers & Qt::MetaModifier || modifiers & Qt::AltModifier)
         {
-        case Qt::Key_Up:
-            shiftSceneUpDown(shiftSceneUpDownFactor);
-            break;
-        case Qt::Key_Down:
-            shiftSceneUpDown(-shiftSceneUpDownFactor);
-            break;
-        case Qt::Key_Left:
-            shiftSceneLeftRight(shiftSceneLeftRightFactor);
-            break;
-        case Qt::Key_Right:
-            shiftSceneLeftRight(-shiftSceneLeftRightFactor);
-            break;
-        case Qt::Key_PageDown:
-            shiftSceneForwardBackward(-shiftSceneForwardBackwardFactor);
-            break;
-        case Qt::Key_PageUp:
-            shiftSceneForwardBackward(shiftSceneForwardBackwardFactor);
-            break;
-        default:
-            break;
+            switch (keyEvent->key())
+            {
+            case Qt::Key_Up:
+                turnCameraUpDown(turnCameraUpDownFactor);
+                break;
+            case Qt::Key_Down:
+                turnCameraUpDown(-turnCameraUpDownFactor);
+                break;
+            case Qt::Key_Left:
+                turnCameraLeftRight(turnCameraLeftRightFactor);
+                break;
+            case Qt::Key_Right:
+                turnCameraLeftRight(-turnCameraLeftRightFactor);
+                break;
+            case Qt::Key_PageDown:
+                stretchCameraDistance(stretchCameraDistanceBackwardFactor);
+                break;
+            case Qt::Key_PageUp:
+                stretchCameraDistance(stretchCameraDistanceForwardFactor);
+                break;
+            default:
+                break;
+            }
         }
-    }
-    else
-    {
-        switch (keyEvent->key())
+
+        // Is the SHIFT key pressed?
+        if (modifiers & Qt::ShiftModifier)
         {
-        case Qt::Key_Up: turnCameraUpDown(turnCameraUpDownFactor);
-            break;
-        case Qt::Key_Down: turnCameraUpDown(-turnCameraUpDownFactor);
-            break;
-        case Qt::Key_Left: turnCameraLeftRight(turnCameraLeftRightFactor);
-            break;
-        case Qt::Key_Right: turnCameraLeftRight(-turnCameraLeftRightFactor);
-            break;
-        case Qt::Key_PageDown: stretchCameraDistance(stretchCameraDistanceBackwardFactor);
-            break;
-        case Qt::Key_PageUp: stretchCameraDistance(stretchCameraDistanceForwardFactor);
-            break;
-        default:
-            break;
+            switch (keyEvent->key())
+            {
+            case Qt::Key_Up:
+                shiftSceneUpDown(-shiftSceneUpDownFactor);
+                break;
+            case Qt::Key_Down:
+                shiftSceneUpDown(shiftSceneUpDownFactor);
+                break;
+            case Qt::Key_Left:
+                shiftSceneLeftRight(shiftSceneLeftRightFactor);
+                break;
+            case Qt::Key_Right:
+                shiftSceneLeftRight(-shiftSceneLeftRightFactor);
+                break;
+            case Qt::Key_PageDown:
+                stretchCameraDistance(stretchCameraDistanceBackwardFactor);
+                break;
+            case Qt::Key_PageUp:
+                stretchCameraDistance(stretchCameraDistanceForwardFactor);
+                break;
+            default:
+                break;
+            }
         }
     }
 
