@@ -102,7 +102,7 @@ FORMS    += forms/main/mainwindow.ui \
 
 # Seperate the Win32 and Unix freeglut libs.
 win32   {   LIBS += -L \
-            "../SolarSystemSimulation/OpenGL/freeglut/win32" \
+            "../SolarSystemSimulation/OpenGL/freeglut/lib" \
             -lfreeglut
         }
 
@@ -118,8 +118,8 @@ OTHER_FILES += \
     database/heavenlybody.txt \
     database/solarsystem.txt \
     database/solarsystemtoheavenlybody.txt \
-    OpenGL/freeglut/win32/libfreeglut_static.a \
-    OpenGL/freeglut/win32/libfreeglut.a \
+    OpenGL/freeglut/lib/libfreeglut_static.a \
+    OpenGL/freeglut/lib/libfreeglut.a \
     database/backups/SolarSystemSimulation.backup \
     README.txt \
     database/backups/SolarSystemSimulation_SecondPresentation.backup
