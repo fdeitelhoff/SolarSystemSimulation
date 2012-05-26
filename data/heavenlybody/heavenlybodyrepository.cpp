@@ -1,10 +1,40 @@
+/*
+    Copyright (C) 2012 by
+    Fabian Deitelhoff (FH@FabianDeitelhoff.de) and
+    Christof Geisler (christof.geisler@stud.fh-swf.de)
+
+    This file is part of the project SolarSystemSimulation.
+
+    SolarSystemSimulation is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SolarSystemSimulation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SolarSystemSimulation.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "heavenlybodyrepository.h"
 
+/*!
+ \brief Constructor: Repository of the heavenly bodies with an instance of the complete database.
+
+*/
 HeavenlyBodyRepository::HeavenlyBodyRepository()
 {
     database = PostgreSQLDatabase::getInstance();
 }
 
+/*!
+ \brief Create a list of all heavenly bodies stored in the database.
+
+ \return QList<HeavenlyBody *> List of all stored heavenly bodies.
+*/
 QList<HeavenlyBody *> HeavenlyBodyRepository::fetchAllHeavenlyBodyEntities()
 {
     QSqlQuery heavenlyBodyEntityQuery;
@@ -42,6 +72,11 @@ QList<HeavenlyBody *> HeavenlyBodyRepository::fetchAllHeavenlyBodyEntities()
     return entities;
 }
 
+/*!
+ \brief Update the data of the given heavenly body.
+
+ \param heavenlyBody Heavely body to be updated.
+*/
 void HeavenlyBodyRepository::updateEntity(HeavenlyBody *heavenlyBody)
 {
     // Check if the heavenly body is unique (the name until now).
@@ -135,6 +170,11 @@ void HeavenlyBodyRepository::updateEntity(HeavenlyBody *heavenlyBody)
     }
 }
 
+/*!
+ \brief Add a new heavenly body to the to the database.
+
+ \param heavenlyBody Heavenly body to add.
+*/
 void HeavenlyBodyRepository::insertEntity(HeavenlyBody *heavenlyBody)
 {
     // Check if the heavenly body is unique (the name until now).
@@ -190,6 +230,11 @@ void HeavenlyBodyRepository::insertEntity(HeavenlyBody *heavenlyBody)
     heavenlyBody->setId(id);
 }
 
+/*!
+ \brief Delete heavenly body from the database.
+
+ \param heavenlyBody Heavenly body to delete.
+*/
 void HeavenlyBodyRepository::deleteEntity(HeavenlyBody *heavenlyBody)
 {
     int count = isHeavenlyBodyUsedAsPlanet(heavenlyBody);
@@ -221,6 +266,12 @@ void HeavenlyBodyRepository::deleteEntity(HeavenlyBody *heavenlyBody)
     }
 }
 
+/*!
+ \brief Convert a Qt-color to a string to store in database.
+
+ \param color Color to store in the database
+ \return QString Color in database format
+*/
 QString HeavenlyBodyRepository::colorToString(QColor color)
 {
     QString colorString("%1:%2:%3:%4");
@@ -232,6 +283,12 @@ QString HeavenlyBodyRepository::colorToString(QColor color)
     return colorString;
 }
 
+/*!
+ \brief Returns a list of heavely bodies of the given type
+
+ \param type Type of the heavenly body
+ \return QList<HeavenlyBody *> List of the heavenly bodies of type 'type'.
+*/
 QList<HeavenlyBody *> HeavenlyBodyRepository::fetchExplizitTypedEntities(QString type)
 {
     QSqlQuery fetchTypedEntitiesQuery;
@@ -272,6 +329,12 @@ QList<HeavenlyBody *> HeavenlyBodyRepository::fetchExplizitTypedEntities(QString
     return entities;
 }
 
+/*!
+ \brief Check if the database contains a heavenly body with the same name as the given heavenly body.
+
+ \param heavenlyBody Heavenly body with the Name to be checked.
+ \return bool TRUE when the name of the given heavenly body is not in the database.
+*/
 bool HeavenlyBodyRepository::isEntityUnique(HeavenlyBody *heavenlyBody)
 {
     QSqlQuery heavenlyBodyQuery;
@@ -302,6 +365,12 @@ bool HeavenlyBodyRepository::isEntityUnique(HeavenlyBody *heavenlyBody)
     return heavenlyBodyQuery.record().value("count").toInt() == 0;
 }
 
+/*!
+ \brief Check if the given heavenly body is used as 'planet'.
+
+ \param heavenlyBody Heavenly body to be checked.
+ \return int How often the heavenly body is used as a planet.
+*/
 int HeavenlyBodyRepository::isHeavenlyBodyUsedAsPlanet(HeavenlyBody *heavenlyBody)
 {
     QSqlQuery isHeavenlyBodyUsedQuery;
@@ -316,19 +385,25 @@ int HeavenlyBodyRepository::isHeavenlyBodyUsedAsPlanet(HeavenlyBody *heavenlyBod
 
     if (!isHeavenlyBodyUsedQuery.exec())
     {
-        throw SqlQueryException("It could not be checked it the heavenly body is used in a solar system!",
+        throw SqlQueryException("It could not be checked if the heavenly body is used in a solar system!",
                                 isHeavenlyBodyUsedQuery.lastError().text());
     }
 
     if (!isHeavenlyBodyUsedQuery.next())
     {
-        throw SqlQueryException("It could not be checked it the heavenly body is used in a solar system!",
+        throw SqlQueryException("It could not be checked if the heavenly body is used in a solar system!",
                                 isHeavenlyBodyUsedQuery.lastError().text());
     }
 
     return isHeavenlyBodyUsedQuery.record().value("count").toInt();
 }
 
+/*!
+ \brief Check if the given heavenly body is used as a 'star'.
+
+ \param heavenlyBody Heavenly body to be checked.
+ \return int How often the heavenly body is used as a star.
+*/
 int HeavenlyBodyRepository::isHeavenlyBodyUsedAsStar(HeavenlyBody *heavenlyBody)
 {
     QSqlQuery isHeavenlyBodyUsedQuery;

@@ -1,0 +1,183 @@
+\section{\-G\-L\-Perspective \-Class \-Reference}
+\label{d1/d8f/classGLPerspective}\index{\-G\-L\-Perspective@{\-G\-L\-Perspective}}
+
+
+{\ttfamily \#include $<$glperspective.\-h$>$}
+
+
+
+\-Collaboration diagram for \-G\-L\-Perspective\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{de/d2d/classGLPerspective__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf apply} ()
+\item 
+void {\bf turn\-Camera\-Up\-Down} (double angle\-Increment)
+\item 
+void {\bf turn\-Camera\-Left\-Right} (double angle\-Increment)
+\item 
+void {\bf stretch\-Camera\-Distance} (double factor)
+\item 
+void {\bf shift\-Scene\-Up\-Down} (double distance)
+\item 
+void {\bf shift\-Scene\-Left\-Right} (double distance)
+\item 
+void {\bf shift\-Scene\-Forward\-Backward} (double distance)
+\item 
+void {\bf set\-Camera} (const {\bf \-G\-L\-Vector} \&new\-Value)
+\item 
+void {\bfseries set\-Center} (const {\bf \-G\-L\-Vector} \&new\-Value)\label{d1/d8f/classGLPerspective_acb39c3e367290da03409361ca42eded9}
+
+\item 
+void {\bfseries set\-Up} (const {\bf \-G\-L\-Vector} \&new\-Value)\label{d1/d8f/classGLPerspective_a09dd20fedcbc65dc790d1b50c0f94406}
+
+\item 
+void {\bfseries set\-Aspect} (\-G\-Ldouble new\-Value)\label{d1/d8f/classGLPerspective_add4215ff5413bd2bf99cd769fc562045}
+
+\item 
+void {\bfseries set\-Far} (\-G\-Ldouble new\-Value)\label{d1/d8f/classGLPerspective_a95858a021bcceddd43d1df6822a0ce8d}
+
+\item 
+void {\bfseries set\-Fovy} (\-G\-Ldouble new\-Value)\label{d1/d8f/classGLPerspective_a585dc3dbb851d1dc2e751879362f8d7d}
+
+\item 
+void {\bfseries set\-Near} (\-G\-Ldouble new\-Value)\label{d1/d8f/classGLPerspective_a76c28c1b8d68d0c201c4dfadfd8863be}
+
+\item 
+void {\bf set\-Viewport} (int width, int height)
+\item 
+double {\bf distance} () const 
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-G\-L\-Vector} {\bfseries \-\_\-\-Camera}\label{d1/d8f/classGLPerspective_a2bb94077d185cb85461a7c0eb53ab334}
+
+\item 
+{\bf \-G\-L\-Vector} {\bfseries \-\_\-\-Center}\label{d1/d8f/classGLPerspective_acee62098421f0b59a62b1637f6ba586f}
+
+\item 
+{\bf \-G\-L\-Vector} {\bfseries \-\_\-\-Up}\label{d1/d8f/classGLPerspective_a69c80f817c645be3adc602e0adaf036c}
+
+\item 
+\-G\-Ldouble {\bfseries \-\_\-\-Aspect}\label{d1/d8f/classGLPerspective_a7355a44ee8fc58dedd79904ebe3093cb}
+
+\item 
+\-G\-Ldouble {\bfseries \-\_\-\-Far}\label{d1/d8f/classGLPerspective_a73b5c97c5d9b4c138eeeeff904c7ca57}
+
+\item 
+\-G\-Ldouble {\bfseries \-\_\-\-Fovy}\label{d1/d8f/classGLPerspective_a54617fb0638ba31e316b61c3dfb83c96}
+
+\item 
+\-G\-Ldouble {\bfseries \-\_\-\-Near}\label{d1/d8f/classGLPerspective_a7d6f75d52248d480136e8be881e9d4e6}
+
+\item 
+\-G\-Lint {\bf \-\_\-\-Width}
+\item 
+\-G\-Lint {\bf \-\_\-\-Height}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A class for encapsulating all data for a glu\-Perspective and a glu\-Look\-At call. \-These include\-: \-\_\-\-Fovy\-: \-Opening angle of frustum in y-\/direction (45° is a good average to start with) \-\_\-\-Aspect\-: \-The aspect ratio of the viewport (width / height) \-\_\-\-Near and \-\_\-\-Far clipping plane distances \-\_\-\-Center\-: \-The 3d-\/point to appear in the center of the viewport \-\_\-\-Camera\-: \-The 3d-\/point where the camera is \-\_\-\-Up\-: \-The 3d-\/vector that points upwards in the viewport
+
+\-Use the \doxyref{apply()}{p.}{d1/d8f/classGLPerspective_a91531aa2c2fab0c53a49c0fac32aac56} function to transfer the perspective settings to the \-Open\-G\-L matrices.
+
+\begin{DoxyAuthor}{\-Author}
+walter $<$walter-\/\-Roth$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{\-G\-L\-Perspective@{\-G\-L\-Perspective}!apply@{apply}}
+\index{apply@{apply}!GLPerspective@{\-G\-L\-Perspective}}
+\subsubsection[{apply}]{\setlength{\rightskip}{0pt plus 5cm}void \-G\-L\-Perspective\-::apply (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{d1/d8f/classGLPerspective_a91531aa2c2fab0c53a49c0fac32aac56}
+\-Applies the perspective settings to projection and modelview matrices. \-Old matrix values will be overwritten. \-To be called once before rendering the scene. \index{\-G\-L\-Perspective@{\-G\-L\-Perspective}!distance@{distance}}
+\index{distance@{distance}!GLPerspective@{\-G\-L\-Perspective}}
+\subsubsection[{distance}]{\setlength{\rightskip}{0pt plus 5cm}double \-G\-L\-Perspective\-::distance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{d1/d8f/classGLPerspective_a5052aedb9d61e12e7499040608918a10}
+\-Getters \index{\-G\-L\-Perspective@{\-G\-L\-Perspective}!set\-Camera@{set\-Camera}}
+\index{set\-Camera@{set\-Camera}!GLPerspective@{\-G\-L\-Perspective}}
+\subsubsection[{set\-Camera}]{\setlength{\rightskip}{0pt plus 5cm}void \-G\-L\-Perspective\-::set\-Camera (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-G\-L\-Vector} \&}]{new\-Value}
+\end{DoxyParamCaption}
+)}\label{d1/d8f/classGLPerspective_afcdc1500b78321e8f7c172f16b5bb2cd}
+\-Setters \index{\-G\-L\-Perspective@{\-G\-L\-Perspective}!set\-Viewport@{set\-Viewport}}
+\index{set\-Viewport@{set\-Viewport}!GLPerspective@{\-G\-L\-Perspective}}
+\subsubsection[{set\-Viewport}]{\setlength{\rightskip}{0pt plus 5cm}void \-G\-L\-Perspective\-::set\-Viewport (
+\begin{DoxyParamCaption}
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)}\label{d1/d8f/classGLPerspective_a2269d593fd75d129c1b695b866afc6d1}
+\-Sets viewport and adjusts \-\_\-\-Aspect to new viewport \index{\-G\-L\-Perspective@{\-G\-L\-Perspective}!shift\-Scene\-Forward\-Backward@{shift\-Scene\-Forward\-Backward}}
+\index{shift\-Scene\-Forward\-Backward@{shift\-Scene\-Forward\-Backward}!GLPerspective@{\-G\-L\-Perspective}}
+\subsubsection[{shift\-Scene\-Forward\-Backward}]{\setlength{\rightskip}{0pt plus 5cm}void \-G\-L\-Perspective\-::shift\-Scene\-Forward\-Backward (
+\begin{DoxyParamCaption}
+\item[{double}]{distance}
+\end{DoxyParamCaption}
+)}\label{d1/d8f/classGLPerspective_adac0de0074901f4896f5aaa19373c125}
+\-Shift the whole scene in x-\/z plane parallel to camera vector projection in xz plane \index{\-G\-L\-Perspective@{\-G\-L\-Perspective}!shift\-Scene\-Left\-Right@{shift\-Scene\-Left\-Right}}
+\index{shift\-Scene\-Left\-Right@{shift\-Scene\-Left\-Right}!GLPerspective@{\-G\-L\-Perspective}}
+\subsubsection[{shift\-Scene\-Left\-Right}]{\setlength{\rightskip}{0pt plus 5cm}void \-G\-L\-Perspective\-::shift\-Scene\-Left\-Right (
+\begin{DoxyParamCaption}
+\item[{double}]{distance}
+\end{DoxyParamCaption}
+)}\label{d1/d8f/classGLPerspective_a15792e2d5f44be8e55bfe4be05220cec}
+\-Shift the whole scene in x-\/z plane orthogonal to camera vector \index{\-G\-L\-Perspective@{\-G\-L\-Perspective}!shift\-Scene\-Up\-Down@{shift\-Scene\-Up\-Down}}
+\index{shift\-Scene\-Up\-Down@{shift\-Scene\-Up\-Down}!GLPerspective@{\-G\-L\-Perspective}}
+\subsubsection[{shift\-Scene\-Up\-Down}]{\setlength{\rightskip}{0pt plus 5cm}void \-G\-L\-Perspective\-::shift\-Scene\-Up\-Down (
+\begin{DoxyParamCaption}
+\item[{double}]{distance}
+\end{DoxyParamCaption}
+)}\label{d1/d8f/classGLPerspective_abc3d6d9327be0c05122cfdfbbb35ae8b}
+\-Shift the whole scene in y direction \index{\-G\-L\-Perspective@{\-G\-L\-Perspective}!stretch\-Camera\-Distance@{stretch\-Camera\-Distance}}
+\index{stretch\-Camera\-Distance@{stretch\-Camera\-Distance}!GLPerspective@{\-G\-L\-Perspective}}
+\subsubsection[{stretch\-Camera\-Distance}]{\setlength{\rightskip}{0pt plus 5cm}void \-G\-L\-Perspective\-::stretch\-Camera\-Distance (
+\begin{DoxyParamCaption}
+\item[{double}]{factor}
+\end{DoxyParamCaption}
+)}\label{d1/d8f/classGLPerspective_a1faea9b30c847b83e52071f24f168a96}
+\-Multiply camera vector by factor \index{\-G\-L\-Perspective@{\-G\-L\-Perspective}!turn\-Camera\-Left\-Right@{turn\-Camera\-Left\-Right}}
+\index{turn\-Camera\-Left\-Right@{turn\-Camera\-Left\-Right}!GLPerspective@{\-G\-L\-Perspective}}
+\subsubsection[{turn\-Camera\-Left\-Right}]{\setlength{\rightskip}{0pt plus 5cm}void \-G\-L\-Perspective\-::turn\-Camera\-Left\-Right (
+\begin{DoxyParamCaption}
+\item[{double}]{angle\-Increment}
+\end{DoxyParamCaption}
+)}\label{d1/d8f/classGLPerspective_a7f2fb7087aff9d9b52a8cad0278e84df}
+\-Moves the camera on a latitude without modifying the distance to \-\_\-\-Center \-Maximum angle is +180 (east), minimum is -\/180 (west) \index{\-G\-L\-Perspective@{\-G\-L\-Perspective}!turn\-Camera\-Up\-Down@{turn\-Camera\-Up\-Down}}
+\index{turn\-Camera\-Up\-Down@{turn\-Camera\-Up\-Down}!GLPerspective@{\-G\-L\-Perspective}}
+\subsubsection[{turn\-Camera\-Up\-Down}]{\setlength{\rightskip}{0pt plus 5cm}void \-G\-L\-Perspective\-::turn\-Camera\-Up\-Down (
+\begin{DoxyParamCaption}
+\item[{double}]{angle\-Increment}
+\end{DoxyParamCaption}
+)}\label{d1/d8f/classGLPerspective_a5a550ad5da6b057ee9dc30f50dde73b8}
+\-Moves the camera on a meridian without modifying the distance to \-\_\-\-Center \-Maximum angle is +90 (north), minimum is -\/90 (south) 
+
+\subsection{\-Member \-Data \-Documentation}
+\index{\-G\-L\-Perspective@{\-G\-L\-Perspective}!\-\_\-\-Height@{\-\_\-\-Height}}
+\index{\-\_\-\-Height@{\-\_\-\-Height}!GLPerspective@{\-G\-L\-Perspective}}
+\subsubsection[{\-\_\-\-Height}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-Lint {\bf \-G\-L\-Perspective\-::\-\_\-\-Height}\hspace{0.3cm}{\ttfamily  [protected]}}\label{d1/d8f/classGLPerspective_a6e4c1f9b9e2d2f98edfc6657e5b23a0f}
+\-Viewport height \index{\-G\-L\-Perspective@{\-G\-L\-Perspective}!\-\_\-\-Width@{\-\_\-\-Width}}
+\index{\-\_\-\-Width@{\-\_\-\-Width}!GLPerspective@{\-G\-L\-Perspective}}
+\subsubsection[{\-\_\-\-Width}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-Lint {\bf \-G\-L\-Perspective\-::\-\_\-\-Width}\hspace{0.3cm}{\ttfamily  [protected]}}\label{d1/d8f/classGLPerspective_a53d38f9b18e35f1d669c72e5c00a8f85}
+\-Viewport width 
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\-Open\-G\-L/glperspective.\-h\item 
+\-Open\-G\-L/glperspective.\-cpp\end{DoxyCompactItemize}

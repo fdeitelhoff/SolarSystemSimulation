@@ -1,5 +1,10 @@
 #include "planet3d.h"
 
+/*!
+ \brief
+ \param solarSystemHeavenlyBody
+ \param keplerConstant Reference Value for the Planet speed
+*/
 Planet3d::Planet3d(SolarSystemHeavenlyBody *solarSystemHeavenlyBody, const float keplerConstant)
     : HeavenlyBody3d(solarSystemHeavenlyBody->getHeavenlyBody())
 {
@@ -13,16 +18,28 @@ Planet3d::Planet3d(SolarSystemHeavenlyBody *solarSystemHeavenlyBody, const float
     init();    
 }
 
+/*!
+ \brief
+*/
 Planet3d::~Planet3d()
 {
     delete orbit3d;
 }
 
+/*!
+ \brief
+    Setter for the Kepler Constant
+ \param keplerConstant Reference value for the planet speed
+*/
 void Planet3d::setKeplerConstant(const float keplerConstant)
 {
     timeOfCirculation = sqrt(keplerConstant * pow(a , 3));
 }
 
+/*!
+ \brief
+
+*/
 void Planet3d::init()
 {
     b = a * sqrt(1 - epsilon * epsilon );
@@ -59,6 +76,10 @@ void Planet3d::init()
     pointsCounter = 0;
 }
 
+/*!
+ \brief
+
+*/
 void Planet3d::calculateHeavenlyBody3d()
 {
     x = cos(phi) * a + e;
@@ -89,6 +110,10 @@ void Planet3d::calculateHeavenlyBody3d()
     pointsCounter++;
 }
 
+/*!
+ \brief
+
+*/
 void Planet3d::paintHeavenlyBody3d()
 {
     glPushMatrix();

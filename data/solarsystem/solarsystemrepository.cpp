@@ -1,10 +1,40 @@
+/*
+    Copyright (C) 2012 by
+    Fabian Deitelhoff (FH@FabianDeitelhoff.de) and
+    Christof Geisler (christof.geisler@stud.fh-swf.de)
+
+    This file is part of the project SolarSystemSimulation.
+
+    SolarSystemSimulation is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SolarSystemSimulation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SolarSystemSimulation.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "solarsystemrepository.h"
 
+/*!
+ \brief Constructor: Repository of the solar systems and their data.
+
+*/
 SolarSystemRepository::SolarSystemRepository()
 {
     database = PostgreSQLDatabase::getInstance();
 }
 
+/*!
+ \brief Create a list of all solar systems stored in the database.
+
+ \return QList<HeavenlyBody *> List of all stored solar systems including all data.
+*/
 QList<SolarSystem *> SolarSystemRepository::fetchAllSolarSystemEntities()
 {
     QSqlQuery solarSystemQuery;
@@ -105,6 +135,11 @@ QList<SolarSystem *> SolarSystemRepository::fetchAllSolarSystemEntities()
     return entities;
 }
 
+/*!
+ \brief Insert a new solar system.
+
+ \param solarSystem Object of the new solar system.
+*/
 void SolarSystemRepository::insertEntity(SolarSystem *solarSystem)
 {
     // Check if the solar system is unique (only the name until now).
@@ -149,6 +184,13 @@ void SolarSystemRepository::insertEntity(SolarSystem *solarSystem)
     solarSystem->setId(id);
 }
 
+/*!
+ \brief Update the data of an existing solar system.
+
+ \param solarSystem Name of the solar system to be updated.
+ \param solarSystemHeavenlyBody New parameters of the solar system.
+ \param oldSolarSystemHeavenlyBody Old parameter of the solar system.
+*/
 void SolarSystemRepository::updatePlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody,
                                                SolarSystemHeavenlyBody *oldSolarSystemHeavenlyBody)
 {
@@ -199,6 +241,11 @@ void SolarSystemRepository::updatePlanetEntity(SolarSystem *solarSystem, SolarSy
     }
 }
 
+/*!
+ \brief Update the main components of the database. Name and central star.
+
+ \param solarSystem
+*/
 void SolarSystemRepository::updateEntity(SolarSystem *solarSystem)
 {
     // Check if the solar system is unique (only the name until now).
@@ -227,6 +274,12 @@ void SolarSystemRepository::updateEntity(SolarSystem *solarSystem)
     }
 }
 
+/*!
+ \brief Add a new heavenly body to an existing solar system.
+
+ \param solarSystem Solar system which is to expand.
+ \param solarSystemHeavenlyBody The new heavenly body in the solar system.
+*/
 void SolarSystemRepository::insertPlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
 {
     if (!isSolarSystemHeavenlyBodyUnique(solarSystem, solarSystemHeavenlyBody))
@@ -264,6 +317,12 @@ void SolarSystemRepository::insertPlanetEntity(SolarSystem *solarSystem, SolarSy
     }
 }
 
+/*!
+ \brief Delete an existing heavenly body from a solar system.
+
+ \param solarSystem Solar system to change.
+ \param solarSystemHeavenlyBody Heavenly body to be deleted.
+*/
 void SolarSystemRepository::deletePlanetEntity(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
 {
     QSqlQuery deletePlanetQuery;
@@ -296,6 +355,11 @@ void SolarSystemRepository::deletePlanetEntity(SolarSystem *solarSystem, SolarSy
     }
 }
 
+/*!
+ \brief Delete complete solarsystem.
+
+ \param solarSystem Solar system to delete.
+*/
 void SolarSystemRepository::deleteEntity(SolarSystem *solarSystem)
 {
     database->getInstance()->transaction();
@@ -337,6 +401,12 @@ void SolarSystemRepository::deleteEntity(SolarSystem *solarSystem)
     database->getInstance()->commit();
 }
 
+/*!
+ \brief Check if the solar system exists.
+
+ \param solarSystem The solar system to check.
+ \return bool Return TRUE if the solar system does not exists.
+*/
 bool SolarSystemRepository::isSolarSystemUnique(SolarSystem *solarSystem)
 {
     QSqlQuery solarSystemQuery;
@@ -367,6 +437,13 @@ bool SolarSystemRepository::isSolarSystemUnique(SolarSystem *solarSystem)
     return solarSystemQuery.record().value("count").toInt() == 0;
 }
 
+/*!
+ \brief Check if the heavenly body of a solar system exists
+
+ \param solarSystem Solar system to check.
+ \param solarSystemHeavenlyBody Check for this heavenly body.
+ \return bool Return TRUE if heavenly bode does not exists in the solar system.
+*/
 bool SolarSystemRepository::isSolarSystemHeavenlyBodyUnique(SolarSystem *solarSystem, SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
 {
     QSqlQuery heavenlyBodyQuery;

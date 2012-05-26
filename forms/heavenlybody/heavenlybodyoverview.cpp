@@ -1,6 +1,33 @@
+/*
+    Copyright (C) 2012 by
+    Fabian Deitelhoff (FH@FabianDeitelhoff.de) and
+    Christof Geisler (christof.geisler@stud.fh-swf.de)
+
+    This file is part of the project SolarSystemSimulation.
+
+    SolarSystemSimulation is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SolarSystemSimulation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SolarSystemSimulation.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "heavenlybodyoverview.h"
 #include "ui_heavenlybodyoverview.h"
 
+/*!
+ \brief Open the window of the heanenly body overview.
+
+ \param parent Parent widget of this window.
+ \param heavenlyBodyModel Model of the overview.
+*/
 HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent, HeavenlyBodyModel *heavenlyBodyModel) :
     QDialog(parent),
     ui(new Ui::HeavenlyBodyOverview)
@@ -37,11 +64,20 @@ HeavenlyBodyOverview::HeavenlyBodyOverview(QWidget *parent, HeavenlyBodyModel *h
     ui->heavenlyBodyTableView->selectRow(0);
 }
 
+/*!
+ \brief Delete the heavenly body overview window.
+
+*/
 HeavenlyBodyOverview::~HeavenlyBodyOverview()
 {
     delete ui;
 }
 
+/*!
+ \brief Enable double click to select a heavenly body.
+
+ \param modelIndex Locate the data in the model
+*/
 void HeavenlyBodyOverview::doubleClicked(QModelIndex modelIndex)
 {
     if (heavenlyBodyModel->isEntitySelected())
@@ -61,12 +97,22 @@ void HeavenlyBodyOverview::doubleClicked(QModelIndex modelIndex)
     }
 }
 
+/*!
+ \brief Enable edit and delete buttom when row is selected.
+
+ \param selected
+ \param deselected
+*/
 void HeavenlyBodyOverview::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
     ui->edit->setEnabled(selected.size() == 1);
     ui->deleteEntity->setEnabled(selected.size() == 1);
 }
 
+/*!
+ \brief Add a new heavenly body to the model.
+
+*/
 void HeavenlyBodyOverview::on_add_clicked()
 {
     try
@@ -83,6 +129,10 @@ void HeavenlyBodyOverview::on_add_clicked()
     }
 }
 
+/*!
+ \brief Edit the selected heavenly body from the List.
+
+*/
 void HeavenlyBodyOverview::on_edit_clicked()
 {
     if (heavenlyBodyModel->isEntitySelected())
@@ -102,6 +152,10 @@ void HeavenlyBodyOverview::on_edit_clicked()
     }
 }
 
+/*!
+ \brief Delete the selected heavenly body
+
+*/
 void HeavenlyBodyOverview::on_deleteEntity_clicked()
 {
     if (heavenlyBodyModel->getSelectedEntity())

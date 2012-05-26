@@ -6,6 +6,13 @@
 
 using namespace std;
 
+/**
+    Class for wrong type exceptions.
+
+    @author Fabian Deitelhoff <FH@FabianDeitelhoff.de>
+    @author Christof Geisler <christof.geisler@stud.fh-swf.de>
+*/
+
 class HeavenlyBodyTypeException : public exception
 {
 

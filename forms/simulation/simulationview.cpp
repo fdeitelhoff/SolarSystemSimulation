@@ -1,3 +1,24 @@
+/*
+    Copyright (C) 2012 by
+    Fabian Deitelhoff (FH@FabianDeitelhoff.de) and
+    Christof Geisler (christof.geisler@stud.fh-swf.de)
+
+    This file is part of the project SolarSystemSimulation.
+
+    SolarSystemSimulation is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SolarSystemSimulation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SolarSystemSimulation.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "simulationview.h"
 #include "ui_simulationview.h"
 
@@ -8,6 +29,12 @@
 #include "OpenGL/glcolorrgba.h"
 #include "OpenGL/GL/glut.h"
 
+/*!
+ \brief Class to show the scene, move the camera and initialize the simulation view.
+
+ \param parent
+ \param solarSystemSimulation
+*/
 SimulationView::SimulationView(QWidget *parent, SolarSystemSimulation *solarSystemSimulation) :
     QGLWidget(parent)
 {
@@ -35,7 +62,7 @@ SimulationView::SimulationView(QWidget *parent, SolarSystemSimulation *solarSyst
     // Some initial constants for the camera position and control.
     cameraZFactor = 3.5;
     axisLengthFactor = 2.0;
-    backgroundColor = Qt::white;
+    backgroundColor = Qt::black;
     shiftSceneUpDownFactor = 0.5;
     shiftSceneLeftRightFactor = 0.5;
     shiftSceneForwardBackwardFactor = 1.0;
@@ -45,6 +72,10 @@ SimulationView::SimulationView(QWidget *parent, SolarSystemSimulation *solarSyst
     stretchCameraDistanceBackwardFactor = 1.15;
 }
 
+/*!
+ \brief Destructor for the view.
+
+*/
 SimulationView::~SimulationView()
 {
     stopSimulation();
@@ -55,11 +86,20 @@ SimulationView::~SimulationView()
     delete timer;
 }
 
+/*!
+ \brief Get the status of the timer.
+
+ \return bool
+*/
 bool SimulationView::isSimulationStarted()
 {
     return timer->isActive();
 }
 
+/*!
+ \brief Resets the perspective of the scene.
+
+*/
 void SimulationView::resetPerspective()
 {
     perspective->setCamera(solarSystemSimulation->getMaxSemimajorAxis() * cameraZFactor * v_Z);
@@ -67,6 +107,10 @@ void SimulationView::resetPerspective()
     axisLength = perspective->distance() * axisLengthFactor;
 }
 
+/*!
+ \brief Starts the timer for the timer event.
+
+*/
 void SimulationView::startSimulation()
 {
     if (!timer->isActive())
@@ -75,6 +119,10 @@ void SimulationView::startSimulation()
     }
 }
 
+/*!
+ \brief Freeze the simulation.
+
+*/
 void SimulationView::stopSimulation()
 {
     if (timer->isActive())
@@ -84,12 +132,21 @@ void SimulationView::stopSimulation()
     }
 }
 
+/*!
+ \brief Init the simulation.
+
+ \param solarSystem
+*/
 void SimulationView::setSolarSystem(SolarSystem *solarSystem)
 {
     solarSystemSimulation->setSolarSystem(solarSystem);
     resetPerspective();
 }
 
+/*!
+ \brief Init the GL environment.
+
+*/
 void SimulationView::initializeGL()
 {
     glClearColor(backgroundColor.red(), backgroundColor.green(),
@@ -99,6 +156,10 @@ void SimulationView::initializeGL()
     glEnable(GL_DEPTH_TEST);
 }
 
+/*!
+ \brief Timer event to calculate and show new scene.
+
+*/
 void SimulationView::timerEvent()
 {
     solarSystemSimulation->calculateSolarSystem3d();
@@ -106,6 +167,12 @@ void SimulationView::timerEvent()
     updateGL();
 }
 
+/*!
+ \brief Method to show dialog when a collision is detected.
+
+ \param firstHeavenlyBody3d
+ \param secondHeavenlyBody3d
+*/
 void SimulationView::collisionDetected(HeavenlyBody3d *firstHeavenlyBody3d, HeavenlyBody3d *secondHeavenlyBody3d)
 {
     QMessageBox msgBox;
@@ -132,6 +199,10 @@ void SimulationView::collisionDetected(HeavenlyBody3d *firstHeavenlyBody3d, Heav
     }
 }
 
+/*!
+ \brief Toggle visibility of coordinates and redraw scene.
+
+*/
 void SimulationView::toggleCoordinateAxesVisibility()
 {
     environment->toggleCoordinateAxesVisibility();
@@ -139,6 +210,10 @@ void SimulationView::toggleCoordinateAxesVisibility()
     update();
 }
 
+/*!
+ \brief Draw coordinate axis
+
+*/
 void SimulationView::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -161,6 +236,10 @@ void SimulationView::paintGL()
     glFlush();
 }
 
+/*!
+ \brief Calculate the length of the coordinate axis.
+
+*/
 void SimulationView::updateOpenGL()
 {
     axisLength = perspective->distance() * axisLengthFactor;
@@ -168,6 +247,11 @@ void SimulationView::updateOpenGL()
     updateGL();
 }
 
+/*!
+ \brief Key detection to turn around and shift the scene.
+
+ \param keyEvent
+*/
 void SimulationView::keyPressEvent(QKeyEvent *keyEvent)
 {
     Qt::KeyboardModifiers modifiers = keyEvent->modifiers();
@@ -234,6 +318,11 @@ void SimulationView::keyPressEvent(QKeyEvent *keyEvent)
     updateOpenGL();
 }
 
+/*!
+ \brief Key and mouse detection to turn around and shift the scene.
+
+ \param me The mouse event.
+*/
 void SimulationView::mouseMoveEvent(QMouseEvent *me)
 {
     Qt::KeyboardModifiers modifiers = me->modifiers();
@@ -293,6 +382,11 @@ void SimulationView::mouseMoveEvent(QMouseEvent *me)
     y = me->y();
 }
 
+/*!
+ \brief Mouse wheel event to zoom the scene.
+
+ \param wheelEvent
+*/
 void SimulationView::wheelEvent(QWheelEvent * wheelEvent)
 {
     Qt::KeyboardModifiers modifiers = wheelEvent->modifiers();
@@ -316,36 +410,72 @@ void SimulationView::wheelEvent(QWheelEvent * wheelEvent)
     }
 }
 
+/*!
+ \brief Method to set the viewport.
+
+ \param width
+ \param height
+*/
 void SimulationView::resizeGL(int width, int height)
 {
     perspective->setViewport(width, height);
 }
 
+/*!
+ \brief Method to turn the camera up and down.
+
+ \param angle
+*/
 void SimulationView::turnCameraUpDown(double angle)
 {
     perspective->turnCameraUpDown(angle);
 }
 
+/*!
+ \brief Method to turn the camera left and right.
+
+ \param angle
+*/
 void SimulationView::turnCameraLeftRight(double angle)
 {
     perspective->turnCameraLeftRight(angle);
 }
 
+/*!
+ \brief Method to zoom the scene
+
+ \param factor
+*/
 void SimulationView::stretchCameraDistance(double factor)
 {
     perspective->stretchCameraDistance(factor);
 }
 
+/*!
+ \brief Method to shift the scene up and down.
+
+ \param distance
+*/
 void SimulationView::shiftSceneUpDown(double distance)
 {
     perspective->shiftSceneUpDown(distance);
 }
 
+/*!
+ \brief Method to shift the scene left and right.
+
+ \param distance
+*/
 void SimulationView::shiftSceneLeftRight(double distance)
 {
     perspective->shiftSceneLeftRight(distance);
 }
 
+/*!
+ \brief Method to shift the scene forward and backward.
+
+ \param distance
+*/
 void SimulationView::shiftSceneForwardBackward(double distance)
 {
     perspective->shiftSceneForwardBackward(distance);

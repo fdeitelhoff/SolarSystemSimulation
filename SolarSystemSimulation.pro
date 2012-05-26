@@ -90,7 +90,8 @@ HEADERS  += forms/main/mainwindow.h \
     visualization/environment/environment.h \
     data/exceptions/heavenlybodytypeexception.h \
     forms/heavenlybody/heavenlybodyitemdelegate.h \
-    forms/solarsystem/solarsystemitemdelegate.h
+    forms/solarsystem/solarsystemitemdelegate.h \
+    data/exceptions/project.h
 
 FORMS    += forms/main/mainwindow.ui \
     forms/simulation/simulationview.ui \
@@ -122,7 +123,9 @@ OTHER_FILES += \
     OpenGL/freeglut/lib/libfreeglut.a \
     database/backups/SolarSystemSimulation.backup \
     README.txt \
+    project.h \
     database/backups/SolarSystemSimulation_SecondPresentation.backup
 
 RESOURCES += \
     forms/ressources/Ressources.qrc
+

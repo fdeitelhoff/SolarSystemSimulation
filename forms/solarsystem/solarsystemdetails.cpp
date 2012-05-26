@@ -1,6 +1,34 @@
+/*
+    Copyright (C) 2012 by
+    Fabian Deitelhoff (FH@FabianDeitelhoff.de) and
+    Christof Geisler (christof.geisler@stud.fh-swf.de)
+
+    This file is part of the project SolarSystemSimulation.
+
+    SolarSystemSimulation is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SolarSystemSimulation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SolarSystemSimulation.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "solarsystemdetails.h"
 #include "ui_solarsystemdetails.h"
 
+/*!
+ \brief Class to show the window for solar systems.
+
+ \param parent Parent widget.
+ \param solarSystemModel Model of the solar systems.
+ \param isEdit Is edit or add.
+*/
 SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarSystemModel, bool isEdit) :
     QDialog(parent),
     ui(new Ui::SolarSystemDetails)
@@ -68,11 +96,21 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
     ui->planetsTableView->setColumnWidth(0, 50);
 }
 
+/*!
+ \brief Delete the window.
+
+*/
 SolarSystemDetails::~SolarSystemDetails()
 {
     delete ui;
 }
 
+/*!
+ \brief Take over the data for the current heavenly body.
+
+ \param current
+ \param previous
+*/
 void SolarSystemDetails::currentPlanetsRowChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     SolarSystemHeavenlyBody *solarSystemHeavenlyBody = solarSystemModel->getCurrentSolarSystemHeavenlyBody();
@@ -88,12 +126,23 @@ void SolarSystemDetails::currentPlanetsRowChanged(const QModelIndex &current, co
     }
 }
 
+/*!
+ \brief Enable or disable the buttons for delete and edit.
+
+ \param selected
+ \param deselected
+*/
 void SolarSystemDetails::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
     ui->deletePlanet->setEnabled(selected.size() == 1);
     ui->editPlanet->setEnabled(selected.size() == 1);
 }
 
+/*!
+ \brief Activate the planet management.
+
+ \param isActive
+*/
 void SolarSystemDetails::setPlanetManagementActive(bool isActive)
 {
     ui->planetsTableView->setEnabled(isActive);
@@ -106,6 +155,11 @@ void SolarSystemDetails::setPlanetManagementActive(bool isActive)
     ui->addPlanet->setEnabled(isActive);
 }
 
+/*!
+ \brief Set the star and sho its diameter.
+
+ \param index
+*/
 void SolarSystemDetails::starSelected(int index)
 {
     HeavenlyBody *heavenlyBody = solarSystemModel->getStarsComboBoxModel()->getHeavenlyBody(index);
@@ -120,16 +174,28 @@ void SolarSystemDetails::starSelected(int index)
     }
 }
 
+/*!
+ \brief Connect slider and text field.
+
+*/
 void SolarSystemDetails::on_excentricity_valueChanged()
 {
     ui->excentricityEdit->setText(QString::number(ui->excentricity->value() / 100.0));
 }
 
+/*!
+ \brief Close the Window when cancel is clicked
+
+*/
 void SolarSystemDetails::on_cancel_clicked()
 {
     close();
 }
 
+/*!
+ \brief When accept clicked successfully enable planet management.
+
+*/
 void SolarSystemDetails::on_accept_clicked()
 {
     if (updateOrCreateSolarSystem())
@@ -140,6 +206,10 @@ void SolarSystemDetails::on_accept_clicked()
     }
 }
 
+/*!
+ \brief Save the data and close the window.
+
+*/
 void SolarSystemDetails::on_ok_clicked()
 {
     if (updateOrCreateSolarSystem())
@@ -148,6 +218,11 @@ void SolarSystemDetails::on_ok_clicked()
     }
 }
 
+/*!
+ \brief Take over the fields data to the model.
+
+ \return bool
+*/
 bool SolarSystemDetails::updateOrCreateSolarSystem()
 {
     bool ok = true;
@@ -194,6 +269,11 @@ bool SolarSystemDetails::updateOrCreateSolarSystem()
     return ok;
 }
 
+/*!
+ \brief Take over the fields data to the model.
+
+ \param isUpdate
+*/
 void SolarSystemDetails::updateOrCreatePlanet(bool isUpdate)
 {
     bool ok = true;
@@ -264,16 +344,28 @@ void SolarSystemDetails::updateOrCreatePlanet(bool isUpdate)
     }
 }
 
+/*!
+ \brief Add the new planet to the model when add clicked.
+
+*/
 void SolarSystemDetails::on_addPlanet_clicked()
 {
     updateOrCreatePlanet(false);
 }
 
+/*!
+ \brief Take over the changed data of the planet when edit clicked.
+
+*/
 void SolarSystemDetails::on_editPlanet_clicked()
 {
     updateOrCreatePlanet(true);
 }
 
+/*!
+ \brief Delete the current planet, when delete is clicked.
+
+*/
 void SolarSystemDetails::on_deletePlanet_clicked()
 {
     if (solarSystemModel->getCurrentSolarSystemHeavenlyBody())

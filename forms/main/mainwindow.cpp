@@ -1,6 +1,32 @@
+/*
+    Copyright (C) 2012 by
+    Fabian Deitelhoff (FH@FabianDeitelhoff.de) and
+    Christof Geisler (christof.geisler@stud.fh-swf.de)
+
+    This file is part of the project SolarSystemSimulation.
+
+    SolarSystemSimulation is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SolarSystemSimulation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SolarSystemSimulation.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+/*!
+ \brief Open the main window and establish the database connection.
+
+ \param parent
+*/
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -37,6 +63,10 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(solarSystemSimulationView);
 }
 
+/*!
+ \brief Destructor for the main window
+
+*/
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -46,16 +76,28 @@ MainWindow::~MainWindow()
     delete solarSystemModel;
 }
 
+/*!
+ \brief Automatic connection
+
+*/
 void MainWindow::on_actionExit_triggered()
 {
     close();
 }
 
+/*!
+ \brief SLOT to close the application
+
+*/
 void MainWindow::closeApplication()
 {
     solarSystemSimulationView->stopSimulation();
 }
 
+/*!
+ \brief Open Solar System overview or restart paused simulation.
+
+*/
 void MainWindow::on_actionStartSimulation_triggered()
 {
     if (!solarSystemSimulation->isSolarSystemAvailable())
@@ -70,11 +112,19 @@ void MainWindow::on_actionStartSimulation_triggered()
     }
 }
 
+/*!
+ \brief Automatic SLOT to stop simulation.
+
+*/
 void MainWindow::on_actionStopSimulation_triggered()
 {
     stopSimulation();
 }
 
+/*!
+ \brief Method to start the simulation.
+
+*/
 void MainWindow::startSimulation()
 {
     solarSystemSimulationView->startSimulation();
@@ -83,6 +133,10 @@ void MainWindow::startSimulation()
     setSimulationMenuState(true);
 }
 
+/*!
+ \brief Method to stop the simulation.
+
+*/
 void MainWindow::stopSimulation()
 {
     solarSystemSimulationView->stopSimulation();
@@ -91,6 +145,10 @@ void MainWindow::stopSimulation()
     setSimulationMenuState(false);
 }
 
+/*!
+ \brief Automatic connection to show heavenly body overview.
+
+*/
 void MainWindow::on_actionHeavenlyBodyOverview_triggered()
 {
     try
@@ -107,11 +165,19 @@ void MainWindow::on_actionHeavenlyBodyOverview_triggered()
     }
 }
 
+/*!
+ \brief Automatic connection to show solar system overview.
+
+*/
 void MainWindow::on_actionSolarSystemOverview_triggered()
 {
     showSolarSystemOverview();
 }
 
+/*!
+ \brief Method to show solar system overview
+
+*/
 void MainWindow::showSolarSystemOverview()
 {
     SolarSystemOverview *solarSystemOverview = new SolarSystemOverview(this, solarSystemModel);
@@ -124,6 +190,11 @@ void MainWindow::showSolarSystemOverview()
     solarSystemOverview->show();
 }
 
+/*!
+ \brief
+
+ \param solarSystem Set checkboxes foe simulation
+*/
 void MainWindow::simulateSolarSystem(SolarSystem *solarSystem)
 {
     solarSystemSimulationView->setSolarSystem(solarSystem);
@@ -133,26 +204,47 @@ void MainWindow::simulateSolarSystem(SolarSystem *solarSystem)
     on_actionStartSimulation_triggered();
 }
 
+/*!
+ \brief Automatic connection to trigger orbit visible.
+
+*/
 void MainWindow::on_actionOrbitVisible_triggered()
 {
     solarSystemSimulation->setOrbitVisible(ui->actionOrbitVisible->isChecked());
 }
 
+/*!
+ \brief Automatic connection to reset the perspective
+
+*/
 void MainWindow::on_actionResetPerspective_triggered()
 {
     solarSystemSimulationView->resetPerspective();
 }
 
+/*!
+ \brief Set the simulation state to false.
+
+*/
 void MainWindow::simulationStopped()
 {
     setSimulationMenuState(false);
 }
 
+/*!
+ \brief Automatic connection to trigger collision detection
+
+*/
 void MainWindow::on_actionDetectCollisions_triggered()
 {
     solarSystemSimulation->setCollisionDetection(ui->actionDetectCollisions->isChecked());
 }
 
+/*!
+ \brief Set checkboxes for start and stop simulation.
+
+ \param isSimulationStarted
+*/
 void MainWindow::setSimulationMenuState(bool isSimulationStarted)
 {
     ui->actionStartSimulation->setChecked(isSimulationStarted);
@@ -164,11 +256,19 @@ void MainWindow::setSimulationMenuState(bool isSimulationStarted)
     }
 }
 
+/*!
+ \brief Deactivate checkbox for collision detection.
+
+*/
 void MainWindow::collisionDetectionDeactivated()
 {
     ui->actionDetectCollisions->setChecked(false);
 }
 
+/*!
+ \brief Automatic connection to show about window when menu clicked.
+
+*/
 void MainWindow::on_actionAboutThisApplication_triggered()
 {
     About *about = new About(this);
@@ -176,11 +276,20 @@ void MainWindow::on_actionAboutThisApplication_triggered()
     about->setFixedSize(about->size());
 }
 
+/*!
+ \brief Automatic connections to trigger visibility coordinates.
+
+*/
 void MainWindow::on_actionCoordinatesVisible_triggered()
 {
     solarSystemSimulationView->toggleCoordinateAxesVisibility();
 }
 
+/*!
+ \brief Close the application directly when no simulation is active.
+
+ \param event
+*/
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (solarSystemSimulationView->isSimulationStarted())
