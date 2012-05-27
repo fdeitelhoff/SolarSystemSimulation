@@ -1,5 +1,34 @@
+/*
+    Copyright (C) 2012 by
+    Fabian Deitelhoff (FH@FabianDeitelhoff.de) and
+    Christof Geisler (christof.geisler@stud.fh-swf.de)
+
+    This file is part of the project SolarSystemSimulation.
+
+    SolarSystemSimulation is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SolarSystemSimulation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SolarSystemSimulation.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "heavenlybody.h"
 
+/*!
+ \brief Constructor for heavenly body with name, diameter, color and type.
+
+ \param name
+ \param diameter
+ \param color
+ \param type
+*/
 HeavenlyBody::HeavenlyBody(QString name, int diameter, QColor color, QString type)
 {
     id = -1;
@@ -7,6 +36,15 @@ HeavenlyBody::HeavenlyBody(QString name, int diameter, QColor color, QString typ
     init(name, diameter, color, type);
 }
 
+/*!
+ \brief Constructor for heavenly body with id, name, diameter, color and type.
+
+ \param id
+ \param name
+ \param diameter
+ \param color
+ \param type
+*/
 HeavenlyBody::HeavenlyBody(qint64 id, QString name, int diameter, QColor color, QString type)
 {
     setId(id);
@@ -14,6 +52,15 @@ HeavenlyBody::HeavenlyBody(qint64 id, QString name, int diameter, QColor color, 
     init(name, diameter, color, type);
 }
 
+/*!
+ \brief Constructor for heavenly body with id, name, diameter, colorString and type.
+
+ \param id
+ \param name
+ \param diameter
+ \param colorString
+ \param type
+*/
 HeavenlyBody::HeavenlyBody(qint64 id, QString name, int diameter, QString colorString, QString type)
 {
     QStringList parts = colorString.split(":", QString::SkipEmptyParts);
@@ -34,6 +81,14 @@ HeavenlyBody::HeavenlyBody(qint64 id, QString name, int diameter, QString colorS
     init(name, diameter, color, type);
 }
 
+/*!
+ \brief Init the object with name, diameter, color and type.
+
+ \param name
+ \param diameter
+ \param color
+ \param type
+*/
 void HeavenlyBody::init(QString name, int diameter, QColor color, QString type)
 {
     this->setName(name);
@@ -42,6 +97,12 @@ void HeavenlyBody::init(QString name, int diameter, QColor color, QString type)
     this->setType(type);
 }
 
+/*!
+ \brief Overload == to compare two heavenly bodies.
+
+ \param heavenlyBody
+ \return bool HeavenlyBody::operator
+*/
 bool HeavenlyBody::operator==(const HeavenlyBody &heavenlyBody)
 {
     return id == heavenlyBody.id &&
@@ -50,6 +111,11 @@ bool HeavenlyBody::operator==(const HeavenlyBody &heavenlyBody)
             type == heavenlyBody.type;
 }
 
+/*!
+ \brief Setter for the id.
+
+ \param id
+*/
 void HeavenlyBody::setId(qint64 id)
 {
     if (id < 1)
@@ -60,6 +126,11 @@ void HeavenlyBody::setId(qint64 id)
     this->id = id;
 }
 
+/*!
+ \brief Setter for the name.
+
+ \param name
+*/
 void HeavenlyBody::setName(QString name)
 {
     name = name.trimmed();
@@ -72,6 +143,11 @@ void HeavenlyBody::setName(QString name)
     this->name = name;
 }
 
+/*!
+ \brief Setter for the diameter.
+
+ \param diameter
+*/
 void HeavenlyBody::setDiameter(int diameter)
 {
     if (diameter < 1)
@@ -82,11 +158,21 @@ void HeavenlyBody::setDiameter(int diameter)
     this->diameter = diameter;
 }
 
+/*!
+ \brief
+
+ \param color Setter for the color.
+*/
 void HeavenlyBody::setColor(QColor color)
 {
     this->color = color;
 }
 
+/*!
+ \brief Setter for the type.
+
+ \param type
+*/
 void HeavenlyBody::setType(QString type)
 {
     if (type != "S" && type != "P")

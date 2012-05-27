@@ -6,6 +6,13 @@
 #include "visualization/heavenlybody/star3d.h"
 #include "visualization/heavenlybody/planet3d.h"
 
+/**
+    Class for simulate the solar system.
+
+    @author Fabian Deitelhoff <FH@FabianDeitelhoff.de>
+    @author Christof Geisler <christof.geisler@stud.fh-swf.de>
+*/
+
 class SolarSystemSimulation : public QObject
 {
     Q_OBJECT

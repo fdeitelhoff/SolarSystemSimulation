@@ -24,6 +24,13 @@
 #include "forms/main/mainwindow.h"
 #include "OpenGL/GL/glut.h"
 
+/*!
+ \brief The main method.
+
+ \param argc
+ \param argv[]
+ \return int
+*/
 int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);

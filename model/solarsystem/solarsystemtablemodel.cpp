@@ -1,20 +1,64 @@
+/*
+    Copyright (C) 2012 by
+    Fabian Deitelhoff (FH@FabianDeitelhoff.de) and
+    Christof Geisler (christof.geisler@stud.fh-swf.de)
+
+    This file is part of the project SolarSystemSimulation.
+
+    SolarSystemSimulation is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SolarSystemSimulation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SolarSystemSimulation.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "solarsystemtablemodel.h"
 
+/*!
+ \brief Default constructor.
+
+*/
 SolarSystemTableModel::SolarSystemTableModel()
     : QAbstractTableModel()
 {
 }
 
+/*!
+ \brief Returns the number of rows.
+
+ \param
+ \return int
+*/
 int SolarSystemTableModel::rowCount(const QModelIndex &/*parent*/) const
 {
     return entities.size();
 }
 
+/*!
+ \brief The column count is alway 4.
+
+ \param
+ \return int
+*/
 int SolarSystemTableModel::columnCount(const QModelIndex &/*parent*/) const
 {
     return 4;
 }
 
+/*!
+ \brief Returns the report of the index in case of the role.
+
+ \param index
+ \param role
+ \return QVariant
+*/
 QVariant SolarSystemTableModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
@@ -58,6 +102,14 @@ QVariant SolarSystemTableModel::data(const QModelIndex &index, int role) const
     return value;
 }
 
+/*!
+ \brief Returns the header of the given column.
+
+ \param section
+ \param orientation
+ \param role
+ \return QVariant
+*/
 QVariant SolarSystemTableModel::headerData(int section, Qt::Orientation orientation,
                                 int role) const
 {
@@ -87,6 +139,11 @@ QVariant SolarSystemTableModel::headerData(int section, Qt::Orientation orientat
     return columnHeader;
 }
 
+/*!
+ \brief Set the table data with the given entities.
+
+ \param entities
+*/
 void SolarSystemTableModel::setData(QList<SolarSystem *> entities)
 {
     this->entities.clear();
@@ -95,6 +152,12 @@ void SolarSystemTableModel::setData(QList<SolarSystem *> entities)
     reset();
 }
 
+/*!
+ \brief Returns the entities at row.
+
+ \param row
+ \return SolarSystem *
+*/
 SolarSystem* SolarSystemTableModel::getSolarSystem(int row)
 {
     if (row >= 0 && row < entities.size())
@@ -105,6 +168,11 @@ SolarSystem* SolarSystemTableModel::getSolarSystem(int row)
     return 0;
 }
 
+/*!
+ \brief Add a solar system to the list.
+
+ \param solarSystem
+*/
 void SolarSystemTableModel::addSolarSystem(SolarSystem *solarSystem)
 {
     if (solarSystem)
@@ -117,6 +185,11 @@ void SolarSystemTableModel::addSolarSystem(SolarSystem *solarSystem)
     }
 }
 
+/*!
+ \brief Remove solar system from list.
+
+ \param solarSystem
+*/
 void SolarSystemTableModel::deleteSolarSystem(SolarSystem *solarSystem)
 {
     if (solarSystem)
@@ -129,6 +202,11 @@ void SolarSystemTableModel::deleteSolarSystem(SolarSystem *solarSystem)
     }
 }
 
+/*!
+ \brief Returns number of solar systems in the list.
+
+ \return int
+*/
 int SolarSystemTableModel::getEntityCount()
 {
     return entities.size();

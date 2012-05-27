@@ -122,8 +122,7 @@ OTHER_FILES += \
     OpenGL/freeglut/lib/libfreeglut_static.a \
     OpenGL/freeglut/lib/libfreeglut.a \
     database/backups/SolarSystemSimulation.backup \
-    README.txt \
-    project.h \
+    README.md \
     database/backups/SolarSystemSimulation_SecondPresentation.backup
 
 RESOURCES += \

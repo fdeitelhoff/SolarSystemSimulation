@@ -1,5 +1,30 @@
+/*
+    Copyright (C) 2012 by
+    Fabian Deitelhoff (FH@FabianDeitelhoff.de) and
+    Christof Geisler (christof.geisler@stud.fh-swf.de)
+
+    This file is part of the project SolarSystemSimulation.
+
+    SolarSystemSimulation is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SolarSystemSimulation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SolarSystemSimulation.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "heavenlybodymodel.h"
 
+/*!
+ \brief Class to image the list of heavenly bodies.
+
+*/
 HeavenlyBodyModel::HeavenlyBodyModel()
 {
     heavenlyBodyRepository = new HeavenlyBodyRepository();
@@ -8,6 +33,10 @@ HeavenlyBodyModel::HeavenlyBodyModel()
     selectedEntity = 0;
 }
 
+/*!
+ \brief Load heavenly bodies from repository
+
+*/
 void HeavenlyBodyModel::loadAllHeavenlyBodyEntities()
 {
     HeavenlyBodyTableModel *heavenlyBodyTableModel = getHeavenlyBodyTableModel();
@@ -17,6 +46,11 @@ void HeavenlyBodyModel::loadAllHeavenlyBodyEntities()
     heavenlyBodyTableModel->setData(entities);
 }
 
+/*!
+ \brief Setter for the selection model.
+
+ \param selectionModel
+*/
 void HeavenlyBodyModel::setSelectionModel(QItemSelectionModel *selectionModel)
 {
     this->selectionModel = selectionModel;
@@ -27,6 +61,12 @@ void HeavenlyBodyModel::setSelectionModel(QItemSelectionModel *selectionModel)
                      Qt::DirectConnection);
 }
 
+/*!
+ \brief Set the entity to the selected row
+
+ \param current
+ \param previous
+*/
 void HeavenlyBodyModel::currentRowChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     if (current.row() >= 0)
@@ -35,6 +75,11 @@ void HeavenlyBodyModel::currentRowChanged(const QModelIndex &current, const QMod
     }
 }
 
+/*!
+ \brief Getter for the heavenly body table model.
+
+ \return HeavenlyBodyTableModel *
+*/
 HeavenlyBodyTableModel* HeavenlyBodyModel::getHeavenlyBodyTableModel()
 {
     if (!heavenlyBodyTableModel)
@@ -45,6 +90,14 @@ HeavenlyBodyTableModel* HeavenlyBodyModel::getHeavenlyBodyTableModel()
     return heavenlyBodyTableModel;
 }
 
+/*!
+ \brief Update entity in model and repository.
+
+ \param name
+ \param diameter
+ \param color
+ \param type
+*/
 void HeavenlyBodyModel::updateEntity(QString name, int diameter, QColor color, QString type)
 {
     // Create a temporary object first.
@@ -59,6 +112,14 @@ void HeavenlyBodyModel::updateEntity(QString name, int diameter, QColor color, Q
     selectedEntity->setType(type);
 }
 
+/*!
+ \brief Add entity in model and repository.
+
+ \param name
+ \param diameter
+ \param color
+ \param type
+*/
 void HeavenlyBodyModel::addEntity(QString name, int diameter, QColor color, QString type)
 {
     HeavenlyBody *heavenlyBody = new HeavenlyBody(name, diameter, color, type);
@@ -68,6 +129,10 @@ void HeavenlyBodyModel::addEntity(QString name, int diameter, QColor color, QStr
     heavenlyBodyTableModel->addHeavenlyBody(heavenlyBody);
 }
 
+/*!
+ \brief Delete entity in model and repository, selected next row.
+
+*/
 void HeavenlyBodyModel::deleteEntity()
 {
     if (isEntitySelected())

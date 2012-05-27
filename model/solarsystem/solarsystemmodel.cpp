@@ -1,5 +1,30 @@
+/*
+    Copyright (C) 2012 by
+    Fabian Deitelhoff (FH@FabianDeitelhoff.de) and
+    Christof Geisler (christof.geisler@stud.fh-swf.de)
+
+    This file is part of the project SolarSystemSimulation.
+
+    SolarSystemSimulation is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SolarSystemSimulation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SolarSystemSimulation.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "solarsystemmodel.h"
 
+/*!
+ \brief Class to image the content of the whole solar system.
+
+*/
 SolarSystemModel::SolarSystemModel()
 {
     solarSystemRepository = new SolarSystemRepository();
@@ -13,11 +38,20 @@ SolarSystemModel::SolarSystemModel()
     currentSolarSystem = 0;
 }
 
+/*!
+ \brief Check if there is an selected solar system.
+
+ \return bool
+*/
 bool SolarSystemModel::isEntitySelected()
 {
     return currentSolarSystem != 0;
 }
 
+/*!
+ \brief Set the data of the heavenly bodies to the solar system heavenly body model.
+
+*/
 void SolarSystemModel::loadEntityData()
 {
     if (currentSolarSystem)
@@ -26,11 +60,20 @@ void SolarSystemModel::loadEntityData()
     }
 }
 
+/*!
+ \brief Resets the data of the solar system heavenly body model.
+
+*/
 void SolarSystemModel::resetSolarSystemEntityData()
 {
     solarSystemHeavenlyBodyTableModel->resetData();
 }
 
+/*!
+ \brief Returns the position of the selected star in the star combo box.
+
+ \return int
+*/
 int SolarSystemModel::getSelectedStarIndex()
 {
     if (!currentSolarSystem)
@@ -41,6 +84,11 @@ int SolarSystemModel::getSelectedStarIndex()
     return starsComboBoxModel->getHeavenlyBodyIndex(currentSolarSystem->getCentralStar());
 }
 
+/*!
+ \brief Returns the position of the selected heavenly body in the planet combo box.
+
+ \return int
+*/
 int SolarSystemModel::getSelectedHeavenlyBodyIndex()
 {
     if (!currentSolarSystemHeavenlyBody)
@@ -51,6 +99,11 @@ int SolarSystemModel::getSelectedHeavenlyBodyIndex()
     return planetsComboBoxModel->getHeavenlyBodyIndex(currentSolarSystemHeavenlyBody->getHeavenlyBody());
 }
 
+/*!
+ \brief Connect to solarSystemSelectionModel.
+
+ \param solarSystemSelectionModel
+*/
 void SolarSystemModel::setSolarSystemSelectionModel(QItemSelectionModel *solarSystemSelectionModel)
 {
     this->solarSystemSelectionModel = solarSystemSelectionModel;
@@ -61,6 +114,11 @@ void SolarSystemModel::setSolarSystemSelectionModel(QItemSelectionModel *solarSy
                      Qt::DirectConnection);
 }
 
+/*!
+ \brief Connect to solarSystemHeavenlyBodySelectionModel.
+
+ \param selectionModel
+*/
 void SolarSystemModel::setSolarSystemHeavenlyBodySelectionModel(QItemSelectionModel *selectionModel)
 {
     this->solarSystemHeavenlyBodySelectionModel = selectionModel;
@@ -71,6 +129,12 @@ void SolarSystemModel::setSolarSystemHeavenlyBodySelectionModel(QItemSelectionMo
                      Qt::DirectConnection);
 }
 
+/*!
+ \brief Method called when selected row of planet in heavenly body overview changed.
+
+ \param current
+ \param previous
+*/
 void SolarSystemModel::currentPlanetsRowChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     if (current.row() >= 0)
@@ -79,6 +143,12 @@ void SolarSystemModel::currentPlanetsRowChanged(const QModelIndex &current, cons
     }
 }
 
+/*!
+ \brief Method called when selected row of solar system in solar system overview changed.
+
+ \param current
+ \param previous
+*/
 void SolarSystemModel::currentSolarSystemRowChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     if (current.row() >= 0)
@@ -87,6 +157,11 @@ void SolarSystemModel::currentSolarSystemRowChanged(const QModelIndex &current, 
     }
 }
 
+/*!
+ \brief Getter for solar system model.
+
+ \return SolarSystemTableModel *
+*/
 SolarSystemTableModel* SolarSystemModel::getSolarSystemTableModel()
 {
     if (!solarSystemTableModel)
@@ -97,6 +172,11 @@ SolarSystemTableModel* SolarSystemModel::getSolarSystemTableModel()
     return solarSystemTableModel;
 }
 
+/*!
+ \brief Getter for solar system heavenly body model.
+
+ \return SolarSystemHeavenlyBodyTableModel *
+*/
 SolarSystemHeavenlyBodyTableModel* SolarSystemModel::getSolarSystemHeavenlyBodyTableModel()
 {
     if (!solarSystemHeavenlyBodyTableModel)
@@ -107,6 +187,11 @@ SolarSystemHeavenlyBodyTableModel* SolarSystemModel::getSolarSystemHeavenlyBodyT
     return solarSystemHeavenlyBodyTableModel;
 }
 
+/*!
+ \brief Getter for the star combo box model.
+
+ \return HeavenlyBodyComboBoxModel *
+*/
 HeavenlyBodyComboBoxModel* SolarSystemModel::getStarsComboBoxModel()
 {
     if (!starsComboBoxModel)
@@ -117,6 +202,11 @@ HeavenlyBodyComboBoxModel* SolarSystemModel::getStarsComboBoxModel()
     return starsComboBoxModel;
 }
 
+/*!
+ \brief Getter for the planet combo box model.
+
+ \return HeavenlyBodyComboBoxModel *
+*/
 HeavenlyBodyComboBoxModel* SolarSystemModel::getPlanetsComboBoxModel()
 {
     if (!planetsComboBoxModel)
@@ -127,6 +217,10 @@ HeavenlyBodyComboBoxModel* SolarSystemModel::getPlanetsComboBoxModel()
     return planetsComboBoxModel;
 }
 
+/*!
+ \brief Load all solar system entities from repository.
+
+*/
 void SolarSystemModel::loadAllSolarSystemEntities()
 {
     SolarSystemTableModel *solarSystemTableModel = getSolarSystemTableModel();
@@ -136,6 +230,10 @@ void SolarSystemModel::loadAllSolarSystemEntities()
     solarSystemTableModel->setData(entities);
 }
 
+/*!
+ \brief Load stars and planets entities from repository.
+
+*/
 void SolarSystemModel::loadOtherEntities()
 {
     QList<HeavenlyBody *> stars = heavenlyBodyRepository->fetchExplizitTypedEntities("S");
@@ -145,6 +243,12 @@ void SolarSystemModel::loadOtherEntities()
     getPlanetsComboBoxModel()->setData(planets);
 }
 
+/*!
+ \brief Create new solar system in model and repository.
+
+ \param name
+ \param centralStarIndex
+*/
 void SolarSystemModel::createSolarSystem(QString name, int centralStarIndex)
 {    
     SolarSystem *solarSystem = new SolarSystem(name, starsComboBoxModel->getHeavenlyBody(centralStarIndex));
@@ -155,6 +259,12 @@ void SolarSystemModel::createSolarSystem(QString name, int centralStarIndex)
     currentSolarSystem = solarSystem;
 }
 
+/*!
+ \brief Update solar system in model and repository.
+
+ \param name
+ \param centralStarIndex
+*/
 void SolarSystemModel::updateSolarSystem(QString name, int centralStarIndex)
 {
     HeavenlyBody *centralStar = starsComboBoxModel->getHeavenlyBody(centralStarIndex);
@@ -169,6 +279,15 @@ void SolarSystemModel::updateSolarSystem(QString name, int centralStarIndex)
     currentSolarSystem->setCentralStar(centralStar);
 }
 
+/*!
+ \brief Add planet with its configuration to model and repository.
+
+ \param planetIndex
+ \param excentricity
+ \param semimajorAxis
+ \param angle
+ \param orbitalPlaneAngle
+*/
 void SolarSystemModel::addPlanet(int planetIndex, double excentricity, double semimajorAxis, double angle, double orbitalPlaneAngle)
 {
     SolarSystemHeavenlyBody *solarSystemHeavenlyBody = new SolarSystemHeavenlyBody(planetsComboBoxModel->getHeavenlyBody(planetIndex),
@@ -179,6 +298,15 @@ void SolarSystemModel::addPlanet(int planetIndex, double excentricity, double se
     currentSolarSystem->addHeavenlyBody(solarSystemHeavenlyBody);
 }
 
+/*!
+ \brief Update planet and its configuration to model and repository.
+
+ \param planetIndex
+ \param excentricity
+ \param semimajorAxis
+ \param angle
+ \param orbitalPlaneAngle
+*/
 void SolarSystemModel::updatePlanet(int planetIndex, double excentricity, double semimajorAxis, double angle, double orbitalPlaneAngle)
 {
     // Create the tmp object first!
@@ -197,6 +325,10 @@ void SolarSystemModel::updatePlanet(int planetIndex, double excentricity, double
     solarSystemHeavenlyBodyTableModel->reset();
 }
 
+/*!
+ \brief Delete planet from model and repository.
+
+*/
 void SolarSystemModel::deletePlanet()
 {
     solarSystemRepository->deletePlanetEntity(currentSolarSystem, currentSolarSystemHeavenlyBody);
@@ -214,6 +346,10 @@ void SolarSystemModel::deletePlanet()
     }
 }
 
+/*!
+ \brief Delete complete solar system.
+
+*/
 void SolarSystemModel::deleteSolarSystem()
 {
     if (isEntitySelected())

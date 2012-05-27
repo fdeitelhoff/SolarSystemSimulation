@@ -1,7 +1,29 @@
+/*
+    Copyright (C) 2012 by
+    Fabian Deitelhoff (FH@FabianDeitelhoff.de) and
+    Christof Geisler (christof.geisler@stud.fh-swf.de)
+
+    This file is part of the project SolarSystemSimulation.
+
+    SolarSystemSimulation is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SolarSystemSimulation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SolarSystemSimulation.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "planet3d.h"
 
 /*!
- \brief
+ \brief Constructor for the planet in 3d.
+
  \param solarSystemHeavenlyBody
  \param keplerConstant Reference Value for the Planet speed
 */
@@ -19,7 +41,8 @@ Planet3d::Planet3d(SolarSystemHeavenlyBody *solarSystemHeavenlyBody, const float
 }
 
 /*!
- \brief
+ \brief Destructor delete the orbit 3d.
+
 */
 Planet3d::~Planet3d()
 {
@@ -27,8 +50,8 @@ Planet3d::~Planet3d()
 }
 
 /*!
- \brief
-    Setter for the Kepler Constant
+ \brief Setter for the Kepler Constant
+
  \param keplerConstant Reference value for the planet speed
 */
 void Planet3d::setKeplerConstant(const float keplerConstant)
@@ -37,7 +60,7 @@ void Planet3d::setKeplerConstant(const float keplerConstant)
 }
 
 /*!
- \brief
+ \brief Initial calculation for the orbit calculation.
 
 */
 void Planet3d::init()
@@ -77,7 +100,7 @@ void Planet3d::init()
 }
 
 /*!
- \brief
+ \brief Inherited method to calculate the position and the speed of the haevenly body 3d.
 
 */
 void Planet3d::calculateHeavenlyBody3d()
@@ -111,7 +134,7 @@ void Planet3d::calculateHeavenlyBody3d()
 }
 
 /*!
- \brief
+ \brief Paint the heavenly body against the given angles.
 
 */
 void Planet3d::paintHeavenlyBody3d()

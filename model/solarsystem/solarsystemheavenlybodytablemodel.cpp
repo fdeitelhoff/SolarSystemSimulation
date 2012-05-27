@@ -1,25 +1,70 @@
+/*
+    Copyright (C) 2012 by
+    Fabian Deitelhoff (FH@FabianDeitelhoff.de) and
+    Christof Geisler (christof.geisler@stud.fh-swf.de)
+
+    This file is part of the project SolarSystemSimulation.
+
+    SolarSystemSimulation is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    SolarSystemSimulation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with SolarSystemSimulation.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "solarsystemheavenlybodytablemodel.h"
 
+/*!
+ \brief Class to image the solar system table with all heavenly body entities.
+
+*/
 SolarSystemHeavenlyBodyTableModel::SolarSystemHeavenlyBodyTableModel()
     : QAbstractTableModel()
 {
 }
 
+/*!
+ \brief Returns the number of rows.
+
+ \param
+ \return int
+*/
 int SolarSystemHeavenlyBodyTableModel::rowCount(const QModelIndex &/*parent*/) const
 {
     return entities.size();
 }
 
+/*!
+ \brief The number of columns is alway 8.
+
+ \param
+ \return int
+*/
 int SolarSystemHeavenlyBodyTableModel::columnCount(const QModelIndex &/*parent*/) const
 {
     return 8;
 }
 
+/*!
+ \brief Reset the model to its original state.
+
+*/
 void SolarSystemHeavenlyBodyTableModel::reset()
 {
     QAbstractTableModel::reset();
 }
 
+/*!
+ \brief Clear data and reset.
+
+*/
 void SolarSystemHeavenlyBodyTableModel::resetData()
 {
     entities.clear();
@@ -27,6 +72,13 @@ void SolarSystemHeavenlyBodyTableModel::resetData()
     reset();
 }
 
+/*!
+ \brief Set the content, the color and the alignment of the data in the model.
+
+ \param index
+ \param role
+ \return QVariant
+*/
 QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
@@ -115,6 +167,14 @@ QVariant SolarSystemHeavenlyBodyTableModel::data(const QModelIndex &index, int r
     }
 }
 
+/*!
+ \brief Get the Header of the given section.
+
+ \param section
+ \param orientation
+ \param role
+ \return QVariant
+*/
 QVariant SolarSystemHeavenlyBodyTableModel::headerData(int section, Qt::Orientation orientation,
                                 int role) const
 {
@@ -156,6 +216,11 @@ QVariant SolarSystemHeavenlyBodyTableModel::headerData(int section, Qt::Orientat
     return columnHeader;
 }
 
+/*!
+ \brief Set the data to the model.
+
+ \param entities
+*/
 void SolarSystemHeavenlyBodyTableModel::setData(QList<SolarSystemHeavenlyBody *> entities)
 {
     this->entities.clear();
@@ -164,6 +229,12 @@ void SolarSystemHeavenlyBodyTableModel::setData(QList<SolarSystemHeavenlyBody *>
     reset();
 }
 
+/*!
+ \brief Return the data of the given row.
+
+ \param row
+ \return SolarSystemHeavenlyBody *
+*/
 SolarSystemHeavenlyBody* SolarSystemHeavenlyBodyTableModel::getSolarSystemHeavenlyBody(int row)
 {
     if (row >= 0 && row < entities.size())
@@ -174,6 +245,11 @@ SolarSystemHeavenlyBody* SolarSystemHeavenlyBodyTableModel::getSolarSystemHeaven
     return 0;
 }
 
+/*!
+ \brief Add a heavenly body with corresponding data to the solar system.
+
+ \param solarSystemHeavenlyBody
+*/
 void SolarSystemHeavenlyBodyTableModel::addSolarSystemHeavenlyBody(SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
 {
     if (solarSystemHeavenlyBody)
@@ -186,6 +262,11 @@ void SolarSystemHeavenlyBodyTableModel::addSolarSystemHeavenlyBody(SolarSystemHe
     }
 }
 
+/*!
+ \brief Delete heavenly body and its data from solar system.
+
+ \param solarSystemHeavenlyBody
+*/
 void SolarSystemHeavenlyBodyTableModel::deleteSolarSystemHeavenlyBody(SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
 {
     if (solarSystemHeavenlyBody)
@@ -198,6 +279,12 @@ void SolarSystemHeavenlyBodyTableModel::deleteSolarSystemHeavenlyBody(SolarSyste
     }
 }
 
+/*!
+ \brief Get the index of the given heavenly body.
+
+ \param solarSystemHeavenlyBody
+ \return int
+*/
 int SolarSystemHeavenlyBodyTableModel::getSolarSystemHeavenlyBodyIndex(SolarSystemHeavenlyBody *solarSystemHeavenlyBody)
 {
     if (!solarSystemHeavenlyBody)
