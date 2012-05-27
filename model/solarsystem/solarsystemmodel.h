@@ -59,7 +59,18 @@ public:
     HeavenlyBodyComboBoxModel* getStarsComboBoxModel();
     HeavenlyBodyComboBoxModel* getPlanetsComboBoxModel();
 
+    /*!
+     \brief Getter for the current solar system.
+
+     \return SolarSystem *
+    */
     SolarSystem* getCurrentSolarSystem() { return currentSolarSystem; }
+
+    /*!
+     \brief Getter for the current solar system heavenly body.
+
+     \return SolarSystemHeavenlyBody *
+    */
     SolarSystemHeavenlyBody* getCurrentSolarSystemHeavenlyBody() { return currentSolarSystemHeavenlyBody; }
 
     void createSolarSystem(QString name, int centralStarIndex);
