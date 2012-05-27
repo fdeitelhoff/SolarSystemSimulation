@@ -1,0 +1,255 @@
+\hypertarget{classGLColorRGBA}{
+\section{\-G\-L\-Color\-R\-G\-B\-A \-Class \-Reference}
+\label{d5/d16/classGLColorRGBA}\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}}
+}
+
+
+{\ttfamily \#include $<$glcolorrgba.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGLColorRGBA_a622416deabcdf958803df4116d129668}{\-G\-L\-Color\-R\-G\-B\-A} ()
+\item 
+\hyperlink{classGLColorRGBA_a0e30c57b5124de32a960fa2c10e8647f}{\-G\-L\-Color\-R\-G\-B\-A} (\-G\-Lfloat r, \-G\-Lfloat g, \-G\-Lfloat b, \-G\-Lfloat a=1.\-0)
+\item 
+virtual \hyperlink{classGLColorRGBA_ae8a41d5c5c644159b27170e8c78370ee}{$\sim$\-G\-L\-Color\-R\-G\-B\-A} ()
+\item 
+\-G\-Lfloat $\ast$ \hyperlink{classGLColorRGBA_a8e08d6f347035b7ee5598942242f4bd9}{fv} ()
+\item 
+\hyperlink{classGLColorRGBA}{\-G\-L\-Color\-R\-G\-B\-A} \hyperlink{classGLColorRGBA_a7dc45f291406b0fb123c682433a7cab2}{operator$\ast$} (double f)
+\item 
+double \hyperlink{classGLColorRGBA_a00482c0011af9e85130329704651228c}{red} ()
+\item 
+\hyperlink{classGLColorRGBA}{\-G\-L\-Color\-R\-G\-B\-A} \hyperlink{classGLColorRGBA_a2978f6eaf48b7ee9e7e166e053b63096}{operator=} (const \hyperlink{classGLColorRGBA}{\-G\-L\-Color\-R\-G\-B\-A} \&to\-Copy)
+\item 
+double \hyperlink{classGLColorRGBA_a0c23858051c491cb34cc66eeb4b6ff8c}{green} ()
+\item 
+\hyperlink{classGLColorRGBA_a11acdaa5e4efb01b8799340678ebe39a}{\-G\-L\-Color\-R\-G\-B\-A} (const \hyperlink{classGLColorRGBA}{\-G\-L\-Color\-R\-G\-B\-A} \&to\-Copy)
+\item 
+double \hyperlink{classGLColorRGBA_ab2bd6122d3957fbe86f35fc884b222f1}{blue} ()
+\item 
+double \hyperlink{classGLColorRGBA_ad3ee42fecad2e51b8a96aa9dbfae8387}{alpha} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classGLColorRGBA_a0b5cc5f5427905bfb3abd5011495d4a0}{copy} (const \hyperlink{classGLColorRGBA}{\-G\-L\-Color\-R\-G\-B\-A} \&to\-Copy)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A color class that supports \-R\-G\-B\-A colors. \-Color is saved as 4 \-G\-Lfloat values 0.\-0 = black, 1.\-0 = full intensity. \-The \char`\"{}\-A\char`\"{} value is for transparency (very practical for window panes). 0.\-0 = transparent, 1.\-0 = opaque \begin{DoxyAuthor}{\-Author}
+\-Walter \-Roth 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classGLColorRGBA_a622416deabcdf958803df4116d129668}{
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}}
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!GLColorRGBA@{\-G\-L\-Color\-R\-G\-B\-A}}
+\subsubsection[{\-G\-L\-Color\-R\-G\-B\-A}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Color\-R\-G\-B\-A\-::\-G\-L\-Color\-R\-G\-B\-A (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d5/d16/classGLColorRGBA_a622416deabcdf958803df4116d129668}
+\-Constructs a black color. 
+\begin{DoxyCode}
+                        {
+ _Red = 0.0;
+ _Green = 0.0;
+ _Blue = 0.0;
+ _Alpha = 1.0;
+}
+\end{DoxyCode}
+\hypertarget{classGLColorRGBA_a0e30c57b5124de32a960fa2c10e8647f}{
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}}
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!GLColorRGBA@{\-G\-L\-Color\-R\-G\-B\-A}}
+\subsubsection[{\-G\-L\-Color\-R\-G\-B\-A}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Color\-R\-G\-B\-A\-::\-G\-L\-Color\-R\-G\-B\-A (
+\begin{DoxyParamCaption}
+\item[{\-G\-Lfloat}]{r, }
+\item[{\-G\-Lfloat}]{g, }
+\item[{\-G\-Lfloat}]{b, }
+\item[{\-G\-Lfloat}]{a = {\ttfamily 1.0}}
+\end{DoxyParamCaption}
+)}}
+\label{d5/d16/classGLColorRGBA_a0e30c57b5124de32a960fa2c10e8647f}
+\-Constructs the specified color. 
+\begin{DoxyCode}
+                                                                  {
+ _Red = r;
+ _Green = g;
+ _Blue = b;
+ _Alpha = a;
+}
+\end{DoxyCode}
+\hypertarget{classGLColorRGBA_ae8a41d5c5c644159b27170e8c78370ee}{
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!$\sim$\-G\-L\-Color\-R\-G\-B\-A@{$\sim$\-G\-L\-Color\-R\-G\-B\-A}}
+\index{$\sim$\-G\-L\-Color\-R\-G\-B\-A@{$\sim$\-G\-L\-Color\-R\-G\-B\-A}!GLColorRGBA@{\-G\-L\-Color\-R\-G\-B\-A}}
+\subsubsection[{$\sim$\-G\-L\-Color\-R\-G\-B\-A}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Color\-R\-G\-B\-A\-::$\sim$\-G\-L\-Color\-R\-G\-B\-A (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{d5/d16/classGLColorRGBA_ae8a41d5c5c644159b27170e8c78370ee}
+\-Destructor, does nothing. 
+\begin{DoxyCode}
+                         {
+}
+\end{DoxyCode}
+\hypertarget{classGLColorRGBA_a11acdaa5e4efb01b8799340678ebe39a}{
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}}
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!GLColorRGBA@{\-G\-L\-Color\-R\-G\-B\-A}}
+\subsubsection[{\-G\-L\-Color\-R\-G\-B\-A}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-L\-Color\-R\-G\-B\-A\-::\-G\-L\-Color\-R\-G\-B\-A (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-G\-L\-Color\-R\-G\-B\-A} \&}]{to\-Copy}
+\end{DoxyParamCaption}
+)}}
+\label{d5/d16/classGLColorRGBA_a11acdaa5e4efb01b8799340678ebe39a}
+\-Copy constructor. 
+\begin{DoxyCode}
+                                                   {
+   copy(toCopy);
+}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classGLColorRGBA_ad3ee42fecad2e51b8a96aa9dbfae8387}{
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!alpha@{alpha}}
+\index{alpha@{alpha}!GLColorRGBA@{\-G\-L\-Color\-R\-G\-B\-A}}
+\subsubsection[{alpha}]{\setlength{\rightskip}{0pt plus 5cm}double \-G\-L\-Color\-R\-G\-B\-A\-::alpha (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d5/d16/classGLColorRGBA_ad3ee42fecad2e51b8a96aa9dbfae8387}
+\-Returns \-A (transparency) value. 
+\begin{DoxyCode}
+                         {
+  return _Alpha;
+}
+\end{DoxyCode}
+\hypertarget{classGLColorRGBA_ab2bd6122d3957fbe86f35fc884b222f1}{
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!blue@{blue}}
+\index{blue@{blue}!GLColorRGBA@{\-G\-L\-Color\-R\-G\-B\-A}}
+\subsubsection[{blue}]{\setlength{\rightskip}{0pt plus 5cm}double \-G\-L\-Color\-R\-G\-B\-A\-::blue (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d5/d16/classGLColorRGBA_ab2bd6122d3957fbe86f35fc884b222f1}
+\-Returns \-Blue value. 
+\begin{DoxyCode}
+                        {
+  return _Blue;
+}
+\end{DoxyCode}
+\hypertarget{classGLColorRGBA_a0b5cc5f5427905bfb3abd5011495d4a0}{
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!copy@{copy}}
+\index{copy@{copy}!GLColorRGBA@{\-G\-L\-Color\-R\-G\-B\-A}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}void \-G\-L\-Color\-R\-G\-B\-A\-::copy (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-G\-L\-Color\-R\-G\-B\-A} \&}]{to\-Copy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{d5/d16/classGLColorRGBA_a0b5cc5f5427905bfb3abd5011495d4a0}
+\-Copy function. \-For internal use only. \-M\-U\-S\-T be called by subclassed copy functions.
+
+\-Copy function. \-For internal use only. 
+\begin{DoxyCode}
+                                                {
+  _Red = toCopy._Red;
+  _Green = toCopy._Green;
+  _Blue = toCopy._Blue;
+  _Alpha = toCopy._Alpha;
+}
+\end{DoxyCode}
+\hypertarget{classGLColorRGBA_a8e08d6f347035b7ee5598942242f4bd9}{
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!fv@{fv}}
+\index{fv@{fv}!GLColorRGBA@{\-G\-L\-Color\-R\-G\-B\-A}}
+\subsubsection[{fv}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-Lfloat $\ast$ \-G\-L\-Color\-R\-G\-B\-A\-::fv (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d5/d16/classGLColorRGBA_a8e08d6f347035b7ee5598942242f4bd9}
+\-Returns a pointer to f\-R. \-To be used with \-G\-L\-Color\-X\-X\-Xfv functions. 
+\begin{DoxyCode}
+                         {
+ return &_Red;
+}
+\end{DoxyCode}
+\hypertarget{classGLColorRGBA_a0c23858051c491cb34cc66eeb4b6ff8c}{
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!green@{green}}
+\index{green@{green}!GLColorRGBA@{\-G\-L\-Color\-R\-G\-B\-A}}
+\subsubsection[{green}]{\setlength{\rightskip}{0pt plus 5cm}double \-G\-L\-Color\-R\-G\-B\-A\-::green (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d5/d16/classGLColorRGBA_a0c23858051c491cb34cc66eeb4b6ff8c}
+\-Returns \-Green value. 
+\begin{DoxyCode}
+                         {
+  return _Green;
+}
+\end{DoxyCode}
+\hypertarget{classGLColorRGBA_a7dc45f291406b0fb123c682433a7cab2}{
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!GLColorRGBA@{\-G\-L\-Color\-R\-G\-B\-A}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-G\-L\-Color\-R\-G\-B\-A} \-G\-L\-Color\-R\-G\-B\-A\-::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{double}]{f}
+\end{DoxyParamCaption}
+)}}
+\label{d5/d16/classGLColorRGBA_a7dc45f291406b0fb123c682433a7cab2}
+\-For brightness adjustment. \char`\"{}a\char`\"{} value is not multiplied.
+
+\-For brightness adjustment. \char`\"{}a\char`\"{} value is not multipiled. 
+\begin{DoxyCode}
+                                           {
+ return GLColorRGBA(_Red * f,
+                   _Green * f,
+                   _Blue * f,
+                   _Alpha);
+}
+\end{DoxyCode}
+\hypertarget{classGLColorRGBA_a2978f6eaf48b7ee9e7e166e053b63096}{
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!operator=@{operator=}}
+\index{operator=@{operator=}!GLColorRGBA@{\-G\-L\-Color\-R\-G\-B\-A}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-G\-L\-Color\-R\-G\-B\-A} \-G\-L\-Color\-R\-G\-B\-A\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-G\-L\-Color\-R\-G\-B\-A} \&}]{to\-Copy}
+\end{DoxyParamCaption}
+)}}
+\label{d5/d16/classGLColorRGBA_a2978f6eaf48b7ee9e7e166e053b63096}
+\-Copy operator. 
+\begin{DoxyCode}
+                                                              {
+  copy(toCopy);
+  return * this;
+}
+\end{DoxyCode}
+\hypertarget{classGLColorRGBA_a00482c0011af9e85130329704651228c}{
+\index{\-G\-L\-Color\-R\-G\-B\-A@{\-G\-L\-Color\-R\-G\-B\-A}!red@{red}}
+\index{red@{red}!GLColorRGBA@{\-G\-L\-Color\-R\-G\-B\-A}}
+\subsubsection[{red}]{\setlength{\rightskip}{0pt plus 5cm}double \-G\-L\-Color\-R\-G\-B\-A\-::red (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d5/d16/classGLColorRGBA_a00482c0011af9e85130329704651228c}
+\-Returns \-Red value. 
+\begin{DoxyCode}
+                       {
+  return _Red;
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\-Open\-G\-L/\hyperlink{glcolorrgba_8h}{glcolorrgba.\-h}\item 
+\-Open\-G\-L/\hyperlink{glcolorrgba_8cpp}{glcolorrgba.\-cpp}\end{DoxyCompactItemize}

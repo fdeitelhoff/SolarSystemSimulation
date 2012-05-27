@@ -1,0 +1,126 @@
+\hypertarget{classPropertyNotValidException}{
+\section{\-Property\-Not\-Valid\-Exception \-Class \-Reference}
+\label{d8/df5/classPropertyNotValidException}\index{\-Property\-Not\-Valid\-Exception@{\-Property\-Not\-Valid\-Exception}}
+}
+
+
+{\ttfamily \#include $<$propertynotvalidexception.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPropertyNotValidException_a1597e12c33e8b6080dbf3bd057e03bb8}{\-Property\-Not\-Valid\-Exception} (const \-Q\-String property, const \-Q\-String message)
+\begin{DoxyCompactList}\small\item\em \-Exception for non valid property. \end{DoxyCompactList}\item 
+virtual \hyperlink{classPropertyNotValidException_ac44b59af3ea710aa74ca523b36bda7ff}{$\sim$\-Property\-Not\-Valid\-Exception} ()  throw ()
+\item 
+virtual const \-Q\-String \hyperlink{classPropertyNotValidException_a66d861efc67428d56e0196f8f5b33d26}{get\-Message} () const   throw ()
+\begin{DoxyCompactList}\small\item\em \-Getter for message. \end{DoxyCompactList}\item 
+virtual const \-Q\-String \hyperlink{classPropertyNotValidException_afce6ddb37d69ac02017d4f7300cdaee1}{get\-Property} () const   throw ()
+\begin{DoxyCompactList}\small\item\em \-Getter foe sql\-Error. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class to encapsulate exceptions.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classPropertyNotValidException_a1597e12c33e8b6080dbf3bd057e03bb8}{
+\index{\-Property\-Not\-Valid\-Exception@{\-Property\-Not\-Valid\-Exception}!\-Property\-Not\-Valid\-Exception@{\-Property\-Not\-Valid\-Exception}}
+\index{\-Property\-Not\-Valid\-Exception@{\-Property\-Not\-Valid\-Exception}!PropertyNotValidException@{\-Property\-Not\-Valid\-Exception}}
+\subsubsection[{\-Property\-Not\-Valid\-Exception}]{\setlength{\rightskip}{0pt plus 5cm}\-Property\-Not\-Valid\-Exception\-::\-Property\-Not\-Valid\-Exception (
+\begin{DoxyParamCaption}
+\item[{const \-Q\-String}]{property, }
+\item[{const \-Q\-String}]{message}
+\end{DoxyParamCaption}
+)}}
+\label{d8/df5/classPropertyNotValidException_a1597e12c33e8b6080dbf3bd057e03bb8}
+
+
+\-Exception for non valid property. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em property} & \\
+\hline
+{\em message} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    this->property = property;
+    this->message = message.arg(property);
+}
+\end{DoxyCode}
+\hypertarget{classPropertyNotValidException_ac44b59af3ea710aa74ca523b36bda7ff}{
+\index{\-Property\-Not\-Valid\-Exception@{\-Property\-Not\-Valid\-Exception}!$\sim$\-Property\-Not\-Valid\-Exception@{$\sim$\-Property\-Not\-Valid\-Exception}}
+\index{$\sim$\-Property\-Not\-Valid\-Exception@{$\sim$\-Property\-Not\-Valid\-Exception}!PropertyNotValidException@{\-Property\-Not\-Valid\-Exception}}
+\subsubsection[{$\sim$\-Property\-Not\-Valid\-Exception}]{\setlength{\rightskip}{0pt plus 5cm}virtual \-Property\-Not\-Valid\-Exception\-::$\sim$\-Property\-Not\-Valid\-Exception (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)  throw ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{d8/df5/classPropertyNotValidException_ac44b59af3ea710aa74ca523b36bda7ff}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classPropertyNotValidException_a66d861efc67428d56e0196f8f5b33d26}{
+\index{\-Property\-Not\-Valid\-Exception@{\-Property\-Not\-Valid\-Exception}!get\-Message@{get\-Message}}
+\index{get\-Message@{get\-Message}!PropertyNotValidException@{\-Property\-Not\-Valid\-Exception}}
+\subsubsection[{get\-Message}]{\setlength{\rightskip}{0pt plus 5cm}const \-Q\-String \-Property\-Not\-Valid\-Exception\-::get\-Message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const  throw ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{d8/df5/classPropertyNotValidException_a66d861efc67428d56e0196f8f5b33d26}
+
+
+\-Getter for message. 
+
+\begin{DoxyReturn}{\-Returns}
+const \-Q\-String 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    return message;
+}
+\end{DoxyCode}
+\hypertarget{classPropertyNotValidException_afce6ddb37d69ac02017d4f7300cdaee1}{
+\index{\-Property\-Not\-Valid\-Exception@{\-Property\-Not\-Valid\-Exception}!get\-Property@{get\-Property}}
+\index{get\-Property@{get\-Property}!PropertyNotValidException@{\-Property\-Not\-Valid\-Exception}}
+\subsubsection[{get\-Property}]{\setlength{\rightskip}{0pt plus 5cm}const \-Q\-String \-Property\-Not\-Valid\-Exception\-::get\-Property (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const  throw ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{d8/df5/classPropertyNotValidException_afce6ddb37d69ac02017d4f7300cdaee1}
+
+
+\-Getter foe sql\-Error. 
+
+\begin{DoxyReturn}{\-Returns}
+const \-Q\-String 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    return property;
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+model/exceptions/\hyperlink{propertynotvalidexception_8h}{propertynotvalidexception.\-h}\item 
+model/exceptions/\hyperlink{propertynotvalidexception_8cpp}{propertynotvalidexception.\-cpp}\end{DoxyCompactItemize}

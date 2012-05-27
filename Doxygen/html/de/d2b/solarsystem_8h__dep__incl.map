@@ -1,0 +1,22 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$d3/df9/solarsystemrepository_8h.html" title="data/solarsystem/solarsystemrepository.h" alt="" coords="302,80,567,107"/>
+<area shape="rect" id="node31" href="$d0/dca/solarsystemtablemodel_8h.html" title="model/solarsystem/solarsystemtablemodel.h" alt="" coords="593,80,873,107"/>
+<area shape="rect" id="node36" href="$d8/df2/solarsystemsimulation_8h.html" title="simulation/solarsystemsimulation.h" alt="" coords="805,304,1032,331"/>
+<area shape="rect" id="node46" href="$d0/d09/solarsystem_8cpp.html" title="model/solarsystem/solarsystem.cpp" alt="" coords="956,80,1188,107"/>
+<area shape="rect" id="node5" href="$d6/d1d/solarsystemrepository_8cpp.html" title="data/solarsystem/solarsystemrepository.cpp" alt="" coords="5,155,283,181"/>
+<area shape="rect" id="node7" href="$d1/d47/solarsystemmodel_8h.html" title="model/solarsystem/solarsystemmodel.h" alt="" coords="308,155,561,181"/>
+<area shape="rect" id="node9" href="$da/d0b/solarsystemoverview_8h.html" title="forms/solarsystem/solarsystemoverview.h" alt="" coords="99,379,367,405"/>
+<area shape="rect" id="node19" href="$d5/d52/solarsystemdetails_8h.html" title="forms/solarsystem/solarsystemdetails.h" alt="" coords="198,304,452,331"/>
+<area shape="rect" id="node24" href="$d4/d7f/solarsystemitemdelegate_8h.html" title="forms/solarsystem/solarsystemitemdelegate.h" alt="" coords="295,229,585,256"/>
+<area shape="rect" id="node29" href="$dd/d38/solarsystemmodel_8cpp.html" title="model/solarsystem/solarsystemmodel.cpp" alt="" coords="609,229,876,256"/>
+<area shape="rect" id="node11" href="$d9/d53/mainwindow_8h.html" title="forms/main/mainwindow.h" alt="" coords="615,453,789,480"/>
+<area shape="rect" id="node17" href="$d9/d7e/solarsystemoverview_8cpp.html" title="forms/solarsystem/solarsystemoverview.cpp" alt="" coords="92,453,373,480"/>
+<area shape="rect" id="node13" href="$d8/dd9/mainwindow_8cpp.html" title="forms/main/mainwindow.cpp" alt="" coords="531,528,719,555"/>
+<area shape="rect" id="node15" href="$df/d0a/main_8cpp.html" title="main.cpp" alt="" coords="744,528,817,555"/>
+<area shape="rect" id="node22" href="$de/de9/solarsystemdetails_8cpp.html" title="forms/solarsystem/solarsystemdetails.cpp" alt="" coords="391,379,659,405"/>
+<area shape="rect" id="node27" href="$d2/df8/solarsystemitemdelegate_8cpp.html" title="forms/solarsystem/solarsystemitemdelegate.cpp" alt="" coords="477,304,781,331"/>
+<area shape="rect" id="node34" href="$db/db3/solarsystemtablemodel_8cpp.html" title="model/solarsystem/solarsystemtablemodel.cpp" alt="" coords="586,155,880,181"/>
+<area shape="rect" id="node38" href="$d8/d64/simulationview_8h.html" title="forms/simulation/simulationview.h" alt="" coords="791,379,1009,405"/>
+<area shape="rect" id="node44" href="$df/de8/solarsystemsimulation_8cpp.html" title="simulation/solarsystemsimulation.cpp" alt="" coords="1033,379,1273,405"/>
+<area shape="rect" id="node41" href="$da/db6/simulationview_8cpp.html" title="forms/simulation/simulationview.cpp" alt="" coords="814,453,1047,480"/>
+</map>

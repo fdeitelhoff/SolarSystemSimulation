@@ -1,0 +1,394 @@
+\hypertarget{classSolarSystem}{
+\section{\-Solar\-System \-Class \-Reference}
+\label{df/d5e/classSolarSystem}\index{\-Solar\-System@{\-Solar\-System}}
+}
+
+
+{\ttfamily \#include $<$solarsystem.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSolarSystem_acd1c223637e498a57d8cee6593f69137}{\-Solar\-System} (\-Q\-String name, \hyperlink{classHeavenlyBody}{\-Heavenly\-Body} $\ast$central\-Star)
+\begin{DoxyCompactList}\small\item\em \-Constructor for solar system with name and central star. \end{DoxyCompactList}\item 
+\hyperlink{classSolarSystem_afa3e85e6ab9fbe04e2cb80dc02c69dfc}{\-Solar\-System} (qint64 id, \-Q\-String name, \hyperlink{classHeavenlyBody}{\-Heavenly\-Body} $\ast$central\-Star)
+\begin{DoxyCompactList}\small\item\em \-Constructor for solar system with id, name and central star. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystem_a051c4da538ac4a9495e775e60855786e}{init} (\-Q\-String name, \hyperlink{classHeavenlyBody}{\-Heavenly\-Body} $\ast$central\-Star)
+\begin{DoxyCompactList}\small\item\em \-Method to init the solar system with a name and a central star. \end{DoxyCompactList}\item 
+qint64 \hyperlink{classSolarSystem_a6d73dac11e01ecf06906ede55e8b77fc}{get\-Id} ()
+\begin{DoxyCompactList}\small\item\em \-Getter for the id. \end{DoxyCompactList}\item 
+\-Q\-String \hyperlink{classSolarSystem_a46abe6f8ea2f1db709d3fac9f1bbf00d}{get\-Name} ()
+\begin{DoxyCompactList}\small\item\em \-Getter for the name. \end{DoxyCompactList}\item 
+\hyperlink{classHeavenlyBody}{\-Heavenly\-Body} $\ast$ \hyperlink{classSolarSystem_a90d1c7f9e05a1bd528b62056b27ff424}{get\-Central\-Star} ()
+\begin{DoxyCompactList}\small\item\em \-Getter for the central star. \end{DoxyCompactList}\item 
+int \hyperlink{classSolarSystem_a2b6d483d05a984f94c2916f41d812f4b}{get\-Planet\-Count} ()
+\begin{DoxyCompactList}\small\item\em \-Getter for the number of heavenly bodies. \end{DoxyCompactList}\item 
+\-Q\-List$<$ \hyperlink{classSolarSystemHeavenlyBody}{\-Solar\-System\-Heavenly\-Body} $\ast$ $>$ \hyperlink{classSolarSystem_ad9adea29a8b57fe361591cafce61b0e2}{get\-Heavenly\-Bodies} ()
+\begin{DoxyCompactList}\small\item\em \-Getter for the list of heavenly bodies. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystem_a97a3b70024c266b428cf4bea2ecdb45c}{set\-Id} (qint64 id)
+\begin{DoxyCompactList}\small\item\em \-Setter for the id. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystem_a1642e94eaa54bc4e43471384f95dcc7d}{set\-Name} (\-Q\-String name)
+\begin{DoxyCompactList}\small\item\em \-Setter for the name. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystem_a468b93dfe340aff47ae7a010020ca365}{set\-Central\-Star} (\hyperlink{classHeavenlyBody}{\-Heavenly\-Body} $\ast$central\-Star)
+\begin{DoxyCompactList}\small\item\em \-Setter for the central star. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystem_abb8b63f463e770dcd596a5df020ec4be}{add\-Heavenly\-Body} (\hyperlink{classSolarSystemHeavenlyBody}{\-Solar\-System\-Heavenly\-Body} $\ast$solar\-System\-Heavenly\-Body)
+\begin{DoxyCompactList}\small\item\em \-Add a heavenly body to the solar system. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystem_a20851d16c7fac4274206834c11746b13}{remove\-Heavenly\-Body} (\hyperlink{classSolarSystemHeavenlyBody}{\-Solar\-System\-Heavenly\-Body} $\ast$solar\-System\-Heavenly\-Body)
+\begin{DoxyCompactList}\small\item\em \-Remove a heavenly body from the solar system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class to model a solar system.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classSolarSystem_acd1c223637e498a57d8cee6593f69137}{
+\index{\-Solar\-System@{\-Solar\-System}!\-Solar\-System@{\-Solar\-System}}
+\index{\-Solar\-System@{\-Solar\-System}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{\-Solar\-System}]{\setlength{\rightskip}{0pt plus 5cm}\-Solar\-System\-::\-Solar\-System (
+\begin{DoxyParamCaption}
+\item[{\-Q\-String}]{name, }
+\item[{{\bf \-Heavenly\-Body} $\ast$}]{central\-Star}
+\end{DoxyParamCaption}
+)}}
+\label{df/d5e/classSolarSystem_acd1c223637e498a57d8cee6593f69137}
+
+
+\-Constructor for solar system with name and central star. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em name} & \\
+\hline
+{\em central\-Star} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    id = -1;
+
+    init(name, centralStar);
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystem_afa3e85e6ab9fbe04e2cb80dc02c69dfc}{
+\index{\-Solar\-System@{\-Solar\-System}!\-Solar\-System@{\-Solar\-System}}
+\index{\-Solar\-System@{\-Solar\-System}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{\-Solar\-System}]{\setlength{\rightskip}{0pt plus 5cm}\-Solar\-System\-::\-Solar\-System (
+\begin{DoxyParamCaption}
+\item[{qint64}]{id, }
+\item[{\-Q\-String}]{name, }
+\item[{{\bf \-Heavenly\-Body} $\ast$}]{central\-Star}
+\end{DoxyParamCaption}
+)}}
+\label{df/d5e/classSolarSystem_afa3e85e6ab9fbe04e2cb80dc02c69dfc}
+
+
+\-Constructor for solar system with id, name and central star. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em id} & \\
+\hline
+{\em name} & \\
+\hline
+{\em central\-Star} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    setId(id);
+
+    init(name, centralStar);
+}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classSolarSystem_abb8b63f463e770dcd596a5df020ec4be}{
+\index{\-Solar\-System@{\-Solar\-System}!add\-Heavenly\-Body@{add\-Heavenly\-Body}}
+\index{add\-Heavenly\-Body@{add\-Heavenly\-Body}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{add\-Heavenly\-Body}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-::add\-Heavenly\-Body (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Solar\-System\-Heavenly\-Body} $\ast$}]{solar\-System\-Heavenly\-Body}
+\end{DoxyParamCaption}
+)}}
+\label{df/d5e/classSolarSystem_abb8b63f463e770dcd596a5df020ec4be}
+
+
+\-Add a heavenly body to the solar system. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em solar\-System\-Heavenly\-Body} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    if (solarSystemHeavenlyBody)
+    {
+        heavenlyBodies.append(solarSystemHeavenlyBody);
+    }
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystem_a90d1c7f9e05a1bd528b62056b27ff424}{
+\index{\-Solar\-System@{\-Solar\-System}!get\-Central\-Star@{get\-Central\-Star}}
+\index{get\-Central\-Star@{get\-Central\-Star}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{get\-Central\-Star}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Heavenly\-Body}$\ast$ \-Solar\-System\-::get\-Central\-Star (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{df/d5e/classSolarSystem_a90d1c7f9e05a1bd528b62056b27ff424}
+
+
+\-Getter for the central star. 
+
+\begin{DoxyReturn}{\-Returns}
+\hyperlink{classHeavenlyBody}{\-Heavenly\-Body} $\ast$ 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{ return centralStar; }
+\end{DoxyCode}
+\hypertarget{classSolarSystem_ad9adea29a8b57fe361591cafce61b0e2}{
+\index{\-Solar\-System@{\-Solar\-System}!get\-Heavenly\-Bodies@{get\-Heavenly\-Bodies}}
+\index{get\-Heavenly\-Bodies@{get\-Heavenly\-Bodies}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{get\-Heavenly\-Bodies}]{\setlength{\rightskip}{0pt plus 5cm}\-Q\-List$<${\bf \-Solar\-System\-Heavenly\-Body} $\ast$$>$ \-Solar\-System\-::get\-Heavenly\-Bodies (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{df/d5e/classSolarSystem_ad9adea29a8b57fe361591cafce61b0e2}
+
+
+\-Getter for the list of heavenly bodies. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Q\-List$<$\-Solar\-System\-Heavenly\-Body $\ast$$>$ 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{ return heavenlyBodies; }
+\end{DoxyCode}
+\hypertarget{classSolarSystem_a6d73dac11e01ecf06906ede55e8b77fc}{
+\index{\-Solar\-System@{\-Solar\-System}!get\-Id@{get\-Id}}
+\index{get\-Id@{get\-Id}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{get\-Id}]{\setlength{\rightskip}{0pt plus 5cm}qint64 \-Solar\-System\-::get\-Id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{df/d5e/classSolarSystem_a6d73dac11e01ecf06906ede55e8b77fc}
+
+
+\-Getter for the id. 
+
+\begin{DoxyReturn}{\-Returns}
+qint64 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{ return id; }
+\end{DoxyCode}
+\hypertarget{classSolarSystem_a46abe6f8ea2f1db709d3fac9f1bbf00d}{
+\index{\-Solar\-System@{\-Solar\-System}!get\-Name@{get\-Name}}
+\index{get\-Name@{get\-Name}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{get\-Name}]{\setlength{\rightskip}{0pt plus 5cm}\-Q\-String \-Solar\-System\-::get\-Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{df/d5e/classSolarSystem_a46abe6f8ea2f1db709d3fac9f1bbf00d}
+
+
+\-Getter for the name. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Q\-String 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{ return name; }
+\end{DoxyCode}
+\hypertarget{classSolarSystem_a2b6d483d05a984f94c2916f41d812f4b}{
+\index{\-Solar\-System@{\-Solar\-System}!get\-Planet\-Count@{get\-Planet\-Count}}
+\index{get\-Planet\-Count@{get\-Planet\-Count}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{get\-Planet\-Count}]{\setlength{\rightskip}{0pt plus 5cm}int \-Solar\-System\-::get\-Planet\-Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{df/d5e/classSolarSystem_a2b6d483d05a984f94c2916f41d812f4b}
+
+
+\-Getter for the number of heavenly bodies. 
+
+\begin{DoxyReturn}{\-Returns}
+int 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{ return heavenlyBodies.size(); }
+\end{DoxyCode}
+\hypertarget{classSolarSystem_a051c4da538ac4a9495e775e60855786e}{
+\index{\-Solar\-System@{\-Solar\-System}!init@{init}}
+\index{init@{init}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-::init (
+\begin{DoxyParamCaption}
+\item[{\-Q\-String}]{name, }
+\item[{{\bf \-Heavenly\-Body} $\ast$}]{central\-Star}
+\end{DoxyParamCaption}
+)}}
+\label{df/d5e/classSolarSystem_a051c4da538ac4a9495e775e60855786e}
+
+
+\-Method to init the solar system with a name and a central star. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em name} & \\
+\hline
+{\em central\-Star} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    setName(name);
+    setCentralStar(centralStar);
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystem_a20851d16c7fac4274206834c11746b13}{
+\index{\-Solar\-System@{\-Solar\-System}!remove\-Heavenly\-Body@{remove\-Heavenly\-Body}}
+\index{remove\-Heavenly\-Body@{remove\-Heavenly\-Body}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{remove\-Heavenly\-Body}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-::remove\-Heavenly\-Body (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Solar\-System\-Heavenly\-Body} $\ast$}]{solar\-System\-Heavenly\-Body}
+\end{DoxyParamCaption}
+)}}
+\label{df/d5e/classSolarSystem_a20851d16c7fac4274206834c11746b13}
+
+
+\-Remove a heavenly body from the solar system. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em solar\-System\-Heavenly\-Body} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    if (solarSystemHeavenlyBody)
+    {
+        heavenlyBodies.removeOne(solarSystemHeavenlyBody);
+    }
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystem_a468b93dfe340aff47ae7a010020ca365}{
+\index{\-Solar\-System@{\-Solar\-System}!set\-Central\-Star@{set\-Central\-Star}}
+\index{set\-Central\-Star@{set\-Central\-Star}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{set\-Central\-Star}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-::set\-Central\-Star (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Heavenly\-Body} $\ast$}]{central\-Star}
+\end{DoxyParamCaption}
+)}}
+\label{df/d5e/classSolarSystem_a468b93dfe340aff47ae7a010020ca365}
+
+
+\-Setter for the central star. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em central\-Star} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    if (!centralStar)
+    {
+        throw PropertyNotValidException("CentralStar", "The field '%1' must be
+       a valid central star!");
+    }
+
+    this->centralStar = centralStar;
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystem_a97a3b70024c266b428cf4bea2ecdb45c}{
+\index{\-Solar\-System@{\-Solar\-System}!set\-Id@{set\-Id}}
+\index{set\-Id@{set\-Id}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{set\-Id}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-::set\-Id (
+\begin{DoxyParamCaption}
+\item[{qint64}]{id}
+\end{DoxyParamCaption}
+)}}
+\label{df/d5e/classSolarSystem_a97a3b70024c266b428cf4bea2ecdb45c}
+
+
+\-Setter for the id. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em id} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    if (id < 1)
+    {
+        throw PropertyNotValidException("ID", "The field '%1' has to be larger
+       than 0!");
+    }
+
+    this->id = id;
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystem_a1642e94eaa54bc4e43471384f95dcc7d}{
+\index{\-Solar\-System@{\-Solar\-System}!set\-Name@{set\-Name}}
+\index{set\-Name@{set\-Name}!SolarSystem@{\-Solar\-System}}
+\subsubsection[{set\-Name}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-::set\-Name (
+\begin{DoxyParamCaption}
+\item[{\-Q\-String}]{name}
+\end{DoxyParamCaption}
+)}}
+\label{df/d5e/classSolarSystem_a1642e94eaa54bc4e43471384f95dcc7d}
+
+
+\-Setter for the name. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em name} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    name = name.trimmed();
+
+    if (name.length() <= 0 || name.length() > 255)
+    {
+        throw PropertyNotValidException("Name", "The field '%1' has to be
+       between 1 and 255 characters long!");
+    }
+
+    this->name = name;
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+model/solarsystem/\hyperlink{solarsystem_8h}{solarsystem.\-h}\item 
+model/solarsystem/\hyperlink{solarsystem_8cpp}{solarsystem.\-cpp}\end{DoxyCompactItemize}

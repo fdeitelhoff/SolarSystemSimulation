@@ -1,0 +1,31 @@
+<map id="G" name="G">
+<area shape="rect" id="node13" href="$d2/da4/heavenlybodyoverview_8h.html" title="forms/heavenlybody/heavenlybodyoverview.h" alt="" coords="651,80,937,107"/>
+<area shape="rect" id="node35" href="$d9/d97/sqlqueryexception_8h.html" title="data/exceptions/sqlqueryexception.h" alt="" coords="51,453,284,480"/>
+<area shape="rect" id="node59" href="$da/d0b/solarsystemoverview_8h.html" title="forms/solarsystem/solarsystemoverview.h" alt="" coords="1173,80,1440,107"/>
+<area shape="rect" id="node98" href="$d8/d64/simulationview_8h.html" title="forms/simulation/simulationview.h" alt="" coords="2280,155,2499,181"/>
+<area shape="rect" id="node113" href="$d8/df2/solarsystemsimulation_8h.html" title="simulation/solarsystemsimulation.h" alt="" coords="1879,229,2105,256"/>
+<area shape="rect" id="node142" href="$d2/dc0/about_8h.html" title="forms/main/about.h" alt="" coords="1014,80,1148,107"/>
+<area shape="rect" id="node18" href="$d0/d51/heavenlybodymodel_8h.html" title="model/heavenlybody/heavenlybodymodel.h" alt="" coords="349,304,619,331"/>
+<area shape="rect" id="node45" href="$d1/d14/heavenlybodydetails_8h.html" title="forms/heavenlybody/heavenlybodydetails.h" alt="" coords="307,155,577,181"/>
+<area shape="rect" id="node52" href="$db/df6/heavenlybodyitemdelegate_8h.html" title="forms/heavenlybody/heavenlybodyitemdelegate.h" alt="" coords="674,229,981,256"/>
+<area shape="rect" id="node28" href="$d7/df3/heavenlybodyrepository_8h.html" title="data/heavenlybody/heavenlybodyrepository.h" alt="" coords="581,379,863,405"/>
+<area shape="rect" id="node31" href="$d1/d46/heavenlybody_8h.html" title="model/heavenlybody/heavenlybody.h" alt="" coords="1415,528,1651,555"/>
+<area shape="rect" id="node40" href="$d3/da4/heavenlybodytablemodel_8h.html" title="model/heavenlybody/heavenlybodytablemodel.h" alt="" coords="360,453,657,480"/>
+<area shape="rect" id="node64" href="$d1/d47/solarsystemmodel_8h.html" title="model/solarsystem/solarsystemmodel.h" alt="" coords="1216,304,1469,331"/>
+<area shape="rect" id="node88" href="$d5/d52/solarsystemdetails_8h.html" title="forms/solarsystem/solarsystemdetails.h" alt="" coords="1125,155,1379,181"/>
+<area shape="rect" id="node68" href="$d3/df9/solarsystemrepository_8h.html" title="data/solarsystem/solarsystemrepository.h" alt="" coords="939,379,1204,405"/>
+<area shape="rect" id="node77" href="$d0/dca/solarsystemtablemodel_8h.html" title="model/solarsystem/solarsystemtablemodel.h" alt="" coords="1229,379,1509,405"/>
+<area shape="rect" id="node81" href="$d5/dc7/heavenlybodycomboboxmodel_8h.html" title="model/heavenlybody/heavenlybodycomboboxmodel.h" alt="" coords="1569,453,1899,480"/>
+<area shape="rect" id="node85" href="$d9/dd6/solarsystemheavenlybodytablemodel_8h.html" title="model/solarsystem/solarsystemheavenlybodytablemodel.h" alt="" coords="734,453,1095,480"/>
+<area shape="rect" id="node71" href="$d3/d37/solarsystem_8h.html" title="model/solarsystem/solarsystem.h" alt="" coords="1272,453,1491,480"/>
+<area shape="rect" id="node93" href="$d4/d7f/solarsystemitemdelegate_8h.html" title="forms/solarsystem/solarsystemitemdelegate.h" alt="" coords="1100,229,1391,256"/>
+<area shape="rect" id="node108" href="$db/dff/glperspective_8h.html" title="OpenGL/glperspective.h" alt="" coords="2249,229,2412,256"/>
+<area shape="rect" id="node132" href="$dd/dd3/light_8h.html" title="visualization/light/light.h" alt="" coords="2667,379,2828,405"/>
+<area shape="rect" id="node136" href="$de/d26/environment_8h.html" title="visualization/environment/environment.h" alt="" coords="2389,379,2643,405"/>
+<area shape="rect" id="node111" href="$d3/d3a/glvector_8h.html" title="glvector.h" alt="" coords="2311,453,2389,480"/>
+<area shape="rect" id="node116" href="$de/d59/heavenlybody3d_8h.html" title="visualization/heavenlybody/heavenlybody3d.h" alt="" coords="2026,379,2312,405"/>
+<area shape="rect" id="node124" href="$d6/db2/star3d_8h.html" title="visualization/heavenlybody/star3d.h" alt="" coords="2033,304,2263,331"/>
+<area shape="rect" id="node128" href="$d8/d81/planet3d_8h.html" title="visualization/heavenlybody/planet3d.h" alt="" coords="1767,304,2009,331"/>
+<area shape="rect" id="node119" href="$da/dcd/glcolorrgba_8h.html" title="OpenGL/glcolorrgba.h" alt="" coords="2510,453,2657,480"/>
+<area shape="rect" id="node121" href="$d8/dcd/GL_2glut_8h.html" title="OpenGL/GL/glut.h" alt="" coords="2683,453,2809,480"/>
+</map>

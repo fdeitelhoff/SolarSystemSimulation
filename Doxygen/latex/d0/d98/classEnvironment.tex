@@ -1,0 +1,136 @@
+\hypertarget{classEnvironment}{
+\section{\-Environment \-Class \-Reference}
+\label{d0/d98/classEnvironment}\index{\-Environment@{\-Environment}}
+}
+
+
+{\ttfamily \#include $<$environment.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classEnvironment_a8b427c4448d8b7536666837521b9e83d}{\-Environment} ()
+\begin{DoxyCompactList}\small\item\em \-Default constructor set the color matrix for the coordinate axes. \end{DoxyCompactList}\item 
+void \hyperlink{classEnvironment_aec8782b0e0548ff5b18091b2468edda3}{draw\-Axes} (\-G\-Ldouble axis\-Length)
+\begin{DoxyCompactList}\small\item\em \-Draw axes if requested. \end{DoxyCompactList}\item 
+void \hyperlink{classEnvironment_a4cba1d0fd57a2e197079410e96414c07}{toggle\-Coordinate\-Axes\-Visibility} ()
+\begin{DoxyCompactList}\small\item\em \-Toggel visability of coordinate axes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class to show the coordinate axes.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classEnvironment_a8b427c4448d8b7536666837521b9e83d}{
+\index{\-Environment@{\-Environment}!\-Environment@{\-Environment}}
+\index{\-Environment@{\-Environment}!Environment@{\-Environment}}
+\subsubsection[{\-Environment}]{\setlength{\rightskip}{0pt plus 5cm}\-Environment\-::\-Environment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d98/classEnvironment_a8b427c4448d8b7536666837521b9e83d}
+
+
+\-Default constructor set the color matrix for the coordinate axes. 
+
+
+\begin{DoxyCode}
+{
+    colors.resize(6);
+
+    // red. GLfloat r, GLfloat g, GLfloat b, GLfloat a =1.0
+    colors[0] = GLColorRGBA(1.0, 0.0, 0.0, 1.0);
+    colors[1] = GLColorRGBA(1.0, 0.0, 0.0, 1.0);
+
+    // green.
+    colors[2] = GLColorRGBA(0.0, 1.0, 0.0, 1.0);
+    colors[3] = GLColorRGBA(0.0, 1.0, 0.0, 1.0);
+
+    // blue.
+    colors[4] = GLColorRGBA(0.0, 0.0, 1.0, 1.0);
+    colors[5] = GLColorRGBA(0.0, 0.0, 1.0, 1.0);
+
+    areCoordinateAxesVisible = false;
+}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classEnvironment_aec8782b0e0548ff5b18091b2468edda3}{
+\index{\-Environment@{\-Environment}!draw\-Axes@{draw\-Axes}}
+\index{draw\-Axes@{draw\-Axes}!Environment@{\-Environment}}
+\subsubsection[{draw\-Axes}]{\setlength{\rightskip}{0pt plus 5cm}void \-Environment\-::draw\-Axes (
+\begin{DoxyParamCaption}
+\item[{\-G\-Ldouble}]{axis\-Length}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d98/classEnvironment_aec8782b0e0548ff5b18091b2468edda3}
+
+
+\-Draw axes if requested. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em axis\-Length} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    if (areCoordinateAxesVisible)
+    {
+        QVector <GLVector> points(6);
+
+        points[0] = GLVector(-axisLength,0.0,0.0);
+        points[1] = GLVector(axisLength,0.0,0.0);
+        points[2] = GLVector(0.0,-axisLength, 0.0);
+        points[3] = GLVector(0.0,axisLength,0.0);
+        points[4] = GLVector(0.0,0.0,-axisLength);
+        points[5] = GLVector(0.0,0.0,axisLength);
+
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glVertexPointer(3, GL_DOUBLE, sizeof(GLVector), points[0].dv());
+
+        glEnableClientState(GL_COLOR_ARRAY);
+        glColorPointer(4, GL_FLOAT, sizeof(GLColorRGBA), colors[0].fv());
+
+        glDrawArrays(GL_LINES, 0, 6);
+
+        glDisableClientState(GL_COLOR_ARRAY);
+        glDisableClientState(GL_VERTEX_ARRAY);
+    }
+}
+\end{DoxyCode}
+\hypertarget{classEnvironment_a4cba1d0fd57a2e197079410e96414c07}{
+\index{\-Environment@{\-Environment}!toggle\-Coordinate\-Axes\-Visibility@{toggle\-Coordinate\-Axes\-Visibility}}
+\index{toggle\-Coordinate\-Axes\-Visibility@{toggle\-Coordinate\-Axes\-Visibility}!Environment@{\-Environment}}
+\subsubsection[{toggle\-Coordinate\-Axes\-Visibility}]{\setlength{\rightskip}{0pt plus 5cm}void \-Environment\-::toggle\-Coordinate\-Axes\-Visibility (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d0/d98/classEnvironment_a4cba1d0fd57a2e197079410e96414c07}
+
+
+\-Toggel visability of coordinate axes. 
+
+
+\begin{DoxyCode}
+{
+    areCoordinateAxesVisible = !areCoordinateAxesVisible;
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+visualization/environment/\hyperlink{environment_8h}{environment.\-h}\item 
+visualization/environment/\hyperlink{environment_8cpp}{environment.\-cpp}\end{DoxyCompactItemize}

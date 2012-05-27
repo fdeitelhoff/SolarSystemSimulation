@@ -1,0 +1,428 @@
+\hypertarget{classCGLMatrix}{
+\section{\-C\-G\-L\-Matrix \-Class \-Reference}
+\label{d2/dbf/classCGLMatrix}\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}}
+}
+
+
+{\ttfamily \#include $<$glmatrix.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCGLMatrix_ab2ad5981adacfea9323c4cf892831963}{\-C\-G\-L\-Matrix} ()
+\item 
+\hyperlink{classCGLMatrix_a3732be240d673831d771617653dafe85}{\-C\-G\-L\-Matrix} (\-G\-Lfloat \-M\mbox{[}16\mbox{]})
+\item 
+virtual \hyperlink{classCGLMatrix_af11bc8cfebec11bd52020972d8f086c5}{$\sim$\-C\-G\-L\-Matrix} ()
+\item 
+virtual void \hyperlink{classCGLMatrix_a737261c154aa5a703bfa3cf498fffe05}{set\-Matrix} (const \-G\-Lfloat $\ast$\-\_\-new\-Val)
+\item 
+virtual \-G\-Lfloat $\ast$ \hyperlink{classCGLMatrix_aebb017fd4ab60e03894c8e3145238079}{get\-Matrix} ()
+\item 
+virtual void \hyperlink{classCGLMatrix_a09af9dead3620cdbe1457b77cf5f0d1d}{load\-Identity} ()
+\item 
+\hyperlink{classCGLMatrix_a74b6777abe679abe7f6cc4a18293e08a}{\-C\-G\-L\-Matrix} (const \hyperlink{classCGLMatrix}{\-C\-G\-L\-Matrix} \&to\-Copy)
+\item 
+const \hyperlink{classCGLMatrix}{\-C\-G\-L\-Matrix} \hyperlink{classCGLMatrix_a0570cbcf3bfc884c8ff5a76664f8fd1c}{operator=} (const \hyperlink{classCGLMatrix}{\-C\-G\-L\-Matrix} \&to\-Copy)
+\item 
+const \hyperlink{classCGLMatrix}{\-C\-G\-L\-Matrix} \hyperlink{classCGLMatrix_aafd7dd919dd8762157a305b1cd66a9c5}{operator$\ast$} (const \hyperlink{classCGLMatrix}{\-C\-G\-L\-Matrix} \&m2) const 
+\item 
+void \hyperlink{classCGLMatrix_adc9981a6db8d0a61a4cdf07560a5a0e6}{debug} (\-Q\-String caption=\char`\"{}\char`\"{})
+\item 
+\-G\-Lfloat \hyperlink{classCGLMatrix_a977b113879f078d72451a35b8a5870ee}{m} (int row, int column)
+\item 
+\hyperlink{classCGLMatrix}{\-C\-G\-L\-Matrix} \hyperlink{classCGLMatrix_a1fdb5739b9ffb980663203a7b188e9d0}{transpose} () const 
+\item 
+\-G\-Lfloat \hyperlink{classCGLMatrix_ab98d99d89d5a71406d806c65ceb9d3f1}{determinant} ()
+\item 
+\-G\-Lfloat \hyperlink{classCGLMatrix_a2d870a98097ae6d8846a6c43e491eb0b}{calc\-Sarrus} (int deleted\-Column)
+\item 
+void \hyperlink{classCGLMatrix_a4fcc5626c99022aa6bc31622e500a98b}{set\-M} (int row, int column, \-G\-Lfloat value)
+\item 
+void \hyperlink{classCGLMatrix_aacca456a50cee1a3a7936255eb693219}{load\-Modelview} ()
+\item 
+void \hyperlink{classCGLMatrix_a9890f5ebe37ab67d91a9d1d8d384028e}{mult\-To\-Stack} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-A 4 $\ast$4 matrix for use with \-Open\-Gl functions and \-C3d\-Vectors declared as m\mbox{[}16\mbox{]}. \-The standard column-\/major order of an \-Open\-G\-L matrix is\-:
+
+m\mbox{[}0\mbox{]} m\mbox{[}4\mbox{]} m\mbox{[}8\mbox{]} m\mbox{[}12\mbox{]} m11 m12 m13 m14 m\mbox{[}1\mbox{]} m\mbox{[}5\mbox{]} m\mbox{[}9\mbox{]} m\mbox{[}13\mbox{]} m21 m22 m23 m24 m\mbox{[}2\mbox{]} m\mbox{[}6\mbox{]} m\mbox{[}10\mbox{]} m\mbox{[}14\mbox{]} m31 m32 m33 m34 m\mbox{[}3\mbox{]} m\mbox{[}7\mbox{]} m\mbox{[}11\mbox{]} m\mbox{[}15\mbox{]} m41 m42 m43 m44
+
+\-Note that m11 is the top left coefficient m\mbox{[}0\mbox{]}, m41 = m\mbox{[}3\mbox{]}, m12 = m\mbox{[}4\mbox{]} and m44 = m\mbox{[}15\mbox{]}. 
+
+{\bfseries \-If you read this in an html file, refer to the cglmatrix.\-h file for correct formatting.} \begin{DoxyAuthor}{\-Author}
+\-Walter \-Roth 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classCGLMatrix_ab2ad5981adacfea9323c4cf892831963}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}}
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{\-C\-G\-L\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-G\-L\-Matrix\-::\-C\-G\-L\-Matrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d2/dbf/classCGLMatrix_ab2ad5981adacfea9323c4cf892831963}
+\-Standard constructor. \-Initializes a zero matrix. 
+\begin{DoxyCode}
+                    {
+    for( int i =0; i < 16; i++)
+        m_M[i] = 0.0;
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_a3732be240d673831d771617653dafe85}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}}
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{\-C\-G\-L\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-G\-L\-Matrix\-::\-C\-G\-L\-Matrix (
+\begin{DoxyParamCaption}
+\item[{\-G\-Lfloat}]{\-M\mbox{[}16\mbox{]}}
+\end{DoxyParamCaption}
+)}}
+\label{d2/dbf/classCGLMatrix_a3732be240d673831d771617653dafe85}
+\-Constructor that takes a full set of matrix coefficients. \-For column major order see top comment in header file. 
+\begin{DoxyCode}
+                                 {
+    for (int i = 0; i < 16; i++)
+        m_M[i]  = M[i];
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_af11bc8cfebec11bd52020972d8f086c5}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!$\sim$\-C\-G\-L\-Matrix@{$\sim$\-C\-G\-L\-Matrix}}
+\index{$\sim$\-C\-G\-L\-Matrix@{$\sim$\-C\-G\-L\-Matrix}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{$\sim$\-C\-G\-L\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-G\-L\-Matrix\-::$\sim$\-C\-G\-L\-Matrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{d2/dbf/classCGLMatrix_af11bc8cfebec11bd52020972d8f086c5}
+\-Destructor. \-Does nothing. 
+\begin{DoxyCode}
+                     {
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_a74b6777abe679abe7f6cc4a18293e08a}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}}
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{\-C\-G\-L\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-G\-L\-Matrix\-::\-C\-G\-L\-Matrix (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-C\-G\-L\-Matrix} \&}]{to\-Copy}
+\end{DoxyParamCaption}
+)}}
+\label{d2/dbf/classCGLMatrix_a74b6777abe679abe7f6cc4a18293e08a}
+\-Copy constructor. 
+\begin{DoxyCode}
+                                            {
+    copy(toCopy);
+}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classCGLMatrix_a2d870a98097ae6d8846a6c43e491eb0b}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!calc\-Sarrus@{calc\-Sarrus}}
+\index{calc\-Sarrus@{calc\-Sarrus}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{calc\-Sarrus}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-Lfloat \-C\-G\-L\-Matrix\-::calc\-Sarrus (
+\begin{DoxyParamCaption}
+\item[{int}]{deleted\-Column}
+\end{DoxyParamCaption}
+)}}
+\label{d2/dbf/classCGLMatrix_a2d870a98097ae6d8846a6c43e491eb0b}
+\-Calculates the determinant using \-Sarrus' law fo 3 by 3 matrices. \-The 3 by 3 matrix is obtained by deleting the last row (row 4) and the specified column.
+
+\-Calculates the determinant using \-Sarrus' law fo 3 by 3 matrices. \-The 3 by 3 sub-\/matrix is obtained by deleting the last row (row 4) and the specified column. 
+\begin{DoxyCode}
+                                              {
+    int sourceColumn = 0;
+    int destColumn = 1;
+    int row = 1;
+    GLfloat result;
+    CGLMatrix dest;   //zero init using standard constructor
+    //create a 3 by 3 matrix from the top 3 rows, and delete specified column
+    for(destColumn =1; destColumn <=3; destColumn++) {
+        sourceColumn++;
+        if(sourceColumn == deletedColumn)
+            sourceColumn++;  //skip deleted column
+        for(row = 1; row <=3; row ++){
+            dest.setM(destColumn, row, m(sourceColumn, row));
+        } //end for row
+    }//end for sourceColumn
+
+    result=
+            dest.m(1,1) * dest.m(2,2) * dest.m(3,3)       //Sarrus law
+            + dest.m(1,2) * dest.m(2,3) * dest.m(3,1)
+            + dest.m(1,3) * dest.m(2,1) * dest.m(3,2)
+            - dest.m(1,3) * dest.m(2,2) * dest.m(3,1)
+            - dest.m(1,1) * dest.m(2,3) * dest.m(3,2)
+            - dest.m(1,2) * dest.m(2,1) * dest.m(3,3);
+    QString s;
+    dest.debug("Sub matrix without column " + s.setNum(deletedColumn));
+    qDebug("Sarrus value: " + s.setNum(result, 'g', 4).toLatin1());
+    return result;
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_adc9981a6db8d0a61a4cdf07560a5a0e6}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!debug@{debug}}
+\index{debug@{debug}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{debug}]{\setlength{\rightskip}{0pt plus 5cm}void \-C\-G\-L\-Matrix\-::debug (
+\begin{DoxyParamCaption}
+\item[{\-Q\-String}]{caption = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}}
+\label{d2/dbf/classCGLMatrix_adc9981a6db8d0a61a4cdf07560a5a0e6}
+\-Writes matrix coefficients to stderr. 
+\begin{DoxyCode}
+                                    {
+    QString line, s;
+    int row, column;
+    qDebug("CGLMatrix debug output: " + caption.toLatin1());
+    for (row = 0; row <4; row++){
+        line= "row " + s.setNum(row+1) +": ";
+        for(column = 0; column <4; column++){
+            line += "  "+ s.setNum(m_M[column * 4 + row], 'g', 4);
+        }
+        qDebug(line.toLatin1());
+    }
+    qDebug("End of CGLMatrix debug output.\n");
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_ab98d99d89d5a71406d806c65ceb9d3f1}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!determinant@{determinant}}
+\index{determinant@{determinant}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{determinant}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-Lfloat \-C\-G\-L\-Matrix\-::determinant (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d2/dbf/classCGLMatrix_ab98d99d89d5a71406d806c65ceb9d3f1}
+\-Returns the determinant.
+
+\-Returns the determinant. \-Because it is rather probable, that the elements of the last row are 0, 0, 0 , 1, the determinant is calculated based on the last row (row number 4). \-The determinantes of the 3 by 3 matrices are calculated using \-Sarrus' law. 
+\begin{DoxyCode}
+                              {
+    GLfloat result = 0.0;
+    if(m(1, 4) != 0.0)
+        result -= m(1,4) * calcSarrus(1);
+    if(m(2, 4) != 0.0)
+        result += m(2,4) * calcSarrus(2);
+    if(m(3, 4) != 0.0)
+        result -= m(3,4) * calcSarrus(3);
+    if(m(4,4) != 0.0)
+        result += m(4,4) * calcSarrus(4);
+
+    QString s;
+    qDebug("determinant value: " + s.setNum(result, 'g', 4).toLatin1());
+
+    return result;
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_aebb017fd4ab60e03894c8e3145238079}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!get\-Matrix@{get\-Matrix}}
+\index{get\-Matrix@{get\-Matrix}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{get\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-Lfloat $\ast$ \-C\-G\-L\-Matrix\-::get\-Matrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{d2/dbf/classCGLMatrix_aebb017fd4ab60e03894c8e3145238079}
+\-Read property of \-G\-Lfloat m\mbox{[}16\mbox{]}. \-Returns the address of m\mbox{[}0\mbox{]}.
+
+\-Read property of \-G\-Lfloat m\-\_\-\-M\mbox{[}16\mbox{]}. 
+\begin{DoxyCode}
+                              {
+    return &m_M[0];
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_a09af9dead3620cdbe1457b77cf5f0d1d}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!load\-Identity@{load\-Identity}}
+\index{load\-Identity@{load\-Identity}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{load\-Identity}]{\setlength{\rightskip}{0pt plus 5cm}void \-C\-G\-L\-Matrix\-::load\-Identity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{d2/dbf/classCGLMatrix_a09af9dead3620cdbe1457b77cf5f0d1d}
+\-Loads the identity matrix. 
+\begin{DoxyCode}
+                            {
+    m_M[0]=1.0;      //column 1
+    m_M[1]=0.0;
+    m_M[2]=0.0;
+    m_M[3]=0.0;
+
+    m_M[4]=0.0;     //column 2
+    m_M[5]=1.0;
+    m_M[6]=0.0;
+    m_M[7]=0.0;
+
+    m_M[8]=0.0;     // column 3
+    m_M[9]=0.0;
+    m_M[10]=1.0;
+    m_M[11]=0.0;
+
+    m_M[12]=0.0;   //  column 4
+    m_M[13]=0.0;
+    m_M[14]=0.0;
+    m_M[15]=1.0;
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_aacca456a50cee1a3a7936255eb693219}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!load\-Modelview@{load\-Modelview}}
+\index{load\-Modelview@{load\-Modelview}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{load\-Modelview}]{\setlength{\rightskip}{0pt plus 5cm}void \-C\-G\-L\-Matrix\-::load\-Modelview (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d2/dbf/classCGLMatrix_aacca456a50cee1a3a7936255eb693219}
+\-Loads the current modelview matrix. 
+\begin{DoxyCode}
+                             {
+    glGetFloatv(GL_MODELVIEW_MATRIX, (GLfloat*)&m_M);
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_a977b113879f078d72451a35b8a5870ee}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!m@{m}}
+\index{m@{m}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{m}]{\setlength{\rightskip}{0pt plus 5cm}\-G\-Lfloat \-C\-G\-L\-Matrix\-::m (
+\begin{DoxyParamCaption}
+\item[{int}]{row, }
+\item[{int}]{column}
+\end{DoxyParamCaption}
+)}}
+\label{d2/dbf/classCGLMatrix_a977b113879f078d72451a35b8a5870ee}
+\-Returns matrix element row, column. \-For mathematical convenience, row and column numbers start with 1. \-Use get\-Matrix for direct access to single index zero based matrix element array, as required by \-Open\-G\-L functions. 
+\begin{DoxyCode}
+                                       {
+    return m_M[row -1 + (column -1) *4];
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_a9890f5ebe37ab67d91a9d1d8d384028e}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!mult\-To\-Stack@{mult\-To\-Stack}}
+\index{mult\-To\-Stack@{mult\-To\-Stack}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{mult\-To\-Stack}]{\setlength{\rightskip}{0pt plus 5cm}void \-C\-G\-L\-Matrix\-::mult\-To\-Stack (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}
+\label{d2/dbf/classCGLMatrix_a9890f5ebe37ab67d91a9d1d8d384028e}
+\-Multiplies the matrix onto the current matrix stack {\bfseries without saving }the current matrix on that stack. 
+\begin{DoxyCode}
+                                {
+    glMultMatrixf((GLfloat*)&m_M);
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_aafd7dd919dd8762157a305b1cd66a9c5}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-C\-G\-L\-Matrix} \-C\-G\-L\-Matrix\-::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-C\-G\-L\-Matrix} \&}]{m2}
+\end{DoxyParamCaption}
+) const}}
+\label{d2/dbf/classCGLMatrix_aafd7dd919dd8762157a305b1cd66a9c5}
+\-Matrix multiplication m $\ast$ m2. !!!\-W\-A\-R\-N\-I\-N\-G\-: \-O\-R\-D\-E\-R \-O\-F \-M\-A\-T\-R\-I\-C\-E\-S \-I\-S \-C\-R\-I\-T\-I\-C\-A\-L!!! (m$\ast$m2 != m2$\ast$m) \-Calculations run on main fpu. \-Use gl\-Mult\-Matrix for calculation on graphics processor.
+
+\-Calculations run on main fpu. \-Use gl\-Mult\-Matrix for calculation on graphics processor. \-Matrix multiplication m\-\_\-\-M $\ast$ m2. !!!\-W\-A\-R\-N\-I\-N\-G\-: \-O\-R\-D\-E\-R \-O\-F \-M\-A\-T\-R\-I\-C\-E\-S \-I\-S \-C\-R\-I\-T\-I\-C\-A\-L!!! (m\-\_\-\-M$\ast$m2 != m2$\ast$m\-\_\-\-M) \-The result element result\mbox{[}i,j\mbox{]} is obtained by multiplying all elements of row i of matrix m\-\_\-\-M with the elements of column j of matrix m2 and adding the products. \-Mathematical row and column numbers usually start with a 1 and not with a 0 as in \-C++. \-This has to be translated into the column major order of the \-Open\-G\-L matrix, where the elements are held in m\-\_\-\-M\mbox{[}16\mbox{]}. \-A 1 based row i is addressed by\-: m\-\_\-\-M\mbox{[}i-\/1\mbox{]}, m\-\_\-\-M \mbox{[}i+3\mbox{]}, m\-\_\-\-M\mbox{[}i+7\mbox{]}, m\-\_\-\-M\mbox{[}i+11\mbox{]}. \-A 0 based row i is addressed by\-: m\-\_\-\-M\mbox{[}i\mbox{]}, m\-\_\-\-M \mbox{[}i+4\mbox{]}, m\-\_\-\-M\mbox{[}i+8\mbox{]}, m\-\_\-\-M\mbox{[}i+12\mbox{]} = m\-\_\-\-M\mbox{[}row + 4 $\ast$ column\mbox{]}. \-A 1 based column j is addressed by\-: m2\mbox{[}(j-\/1)$\ast$4\mbox{]}, m\-\_\-\-M\mbox{[}(j-\/1)$\ast$4 +1, m\-\_\-\-M\mbox{[}(j-\/1)$\ast$4 +2, m\-\_\-\-M\mbox{[}(j-\/1)$\ast$4 +3\mbox{]}. \-A 0 based column j is addressed by\-: m2\mbox{[}j$\ast$4\mbox{]}, m\-\_\-\-M\mbox{[}j$\ast$4 +1\mbox{]}, m\-\_\-\-M\mbox{[}j$\ast$4 +2\mbox{]}, m\-\_\-\-M\mbox{[}j$\ast$4 +3\mbox{]} = m\-\_\-\-M\mbox{[}4$\ast$column + row\mbox{]}. \-The operator $\ast$ runs through m\-\_\-\-M\mbox{[}16\mbox{]} by zero based rows and columns, which is not the fastest, however a pretty obvious way of calculating the product. \-For top speed, use 16 separately hard coded sums. 
+\begin{DoxyCode}
+                                                               {
+    GLfloat result[16];
+    int row, column, fourTimesColumn;
+    for(row = 0; row<4; row++)            //rows 0 to 3, mathematical i = 1 to
+       4
+        for (column =0; column <4; column ++){  //columns 0 to 3, mathematical
+       j= 1 to 4
+        fourTimesColumn = 4 * column;
+        result[row + 4 * column] =
+                m_M[row]       * m2.m_M[fourTimesColumn]
+                +  m_M[row + 4]   * m2.m_M[fourTimesColumn + 1]
+                +  m_M[row + 8]   * m2.m_M[fourTimesColumn + 2]
+                +  m_M[row + 12]  * m2.m_M[fourTimesColumn + 3];
+    }
+    return CGLMatrix(result);
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_a0570cbcf3bfc884c8ff5a76664f8fd1c}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!operator=@{operator=}}
+\index{operator=@{operator=}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-C\-G\-L\-Matrix} \-C\-G\-L\-Matrix\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-C\-G\-L\-Matrix} \&}]{to\-Copy}
+\end{DoxyParamCaption}
+)}}
+\label{d2/dbf/classCGLMatrix_a0570cbcf3bfc884c8ff5a76664f8fd1c}
+\-Operator = copies m.
+
+\-Operator = copies m\-\_\-\-M. 
+\begin{DoxyCode}
+                                                              {
+    copy(toCopy);
+    return * this;
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_a4fcc5626c99022aa6bc31622e500a98b}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!set\-M@{set\-M}}
+\index{set\-M@{set\-M}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{set\-M}]{\setlength{\rightskip}{0pt plus 5cm}void \-C\-G\-L\-Matrix\-::set\-M (
+\begin{DoxyParamCaption}
+\item[{int}]{row, }
+\item[{int}]{column, }
+\item[{\-G\-Lfloat}]{value}
+\end{DoxyParamCaption}
+)}}
+\label{d2/dbf/classCGLMatrix_a4fcc5626c99022aa6bc31622e500a98b}
+\-Sets matrix element in row and column. \-Row and column numbers start with 1. 
+\begin{DoxyCode}
+                                                      {
+    m_M[row -1 + (column -1) * 4] = value;
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_a737261c154aa5a703bfa3cf498fffe05}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!set\-Matrix@{set\-Matrix}}
+\index{set\-Matrix@{set\-Matrix}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{set\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}void \-C\-G\-L\-Matrix\-::set\-Matrix (
+\begin{DoxyParamCaption}
+\item[{const \-G\-Lfloat $\ast$}]{\-\_\-new\-Val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{d2/dbf/classCGLMatrix_a737261c154aa5a703bfa3cf498fffe05}
+\-Write property of \-G\-Lfloat m\mbox{[}16\mbox{]}.
+
+\-Write property of \-G\-Lfloat m\-\_\-\-M\mbox{[}16\mbox{]}. 
+\begin{DoxyCode}
+                                                {
+    for( int i =0; i < 16; i++)
+        m_M[i] = _newVal[i];
+}
+\end{DoxyCode}
+\hypertarget{classCGLMatrix_a1fdb5739b9ffb980663203a7b188e9d0}{
+\index{\-C\-G\-L\-Matrix@{\-C\-G\-L\-Matrix}!transpose@{transpose}}
+\index{transpose@{transpose}!CGLMatrix@{\-C\-G\-L\-Matrix}}
+\subsubsection[{transpose}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-C\-G\-L\-Matrix} \-C\-G\-L\-Matrix\-::transpose (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}
+\label{d2/dbf/classCGLMatrix_a1fdb5739b9ffb980663203a7b188e9d0}
+\-Returns the transposed matrix m$^\wedge$\-T. 
+\begin{DoxyCode}
+                                   {
+    GLfloat t[16];
+    int row, column;
+    for (row = 0; row <4; row++){
+        for(column = 0; column <4; column++){
+            t[row*4 + column] = m_M[row + column *4];
+        }//end for column
+    }// end for row
+    return CGLMatrix(t);
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\-Open\-G\-L/\hyperlink{glmatrix_8h}{glmatrix.\-h}\item 
+\-Open\-G\-L/\hyperlink{glmatrix_8cpp}{glmatrix.\-cpp}\end{DoxyCompactItemize}

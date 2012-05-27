@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" id="node7" href="$d1/d47/solarsystemmodel_8h.html" title="model/solarsystem/solarsystemmodel.h" alt="" coords="633,80,887,107"/>
+<area shape="rect" id="node13" href="$d3/df9/solarsystemrepository_8h.html" title="data/solarsystem/solarsystemrepository.h" alt="" coords="991,155,1256,181"/>
+<area shape="rect" id="node61" href="$d0/dca/solarsystemtablemodel_8h.html" title="model/solarsystem/solarsystemtablemodel.h" alt="" coords="274,155,555,181"/>
+<area shape="rect" id="node71" href="$d5/dc7/heavenlybodycomboboxmodel_8h.html" title="model/heavenlybody/heavenlybodycomboboxmodel.h" alt="" coords="1753,155,2083,181"/>
+<area shape="rect" id="node77" href="$d7/df3/heavenlybodyrepository_8h.html" title="data/heavenlybody/heavenlybodyrepository.h" alt="" coords="1447,155,1728,181"/>
+<area shape="rect" id="node97" href="$d9/dd6/solarsystemheavenlybodytablemodel_8h.html" title="model/solarsystem/solarsystemheavenlybodytablemodel.h" alt="" coords="579,155,940,181"/>
+<area shape="rect" id="node25" href="$d0/d57/postgresqldatabase_8h.html" title="database/postgresqldatabase.h" alt="" coords="1048,229,1251,256"/>
+<area shape="rect" id="node35" href="$d3/d37/solarsystem_8h.html" title="model/solarsystem/solarsystem.h" alt="" coords="504,229,723,256"/>
+<area shape="rect" id="node53" href="$d9/d97/sqlqueryexception_8h.html" title="data/exceptions/sqlqueryexception.h" alt="" coords="1272,379,1505,405"/>
+<area shape="rect" id="node57" href="$db/d11/entitynotuniqueexception_8h.html" title="data/exceptions/entitynotuniqueexception.h" alt="" coords="1615,379,1888,405"/>
+<area shape="rect" id="node29" href="$de/d89/databaseconnectionfailedexception_8h.html" title="database/exceptions/databaseconnectionfailedexception.h" alt="" coords="1009,453,1369,480"/>
+<area shape="rect" id="node39" href="$d1/d46/heavenlybody_8h.html" title="model/heavenlybody/heavenlybody.h" alt="" coords="715,379,951,405"/>
+<area shape="rect" id="node44" href="$db/d66/propertynotvalidexception_8h.html" title="model/exceptions/propertynotvalidexception.h" alt="" coords="509,453,795,480"/>
+<area shape="rect" id="node48" href="$d4/d2a/solarsystemheavenlybody_8h.html" title="model/solarsystem/solarsystemheavenlybody.h" alt="" coords="496,304,793,331"/>
+<area shape="rect" id="node87" href="$d3/da6/deleteentityfailedexception_8h.html" title="data/exceptions/deleteentityfailedexception.h" alt="" coords="1444,453,1725,480"/>
+<area shape="rect" id="node93" href="$dd/d34/heavenlybodytypeexception_8h.html" title="data/exceptions/heavenlybodytypeexception.h" alt="" coords="1801,453,2092,480"/>
+</map>

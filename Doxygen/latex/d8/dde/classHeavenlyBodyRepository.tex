@@ -1,0 +1,444 @@
+\hypertarget{classHeavenlyBodyRepository}{
+\section{\-Heavenly\-Body\-Repository \-Class \-Reference}
+\label{d8/dde/classHeavenlyBodyRepository}\index{\-Heavenly\-Body\-Repository@{\-Heavenly\-Body\-Repository}}
+}
+
+
+{\ttfamily \#include $<$heavenlybodyrepository.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHeavenlyBodyRepository_ac3d5ecbaa6079313028df52accaca9d3}{\-Heavenly\-Body\-Repository} ()
+\begin{DoxyCompactList}\small\item\em \-Constructor\-: \-Repository of the heavenly bodies with an instance of the complete database. \end{DoxyCompactList}\item 
+\-Q\-List$<$ \hyperlink{classHeavenlyBody}{\-Heavenly\-Body} $\ast$ $>$ \hyperlink{classHeavenlyBodyRepository_aa26902de514869deb6683f15b7c8a9e4}{fetch\-All\-Heavenly\-Body\-Entities} ()
+\begin{DoxyCompactList}\small\item\em \-Create a list of all heavenly bodies stored in the database. \end{DoxyCompactList}\item 
+\-Q\-List$<$ \hyperlink{classHeavenlyBody}{\-Heavenly\-Body} $\ast$ $>$ \hyperlink{classHeavenlyBodyRepository_a1e514d292fb5c3c1ad10f3abfa68b528}{fetch\-Explizit\-Typed\-Entities} (\-Q\-String type)
+\begin{DoxyCompactList}\small\item\em \-Returns a list of heavely bodies of the given type. \end{DoxyCompactList}\item 
+void \hyperlink{classHeavenlyBodyRepository_a94e952644cedae8e17c89253587838c3}{update\-Entity} (\hyperlink{classHeavenlyBody}{\-Heavenly\-Body} $\ast$heavenly\-Body)
+\begin{DoxyCompactList}\small\item\em \-Update the data of the given heavenly body. \end{DoxyCompactList}\item 
+void \hyperlink{classHeavenlyBodyRepository_a1306c330be807110a73b117d1fe47781}{insert\-Entity} (\hyperlink{classHeavenlyBody}{\-Heavenly\-Body} $\ast$heavenly\-Body)
+\begin{DoxyCompactList}\small\item\em \-Add a new heavenly body to the to the database. \end{DoxyCompactList}\item 
+void \hyperlink{classHeavenlyBodyRepository_a6f648521bdff4d5ff1f17ac9948c674b}{delete\-Entity} (\hyperlink{classHeavenlyBody}{\-Heavenly\-Body} $\ast$heavenly\-Body)
+\begin{DoxyCompactList}\small\item\em \-Delete heavenly body from the database. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class for heavenly body repository.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classHeavenlyBodyRepository_ac3d5ecbaa6079313028df52accaca9d3}{
+\index{\-Heavenly\-Body\-Repository@{\-Heavenly\-Body\-Repository}!\-Heavenly\-Body\-Repository@{\-Heavenly\-Body\-Repository}}
+\index{\-Heavenly\-Body\-Repository@{\-Heavenly\-Body\-Repository}!HeavenlyBodyRepository@{\-Heavenly\-Body\-Repository}}
+\subsubsection[{\-Heavenly\-Body\-Repository}]{\setlength{\rightskip}{0pt plus 5cm}\-Heavenly\-Body\-Repository\-::\-Heavenly\-Body\-Repository (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d8/dde/classHeavenlyBodyRepository_ac3d5ecbaa6079313028df52accaca9d3}
+
+
+\-Constructor\-: \-Repository of the heavenly bodies with an instance of the complete database. 
+
+
+\begin{DoxyCode}
+{
+    database = PostgreSQLDatabase::getInstance();
+}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classHeavenlyBodyRepository_a6f648521bdff4d5ff1f17ac9948c674b}{
+\index{\-Heavenly\-Body\-Repository@{\-Heavenly\-Body\-Repository}!delete\-Entity@{delete\-Entity}}
+\index{delete\-Entity@{delete\-Entity}!HeavenlyBodyRepository@{\-Heavenly\-Body\-Repository}}
+\subsubsection[{delete\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}void \-Heavenly\-Body\-Repository\-::delete\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Heavenly\-Body} $\ast$}]{heavenly\-Body}
+\end{DoxyParamCaption}
+)}}
+\label{d8/dde/classHeavenlyBodyRepository_a6f648521bdff4d5ff1f17ac9948c674b}
+
+
+\-Delete heavenly body from the database. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em heavenly\-Body} & \-Heavenly body to delete. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    int count = isHeavenlyBodyUsedAsPlanet(heavenlyBody);
+
+    if (count > 0)
+    {
+        throw DeleteEntityFailedException(QString("The heavenly body could not
+       be deleted because it is used in %1 solar system(s) as a planet!").arg(count));
+    }
+
+    count = isHeavenlyBodyUsedAsStar(heavenlyBody);
+
+    if (count > 0)
+    {
+        throw DeleteEntityFailedException(QString("The heavenly body could not
+       be deleted because it is used in %1 solar system(s) as a star!").arg(count));
+    }
+
+    QSqlQuery deleteHeavenlyBodyQuery;
+    deleteHeavenlyBodyQuery.prepare("DELETE FROM "
+                                    "       heavenlybody "
+                                    "WHERE "
+                                    "       heavenlybodyid = :heavenlybodyid");
+
+    deleteHeavenlyBodyQuery.bindValue(":heavenlybodyid", heavenlyBody->getId())
+      ;
+
+    if (!deleteHeavenlyBodyQuery.exec())
+    {
+        throw DeleteEntityFailedException("The heavenly body could not be
+       deleted!",
+                                          deleteHeavenlyBodyQuery.lastError().
+      text());
+    }
+}
+\end{DoxyCode}
+\hypertarget{classHeavenlyBodyRepository_aa26902de514869deb6683f15b7c8a9e4}{
+\index{\-Heavenly\-Body\-Repository@{\-Heavenly\-Body\-Repository}!fetch\-All\-Heavenly\-Body\-Entities@{fetch\-All\-Heavenly\-Body\-Entities}}
+\index{fetch\-All\-Heavenly\-Body\-Entities@{fetch\-All\-Heavenly\-Body\-Entities}!HeavenlyBodyRepository@{\-Heavenly\-Body\-Repository}}
+\subsubsection[{fetch\-All\-Heavenly\-Body\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}\-Q\-List$<$ {\bf \-Heavenly\-Body} $\ast$ $>$ \-Heavenly\-Body\-Repository\-::fetch\-All\-Heavenly\-Body\-Entities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d8/dde/classHeavenlyBodyRepository_aa26902de514869deb6683f15b7c8a9e4}
+
+
+\-Create a list of all heavenly bodies stored in the database. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Q\-List$<$\-Heavenly\-Body $\ast$$>$ \-List of all stored heavenly bodies. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    QSqlQuery heavenlyBodyEntityQuery;
+    heavenlyBodyEntityQuery.prepare("SELECT "
+                                    "     heavenlybodyid, "
+                                    "     name, "
+                                    "     diameter, "
+                                    "     color, "
+                                    "     type "
+                                    "FROM "
+                                    "     heavenlybody "
+                                    "ORDER BY "
+                                    "     type, "
+                                    "     name");
+
+    if (!heavenlyBodyEntityQuery.exec())
+    {
+        throw SqlQueryException("The heavenly body entities could not be
+       fetched!",
+                                heavenlyBodyEntityQuery.lastError().text());
+    }
+
+    QList<HeavenlyBody *> entities;
+
+    while (heavenlyBodyEntityQuery.next())
+    {
+        qint64 id = heavenlyBodyEntityQuery.value(0).toLongLong();
+        QString name = heavenlyBodyEntityQuery.value(1).toString();
+        int diameter = heavenlyBodyEntityQuery.value(2).toInt();
+        QString color = heavenlyBodyEntityQuery.value(3).toString();
+        QString type = heavenlyBodyEntityQuery.value(4).toString();
+
+        entities.append(new HeavenlyBody(id, name, diameter, color, type));
+    }
+
+    return entities;
+}
+\end{DoxyCode}
+\hypertarget{classHeavenlyBodyRepository_a1e514d292fb5c3c1ad10f3abfa68b528}{
+\index{\-Heavenly\-Body\-Repository@{\-Heavenly\-Body\-Repository}!fetch\-Explizit\-Typed\-Entities@{fetch\-Explizit\-Typed\-Entities}}
+\index{fetch\-Explizit\-Typed\-Entities@{fetch\-Explizit\-Typed\-Entities}!HeavenlyBodyRepository@{\-Heavenly\-Body\-Repository}}
+\subsubsection[{fetch\-Explizit\-Typed\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}\-Q\-List$<$ {\bf \-Heavenly\-Body} $\ast$ $>$ \-Heavenly\-Body\-Repository\-::fetch\-Explizit\-Typed\-Entities (
+\begin{DoxyParamCaption}
+\item[{\-Q\-String}]{type}
+\end{DoxyParamCaption}
+)}}
+\label{d8/dde/classHeavenlyBodyRepository_a1e514d292fb5c3c1ad10f3abfa68b528}
+
+
+\-Returns a list of heavely bodies of the given type. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em type} & \-Type of the heavenly body \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Q\-List$<$\-Heavenly\-Body $\ast$$>$ \-List of the heavenly bodies of type 'type'. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    QSqlQuery fetchTypedEntitiesQuery;
+    fetchTypedEntitiesQuery.prepare("SELECT "
+                                    "     heavenlybodyid, "
+                                    "     name, "
+                                    "     diameter, "
+                                    "     color, "
+                                    "     type "
+                                    "FROM "
+                                    "     heavenlybody "
+                                    "WHERE "
+                                    "     type = :type "
+                                    "ORDER BY "
+                                    "     name");
+
+    fetchTypedEntitiesQuery.bindValue(":type", type);
+
+    if (!fetchTypedEntitiesQuery.exec())
+    {
+        throw SqlQueryException("The explizit typed heavenly bodies could not
+       be retrieved!",
+                                fetchTypedEntitiesQuery.lastError().text());
+    }
+
+    QList<HeavenlyBody *> entities;
+
+    while (fetchTypedEntitiesQuery.next())
+    {
+        qint64 id = fetchTypedEntitiesQuery.value(0).toLongLong();
+        QString name = fetchTypedEntitiesQuery.value(1).toString();
+        int diameter = fetchTypedEntitiesQuery.value(2).toInt();
+        QString color = fetchTypedEntitiesQuery.value(3).toString();
+        QString type = fetchTypedEntitiesQuery.value(4).toString();
+
+        entities.append(new HeavenlyBody(id, name, diameter, color, type));
+    }
+
+    return entities;
+}
+\end{DoxyCode}
+\hypertarget{classHeavenlyBodyRepository_a1306c330be807110a73b117d1fe47781}{
+\index{\-Heavenly\-Body\-Repository@{\-Heavenly\-Body\-Repository}!insert\-Entity@{insert\-Entity}}
+\index{insert\-Entity@{insert\-Entity}!HeavenlyBodyRepository@{\-Heavenly\-Body\-Repository}}
+\subsubsection[{insert\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}void \-Heavenly\-Body\-Repository\-::insert\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Heavenly\-Body} $\ast$}]{heavenly\-Body}
+\end{DoxyParamCaption}
+)}}
+\label{d8/dde/classHeavenlyBodyRepository_a1306c330be807110a73b117d1fe47781}
+
+
+\-Add a new heavenly body to the to the database. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em heavenly\-Body} & \-Heavenly body to add. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    // Check if the heavenly body is unique (the name until now).
+    if (!isEntityUnique(heavenlyBody))
+    {
+        throw EntityNotUniqueException("The name of the heavenly body is not
+       unique! Please choose another one.");
+    }
+
+    QSqlQuery addHeavenlyBodyQuery;
+    addHeavenlyBodyQuery.prepare("INSERT INTO heavenlybody "
+                                 "      ( "
+                                 "       name, "
+                                 "       diameter, "
+                                 "       color, "
+                                 "       type "
+                                 "      ) "
+                                 "VALUES "
+                                 "      ( "
+                                 "       :name, "
+                                 "       :diameter, "
+                                 "       :color, "
+                                 "       :type "
+                                 "      ) "
+                                 "RETURNING "
+                                 "      heavenlybodyid");
+
+    addHeavenlyBodyQuery.bindValue(":name", heavenlyBody->getName());
+    addHeavenlyBodyQuery.bindValue(":diameter", heavenlyBody->getDiameter());
+    addHeavenlyBodyQuery.bindValue(":color", colorToString(heavenlyBody->
+      getColor()));
+    addHeavenlyBodyQuery.bindValue(":type", heavenlyBody->getType());
+
+    if (!addHeavenlyBodyQuery.exec())
+    {
+        throw SqlQueryException("The heavenly body could not be inserted!",
+                                addHeavenlyBodyQuery.lastError().text());
+    }
+
+    // Get the last inserted id.
+    if (!addHeavenlyBodyQuery.next())
+    {
+        throw new SqlQueryException("The last inserted heavenly body id could
+       not be retrieved!",
+                                    addHeavenlyBodyQuery.lastError().text());
+    }
+
+    qint64 id = addHeavenlyBodyQuery.record().value("heavenlybodyid").
+      toLongLong();
+
+    if (id <= 0)
+    {
+        throw new SqlQueryException("The last inserted heavenly body id could
+       not be retrieved!",
+                                    addHeavenlyBodyQuery.lastError().text());
+    }
+
+    heavenlyBody->setId(id);
+}
+\end{DoxyCode}
+\hypertarget{classHeavenlyBodyRepository_a94e952644cedae8e17c89253587838c3}{
+\index{\-Heavenly\-Body\-Repository@{\-Heavenly\-Body\-Repository}!update\-Entity@{update\-Entity}}
+\index{update\-Entity@{update\-Entity}!HeavenlyBodyRepository@{\-Heavenly\-Body\-Repository}}
+\subsubsection[{update\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}void \-Heavenly\-Body\-Repository\-::update\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Heavenly\-Body} $\ast$}]{heavenly\-Body}
+\end{DoxyParamCaption}
+)}}
+\label{d8/dde/classHeavenlyBodyRepository_a94e952644cedae8e17c89253587838c3}
+
+
+\-Update the data of the given heavenly body. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em heavenly\-Body} & \-Heavely body to be updated. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    // Check if the heavenly body is unique (the name until now).
+    if (!isEntityUnique(heavenlyBody))
+    {
+        throw EntityNotUniqueException("The name of the heavenly body is not
+       unique! Please choose another one.");
+    }
+
+    // Check if the heavenlybody is used as a star, when it should be a planet!
+    if (heavenlyBody->getType() == "P")
+    {
+        QSqlQuery isHeavenlyBodyStarQuery;
+        isHeavenlyBodyStarQuery.prepare("SELECT "
+                                        "       COUNT(*) As count "
+                                        "FROM "
+                                        "       solarsystem "
+                                        "WHERE "
+                                        "       centralstarid = :centralstarid"
+      );
+
+        isHeavenlyBodyStarQuery.bindValue(":centralstarid", heavenlyBody->getId
+      ());
+
+        if (!isHeavenlyBodyStarQuery.exec())
+        {
+            throw SqlQueryException("The heavenly body could not be checked!",
+                                    isHeavenlyBodyStarQuery.lastError().text())
+      ;
+        }
+
+        if (!isHeavenlyBodyStarQuery.next())
+        {
+            throw SqlQueryException("The heavenly body could not be checked!",
+                                    isHeavenlyBodyStarQuery.lastError().text())
+      ;
+        }
+
+        if (isHeavenlyBodyStarQuery.record().value("count").toInt() != 0)
+        {
+            throw HeavenlyBodyTypeException(QString("The Heavenly Body '%1'
+       could not changed to a planet!\n\nIt is used as a star in at least one solar
+       system.").arg(heavenlyBody->getName()));
+        }
+    }
+    // Check if the heavenlybody is used as a planet, when it should be a star!
+    else if (heavenlyBody->getType() == "S")
+    {
+        QSqlQuery isHeavenlyBodyPlanetQuery;
+        isHeavenlyBodyPlanetQuery.prepare("SELECT "
+                                          "       COUNT(*) As count "
+                                          "FROM "
+                                          "       solarsystemtoheavenlybody "
+                                          "WHERE "
+                                          "       heavenlybodyid =
+       :heavenlybodyid");
+
+        isHeavenlyBodyPlanetQuery.bindValue(":heavenlybodyid", heavenlyBody->
+      getId());
+
+        if (!isHeavenlyBodyPlanetQuery.exec())
+        {
+            throw SqlQueryException("The heavenly body could not be checked!",
+                                    isHeavenlyBodyPlanetQuery.lastError().text(
+      ));
+        }
+
+        if (!isHeavenlyBodyPlanetQuery.next())
+        {
+            throw SqlQueryException("The heavenly body could not be checked!",
+                                    isHeavenlyBodyPlanetQuery.lastError().text(
+      ));
+        }
+
+        if (isHeavenlyBodyPlanetQuery.record().value("count").toInt() != 0)
+        {
+            throw HeavenlyBodyTypeException(QString("The Heavenly Body '%1'
+       could not changed to a star!\n\nIt is used as a planet in at least one solar
+       system.").arg(heavenlyBody->getName()));
+        }
+    }
+
+    QSqlQuery updateHeavenlyBodyQuery;
+    updateHeavenlyBodyQuery.prepare("UPDATE "
+                                    "     heavenlybody "
+                                    "SET "
+                                    "     name = :name, "
+                                    "     diameter = :diameter, "
+                                    "     color = :color, "
+                                    "     type = :type "
+                                    "WHERE "
+                                    "     heavenlybodyid = :heavenlybodyid");
+
+    updateHeavenlyBodyQuery.bindValue(":name", heavenlyBody->getName());
+    updateHeavenlyBodyQuery.bindValue(":diameter", heavenlyBody->getDiameter())
+      ;
+    updateHeavenlyBodyQuery.bindValue(":color", colorToString(heavenlyBody->
+      getColor()));
+    updateHeavenlyBodyQuery.bindValue(":type", heavenlyBody->getType());
+    updateHeavenlyBodyQuery.bindValue(":heavenlybodyid", heavenlyBody->getId())
+      ;
+
+    if (!updateHeavenlyBodyQuery.exec())
+    {
+        throw SqlQueryException("The heavenly body could not be updated!",
+                                updateHeavenlyBodyQuery.lastError().text());
+    }
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+data/heavenlybody/\hyperlink{heavenlybodyrepository_8h}{heavenlybodyrepository.\-h}\item 
+data/heavenlybody/\hyperlink{heavenlybodyrepository_8cpp}{heavenlybodyrepository.\-cpp}\end{DoxyCompactItemize}

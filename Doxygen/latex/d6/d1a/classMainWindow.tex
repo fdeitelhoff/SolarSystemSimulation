@@ -1,0 +1,115 @@
+\hypertarget{classMainWindow}{
+\section{\-Main\-Window \-Class \-Reference}
+\label{d6/d1a/classMainWindow}\index{\-Main\-Window@{\-Main\-Window}}
+}
+
+
+{\ttfamily \#include $<$mainwindow.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMainWindow_a8b244be8b7b7db1b08de2a2acb9409db}{\-Main\-Window} (\-Q\-Widget $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em \-Open the main window and establish the database connection. \end{DoxyCompactList}\item 
+\hyperlink{classMainWindow_ae98d00a93bc118200eeef9f9bba1dba7}{$\sim$\-Main\-Window} ()
+\begin{DoxyCompactList}\small\item\em \-Destructor for the main window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class with components to show the main window.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classMainWindow_a8b244be8b7b7db1b08de2a2acb9409db}{
+\index{\-Main\-Window@{\-Main\-Window}!\-Main\-Window@{\-Main\-Window}}
+\index{\-Main\-Window@{\-Main\-Window}!MainWindow@{\-Main\-Window}}
+\subsubsection[{\-Main\-Window}]{\setlength{\rightskip}{0pt plus 5cm}\-Main\-Window\-::\-Main\-Window (
+\begin{DoxyParamCaption}
+\item[{\-Q\-Widget $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}
+\label{d6/d1a/classMainWindow_a8b244be8b7b7db1b08de2a2acb9409db}
+
+
+\-Open the main window and establish the database connection. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+                                      :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+
+    solarSystemSimulation = new SolarSystemSimulation();
+
+    solarSystemSimulationView = new SimulationView(this, solarSystemSimulation)
+      ;
+
+    connect(solarSystemSimulationView,
+            SIGNAL(simulationStopped()),
+            this,
+            SLOT(simulationStopped()));
+    connect(solarSystemSimulationView,
+            SIGNAL(collisionDetectionDeactivated()),
+            this,
+            SLOT(collisionDetectionDeactivated()));
+    try
+    {
+        heavenlyBodyModel = new HeavenlyBodyModel();
+        solarSystemModel = new SolarSystemModel();
+    }
+    catch (const DatabaseConnectionFailedException &dbConnectionFailed)
+    {
+        QMessageBox::critical(this,
+                              "Database connection error",
+                              QString("The database connection could not be
+       opened!\n\nError:\n\n%1").arg(dbConnectionFailed.getSqlError()),
+                              QMessageBox::Ok);
+
+        exit(DatabaseConnectionError);
+    }
+
+    setCentralWidget(solarSystemSimulationView);
+}
+\end{DoxyCode}
+\hypertarget{classMainWindow_ae98d00a93bc118200eeef9f9bba1dba7}{
+\index{\-Main\-Window@{\-Main\-Window}!$\sim$\-Main\-Window@{$\sim$\-Main\-Window}}
+\index{$\sim$\-Main\-Window@{$\sim$\-Main\-Window}!MainWindow@{\-Main\-Window}}
+\subsubsection[{$\sim$\-Main\-Window}]{\setlength{\rightskip}{0pt plus 5cm}\-Main\-Window\-::$\sim$\-Main\-Window (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d6/d1a/classMainWindow_ae98d00a93bc118200eeef9f9bba1dba7}
+
+
+\-Destructor for the main window. 
+
+
+\begin{DoxyCode}
+{
+    delete ui;
+    delete solarSystemSimulation;
+    delete solarSystemSimulationView;
+    delete heavenlyBodyModel;
+    delete solarSystemModel;
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+forms/main/\hyperlink{mainwindow_8h}{mainwindow.\-h}\item 
+forms/main/\hyperlink{mainwindow_8cpp}{mainwindow.\-cpp}\end{DoxyCompactItemize}

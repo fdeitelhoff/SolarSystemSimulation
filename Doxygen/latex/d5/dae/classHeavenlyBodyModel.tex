@@ -1,0 +1,293 @@
+\hypertarget{classHeavenlyBodyModel}{
+\section{\-Heavenly\-Body\-Model \-Class \-Reference}
+\label{d5/dae/classHeavenlyBodyModel}\index{\-Heavenly\-Body\-Model@{\-Heavenly\-Body\-Model}}
+}
+
+
+{\ttfamily \#include $<$heavenlybodymodel.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHeavenlyBodyModel_a11620b7d75c0984a3d92dd430b28e498}{\-Heavenly\-Body\-Model} ()
+\begin{DoxyCompactList}\small\item\em \-Class to image the list of heavenly bodies. \end{DoxyCompactList}\item 
+void \hyperlink{classHeavenlyBodyModel_a6930a1f2cabc1b5c715faeefa255b9b6}{load\-All\-Heavenly\-Body\-Entities} ()
+\begin{DoxyCompactList}\small\item\em \-Load heavenly bodies from repository. \end{DoxyCompactList}\item 
+\hyperlink{classHeavenlyBodyTableModel}{\-Heavenly\-Body\-Table\-Model} $\ast$ \hyperlink{classHeavenlyBodyModel_a8237cf4cab0e6b3b154ba7e4f70f9d56}{get\-Heavenly\-Body\-Table\-Model} ()
+\begin{DoxyCompactList}\small\item\em \-Getter for the heavenly body table model. \end{DoxyCompactList}\item 
+void \hyperlink{classHeavenlyBodyModel_a13d3799b8e3ee537fdebe61a419160a9}{set\-Selection\-Model} (\-Q\-Item\-Selection\-Model $\ast$selection\-Model)
+\begin{DoxyCompactList}\small\item\em \-Setter for the selection model. \end{DoxyCompactList}\item 
+\hyperlink{classHeavenlyBody}{\-Heavenly\-Body} $\ast$ \hyperlink{classHeavenlyBodyModel_abc32e9a6e31b96a93d4dcd31e736be17}{get\-Selected\-Entity} ()
+\item 
+bool \hyperlink{classHeavenlyBodyModel_aebbc9b5febaa4e709e6f2c433f7f99f5}{is\-Entity\-Selected} ()
+\item 
+void \hyperlink{classHeavenlyBodyModel_a181897be2a2724104384115dcf625457}{add\-Entity} (\-Q\-String name, int diameter, \-Q\-Color color, \-Q\-String type)
+\begin{DoxyCompactList}\small\item\em \-Add entity in model and repository. \end{DoxyCompactList}\item 
+void \hyperlink{classHeavenlyBodyModel_ad37a9019aa8a0f21a94b07d10b81e50b}{update\-Entity} (\-Q\-String name, int diameter, \-Q\-Color color, \-Q\-String type)
+\begin{DoxyCompactList}\small\item\em \-Update entity in model and repository. \end{DoxyCompactList}\item 
+void \hyperlink{classHeavenlyBodyModel_a5d9f5cfdc3a128959ec9bd88ace1226f}{delete\-Entity} ()
+\begin{DoxyCompactList}\small\item\em \-Delete entity in model and repository, selected next row. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class to model the list of heavenly bodies.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classHeavenlyBodyModel_a11620b7d75c0984a3d92dd430b28e498}{
+\index{\-Heavenly\-Body\-Model@{\-Heavenly\-Body\-Model}!\-Heavenly\-Body\-Model@{\-Heavenly\-Body\-Model}}
+\index{\-Heavenly\-Body\-Model@{\-Heavenly\-Body\-Model}!HeavenlyBodyModel@{\-Heavenly\-Body\-Model}}
+\subsubsection[{\-Heavenly\-Body\-Model}]{\setlength{\rightskip}{0pt plus 5cm}\-Heavenly\-Body\-Model\-::\-Heavenly\-Body\-Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d5/dae/classHeavenlyBodyModel_a11620b7d75c0984a3d92dd430b28e498}
+
+
+\-Class to image the list of heavenly bodies. 
+
+
+\begin{DoxyCode}
+{
+    heavenlyBodyRepository = new HeavenlyBodyRepository();
+
+    heavenlyBodyTableModel = 0;
+    selectedEntity = 0;
+}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classHeavenlyBodyModel_a181897be2a2724104384115dcf625457}{
+\index{\-Heavenly\-Body\-Model@{\-Heavenly\-Body\-Model}!add\-Entity@{add\-Entity}}
+\index{add\-Entity@{add\-Entity}!HeavenlyBodyModel@{\-Heavenly\-Body\-Model}}
+\subsubsection[{add\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}void \-Heavenly\-Body\-Model\-::add\-Entity (
+\begin{DoxyParamCaption}
+\item[{\-Q\-String}]{name, }
+\item[{int}]{diameter, }
+\item[{\-Q\-Color}]{color, }
+\item[{\-Q\-String}]{type}
+\end{DoxyParamCaption}
+)}}
+\label{d5/dae/classHeavenlyBodyModel_a181897be2a2724104384115dcf625457}
+
+
+\-Add entity in model and repository. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em name} & \\
+\hline
+{\em diameter} & \\
+\hline
+{\em color} & \\
+\hline
+{\em type} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    HeavenlyBody *heavenlyBody = new HeavenlyBody(name, diameter, color, type);
+
+    heavenlyBodyRepository->insertEntity(heavenlyBody);
+
+    heavenlyBodyTableModel->addHeavenlyBody(heavenlyBody);
+}
+\end{DoxyCode}
+\hypertarget{classHeavenlyBodyModel_a5d9f5cfdc3a128959ec9bd88ace1226f}{
+\index{\-Heavenly\-Body\-Model@{\-Heavenly\-Body\-Model}!delete\-Entity@{delete\-Entity}}
+\index{delete\-Entity@{delete\-Entity}!HeavenlyBodyModel@{\-Heavenly\-Body\-Model}}
+\subsubsection[{delete\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}void \-Heavenly\-Body\-Model\-::delete\-Entity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d5/dae/classHeavenlyBodyModel_a5d9f5cfdc3a128959ec9bd88ace1226f}
+
+
+\-Delete entity in model and repository, selected next row. 
+
+
+\begin{DoxyCode}
+{
+    if (isEntitySelected())
+    {
+        heavenlyBodyRepository->deleteEntity(selectedEntity);
+        heavenlyBodyTableModel->removeHeavenlyBody(selectedEntity);
+
+        if (heavenlyBodyTableModel->getEntityCount() > 0)
+        {
+            selectedEntity = heavenlyBodyTableModel->getHeavenlyBody(
+      selectionModel->currentIndex().row());
+        }
+        else
+        {
+            selectedEntity = 0;
+        }
+    }
+}
+\end{DoxyCode}
+\hypertarget{classHeavenlyBodyModel_a8237cf4cab0e6b3b154ba7e4f70f9d56}{
+\index{\-Heavenly\-Body\-Model@{\-Heavenly\-Body\-Model}!get\-Heavenly\-Body\-Table\-Model@{get\-Heavenly\-Body\-Table\-Model}}
+\index{get\-Heavenly\-Body\-Table\-Model@{get\-Heavenly\-Body\-Table\-Model}!HeavenlyBodyModel@{\-Heavenly\-Body\-Model}}
+\subsubsection[{get\-Heavenly\-Body\-Table\-Model}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Heavenly\-Body\-Table\-Model} $\ast$ \-Heavenly\-Body\-Model\-::get\-Heavenly\-Body\-Table\-Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d5/dae/classHeavenlyBodyModel_a8237cf4cab0e6b3b154ba7e4f70f9d56}
+
+
+\-Getter for the heavenly body table model. 
+
+\begin{DoxyReturn}{\-Returns}
+\hyperlink{classHeavenlyBodyTableModel}{\-Heavenly\-Body\-Table\-Model} $\ast$ 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    if (!heavenlyBodyTableModel)
+    {
+        heavenlyBodyTableModel = new HeavenlyBodyTableModel();
+    }
+
+    return heavenlyBodyTableModel;
+}
+\end{DoxyCode}
+\hypertarget{classHeavenlyBodyModel_abc32e9a6e31b96a93d4dcd31e736be17}{
+\index{\-Heavenly\-Body\-Model@{\-Heavenly\-Body\-Model}!get\-Selected\-Entity@{get\-Selected\-Entity}}
+\index{get\-Selected\-Entity@{get\-Selected\-Entity}!HeavenlyBodyModel@{\-Heavenly\-Body\-Model}}
+\subsubsection[{get\-Selected\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Heavenly\-Body}$\ast$ \-Heavenly\-Body\-Model\-::get\-Selected\-Entity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d5/dae/classHeavenlyBodyModel_abc32e9a6e31b96a93d4dcd31e736be17}
+
+\begin{DoxyCode}
+{ return selectedEntity; }
+\end{DoxyCode}
+\hypertarget{classHeavenlyBodyModel_aebbc9b5febaa4e709e6f2c433f7f99f5}{
+\index{\-Heavenly\-Body\-Model@{\-Heavenly\-Body\-Model}!is\-Entity\-Selected@{is\-Entity\-Selected}}
+\index{is\-Entity\-Selected@{is\-Entity\-Selected}!HeavenlyBodyModel@{\-Heavenly\-Body\-Model}}
+\subsubsection[{is\-Entity\-Selected}]{\setlength{\rightskip}{0pt plus 5cm}bool \-Heavenly\-Body\-Model\-::is\-Entity\-Selected (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{d5/dae/classHeavenlyBodyModel_aebbc9b5febaa4e709e6f2c433f7f99f5}
+
+\begin{DoxyCode}
+{ return selectedEntity != 0; }
+\end{DoxyCode}
+\hypertarget{classHeavenlyBodyModel_a6930a1f2cabc1b5c715faeefa255b9b6}{
+\index{\-Heavenly\-Body\-Model@{\-Heavenly\-Body\-Model}!load\-All\-Heavenly\-Body\-Entities@{load\-All\-Heavenly\-Body\-Entities}}
+\index{load\-All\-Heavenly\-Body\-Entities@{load\-All\-Heavenly\-Body\-Entities}!HeavenlyBodyModel@{\-Heavenly\-Body\-Model}}
+\subsubsection[{load\-All\-Heavenly\-Body\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}void \-Heavenly\-Body\-Model\-::load\-All\-Heavenly\-Body\-Entities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d5/dae/classHeavenlyBodyModel_a6930a1f2cabc1b5c715faeefa255b9b6}
+
+
+\-Load heavenly bodies from repository. 
+
+
+\begin{DoxyCode}
+{
+    HeavenlyBodyTableModel *heavenlyBodyTableModel = getHeavenlyBodyTableModel(
+      );
+
+    QList<HeavenlyBody *> entities = heavenlyBodyRepository->
+      fetchAllHeavenlyBodyEntities();
+
+    heavenlyBodyTableModel->setData(entities);
+}
+\end{DoxyCode}
+\hypertarget{classHeavenlyBodyModel_a13d3799b8e3ee537fdebe61a419160a9}{
+\index{\-Heavenly\-Body\-Model@{\-Heavenly\-Body\-Model}!set\-Selection\-Model@{set\-Selection\-Model}}
+\index{set\-Selection\-Model@{set\-Selection\-Model}!HeavenlyBodyModel@{\-Heavenly\-Body\-Model}}
+\subsubsection[{set\-Selection\-Model}]{\setlength{\rightskip}{0pt plus 5cm}void \-Heavenly\-Body\-Model\-::set\-Selection\-Model (
+\begin{DoxyParamCaption}
+\item[{\-Q\-Item\-Selection\-Model $\ast$}]{selection\-Model}
+\end{DoxyParamCaption}
+)}}
+\label{d5/dae/classHeavenlyBodyModel_a13d3799b8e3ee537fdebe61a419160a9}
+
+
+\-Setter for the selection model. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em selection\-Model} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    this->selectionModel = selectionModel;
+    QObject::connect(this->selectionModel,
+                     SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+                     this,
+                     SLOT(currentRowChanged(QModelIndex,QModelIndex)),
+                     Qt::DirectConnection);
+}
+\end{DoxyCode}
+\hypertarget{classHeavenlyBodyModel_ad37a9019aa8a0f21a94b07d10b81e50b}{
+\index{\-Heavenly\-Body\-Model@{\-Heavenly\-Body\-Model}!update\-Entity@{update\-Entity}}
+\index{update\-Entity@{update\-Entity}!HeavenlyBodyModel@{\-Heavenly\-Body\-Model}}
+\subsubsection[{update\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}void \-Heavenly\-Body\-Model\-::update\-Entity (
+\begin{DoxyParamCaption}
+\item[{\-Q\-String}]{name, }
+\item[{int}]{diameter, }
+\item[{\-Q\-Color}]{color, }
+\item[{\-Q\-String}]{type}
+\end{DoxyParamCaption}
+)}}
+\label{d5/dae/classHeavenlyBodyModel_ad37a9019aa8a0f21a94b07d10b81e50b}
+
+
+\-Update entity in model and repository. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em name} & \\
+\hline
+{\em diameter} & \\
+\hline
+{\em color} & \\
+\hline
+{\em type} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    // Create a temporary object first.
+    HeavenlyBody *heavenlyBody = new HeavenlyBody(selectedEntity->getId(), name
+      , diameter, color, type);
+
+    heavenlyBodyRepository->updateEntity(heavenlyBody);
+
+    // Update the "real" object when there was no error during the update!
+    selectedEntity->setName(name);
+    selectedEntity->setDiameter(diameter);
+    selectedEntity->setColor(color);
+    selectedEntity->setType(type);
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+model/heavenlybody/\hyperlink{heavenlybodymodel_8h}{heavenlybodymodel.\-h}\item 
+model/heavenlybody/\hyperlink{heavenlybodymodel_8cpp}{heavenlybodymodel.\-cpp}\end{DoxyCompactItemize}

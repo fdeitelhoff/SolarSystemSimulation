@@ -1,0 +1,207 @@
+\hypertarget{classPlanet3d}{
+\section{\-Planet3d \-Class \-Reference}
+\label{d1/d39/classPlanet3d}\index{\-Planet3d@{\-Planet3d}}
+}
+
+
+{\ttfamily \#include $<$planet3d.\-h$>$}
+
+
+
+\-Inheritance diagram for \-Planet3d\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{d7/d7e/classPlanet3d__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for \-Planet3d\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{d2/de3/classPlanet3d__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPlanet3d_ad657ee6cddb3f386e861dad977f6998c}{\-Planet3d} (\hyperlink{classSolarSystemHeavenlyBody}{\-Solar\-System\-Heavenly\-Body} $\ast$solar\-System\-Heavenly\-Body, const float kepler\-Constant)
+\begin{DoxyCompactList}\small\item\em \-Constructor for the planet in 3d. \end{DoxyCompactList}\item 
+\hyperlink{classPlanet3d_aecd84d1043acd76bebc3314f14643280}{$\sim$\-Planet3d} ()
+\begin{DoxyCompactList}\small\item\em \-Destructor delete the orbit 3d. \end{DoxyCompactList}\item 
+void \hyperlink{classPlanet3d_a2e504935919360a2015b50c103798dd8}{paint\-Heavenly\-Body3d} ()
+\begin{DoxyCompactList}\small\item\em \-Paint the heavenly body against the given angles. \end{DoxyCompactList}\item 
+void \hyperlink{classPlanet3d_af486055f2af946f84c309c93096596fd}{calculate\-Heavenly\-Body3d} ()
+\begin{DoxyCompactList}\small\item\em \-Inherited method to calculate the position and the speed of the haevenly body 3d. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class to calculate and paint the planets.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classPlanet3d_ad657ee6cddb3f386e861dad977f6998c}{
+\index{\-Planet3d@{\-Planet3d}!\-Planet3d@{\-Planet3d}}
+\index{\-Planet3d@{\-Planet3d}!Planet3d@{\-Planet3d}}
+\subsubsection[{\-Planet3d}]{\setlength{\rightskip}{0pt plus 5cm}\-Planet3d\-::\-Planet3d (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Solar\-System\-Heavenly\-Body} $\ast$}]{solar\-System\-Heavenly\-Body, }
+\item[{const float}]{kepler\-Constant}
+\end{DoxyParamCaption}
+)}}
+\label{d1/d39/classPlanet3d_ad657ee6cddb3f386e861dad977f6998c}
+
+
+\-Constructor for the planet in 3d. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em solar\-System\-Heavenly\-Body} & \\
+\hline
+{\em kepler\-Constant} & \-Reference \-Value for the \-Planet speed \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+    : HeavenlyBody3d(solarSystemHeavenlyBody->getHeavenlyBody())
+{
+    orbitAngle = solarSystemHeavenlyBody->getAngle();
+    orbitalPlaneAngle = solarSystemHeavenlyBody->getOrbitalPlaneAngle();
+    a = solarSystemHeavenlyBody->getSemimajorAxis();
+    epsilon = solarSystemHeavenlyBody->getNumericExcentricity();
+
+    setKeplerConstant(keplerConstant);
+
+    init();    
+}
+\end{DoxyCode}
+\hypertarget{classPlanet3d_aecd84d1043acd76bebc3314f14643280}{
+\index{\-Planet3d@{\-Planet3d}!$\sim$\-Planet3d@{$\sim$\-Planet3d}}
+\index{$\sim$\-Planet3d@{$\sim$\-Planet3d}!Planet3d@{\-Planet3d}}
+\subsubsection[{$\sim$\-Planet3d}]{\setlength{\rightskip}{0pt plus 5cm}\-Planet3d\-::$\sim$\-Planet3d (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d1/d39/classPlanet3d_aecd84d1043acd76bebc3314f14643280}
+
+
+\-Destructor delete the orbit 3d. 
+
+
+\begin{DoxyCode}
+{
+    delete orbit3d;
+}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classPlanet3d_af486055f2af946f84c309c93096596fd}{
+\index{\-Planet3d@{\-Planet3d}!calculate\-Heavenly\-Body3d@{calculate\-Heavenly\-Body3d}}
+\index{calculate\-Heavenly\-Body3d@{calculate\-Heavenly\-Body3d}!Planet3d@{\-Planet3d}}
+\subsubsection[{calculate\-Heavenly\-Body3d}]{\setlength{\rightskip}{0pt plus 5cm}void \-Planet3d\-::calculate\-Heavenly\-Body3d (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{d1/d39/classPlanet3d_af486055f2af946f84c309c93096596fd}
+
+
+\-Inherited method to calculate the position and the speed of the haevenly body 3d. 
+
+
+
+\-Reimplemented from \hyperlink{classHeavenlyBody3d_ac1c46a03505f9b7bb57191f22d50ba27}{\-Heavenly\-Body3d}.
+
+
+\begin{DoxyCode}
+{
+    x = cos(phi) * a + e;
+    y = sin(phi) * b;
+
+    // Absolute value of the planet position vector
+    float r = sqrt( x * x + y * y);
+
+    //  Instantaneous velocity of the planet according to the
+       Vis-Viva-Equatation
+    float instantaneousVelocity = sqrt( mu * ( 2 / r - 1 / a ));
+
+    // Take a rule of three to calculate the transgrassing angle:
+    // alpha / øalpha ~ v / øv
+    float orbitPointsCount = timeOfCirculation;
+    double averageAngle = 2 * M_PI / orbitPointsCount;
+    double alpha = averageAngle * instantaneousVelocity / averageSpeed;
+
+    phi += alpha;
+    if (pointsCounter == (int) orbitPointsCount / 2 + 2)
+    {
+        phi = M_PI;
+    }
+    if (pointsCounter > orbitPointsCount + 2)
+    {
+        phi = 0;
+        pointsCounter = 0;
+    }
+    pointsCounter++;
+}
+\end{DoxyCode}
+\hypertarget{classPlanet3d_a2e504935919360a2015b50c103798dd8}{
+\index{\-Planet3d@{\-Planet3d}!paint\-Heavenly\-Body3d@{paint\-Heavenly\-Body3d}}
+\index{paint\-Heavenly\-Body3d@{paint\-Heavenly\-Body3d}!Planet3d@{\-Planet3d}}
+\subsubsection[{paint\-Heavenly\-Body3d}]{\setlength{\rightskip}{0pt plus 5cm}void \-Planet3d\-::paint\-Heavenly\-Body3d (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{d1/d39/classPlanet3d_a2e504935919360a2015b50c103798dd8}
+
+
+\-Paint the heavenly body against the given angles. 
+
+
+
+\-Reimplemented from \hyperlink{classHeavenlyBody3d_a030592ed6fd43987d2b004f56a3ab3a8}{\-Heavenly\-Body3d}.
+
+
+\begin{DoxyCode}
+{
+    glPushMatrix();
+
+    glRotatef(orbitalPlaneAngle, 1.0, 0.0, 0.0);
+    glRotatef(orbitAngle, 0.0, 0.0, 1.0);
+
+    glTranslatef(x, y, 0);
+
+    HeavenlyBody3d::paintHeavenlyBody3d();
+
+    float matrix[16];
+    glGetFloatv(GL_MODELVIEW_MATRIX, matrix);
+
+    heavenlyBodyCenter = GLVector(matrix[12]/matrix[15], matrix[13]/matrix[15],
+       matrix[14]/matrix[15]);
+
+    glPopMatrix();
+
+    if (isOrbitVisisble())
+    {
+        orbit3d->paintOrbit3d();
+    }
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+visualization/heavenlybody/\hyperlink{planet3d_8h}{planet3d.\-h}\item 
+visualization/heavenlybody/\hyperlink{planet3d_8cpp}{planet3d.\-cpp}\end{DoxyCompactItemize}

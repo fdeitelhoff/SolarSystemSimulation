@@ -1,0 +1,120 @@
+\hypertarget{classHeavenlyBodyDetails}{
+\section{\-Heavenly\-Body\-Details \-Class \-Reference}
+\label{dd/d37/classHeavenlyBodyDetails}\index{\-Heavenly\-Body\-Details@{\-Heavenly\-Body\-Details}}
+}
+
+
+{\ttfamily \#include $<$heavenlybodydetails.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHeavenlyBodyDetails_a054ec45af11e8f42cba7f0b40eb5f8e8}{\-Heavenly\-Body\-Details} (\-Q\-Widget $\ast$parent=0, \hyperlink{classHeavenlyBodyModel}{\-Heavenly\-Body\-Model} $\ast$heavenly\-Body\-Model=0, bool edit=false)
+\begin{DoxyCompactList}\small\item\em \-Open dialog window to add or edit a heavenly body. \end{DoxyCompactList}\item 
+\hyperlink{classHeavenlyBodyDetails_a7f2566a1ba36b51157a6d0c753a0c545}{$\sim$\-Heavenly\-Body\-Details} ()
+\begin{DoxyCompactList}\small\item\em \-Destructor to close dialog. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class for the components to show the window heavenly body details.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classHeavenlyBodyDetails_a054ec45af11e8f42cba7f0b40eb5f8e8}{
+\index{\-Heavenly\-Body\-Details@{\-Heavenly\-Body\-Details}!\-Heavenly\-Body\-Details@{\-Heavenly\-Body\-Details}}
+\index{\-Heavenly\-Body\-Details@{\-Heavenly\-Body\-Details}!HeavenlyBodyDetails@{\-Heavenly\-Body\-Details}}
+\subsubsection[{\-Heavenly\-Body\-Details}]{\setlength{\rightskip}{0pt plus 5cm}\-Heavenly\-Body\-Details\-::\-Heavenly\-Body\-Details (
+\begin{DoxyParamCaption}
+\item[{\-Q\-Widget $\ast$}]{parent = {\ttfamily 0}, }
+\item[{{\bf \-Heavenly\-Body\-Model} $\ast$}]{heavenly\-Body\-Model = {\ttfamily 0}, }
+\item[{bool}]{is\-Edit = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d37/classHeavenlyBodyDetails_a054ec45af11e8f42cba7f0b40eb5f8e8}
+
+
+\-Open dialog window to add or edit a heavenly body. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em parent} & \-Parent of this dialog. \\
+\hline
+{\em heavenly\-Body\-Model} & \-Model of the heavenly body table. \\
+\hline
+{\em is\-Edit} & \-If \-T\-R\-U\-E edit, else add heavenlybody. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+                                                                               
+                                  :
+    QDialog(parent),
+    ui(new Ui::HeavenlyBodyDetails)
+{
+    ui->setupUi(this);
+
+    setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
+
+    this->isEdit = isEdit;
+
+    this->heavenlyBodyModel = heavenlyBodyModel;
+
+    tmpColor = Qt::green;
+
+    colorDialog = new QColorDialog(this);
+
+    if (isEdit)
+    {
+        currentEntity = heavenlyBodyModel->getSelectedEntity();
+
+        setWindowTitle(QString("Edit Heavenly Body '%1'").arg(currentEntity->
+      getName()));
+
+        ui->name->setText(currentEntity->getName());
+        ui->diameter->setText(QString::number(currentEntity->getDiameter()));
+
+        tmpColor = currentEntity->getColor();
+
+        if (currentEntity->getType() == "S")
+        {
+            ui->star->setChecked(true);
+        }
+    }
+
+    // Maybe StyleSheets are a better solution here?
+    QPalette palette = ui->colorLabel->palette();
+    palette.setColor(ui->colorLabel->backgroundRole(), tmpColor);
+    ui->colorLabel->setPalette(palette);
+}
+\end{DoxyCode}
+\hypertarget{classHeavenlyBodyDetails_a7f2566a1ba36b51157a6d0c753a0c545}{
+\index{\-Heavenly\-Body\-Details@{\-Heavenly\-Body\-Details}!$\sim$\-Heavenly\-Body\-Details@{$\sim$\-Heavenly\-Body\-Details}}
+\index{$\sim$\-Heavenly\-Body\-Details@{$\sim$\-Heavenly\-Body\-Details}!HeavenlyBodyDetails@{\-Heavenly\-Body\-Details}}
+\subsubsection[{$\sim$\-Heavenly\-Body\-Details}]{\setlength{\rightskip}{0pt plus 5cm}\-Heavenly\-Body\-Details\-::$\sim$\-Heavenly\-Body\-Details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{dd/d37/classHeavenlyBodyDetails_a7f2566a1ba36b51157a6d0c753a0c545}
+
+
+\-Destructor to close dialog. 
+
+
+\begin{DoxyCode}
+{
+    delete ui;
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+forms/heavenlybody/\hyperlink{heavenlybodydetails_8h}{heavenlybodydetails.\-h}\item 
+forms/heavenlybody/\hyperlink{heavenlybodydetails_8cpp}{heavenlybodydetails.\-cpp}\end{DoxyCompactItemize}

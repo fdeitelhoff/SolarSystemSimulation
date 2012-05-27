@@ -1,0 +1,126 @@
+\hypertarget{classDatabaseConnectionFailedException}{
+\section{\-Database\-Connection\-Failed\-Exception \-Class \-Reference}
+\label{d3/d31/classDatabaseConnectionFailedException}\index{\-Database\-Connection\-Failed\-Exception@{\-Database\-Connection\-Failed\-Exception}}
+}
+
+
+{\ttfamily \#include $<$databaseconnectionfailedexception.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDatabaseConnectionFailedException_a784aba557a81691eca0ae32e1a6ea6c4}{\-Database\-Connection\-Failed\-Exception} (const \-Q\-String message, \-Q\-String sql\-Error)
+\begin{DoxyCompactList}\small\item\em \-Exception class for failed database connection. \end{DoxyCompactList}\item 
+virtual \hyperlink{classDatabaseConnectionFailedException_a666c5d590533b48f3a4bd8df0e98f86b}{$\sim$\-Database\-Connection\-Failed\-Exception} ()  throw ()
+\item 
+virtual const \-Q\-String \hyperlink{classDatabaseConnectionFailedException_a6e06c3e2211fd467dee77cc8a0f32916}{get\-Message} () const   throw ()
+\begin{DoxyCompactList}\small\item\em \-Getter for the message. \end{DoxyCompactList}\item 
+virtual const \-Q\-String \hyperlink{classDatabaseConnectionFailedException_a468c38c3fc532627e1aea4b8e59c1112}{get\-Sql\-Error} () const   throw ()
+\begin{DoxyCompactList}\small\item\em \-Getter for the sql\-Error. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class for database connection failed exceptions .
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classDatabaseConnectionFailedException_a784aba557a81691eca0ae32e1a6ea6c4}{
+\index{\-Database\-Connection\-Failed\-Exception@{\-Database\-Connection\-Failed\-Exception}!\-Database\-Connection\-Failed\-Exception@{\-Database\-Connection\-Failed\-Exception}}
+\index{\-Database\-Connection\-Failed\-Exception@{\-Database\-Connection\-Failed\-Exception}!DatabaseConnectionFailedException@{\-Database\-Connection\-Failed\-Exception}}
+\subsubsection[{\-Database\-Connection\-Failed\-Exception}]{\setlength{\rightskip}{0pt plus 5cm}\-Database\-Connection\-Failed\-Exception\-::\-Database\-Connection\-Failed\-Exception (
+\begin{DoxyParamCaption}
+\item[{const \-Q\-String}]{message, }
+\item[{\-Q\-String}]{sql\-Error}
+\end{DoxyParamCaption}
+)}}
+\label{d3/d31/classDatabaseConnectionFailedException_a784aba557a81691eca0ae32e1a6ea6c4}
+
+
+\-Exception class for failed database connection. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em message} & \-The error message. \\
+\hline
+{\em sql\-Error} & \-The \-S\-Q\-L-\/error. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    this->message = message;
+    this->sqlError = sqlError;
+}
+\end{DoxyCode}
+\hypertarget{classDatabaseConnectionFailedException_a666c5d590533b48f3a4bd8df0e98f86b}{
+\index{\-Database\-Connection\-Failed\-Exception@{\-Database\-Connection\-Failed\-Exception}!$\sim$\-Database\-Connection\-Failed\-Exception@{$\sim$\-Database\-Connection\-Failed\-Exception}}
+\index{$\sim$\-Database\-Connection\-Failed\-Exception@{$\sim$\-Database\-Connection\-Failed\-Exception}!DatabaseConnectionFailedException@{\-Database\-Connection\-Failed\-Exception}}
+\subsubsection[{$\sim$\-Database\-Connection\-Failed\-Exception}]{\setlength{\rightskip}{0pt plus 5cm}virtual \-Database\-Connection\-Failed\-Exception\-::$\sim$\-Database\-Connection\-Failed\-Exception (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)  throw ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}
+\label{d3/d31/classDatabaseConnectionFailedException_a666c5d590533b48f3a4bd8df0e98f86b}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classDatabaseConnectionFailedException_a6e06c3e2211fd467dee77cc8a0f32916}{
+\index{\-Database\-Connection\-Failed\-Exception@{\-Database\-Connection\-Failed\-Exception}!get\-Message@{get\-Message}}
+\index{get\-Message@{get\-Message}!DatabaseConnectionFailedException@{\-Database\-Connection\-Failed\-Exception}}
+\subsubsection[{get\-Message}]{\setlength{\rightskip}{0pt plus 5cm}const \-Q\-String \-Database\-Connection\-Failed\-Exception\-::get\-Message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const  throw ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{d3/d31/classDatabaseConnectionFailedException_a6e06c3e2211fd467dee77cc8a0f32916}
+
+
+\-Getter for the message. 
+
+\begin{DoxyReturn}{\-Returns}
+const \-Q\-String 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    return message;
+}
+\end{DoxyCode}
+\hypertarget{classDatabaseConnectionFailedException_a468c38c3fc532627e1aea4b8e59c1112}{
+\index{\-Database\-Connection\-Failed\-Exception@{\-Database\-Connection\-Failed\-Exception}!get\-Sql\-Error@{get\-Sql\-Error}}
+\index{get\-Sql\-Error@{get\-Sql\-Error}!DatabaseConnectionFailedException@{\-Database\-Connection\-Failed\-Exception}}
+\subsubsection[{get\-Sql\-Error}]{\setlength{\rightskip}{0pt plus 5cm}const \-Q\-String \-Database\-Connection\-Failed\-Exception\-::get\-Sql\-Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const  throw ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{d3/d31/classDatabaseConnectionFailedException_a468c38c3fc532627e1aea4b8e59c1112}
+
+
+\-Getter for the sql\-Error. 
+
+\begin{DoxyReturn}{\-Returns}
+const \-Q\-String 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    return sqlError;
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+database/exceptions/\hyperlink{databaseconnectionfailedexception_8h}{databaseconnectionfailedexception.\-h}\item 
+database/exceptions/\hyperlink{databaseconnectionfailedexception_8cpp}{databaseconnectionfailedexception.\-cpp}\end{DoxyCompactItemize}

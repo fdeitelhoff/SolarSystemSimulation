@@ -1,0 +1,15 @@
+<map id="G" name="G">
+<area shape="rect" id="node7" href="$d0/d51/heavenlybodymodel_8h.html" title="model/heavenlybody/heavenlybodymodel.h" alt="" coords="453,155,723,181"/>
+<area shape="rect" id="node76" href="$d1/d14/heavenlybodydetails_8h.html" title="forms/heavenlybody/heavenlybodydetails.h" alt="" coords="249,80,520,107"/>
+<area shape="rect" id="node83" href="$db/df6/heavenlybodyitemdelegate_8h.html" title="forms/heavenlybody/heavenlybodyitemdelegate.h" alt="" coords="641,80,948,107"/>
+<area shape="rect" id="node17" href="$d7/df3/heavenlybodyrepository_8h.html" title="data/heavenlybody/heavenlybodyrepository.h" alt="" coords="691,229,972,256"/>
+<area shape="rect" id="node40" href="$d1/d46/heavenlybody_8h.html" title="model/heavenlybody/heavenlybody.h" alt="" coords="461,304,696,331"/>
+<area shape="rect" id="node65" href="$d3/da4/heavenlybodytablemodel_8h.html" title="model/heavenlybody/heavenlybodytablemodel.h" alt="" coords="252,229,549,256"/>
+<area shape="rect" id="node30" href="$d0/d57/postgresqldatabase_8h.html" title="database/postgresqldatabase.h" alt="" coords="971,304,1173,331"/>
+<area shape="rect" id="node49" href="$d3/da6/deleteentityfailedexception_8h.html" title="data/exceptions/deleteentityfailedexception.h" alt="" coords="1873,379,2155,405"/>
+<area shape="rect" id="node53" href="$d9/d97/sqlqueryexception_8h.html" title="data/exceptions/sqlqueryexception.h" alt="" coords="488,379,721,405"/>
+<area shape="rect" id="node57" href="$db/d11/entitynotuniqueexception_8h.html" title="data/exceptions/entitynotuniqueexception.h" alt="" coords="746,379,1019,405"/>
+<area shape="rect" id="node61" href="$dd/d34/heavenlybodytypeexception_8h.html" title="data/exceptions/heavenlybodytypeexception.h" alt="" coords="1044,379,1335,405"/>
+<area shape="rect" id="node34" href="$de/d89/databaseconnectionfailedexception_8h.html" title="database/exceptions/databaseconnectionfailedexception.h" alt="" coords="1489,379,1849,405"/>
+<area shape="rect" id="node45" href="$db/d66/propertynotvalidexception_8h.html" title="model/exceptions/propertynotvalidexception.h" alt="" coords="177,379,463,405"/>
+</map>

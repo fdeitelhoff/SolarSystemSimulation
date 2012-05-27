@@ -1,0 +1,384 @@
+\hypertarget{classSimulationView}{
+\section{\-Simulation\-View \-Class \-Reference}
+\label{d9/df6/classSimulationView}\index{\-Simulation\-View@{\-Simulation\-View}}
+}
+
+
+{\ttfamily \#include $<$simulationview.\-h$>$}
+
+\subsection*{\-Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classSimulationView_a4198d47f7517525c5702a9bc6e1e9369}{simulation\-Stopped} ()
+\item 
+void \hyperlink{classSimulationView_ac6d069baef5c77cff2b8ada065950ab4}{collision\-Detection\-Deactivated} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSimulationView_a4d55de963f5612a2c894f501a8928991}{\-Simulation\-View} (\-Q\-Widget $\ast$parent=0, \hyperlink{classSolarSystemSimulation}{\-Solar\-System\-Simulation} $\ast$solar\-System\-Simulation=0)
+\begin{DoxyCompactList}\small\item\em \-Class to show the scene, move the camera and initialize the simulation view. \end{DoxyCompactList}\item 
+\hyperlink{classSimulationView_a7ccb9a29e3632431bba5a686da61d8a9}{$\sim$\-Simulation\-View} ()
+\begin{DoxyCompactList}\small\item\em \-Destructor for the view. \end{DoxyCompactList}\item 
+void \hyperlink{classSimulationView_ad1e431046ff2a7e774d92bbba6fded3b}{set\-Solar\-System} (\hyperlink{classSolarSystem}{\-Solar\-System} $\ast$solar\-System)
+\begin{DoxyCompactList}\small\item\em \-Init the simulation. \end{DoxyCompactList}\item 
+void \hyperlink{classSimulationView_ae7936c84b92f7ae64a772a9ba1422624}{start\-Simulation} ()
+\begin{DoxyCompactList}\small\item\em \-Starts the timer for the timer event. \end{DoxyCompactList}\item 
+void \hyperlink{classSimulationView_ad51d8480373e82c73e3353c868df6f87}{stop\-Simulation} ()
+\begin{DoxyCompactList}\small\item\em \-Freeze the simulation. \end{DoxyCompactList}\item 
+void \hyperlink{classSimulationView_acde2b2fb1ac01e85a8f8efbbe6717f12}{reset\-Perspective} ()
+\begin{DoxyCompactList}\small\item\em \-Resets the perspective of the scene. \end{DoxyCompactList}\item 
+bool \hyperlink{classSimulationView_a20413dcac5bc5d52b9d5fae836cf3f93}{is\-Simulation\-Started} ()
+\begin{DoxyCompactList}\small\item\em \-Get the status of the timer. \end{DoxyCompactList}\item 
+void \hyperlink{classSimulationView_a712a4c812faec9a14699c1ceb1048337}{toggle\-Coordinate\-Axes\-Visibility} ()
+\begin{DoxyCompactList}\small\item\em \-Toggle visibility of coordinates and redraw scene. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classSimulationView_aabf60efd5011c63555e9bd154107f42d}{key\-Press\-Event} (\-Q\-Key\-Event $\ast$key\-Event)
+\begin{DoxyCompactList}\small\item\em \-Key detection to turn around and shift the scene. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class with components to show and administrate the simulation view window.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classSimulationView_a4d55de963f5612a2c894f501a8928991}{
+\index{\-Simulation\-View@{\-Simulation\-View}!\-Simulation\-View@{\-Simulation\-View}}
+\index{\-Simulation\-View@{\-Simulation\-View}!SimulationView@{\-Simulation\-View}}
+\subsubsection[{\-Simulation\-View}]{\setlength{\rightskip}{0pt plus 5cm}\-Simulation\-View\-::\-Simulation\-View (
+\begin{DoxyParamCaption}
+\item[{\-Q\-Widget $\ast$}]{parent = {\ttfamily 0}, }
+\item[{{\bf \-Solar\-System\-Simulation} $\ast$}]{solar\-System\-Simulation = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}
+\label{d9/df6/classSimulationView_a4d55de963f5612a2c894f501a8928991}
+
+
+\-Class to show the scene, move the camera and initialize the simulation view. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em parent} & \\
+\hline
+{\em solar\-System\-Simulation} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+                                                                               
+                   :
+    QGLWidget(parent)
+{
+    perspective = new GLPerspective();
+
+    light = new Light();
+
+    environment = new Environment();
+
+    setFocusPolicy(Qt::StrongFocus);
+    setMouseTracking(true);
+
+    this->solarSystemSimulation = solarSystemSimulation;
+    connect(solarSystemSimulation,
+            SIGNAL(collisionDetected(HeavenlyBody3d*,HeavenlyBody3d*)),
+            this,
+            SLOT(collisionDetected(HeavenlyBody3d*,HeavenlyBody3d*)));
+
+    timer = new QTimer(this);
+    connect(timer,
+            SIGNAL(timeout()),
+            this,
+            SLOT(timerEvent()));
+
+    // Some initial constants for the camera position and control.
+    cameraZFactor = 3.5;
+    axisLengthFactor = 2.0;
+    backgroundColor = Qt::black;
+    shiftSceneUpDownFactor = 0.5;
+    shiftSceneLeftRightFactor = 0.5;
+    shiftSceneForwardBackwardFactor = 1.0;
+    turnCameraUpDownFactor = 1.0;
+    turnCameraLeftRightFactor = 1.0;
+    stretchCameraDistanceForwardFactor = 0.85;
+    stretchCameraDistanceBackwardFactor = 1.15;
+}
+\end{DoxyCode}
+\hypertarget{classSimulationView_a7ccb9a29e3632431bba5a686da61d8a9}{
+\index{\-Simulation\-View@{\-Simulation\-View}!$\sim$\-Simulation\-View@{$\sim$\-Simulation\-View}}
+\index{$\sim$\-Simulation\-View@{$\sim$\-Simulation\-View}!SimulationView@{\-Simulation\-View}}
+\subsubsection[{$\sim$\-Simulation\-View}]{\setlength{\rightskip}{0pt plus 5cm}\-Simulation\-View\-::$\sim$\-Simulation\-View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/df6/classSimulationView_a7ccb9a29e3632431bba5a686da61d8a9}
+
+
+\-Destructor for the view. 
+
+
+\begin{DoxyCode}
+{
+    stopSimulation();
+
+    delete perspective;
+    delete light;
+    delete environment;
+    delete timer;
+}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classSimulationView_ac6d069baef5c77cff2b8ada065950ab4}{
+\index{\-Simulation\-View@{\-Simulation\-View}!collision\-Detection\-Deactivated@{collision\-Detection\-Deactivated}}
+\index{collision\-Detection\-Deactivated@{collision\-Detection\-Deactivated}!SimulationView@{\-Simulation\-View}}
+\subsubsection[{collision\-Detection\-Deactivated}]{\setlength{\rightskip}{0pt plus 5cm}void \-Simulation\-View\-::collision\-Detection\-Deactivated (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
+\label{d9/df6/classSimulationView_ac6d069baef5c77cff2b8ada065950ab4}
+\hypertarget{classSimulationView_a20413dcac5bc5d52b9d5fae836cf3f93}{
+\index{\-Simulation\-View@{\-Simulation\-View}!is\-Simulation\-Started@{is\-Simulation\-Started}}
+\index{is\-Simulation\-Started@{is\-Simulation\-Started}!SimulationView@{\-Simulation\-View}}
+\subsubsection[{is\-Simulation\-Started}]{\setlength{\rightskip}{0pt plus 5cm}bool \-Simulation\-View\-::is\-Simulation\-Started (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/df6/classSimulationView_a20413dcac5bc5d52b9d5fae836cf3f93}
+
+
+\-Get the status of the timer. 
+
+\begin{DoxyReturn}{\-Returns}
+bool 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    return timer->isActive();
+}
+\end{DoxyCode}
+\hypertarget{classSimulationView_aabf60efd5011c63555e9bd154107f42d}{
+\index{\-Simulation\-View@{\-Simulation\-View}!key\-Press\-Event@{key\-Press\-Event}}
+\index{key\-Press\-Event@{key\-Press\-Event}!SimulationView@{\-Simulation\-View}}
+\subsubsection[{key\-Press\-Event}]{\setlength{\rightskip}{0pt plus 5cm}void \-Simulation\-View\-::key\-Press\-Event (
+\begin{DoxyParamCaption}
+\item[{\-Q\-Key\-Event $\ast$}]{key\-Event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{d9/df6/classSimulationView_aabf60efd5011c63555e9bd154107f42d}
+
+
+\-Key detection to turn around and shift the scene. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em key\-Event} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    Qt::KeyboardModifiers modifiers = keyEvent->modifiers();
+    // Is the CTRL key pressed?
+    if (modifiers & Qt::ControlModifier)
+    {
+        // Is the windows or the alt key pressed.
+        if (modifiers & Qt::MetaModifier || modifiers & Qt::AltModifier)
+        {
+            switch (keyEvent->key())
+            {
+            case Qt::Key_Up:
+                turnCameraUpDown(turnCameraUpDownFactor);
+                break;
+            case Qt::Key_Down:
+                turnCameraUpDown(-turnCameraUpDownFactor);
+                break;
+            case Qt::Key_Left:
+                turnCameraLeftRight(turnCameraLeftRightFactor);
+                break;
+            case Qt::Key_Right:
+                turnCameraLeftRight(-turnCameraLeftRightFactor);
+                break;
+            case Qt::Key_PageDown:
+                stretchCameraDistance(stretchCameraDistanceBackwardFactor);
+                break;
+            case Qt::Key_PageUp:
+                stretchCameraDistance(stretchCameraDistanceForwardFactor);
+                break;
+            default:
+                break;
+            }
+        }
+
+        // Is the SHIFT key pressed?
+        if (modifiers & Qt::ShiftModifier)
+        {
+            switch (keyEvent->key())
+            {
+            case Qt::Key_Up:
+                shiftSceneUpDown(-shiftSceneUpDownFactor);
+                break;
+            case Qt::Key_Down:
+                shiftSceneUpDown(shiftSceneUpDownFactor);
+                break;
+            case Qt::Key_Left:
+                shiftSceneLeftRight(shiftSceneLeftRightFactor);
+                break;
+            case Qt::Key_Right:
+                shiftSceneLeftRight(-shiftSceneLeftRightFactor);
+                break;
+            case Qt::Key_PageDown:
+                stretchCameraDistance(stretchCameraDistanceBackwardFactor);
+                break;
+            case Qt::Key_PageUp:
+                stretchCameraDistance(stretchCameraDistanceForwardFactor);
+                break;
+            default:
+                break;
+            }
+        }
+    }
+
+    updateOpenGL();
+}
+\end{DoxyCode}
+\hypertarget{classSimulationView_acde2b2fb1ac01e85a8f8efbbe6717f12}{
+\index{\-Simulation\-View@{\-Simulation\-View}!reset\-Perspective@{reset\-Perspective}}
+\index{reset\-Perspective@{reset\-Perspective}!SimulationView@{\-Simulation\-View}}
+\subsubsection[{reset\-Perspective}]{\setlength{\rightskip}{0pt plus 5cm}void \-Simulation\-View\-::reset\-Perspective (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/df6/classSimulationView_acde2b2fb1ac01e85a8f8efbbe6717f12}
+
+
+\-Resets the perspective of the scene. 
+
+
+\begin{DoxyCode}
+{
+    perspective->setCamera(solarSystemSimulation->getMaxSemimajorAxis() * 
+      cameraZFactor * v_Z);
+    perspective->setCenter(v_Zero);
+    axisLength = perspective->distance() * axisLengthFactor;
+}
+\end{DoxyCode}
+\hypertarget{classSimulationView_ad1e431046ff2a7e774d92bbba6fded3b}{
+\index{\-Simulation\-View@{\-Simulation\-View}!set\-Solar\-System@{set\-Solar\-System}}
+\index{set\-Solar\-System@{set\-Solar\-System}!SimulationView@{\-Simulation\-View}}
+\subsubsection[{set\-Solar\-System}]{\setlength{\rightskip}{0pt plus 5cm}void \-Simulation\-View\-::set\-Solar\-System (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Solar\-System} $\ast$}]{solar\-System}
+\end{DoxyParamCaption}
+)}}
+\label{d9/df6/classSimulationView_ad1e431046ff2a7e774d92bbba6fded3b}
+
+
+\-Init the simulation. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em solar\-System} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    solarSystemSimulation->setSolarSystem(solarSystem);
+    resetPerspective();
+}
+\end{DoxyCode}
+\hypertarget{classSimulationView_a4198d47f7517525c5702a9bc6e1e9369}{
+\index{\-Simulation\-View@{\-Simulation\-View}!simulation\-Stopped@{simulation\-Stopped}}
+\index{simulation\-Stopped@{simulation\-Stopped}!SimulationView@{\-Simulation\-View}}
+\subsubsection[{simulation\-Stopped}]{\setlength{\rightskip}{0pt plus 5cm}void \-Simulation\-View\-::simulation\-Stopped (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}signal\mbox{]}}}}
+\label{d9/df6/classSimulationView_a4198d47f7517525c5702a9bc6e1e9369}
+\hypertarget{classSimulationView_ae7936c84b92f7ae64a772a9ba1422624}{
+\index{\-Simulation\-View@{\-Simulation\-View}!start\-Simulation@{start\-Simulation}}
+\index{start\-Simulation@{start\-Simulation}!SimulationView@{\-Simulation\-View}}
+\subsubsection[{start\-Simulation}]{\setlength{\rightskip}{0pt plus 5cm}void \-Simulation\-View\-::start\-Simulation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/df6/classSimulationView_ae7936c84b92f7ae64a772a9ba1422624}
+
+
+\-Starts the timer for the timer event. 
+
+
+\begin{DoxyCode}
+{
+    if (!timer->isActive())
+    {
+        timer->start(10);
+    }
+}
+\end{DoxyCode}
+\hypertarget{classSimulationView_ad51d8480373e82c73e3353c868df6f87}{
+\index{\-Simulation\-View@{\-Simulation\-View}!stop\-Simulation@{stop\-Simulation}}
+\index{stop\-Simulation@{stop\-Simulation}!SimulationView@{\-Simulation\-View}}
+\subsubsection[{stop\-Simulation}]{\setlength{\rightskip}{0pt plus 5cm}void \-Simulation\-View\-::stop\-Simulation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/df6/classSimulationView_ad51d8480373e82c73e3353c868df6f87}
+
+
+\-Freeze the simulation. 
+
+
+\begin{DoxyCode}
+{
+    if (timer->isActive())
+    {
+        timer->stop();
+        emit simulationStopped();
+    }
+}
+\end{DoxyCode}
+\hypertarget{classSimulationView_a712a4c812faec9a14699c1ceb1048337}{
+\index{\-Simulation\-View@{\-Simulation\-View}!toggle\-Coordinate\-Axes\-Visibility@{toggle\-Coordinate\-Axes\-Visibility}}
+\index{toggle\-Coordinate\-Axes\-Visibility@{toggle\-Coordinate\-Axes\-Visibility}!SimulationView@{\-Simulation\-View}}
+\subsubsection[{toggle\-Coordinate\-Axes\-Visibility}]{\setlength{\rightskip}{0pt plus 5cm}void \-Simulation\-View\-::toggle\-Coordinate\-Axes\-Visibility (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/df6/classSimulationView_a712a4c812faec9a14699c1ceb1048337}
+
+
+\-Toggle visibility of coordinates and redraw scene. 
+
+
+\begin{DoxyCode}
+{
+    environment->toggleCoordinateAxesVisibility();
+
+    update();
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+forms/simulation/\hyperlink{simulationview_8h}{simulationview.\-h}\item 
+forms/simulation/\hyperlink{simulationview_8cpp}{simulationview.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,387 @@
+\hypertarget{classSolarSystemTableModel}{
+\section{\-Solar\-System\-Table\-Model \-Class \-Reference}
+\label{dc/d37/classSolarSystemTableModel}\index{\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}}
+}
+
+
+{\ttfamily \#include $<$solarsystemtablemodel.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSolarSystemTableModel_a5157f0d683d312f7861ce3167780f1ed}{\-Solar\-System\-Table\-Model} ()
+\begin{DoxyCompactList}\small\item\em \-Default constructor. \end{DoxyCompactList}\item 
+int \hyperlink{classSolarSystemTableModel_a72917602c0d7fc4d59efec3dc5c34121}{row\-Count} (const \-Q\-Model\-Index \&parent=\-Q\-Model\-Index()) const 
+\begin{DoxyCompactList}\small\item\em \-Returns the number of rows. \end{DoxyCompactList}\item 
+int \hyperlink{classSolarSystemTableModel_a9b5c7dcbada0ef855863fef50733de98}{column\-Count} (const \-Q\-Model\-Index \&parent=\-Q\-Model\-Index()) const 
+\begin{DoxyCompactList}\small\item\em \-The column count is alway 4. \end{DoxyCompactList}\item 
+\-Q\-Variant \hyperlink{classSolarSystemTableModel_a6e706c80d315c4e57519dea4ac6bbeea}{data} (const \-Q\-Model\-Index \&index, int role) const 
+\begin{DoxyCompactList}\small\item\em \-Returns the report of the index in case of the role. \end{DoxyCompactList}\item 
+\-Q\-Variant \hyperlink{classSolarSystemTableModel_ab6f41e0affc9a36a3bdfa41bc6e91a79}{header\-Data} (int section, \-Qt\-::\-Orientation orientation, int role=\-Qt\-::\-Display\-Role) const 
+\begin{DoxyCompactList}\small\item\em \-Returns the header of the given column. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystemTableModel_ac5072386a5b96ace8a13d6aba6c94a82}{set\-Data} (\-Q\-List$<$ \hyperlink{classSolarSystem}{\-Solar\-System} $\ast$ $>$ entities)
+\begin{DoxyCompactList}\small\item\em \-Set the table data with the given entities. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystemTableModel_a042c3754415bb1663496b80f677ac339}{add\-Solar\-System} (\hyperlink{classSolarSystem}{\-Solar\-System} $\ast$solar\-System)
+\begin{DoxyCompactList}\small\item\em \-Add a solar system to the list. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystemTableModel_aa4822a831ab30e1baf05f6cb815f83c7}{delete\-Solar\-System} (\hyperlink{classSolarSystem}{\-Solar\-System} $\ast$solar\-System)
+\begin{DoxyCompactList}\small\item\em \-Remove solar system from list. \end{DoxyCompactList}\item 
+\hyperlink{classSolarSystem}{\-Solar\-System} $\ast$ \hyperlink{classSolarSystemTableModel_afe336ebf6069f087400edc501bfd1e68}{get\-Solar\-System} (int row)
+\begin{DoxyCompactList}\small\item\em \-Returns the entities at row. \end{DoxyCompactList}\item 
+int \hyperlink{classSolarSystemTableModel_aaa3593e268ef42ef4b0e705ce29697ed}{get\-Entity\-Count} ()
+\begin{DoxyCompactList}\small\item\em \-Returns number of solar systems in the list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class to model a list of solar systems.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classSolarSystemTableModel_a5157f0d683d312f7861ce3167780f1ed}{
+\index{\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}!\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}}
+\index{\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}!SolarSystemTableModel@{\-Solar\-System\-Table\-Model}}
+\subsubsection[{\-Solar\-System\-Table\-Model}]{\setlength{\rightskip}{0pt plus 5cm}\-Solar\-System\-Table\-Model\-::\-Solar\-System\-Table\-Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{dc/d37/classSolarSystemTableModel_a5157f0d683d312f7861ce3167780f1ed}
+
+
+\-Default constructor. 
+
+
+\begin{DoxyCode}
+    : QAbstractTableModel()
+{
+}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classSolarSystemTableModel_a042c3754415bb1663496b80f677ac339}{
+\index{\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}!add\-Solar\-System@{add\-Solar\-System}}
+\index{add\-Solar\-System@{add\-Solar\-System}!SolarSystemTableModel@{\-Solar\-System\-Table\-Model}}
+\subsubsection[{add\-Solar\-System}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-Table\-Model\-::add\-Solar\-System (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Solar\-System} $\ast$}]{solar\-System}
+\end{DoxyParamCaption}
+)}}
+\label{dc/d37/classSolarSystemTableModel_a042c3754415bb1663496b80f677ac339}
+
+
+\-Add a solar system to the list. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em solar\-System} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    if (solarSystem)
+    {
+        int size = entities.size() + 1;
+
+        beginInsertRows(QModelIndex(), size, size);
+        entities.append(solarSystem);
+        endInsertRows();
+    }
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemTableModel_a9b5c7dcbada0ef855863fef50733de98}{
+\index{\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}!column\-Count@{column\-Count}}
+\index{column\-Count@{column\-Count}!SolarSystemTableModel@{\-Solar\-System\-Table\-Model}}
+\subsubsection[{column\-Count}]{\setlength{\rightskip}{0pt plus 5cm}int \-Solar\-System\-Table\-Model\-::column\-Count (
+\begin{DoxyParamCaption}
+\item[{const \-Q\-Model\-Index \&}]{parent = {\ttfamily \-Q\-Model\-Index()}}
+\end{DoxyParamCaption}
+) const}}
+\label{dc/d37/classSolarSystemTableModel_a9b5c7dcbada0ef855863fef50733de98}
+
+
+\-The column count is alway 4. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em $\backslash$return} & int \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    return 4;
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemTableModel_a6e706c80d315c4e57519dea4ac6bbeea}{
+\index{\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}!data@{data}}
+\index{data@{data}!SolarSystemTableModel@{\-Solar\-System\-Table\-Model}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}\-Q\-Variant \-Solar\-System\-Table\-Model\-::data (
+\begin{DoxyParamCaption}
+\item[{const \-Q\-Model\-Index \&}]{index, }
+\item[{int}]{role}
+\end{DoxyParamCaption}
+) const}}
+\label{dc/d37/classSolarSystemTableModel_a6e706c80d315c4e57519dea4ac6bbeea}
+
+
+\-Returns the report of the index in case of the role. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em index} & \\
+\hline
+{\em role} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Q\-Variant 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    if (!index.isValid())
+    {
+        return QVariant();
+    }
+
+    SolarSystem *entity = entities.at(index.row());
+    QVariant value;
+
+    if (role == Qt::DisplayRole)
+    {
+        switch (index.column())
+        {
+        case 0:
+            value = QVariant(entity->getId());
+            break;
+        case 1:
+            value = QVariant(entity->getName());
+            break;
+        case 2:
+            value = QVariant(entity->getCentralStar()->getName());
+            break;
+        case 3:
+            value = QVariant(entity->getPlanetCount());
+            break;
+        }
+    }
+    else if (role == Qt::TextAlignmentRole)
+    {
+        if (index.column() == 0 || index.column() == 3)
+        {
+            value = QVariant(Qt::AlignRight | Qt::AlignVCenter);
+        }
+        else
+        {
+            value = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+        }
+    }
+
+    return value;
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemTableModel_aa4822a831ab30e1baf05f6cb815f83c7}{
+\index{\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}!delete\-Solar\-System@{delete\-Solar\-System}}
+\index{delete\-Solar\-System@{delete\-Solar\-System}!SolarSystemTableModel@{\-Solar\-System\-Table\-Model}}
+\subsubsection[{delete\-Solar\-System}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-Table\-Model\-::delete\-Solar\-System (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Solar\-System} $\ast$}]{solar\-System}
+\end{DoxyParamCaption}
+)}}
+\label{dc/d37/classSolarSystemTableModel_aa4822a831ab30e1baf05f6cb815f83c7}
+
+
+\-Remove solar system from list. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em solar\-System} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    if (solarSystem)
+    {
+        int size = entities.size() - 1;
+
+        beginRemoveRows(QModelIndex(), size, size);
+        entities.removeOne(solarSystem);
+        endRemoveRows();
+    }
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemTableModel_aaa3593e268ef42ef4b0e705ce29697ed}{
+\index{\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}!get\-Entity\-Count@{get\-Entity\-Count}}
+\index{get\-Entity\-Count@{get\-Entity\-Count}!SolarSystemTableModel@{\-Solar\-System\-Table\-Model}}
+\subsubsection[{get\-Entity\-Count}]{\setlength{\rightskip}{0pt plus 5cm}int \-Solar\-System\-Table\-Model\-::get\-Entity\-Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{dc/d37/classSolarSystemTableModel_aaa3593e268ef42ef4b0e705ce29697ed}
+
+
+\-Returns number of solar systems in the list. 
+
+\begin{DoxyReturn}{\-Returns}
+int 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    return entities.size();
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemTableModel_afe336ebf6069f087400edc501bfd1e68}{
+\index{\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}!get\-Solar\-System@{get\-Solar\-System}}
+\index{get\-Solar\-System@{get\-Solar\-System}!SolarSystemTableModel@{\-Solar\-System\-Table\-Model}}
+\subsubsection[{get\-Solar\-System}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Solar\-System} $\ast$ \-Solar\-System\-Table\-Model\-::get\-Solar\-System (
+\begin{DoxyParamCaption}
+\item[{int}]{row}
+\end{DoxyParamCaption}
+)}}
+\label{dc/d37/classSolarSystemTableModel_afe336ebf6069f087400edc501bfd1e68}
+
+
+\-Returns the entities at row. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em row} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\hyperlink{classSolarSystem}{\-Solar\-System} $\ast$ 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    if (row >= 0 && row < entities.size())
+    {
+        return entities.at(row);
+    }
+
+    return 0;
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemTableModel_ab6f41e0affc9a36a3bdfa41bc6e91a79}{
+\index{\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}!header\-Data@{header\-Data}}
+\index{header\-Data@{header\-Data}!SolarSystemTableModel@{\-Solar\-System\-Table\-Model}}
+\subsubsection[{header\-Data}]{\setlength{\rightskip}{0pt plus 5cm}\-Q\-Variant \-Solar\-System\-Table\-Model\-::header\-Data (
+\begin{DoxyParamCaption}
+\item[{int}]{section, }
+\item[{\-Qt\-::\-Orientation}]{orientation, }
+\item[{int}]{role = {\ttfamily \-Qt\-:\-:\-Display\-Role}}
+\end{DoxyParamCaption}
+) const}}
+\label{dc/d37/classSolarSystemTableModel_ab6f41e0affc9a36a3bdfa41bc6e91a79}
+
+
+\-Returns the header of the given column. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em section} & \\
+\hline
+{\em orientation} & \\
+\hline
+{\em role} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Q\-Variant 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    if (role != Qt::DisplayRole || orientation != Qt::Horizontal)
+    {
+        return QVariant();
+    }
+
+    QString columnHeader;
+
+    switch (section)
+    {
+    case 0:
+        columnHeader = "ID";
+        break;
+    case 1:
+        columnHeader = "Name";
+        break;
+    case 2:
+        columnHeader = "Central Star";
+        break;
+    case 3:
+        columnHeader = "Planet count";
+        break;
+    }
+
+    return columnHeader;
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemTableModel_a72917602c0d7fc4d59efec3dc5c34121}{
+\index{\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}!row\-Count@{row\-Count}}
+\index{row\-Count@{row\-Count}!SolarSystemTableModel@{\-Solar\-System\-Table\-Model}}
+\subsubsection[{row\-Count}]{\setlength{\rightskip}{0pt plus 5cm}int \-Solar\-System\-Table\-Model\-::row\-Count (
+\begin{DoxyParamCaption}
+\item[{const \-Q\-Model\-Index \&}]{parent = {\ttfamily \-Q\-Model\-Index()}}
+\end{DoxyParamCaption}
+) const}}
+\label{dc/d37/classSolarSystemTableModel_a72917602c0d7fc4d59efec3dc5c34121}
+
+
+\-Returns the number of rows. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em $\backslash$return} & int \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    return entities.size();
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemTableModel_ac5072386a5b96ace8a13d6aba6c94a82}{
+\index{\-Solar\-System\-Table\-Model@{\-Solar\-System\-Table\-Model}!set\-Data@{set\-Data}}
+\index{set\-Data@{set\-Data}!SolarSystemTableModel@{\-Solar\-System\-Table\-Model}}
+\subsubsection[{set\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-Table\-Model\-::set\-Data (
+\begin{DoxyParamCaption}
+\item[{\-Q\-List$<$ {\bf \-Solar\-System} $\ast$ $>$}]{entities}
+\end{DoxyParamCaption}
+)}}
+\label{dc/d37/classSolarSystemTableModel_ac5072386a5b96ace8a13d6aba6c94a82}
+
+
+\-Set the table data with the given entities. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em entities} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    this->entities.clear();
+    this->entities.append(entities);
+
+    reset();
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+model/solarsystem/\hyperlink{solarsystemtablemodel_8h}{solarsystemtablemodel.\-h}\item 
+model/solarsystem/\hyperlink{solarsystemtablemodel_8cpp}{solarsystemtablemodel.\-cpp}\end{DoxyCompactItemize}

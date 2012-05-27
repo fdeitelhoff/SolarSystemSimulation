@@ -1,0 +1,82 @@
+\hypertarget{classAbout}{
+\section{\-About \-Class \-Reference}
+\label{d9/d6d/classAbout}\index{\-About@{\-About}}
+}
+
+
+{\ttfamily \#include $<$about.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classAbout_ab79599ebbcdeffe0a96e00f010e64177}{\-About} (\-Q\-Widget $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em \-Open the about dialog. \end{DoxyCompactList}\item 
+\hyperlink{classAbout_ace60197b1b610998908036ee1f802204}{$\sim$\-About} ()
+\begin{DoxyCompactList}\small\item\em \-Close and delete the about dialog. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class to show the about dialog.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classAbout_ab79599ebbcdeffe0a96e00f010e64177}{
+\index{\-About@{\-About}!\-About@{\-About}}
+\index{\-About@{\-About}!About@{\-About}}
+\subsubsection[{\-About}]{\setlength{\rightskip}{0pt plus 5cm}\-About\-::\-About (
+\begin{DoxyParamCaption}
+\item[{\-Q\-Widget $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}explicit\mbox{]}}}}
+\label{d9/d6d/classAbout_ab79599ebbcdeffe0a96e00f010e64177}
+
+
+\-Open the about dialog. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+                            :
+    QDialog(parent),
+    ui(new Ui::About)
+{
+    ui->setupUi(this);
+
+    setWindowFlags(windowFlags() ^ Qt::WindowContextHelpButtonHint);
+}
+\end{DoxyCode}
+\hypertarget{classAbout_ace60197b1b610998908036ee1f802204}{
+\index{\-About@{\-About}!$\sim$\-About@{$\sim$\-About}}
+\index{$\sim$\-About@{$\sim$\-About}!About@{\-About}}
+\subsubsection[{$\sim$\-About}]{\setlength{\rightskip}{0pt plus 5cm}\-About\-::$\sim$\-About (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d9/d6d/classAbout_ace60197b1b610998908036ee1f802204}
+
+
+\-Close and delete the about dialog. 
+
+
+\begin{DoxyCode}
+{
+    delete ui;
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+forms/main/\hyperlink{about_8h}{about.\-h}\item 
+forms/main/\hyperlink{about_8cpp}{about.\-cpp}\end{DoxyCompactItemize}

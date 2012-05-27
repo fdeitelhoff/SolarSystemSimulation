@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$d8/df2/solarsystemsimulation_8h.html" title="simulation/solarsystemsimulation.h" alt="" coords="272,155,499,181"/>
+<area shape="rect" id="node18" href="$d6/db2/star3d_8h.html" title="visualization/heavenlybody/star3d.h" alt="" coords="119,80,348,107"/>
+<area shape="rect" id="node23" href="$d8/d81/planet3d_8h.html" title="visualization/heavenlybody/planet3d.h" alt="" coords="423,80,665,107"/>
+<area shape="rect" id="node28" href="$d8/d7f/heavenlybody3d_8cpp.html" title="visualization/heavenlybody/heavenlybody3d.cpp" alt="" coords="689,80,991,107"/>
+<area shape="rect" id="node5" href="$d8/d64/simulationview_8h.html" title="forms/simulation/simulationview.h" alt="" coords="276,229,495,256"/>
+<area shape="rect" id="node7" href="$d9/d53/mainwindow_8h.html" title="forms/main/mainwindow.h" alt="" coords="151,304,325,331"/>
+<area shape="rect" id="node16" href="$df/de8/solarsystemsimulation_8cpp.html" title="simulation/solarsystemsimulation.cpp" alt="" coords="519,229,759,256"/>
+<area shape="rect" id="node13" href="$da/db6/simulationview_8cpp.html" title="forms/simulation/simulationview.cpp" alt="" coords="350,304,583,331"/>
+<area shape="rect" id="node9" href="$d8/dd9/mainwindow_8cpp.html" title="forms/main/mainwindow.cpp" alt="" coords="67,379,255,405"/>
+<area shape="rect" id="node11" href="$df/d0a/main_8cpp.html" title="main.cpp" alt="" coords="280,379,353,405"/>
+<area shape="rect" id="node21" href="$d2/df4/star3d_8cpp.html" title="visualization/heavenlybody/star3d.cpp" alt="" coords="5,155,248,181"/>
+<area shape="rect" id="node26" href="$d6/d54/planet3d_8cpp.html" title="visualization/heavenlybody/planet3d.cpp" alt="" coords="523,155,779,181"/>
+</map>

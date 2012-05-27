@@ -1,0 +1,172 @@
+\hypertarget{classPostgreSQLDatabase}{
+\section{\-Postgre\-S\-Q\-L\-Database \-Class \-Reference}
+\label{dc/d2c/classPostgreSQLDatabase}\index{\-Postgre\-S\-Q\-L\-Database@{\-Postgre\-S\-Q\-L\-Database}}
+}
+
+
+{\ttfamily \#include $<$postgresqldatabase.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classPostgreSQLDatabase_a3814e1b3bfa2a3e7408a1e0855b28a45}{transaction} ()
+\begin{DoxyCompactList}\small\item\em \-Start database transaction. \end{DoxyCompactList}\item 
+void \hyperlink{classPostgreSQLDatabase_a267e5394770aa97c9e410bd3c9655a36}{commit} ()
+\begin{DoxyCompactList}\small\item\em \-Commit database operations. \end{DoxyCompactList}\item 
+void \hyperlink{classPostgreSQLDatabase_ac34287937b49aaa849627d987730ae2a}{rollback} ()
+\begin{DoxyCompactList}\small\item\em \-Rollback the database operations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classPostgreSQLDatabase}{\-Postgre\-S\-Q\-L\-Database} $\ast$ \hyperlink{classPostgreSQLDatabase_afe0a9795acbfa2917ec3668c0ea1045b}{get\-Instance} ()
+\begin{DoxyCompactList}\small\item\em \-Make \hyperlink{classPostgreSQLDatabase}{\-Postgre\-S\-Q\-L\-Database} \-Object if none exists. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPostgreSQLDatabase_a627b4814e824226495b41ad6db182094}{\-Postgre\-S\-Q\-L\-Database} ()
+\begin{DoxyCompactList}\small\item\em \-Establish database connection. \-On windows systems use \-O\-D\-B\-C, on other systems the native \-Postgre\-S\-Q\-L driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class for connect to database.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classPostgreSQLDatabase_a627b4814e824226495b41ad6db182094}{
+\index{\-Postgre\-S\-Q\-L\-Database@{\-Postgre\-S\-Q\-L\-Database}!\-Postgre\-S\-Q\-L\-Database@{\-Postgre\-S\-Q\-L\-Database}}
+\index{\-Postgre\-S\-Q\-L\-Database@{\-Postgre\-S\-Q\-L\-Database}!PostgreSQLDatabase@{\-Postgre\-S\-Q\-L\-Database}}
+\subsubsection[{\-Postgre\-S\-Q\-L\-Database}]{\setlength{\rightskip}{0pt plus 5cm}\-Postgre\-S\-Q\-L\-Database\-::\-Postgre\-S\-Q\-L\-Database (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{dc/d2c/classPostgreSQLDatabase_a627b4814e824226495b41ad6db182094}
+
+
+\-Establish database connection. \-On windows systems use \-O\-D\-B\-C, on other systems the native \-Postgre\-S\-Q\-L driver. 
+
+
+\begin{DoxyCode}
+{
+    #ifdef WIN32
+    // Connection over ODBC!. "SolarSystemSimulation" is the name of the ODBC
+       data source.
+    database = QSqlDatabase::addDatabase("QODBC");
+    database.setDatabaseName("SolarSystemSimulation");
+
+    #else
+    // Connection through the native PostgreSQL driver.
+    database = QSqlDatabase::addDatabase("QPSQL");
+    database.setHostName("localhost");
+    database.setDatabaseName("SolarSystemSimulation");
+    database.setUserName("postgres");
+    database.setPassword("postgres");
+    #endif
+
+    if (!database.open())
+    {
+        throw DatabaseConnectionFailedException("The database connection could
+       not be opened!",
+                                                database.lastError().text());
+    }
+}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classPostgreSQLDatabase_a267e5394770aa97c9e410bd3c9655a36}{
+\index{\-Postgre\-S\-Q\-L\-Database@{\-Postgre\-S\-Q\-L\-Database}!commit@{commit}}
+\index{commit@{commit}!PostgreSQLDatabase@{\-Postgre\-S\-Q\-L\-Database}}
+\subsubsection[{commit}]{\setlength{\rightskip}{0pt plus 5cm}void \-Postgre\-S\-Q\-L\-Database\-::commit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{dc/d2c/classPostgreSQLDatabase_a267e5394770aa97c9e410bd3c9655a36}
+
+
+\-Commit database operations. 
+
+
+\begin{DoxyCode}
+{
+    database.commit();
+}
+\end{DoxyCode}
+\hypertarget{classPostgreSQLDatabase_afe0a9795acbfa2917ec3668c0ea1045b}{
+\index{\-Postgre\-S\-Q\-L\-Database@{\-Postgre\-S\-Q\-L\-Database}!get\-Instance@{get\-Instance}}
+\index{get\-Instance@{get\-Instance}!PostgreSQLDatabase@{\-Postgre\-S\-Q\-L\-Database}}
+\subsubsection[{get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Postgre\-S\-Q\-L\-Database} $\ast$ \-Postgre\-S\-Q\-L\-Database\-::get\-Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{dc/d2c/classPostgreSQLDatabase_afe0a9795acbfa2917ec3668c0ea1045b}
+
+
+\-Make \hyperlink{classPostgreSQLDatabase}{\-Postgre\-S\-Q\-L\-Database} \-Object if none exists. 
+
+\begin{DoxyReturn}{\-Returns}
+\hyperlink{classPostgreSQLDatabase}{\-Postgre\-S\-Q\-L\-Database} $\ast$ \-Return the \hyperlink{classPostgreSQLDatabase}{\-Postgre\-S\-Q\-L\-Database} \-Object. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    if (!instance)
+    {
+        instance = new PostgreSQLDatabase();
+    }
+
+    return instance;
+}
+\end{DoxyCode}
+\hypertarget{classPostgreSQLDatabase_ac34287937b49aaa849627d987730ae2a}{
+\index{\-Postgre\-S\-Q\-L\-Database@{\-Postgre\-S\-Q\-L\-Database}!rollback@{rollback}}
+\index{rollback@{rollback}!PostgreSQLDatabase@{\-Postgre\-S\-Q\-L\-Database}}
+\subsubsection[{rollback}]{\setlength{\rightskip}{0pt plus 5cm}void \-Postgre\-S\-Q\-L\-Database\-::rollback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{dc/d2c/classPostgreSQLDatabase_ac34287937b49aaa849627d987730ae2a}
+
+
+\-Rollback the database operations. 
+
+
+\begin{DoxyCode}
+{
+    database.rollback();
+}
+\end{DoxyCode}
+\hypertarget{classPostgreSQLDatabase_a3814e1b3bfa2a3e7408a1e0855b28a45}{
+\index{\-Postgre\-S\-Q\-L\-Database@{\-Postgre\-S\-Q\-L\-Database}!transaction@{transaction}}
+\index{transaction@{transaction}!PostgreSQLDatabase@{\-Postgre\-S\-Q\-L\-Database}}
+\subsubsection[{transaction}]{\setlength{\rightskip}{0pt plus 5cm}void \-Postgre\-S\-Q\-L\-Database\-::transaction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{dc/d2c/classPostgreSQLDatabase_a3814e1b3bfa2a3e7408a1e0855b28a45}
+
+
+\-Start database transaction. 
+
+
+\begin{DoxyCode}
+{
+    database.transaction();
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+database/\hyperlink{postgresqldatabase_8h}{postgresqldatabase.\-h}\item 
+database/\hyperlink{postgresqldatabase_8cpp}{postgresqldatabase.\-cpp}\end{DoxyCompactItemize}

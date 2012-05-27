@@ -1,0 +1,582 @@
+\hypertarget{classSolarSystemRepository}{
+\section{\-Solar\-System\-Repository \-Class \-Reference}
+\label{d6/d91/classSolarSystemRepository}\index{\-Solar\-System\-Repository@{\-Solar\-System\-Repository}}
+}
+
+
+{\ttfamily \#include $<$solarsystemrepository.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSolarSystemRepository_a589048d551ee6482941b6f33e7bb3216}{\-Solar\-System\-Repository} ()
+\begin{DoxyCompactList}\small\item\em \-Constructor\-: \-Repository of the solar systems and their data. \end{DoxyCompactList}\item 
+\-Q\-List$<$ \hyperlink{classSolarSystem}{\-Solar\-System} $\ast$ $>$ \hyperlink{classSolarSystemRepository_ab69efdcd44ac869170b8999aa33c3dc8}{fetch\-All\-Solar\-System\-Entities} ()
+\begin{DoxyCompactList}\small\item\em \-Create a list of all solar systems stored in the database. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystemRepository_a84453eab458c2351540ec1942245da92}{insert\-Entity} (\hyperlink{classSolarSystem}{\-Solar\-System} $\ast$solar\-System)
+\begin{DoxyCompactList}\small\item\em \-Insert a new solar system. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystemRepository_a6d3957bdc392b00d697b56f8495beafb}{update\-Entity} (\hyperlink{classSolarSystem}{\-Solar\-System} $\ast$solar\-System)
+\begin{DoxyCompactList}\small\item\em \-Update the main components of the database. \-Name and central star. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystemRepository_a3747b0c12c0770c62b7f9beb22f2ef27}{delete\-Entity} (\hyperlink{classSolarSystem}{\-Solar\-System} $\ast$solar\-System)
+\begin{DoxyCompactList}\small\item\em \-Delete complete solarsystem. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystemRepository_a365ea92e0a2ec7ec683222e89c74356b}{insert\-Planet\-Entity} (\hyperlink{classSolarSystem}{\-Solar\-System} $\ast$solar\-System, \hyperlink{classSolarSystemHeavenlyBody}{\-Solar\-System\-Heavenly\-Body} $\ast$solar\-System\-Heavenly\-Body)
+\begin{DoxyCompactList}\small\item\em \-Add a new heavenly body to an existing solar system. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystemRepository_a0bd7f2f352c52cbc4b1e7f21fbd9518b}{update\-Planet\-Entity} (\hyperlink{classSolarSystem}{\-Solar\-System} $\ast$solar\-System, \hyperlink{classSolarSystemHeavenlyBody}{\-Solar\-System\-Heavenly\-Body} $\ast$solar\-System\-Heavenly\-Body, \hyperlink{classSolarSystemHeavenlyBody}{\-Solar\-System\-Heavenly\-Body} $\ast$old\-Solar\-System\-Heavenly\-Body)
+\begin{DoxyCompactList}\small\item\em \-Update the data of an existing solar system. \end{DoxyCompactList}\item 
+void \hyperlink{classSolarSystemRepository_a6073be89c1a6d7d895b51bbed8dddb24}{delete\-Planet\-Entity} (\hyperlink{classSolarSystem}{\-Solar\-System} $\ast$solar\-System, \hyperlink{classSolarSystemHeavenlyBody}{\-Solar\-System\-Heavenly\-Body} $\ast$solar\-System\-Heavenly\-Body)
+\begin{DoxyCompactList}\small\item\em \-Delete an existing heavenly body from a solar system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Class for solar system repository.
+
+\begin{DoxyAuthor}{\-Author}
+\-Fabian \-Deitelhoff $<$\href{mailto:FH@FabianDeitelhoff.de}{\tt \-F\-H@\-Fabian\-Deitelhoff.\-de}$>$ 
+
+\-Christof \-Geisler $<$\href{mailto:christof.geisler@stud.fh-swf.de}{\tt christof.\-geisler@stud.\-fh-\/swf.\-de}$>$ 
+\end{DoxyAuthor}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classSolarSystemRepository_a589048d551ee6482941b6f33e7bb3216}{
+\index{\-Solar\-System\-Repository@{\-Solar\-System\-Repository}!\-Solar\-System\-Repository@{\-Solar\-System\-Repository}}
+\index{\-Solar\-System\-Repository@{\-Solar\-System\-Repository}!SolarSystemRepository@{\-Solar\-System\-Repository}}
+\subsubsection[{\-Solar\-System\-Repository}]{\setlength{\rightskip}{0pt plus 5cm}\-Solar\-System\-Repository\-::\-Solar\-System\-Repository (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d6/d91/classSolarSystemRepository_a589048d551ee6482941b6f33e7bb3216}
+
+
+\-Constructor\-: \-Repository of the solar systems and their data. 
+
+
+\begin{DoxyCode}
+{
+    database = PostgreSQLDatabase::getInstance();
+}
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classSolarSystemRepository_a3747b0c12c0770c62b7f9beb22f2ef27}{
+\index{\-Solar\-System\-Repository@{\-Solar\-System\-Repository}!delete\-Entity@{delete\-Entity}}
+\index{delete\-Entity@{delete\-Entity}!SolarSystemRepository@{\-Solar\-System\-Repository}}
+\subsubsection[{delete\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-Repository\-::delete\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Solar\-System} $\ast$}]{solar\-System}
+\end{DoxyParamCaption}
+)}}
+\label{d6/d91/classSolarSystemRepository_a3747b0c12c0770c62b7f9beb22f2ef27}
+
+
+\-Delete complete solarsystem. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em solar\-System} & \-Solar system to delete. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    database->getInstance()->transaction();
+
+    // Delete all planets of the solar system first!
+    QSqlQuery deleteSolarSystemPlanetsQuery;
+    deleteSolarSystemPlanetsQuery.prepare("DELETE FROM "
+                                          "     solarsystemtoheavenlybody "
+                                          "WHERE "
+                                          "     solarsystemid = :solarsystemid"
+      );
+
+    deleteSolarSystemPlanetsQuery.bindValue(":solarsystemid", solarSystem->getId
+      ());
+
+    if (!deleteSolarSystemPlanetsQuery.exec())
+    {
+        database->getInstance()->rollback();
+
+        throw SqlQueryException("No planet of the solar system could be
+       deleted!",
+                                deleteSolarSystemPlanetsQuery.lastError().text(
+      ));
+    }
+
+    // Now delete the solar system!
+    QSqlQuery deleteSolarSystemQuery;
+    deleteSolarSystemQuery.prepare("DELETE FROM "
+                                   "     solarsystem "
+                                   "WHERE "
+                                   "     solarsystemid = :solarsystemid");
+
+    deleteSolarSystemQuery.bindValue(":solarsystemid", solarSystem->getId());
+
+    if (!deleteSolarSystemQuery.exec())
+    {
+        database->getInstance()->rollback();
+
+        throw SqlQueryException("The solar system could not be deleted!",
+                                deleteSolarSystemQuery.lastError().text());
+    }
+
+    database->getInstance()->commit();
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemRepository_a6073be89c1a6d7d895b51bbed8dddb24}{
+\index{\-Solar\-System\-Repository@{\-Solar\-System\-Repository}!delete\-Planet\-Entity@{delete\-Planet\-Entity}}
+\index{delete\-Planet\-Entity@{delete\-Planet\-Entity}!SolarSystemRepository@{\-Solar\-System\-Repository}}
+\subsubsection[{delete\-Planet\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-Repository\-::delete\-Planet\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Solar\-System} $\ast$}]{solar\-System, }
+\item[{{\bf \-Solar\-System\-Heavenly\-Body} $\ast$}]{solar\-System\-Heavenly\-Body}
+\end{DoxyParamCaption}
+)}}
+\label{d6/d91/classSolarSystemRepository_a6073be89c1a6d7d895b51bbed8dddb24}
+
+
+\-Delete an existing heavenly body from a solar system. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em solar\-System} & \-Solar system to change. \\
+\hline
+{\em solar\-System\-Heavenly\-Body} & \-Heavenly body to be deleted. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    QSqlQuery deletePlanetQuery;
+    deletePlanetQuery.prepare("DELETE FROM "
+                              "     solarsystemtoheavenlybody "
+                              "WHERE "
+                              "     solarsystemid = :solarsystemid "
+                              "AND "
+                              "     heavenlybodyid = :heavenlybodyid "
+                              "AND "
+                              "     excentricity = :excentricity "
+                              "AND "
+                              "     semimajoraxis = :semimajoraxis "
+                              "AND "
+                              "     angle = :angle "
+                              "AND "
+                              "     orbitalplaneangle = :orbitalplaneangle");
+
+    deletePlanetQuery.bindValue(":solarsystemid", solarSystem->getId());
+    deletePlanetQuery.bindValue(":heavenlybodyid", solarSystemHeavenlyBody->
+      getHeavenlyBody()->getId());
+    deletePlanetQuery.bindValue(":excentricity", solarSystemHeavenlyBody->
+      getNumericExcentricity());
+    deletePlanetQuery.bindValue(":semimajoraxis", solarSystemHeavenlyBody->
+      getSemimajorAxis());
+    deletePlanetQuery.bindValue(":angle", solarSystemHeavenlyBody->getAngle());
+    deletePlanetQuery.bindValue(":orbitalplaneangle", solarSystemHeavenlyBody->
+      getOrbitalPlaneAngle());
+
+    if (!deletePlanetQuery.exec())
+    {
+        throw SqlQueryException("The planet could not be deleted from the solar
+       system!",
+                                deletePlanetQuery.lastError().text());
+    }
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemRepository_ab69efdcd44ac869170b8999aa33c3dc8}{
+\index{\-Solar\-System\-Repository@{\-Solar\-System\-Repository}!fetch\-All\-Solar\-System\-Entities@{fetch\-All\-Solar\-System\-Entities}}
+\index{fetch\-All\-Solar\-System\-Entities@{fetch\-All\-Solar\-System\-Entities}!SolarSystemRepository@{\-Solar\-System\-Repository}}
+\subsubsection[{fetch\-All\-Solar\-System\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}\-Q\-List$<$ {\bf \-Solar\-System} $\ast$ $>$ \-Solar\-System\-Repository\-::fetch\-All\-Solar\-System\-Entities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{d6/d91/classSolarSystemRepository_ab69efdcd44ac869170b8999aa33c3dc8}
+
+
+\-Create a list of all solar systems stored in the database. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Q\-List$<$\-Heavenly\-Body $\ast$$>$ \-List of all stored solar systems including all data. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    QSqlQuery solarSystemQuery;
+    solarSystemQuery.prepare("SELECT"
+                             "     solarsystemid, "
+                             "     solarsystem.name, "
+                             "     heavenlybodyid, "
+                             "     heavenlybody.name, "
+                             "     diameter, "
+                             "     color, "
+                             "     type "
+                             "FROM "
+                             "     solarsystem "
+                             "INNER JOIN "
+                             "     heavenlybody "
+                             "ON "
+                             "     centralstarid = heavenlybodyid "
+                             "ORDER BY "
+                             "     solarsystem.name, "
+                             "     solarsystemid");
+
+    if (!solarSystemQuery.exec())
+    {
+        throw SqlQueryException("The solar system entities could not be
+       retrieved!",
+                                solarSystemQuery.lastError().text());
+    }
+
+    QList<SolarSystem *> entities;
+
+    QSqlQuery innerQuery;
+    innerQuery.prepare("SELECT"
+                  "     excentricity, "
+                  "     semimajoraxis, "
+                  "     angle, "
+                  "     orbitalplaneangle, "
+                  "     heavenlybody.heavenlybodyid, "
+                  "     heavenlybody.name, "
+                  "     diameter, "
+                  "     color, "
+                  "     type "
+                  "FROM "
+                  "     solarsystemtoheavenlybody "
+                  "INNER JOIN "
+                  "     heavenlybody "
+                  "ON "
+                  "     solarsystemtoheavenlybody.heavenlybodyid =
+       heavenlybody.heavenlybodyid "
+                  "WHERE "
+                  "     solarsystemid = :solarsystemid "
+                  "ORDER BY "
+                  "     semimajoraxis");
+
+    while (solarSystemQuery.next())
+    {
+        // The solar system data.
+        qint64 solarSystemId = solarSystemQuery.value(0).toLongLong();
+        QString solarSystemName = solarSystemQuery.value(1).toString();
+
+        // The central star data.
+        qint64 id = solarSystemQuery.value(2).toLongLong();
+        QString name = solarSystemQuery.value(3).toString();
+        int diameter = solarSystemQuery.value(4).toInt();
+        QString color = solarSystemQuery.value(5).toString();
+        QString type = solarSystemQuery.value(6).toString();
+
+        SolarSystem *solarSystem = new SolarSystem(solarSystemId,
+                                                   solarSystemName,
+                                                   new HeavenlyBody(id, name, 
+      diameter, color, type));
+
+        innerQuery.bindValue(":solarsystemid", solarSystemId);
+
+        // If there was an error in the inner query the _complete_ execution is
+       canceled here!
+        if (!innerQuery.exec())
+        {
+            throw SqlQueryException("The solar system heavenly bodies could not
+       be retrieved!",
+                                    innerQuery.lastError().text());
+        }
+
+        while (innerQuery.next())
+        {
+            // The planet within the solar system.
+            SolarSystemHeavenlyBody *solarSystemHeavenlyBody = new 
+      SolarSystemHeavenlyBody(
+                        new HeavenlyBody(innerQuery.value(4).toLongLong(),
+                                         innerQuery.value(5).toString(),
+                                         innerQuery.value(6).toInt(),
+                                         innerQuery.value(7).toString(),
+                                         innerQuery.value(8).toString()),
+                        innerQuery.value(0).toDouble(),
+                        innerQuery.value(1).toDouble(),
+                        innerQuery.value(2).toDouble(),
+                        innerQuery.value(3).toDouble());
+
+            solarSystem->addHeavenlyBody(solarSystemHeavenlyBody);
+        }
+
+        entities.append(solarSystem);
+    }
+
+    return entities;
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemRepository_a84453eab458c2351540ec1942245da92}{
+\index{\-Solar\-System\-Repository@{\-Solar\-System\-Repository}!insert\-Entity@{insert\-Entity}}
+\index{insert\-Entity@{insert\-Entity}!SolarSystemRepository@{\-Solar\-System\-Repository}}
+\subsubsection[{insert\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-Repository\-::insert\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Solar\-System} $\ast$}]{solar\-System}
+\end{DoxyParamCaption}
+)}}
+\label{d6/d91/classSolarSystemRepository_a84453eab458c2351540ec1942245da92}
+
+
+\-Insert a new solar system. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em solar\-System} & \-Object of the new solar system. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    // Check if the solar system is unique (only the name until now).
+    if (!isSolarSystemUnique(solarSystem))
+    {
+        throw EntityNotUniqueException("The name of the solar system is not
+       unique! Please choose another one.");
+    }
+
+    QSqlQuery insertSolarSystemQuery;
+    insertSolarSystemQuery.prepare("INSERT INTO solarsystem "
+                                   "     (name, "
+                                   "      centralstarid) "
+                                   "VALUES "
+                                   "     (:name, "
+                                   "      :centralstarid) "
+                                   "RETURNING "
+                                   "     solarsystemid");
+
+    insertSolarSystemQuery.bindValue(":name", solarSystem->getName());
+    insertSolarSystemQuery.bindValue(":centralstarid", solarSystem->
+      getCentralStar()->getId());
+
+    if (!insertSolarSystemQuery.exec())
+    {
+        throw SqlQueryException("The solar system could not be inserted!",
+                                insertSolarSystemQuery.lastError().text());
+    }
+
+    if (!insertSolarSystemQuery.next())
+    {
+        throw SqlQueryException("The last inserted solar system id could not be
+       retrieved!",
+                                insertSolarSystemQuery.lastError().text());
+    }
+
+    qint64 id = insertSolarSystemQuery.record().value("solarsystemid").
+      toLongLong();
+
+    if (id <= 0)
+    {
+        throw SqlQueryException("The last inserted solar system id could not be
+       retrieved!",
+                                insertSolarSystemQuery.lastError().text());
+    }
+
+    solarSystem->setId(id);
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemRepository_a365ea92e0a2ec7ec683222e89c74356b}{
+\index{\-Solar\-System\-Repository@{\-Solar\-System\-Repository}!insert\-Planet\-Entity@{insert\-Planet\-Entity}}
+\index{insert\-Planet\-Entity@{insert\-Planet\-Entity}!SolarSystemRepository@{\-Solar\-System\-Repository}}
+\subsubsection[{insert\-Planet\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-Repository\-::insert\-Planet\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Solar\-System} $\ast$}]{solar\-System, }
+\item[{{\bf \-Solar\-System\-Heavenly\-Body} $\ast$}]{solar\-System\-Heavenly\-Body}
+\end{DoxyParamCaption}
+)}}
+\label{d6/d91/classSolarSystemRepository_a365ea92e0a2ec7ec683222e89c74356b}
+
+
+\-Add a new heavenly body to an existing solar system. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em solar\-System} & \-Solar system which is to expand. \\
+\hline
+{\em solar\-System\-Heavenly\-Body} & \-The new heavenly body in the solar system. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    if (!isSolarSystemHeavenlyBodyUnique(solarSystem, solarSystemHeavenlyBody))
+    {
+        throw EntityNotUniqueException("The solar system heavenly body is not
+       unique!");
+    }
+
+    QSqlQuery insertPlanetQuery;
+    insertPlanetQuery.prepare("INSERT INTO solarsystemtoheavenlybody"
+                              "     (solarsystemid, "
+                              "      heavenlybodyid, "
+                              "      excentricity, "
+                              "      semimajoraxis, "
+                              "      angle, "
+                              "      orbitalplaneangle) "
+                              "VALUES "
+                              "     (:solarsystemid, "
+                              "      :heavenlybodyid, "
+                              "      :excentricity, "
+                              "      :semimajoraxis, "
+                              "      :angle, "
+                              "      :orbitalplaneangle)");
+
+    insertPlanetQuery.bindValue(":solarsystemid", solarSystem->getId());
+    insertPlanetQuery.bindValue(":heavenlybodyid", solarSystemHeavenlyBody->
+      getHeavenlyBody()->getId());
+    insertPlanetQuery.bindValue(":excentricity", solarSystemHeavenlyBody->
+      getNumericExcentricity());
+    insertPlanetQuery.bindValue(":semimajoraxis", solarSystemHeavenlyBody->
+      getSemimajorAxis());
+    insertPlanetQuery.bindValue(":angle", solarSystemHeavenlyBody->getAngle());
+    insertPlanetQuery.bindValue(":orbitalplaneangle", solarSystemHeavenlyBody->
+      getOrbitalPlaneAngle());
+
+    if (!insertPlanetQuery.exec())
+    {
+        throw SqlQueryException("The planet could not inserted to the solar
+       system!",
+                                insertPlanetQuery.lastError().text());
+    }
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemRepository_a6d3957bdc392b00d697b56f8495beafb}{
+\index{\-Solar\-System\-Repository@{\-Solar\-System\-Repository}!update\-Entity@{update\-Entity}}
+\index{update\-Entity@{update\-Entity}!SolarSystemRepository@{\-Solar\-System\-Repository}}
+\subsubsection[{update\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-Repository\-::update\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Solar\-System} $\ast$}]{solar\-System}
+\end{DoxyParamCaption}
+)}}
+\label{d6/d91/classSolarSystemRepository_a6d3957bdc392b00d697b56f8495beafb}
+
+
+\-Update the main components of the database. \-Name and central star. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em solar\-System} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    // Check if the solar system is unique (only the name until now).
+    if (!isSolarSystemUnique(solarSystem))
+    {
+        throw EntityNotUniqueException("The name of the solar system is not
+       unique! Please choose another one.");
+    }
+
+    QSqlQuery updateSolarSystemQuery;
+    updateSolarSystemQuery.prepare("UPDATE "
+                                   "     solarsystem "
+                                   "SET "
+                                   "     name = :name, "
+                                   "     centralstarid = :centralstarid "
+                                   "WHERE "
+                                   "     solarsystemid = :solarsystemid");
+
+    updateSolarSystemQuery.bindValue(":name", solarSystem->getName());
+    updateSolarSystemQuery.bindValue(":centralstarid", solarSystem->
+      getCentralStar()->getId());
+    updateSolarSystemQuery.bindValue(":solarsystemid", solarSystem->getId());
+
+    if (!updateSolarSystemQuery.exec())
+    {
+        throw SqlQueryException("The solar system could not be updated!",
+                                updateSolarSystemQuery.lastError().text());
+    }
+}
+\end{DoxyCode}
+\hypertarget{classSolarSystemRepository_a0bd7f2f352c52cbc4b1e7f21fbd9518b}{
+\index{\-Solar\-System\-Repository@{\-Solar\-System\-Repository}!update\-Planet\-Entity@{update\-Planet\-Entity}}
+\index{update\-Planet\-Entity@{update\-Planet\-Entity}!SolarSystemRepository@{\-Solar\-System\-Repository}}
+\subsubsection[{update\-Planet\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}void \-Solar\-System\-Repository\-::update\-Planet\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Solar\-System} $\ast$}]{solar\-System, }
+\item[{{\bf \-Solar\-System\-Heavenly\-Body} $\ast$}]{solar\-System\-Heavenly\-Body, }
+\item[{{\bf \-Solar\-System\-Heavenly\-Body} $\ast$}]{old\-Solar\-System\-Heavenly\-Body}
+\end{DoxyParamCaption}
+)}}
+\label{d6/d91/classSolarSystemRepository_a0bd7f2f352c52cbc4b1e7f21fbd9518b}
+
+
+\-Update the data of an existing solar system. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em solar\-System} & \-Name of the solar system to be updated. \\
+\hline
+{\em solar\-System\-Heavenly\-Body} & \-New parameters of the solar system. \\
+\hline
+{\em old\-Solar\-System\-Heavenly\-Body} & \-Old parameter of the solar system. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    if (!isSolarSystemHeavenlyBodyUnique(solarSystem, solarSystemHeavenlyBody))
+    {
+        throw EntityNotUniqueException("The solar system heavenly body is not
+       unique!");
+    }
+
+    QSqlQuery editPlanetQuery;
+    editPlanetQuery.prepare("UPDATE "
+                            "       solarsystemtoheavenlybody "
+                            "SET "
+                            "       heavenlybodyid = :heavenlybodyid, "
+                            "       excentricity = :excentricity, "
+                            "       semimajoraxis = :semimajoraxis, "
+                            "       angle = :angle, "
+                            "       orbitalplaneangle = :orbitalplaneangle "
+                            "WHERE "
+                            "       solarsystemid = :solarsystemid "
+                            "AND "
+                            "       heavenlybodyid = :oldHeavenlybodyid "
+                            "AND "
+                            "       excentricity = :oldExcentricity "
+                            "AND "
+                            "       semimajoraxis = :oldSemimajoraxis "
+                            "AND "
+                            "       angle = :oldAngle "
+                            "AND "
+                            "       orbitalplaneangle = :oldOrbitalplaneangle")
+      ;
+
+    editPlanetQuery.bindValue(":solarsystemid", solarSystem->getId());
+    editPlanetQuery.bindValue(":heavenlybodyid", solarSystemHeavenlyBody->
+      getHeavenlyBody()->getId());
+    editPlanetQuery.bindValue(":excentricity", solarSystemHeavenlyBody->
+      getNumericExcentricity());
+    editPlanetQuery.bindValue(":semimajoraxis", solarSystemHeavenlyBody->
+      getSemimajorAxis());
+    editPlanetQuery.bindValue(":angle", solarSystemHeavenlyBody->getAngle());
+    editPlanetQuery.bindValue(":orbitalplaneangle", solarSystemHeavenlyBody->
+      getOrbitalPlaneAngle());
+
+    editPlanetQuery.bindValue(":oldHeavenlybodyid", oldSolarSystemHeavenlyBody
+      ->getHeavenlyBody()->getId());
+    editPlanetQuery.bindValue(":oldExcentricity", oldSolarSystemHeavenlyBody->
+      getNumericExcentricity());
+    editPlanetQuery.bindValue(":oldSemimajoraxis", oldSolarSystemHeavenlyBody->
+      getSemimajorAxis());
+    editPlanetQuery.bindValue(":oldAngle", oldSolarSystemHeavenlyBody->getAngle
+      ());
+    editPlanetQuery.bindValue(":oldOrbitalplaneangle", 
+      oldSolarSystemHeavenlyBody->getOrbitalPlaneAngle());
+
+    if (!editPlanetQuery.exec())
+    {
+        throw SqlQueryException("The planet could not updated in the database!"
+      ,
+                                editPlanetQuery.lastError().text());
+    }
+}
+\end{DoxyCode}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+data/solarsystem/\hyperlink{solarsystemrepository_8h}{solarsystemrepository.\-h}\item 
+data/solarsystem/\hyperlink{solarsystemrepository_8cpp}{solarsystemrepository.\-cpp}\end{DoxyCompactItemize}
