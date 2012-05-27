@@ -1,2 +1,3 @@
-/Doxygen
+/Doxygen/html/*
+/Doxygen/latex/*
 /SolarSystemSimulation.pro.user
