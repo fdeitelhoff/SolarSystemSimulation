@@ -18,4 +18,4 @@ The connection has to be changed directly in code. See the class _PostgreSQLData
 
 Installation
 ------------
-There is a manual in german language in documentation/german/Manual.pdf
+There is a manual in german language in documentation/de_De/manual.pdf
