@@ -316,3 +316,17 @@ void MainWindow::closeEvent(QCloseEvent *event)
         event->accept();
     }
 }
+
+/*!
+ \brief Show the language depending manual (PDF) in the system default reader.
+
+*/
+void MainWindow::on_actionShowHelp_triggered()
+{
+    QString defaultLocale = QLocale::system().name();
+
+    QString manualPath = QApplication::applicationDirPath();
+    manualPath.append(QString("/documentation/%1/manual.pdf").arg(defaultLocale));
+
+    QDesktopServices::openUrl(QUrl("file:///" + manualPath));
+}

@@ -6,6 +6,8 @@
 #include <QLayout>
 #include <QCloseEvent>
 #include <QLocale>
+#include <QDesktopServices>
+#include <QUrl>
 
 #include "forms/heavenlybody/heavenlybodyoverview.h"
 #include "forms/solarsystem/solarsystemoverview.h"
@@ -86,6 +88,8 @@ private slots:
     void on_actionCoordinatesVisible_triggered();
 
     void on_actionAboutThisApplication_triggered();
+
+    void on_actionShowHelp_triggered();
 
     void simulateSolarSystem(SolarSystem *solarSystem);
 
