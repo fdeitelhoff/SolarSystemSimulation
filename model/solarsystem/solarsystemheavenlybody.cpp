@@ -90,9 +90,9 @@ void SolarSystemHeavenlyBody::setNumericExcentricity(double numericExcentricity)
 */
 void SolarSystemHeavenlyBody::setSemimajorAxis(double semimajorAxis)
 {
-    if (semimajorAxis <= 0)
+    if (semimajorAxis <= 0 || semimajorAxis > 10000)
     {
-        throw PropertyNotValidException("Semimajor Axis", "The field '%1' has to be larger than 0!");
+        throw PropertyNotValidException("Semimajor Axis", "The field '%1' has to be between 0 and 10.000!");
     }
 
     this->semimajorAxis = semimajorAxis;
