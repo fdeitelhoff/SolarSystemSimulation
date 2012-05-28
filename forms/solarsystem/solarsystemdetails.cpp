@@ -91,6 +91,8 @@ SolarSystemDetails::SolarSystemDetails(QWidget *parent, SolarSystemModel *solarS
         ui->planets->setCurrentIndex(0);
     }
 
+    isExenctricityValueChangedActive = true;
+
     ui->planetsTableView->setItemDelegate(new SolarSystemItemDelegate(solarSystemModel));
 
     ui->planetsTableView->setColumnWidth(0, 50);
@@ -175,12 +177,34 @@ void SolarSystemDetails::starSelected(int index)
 }
 
 /*!
+ \brief Connect text field and slider.
+
+*/
+void SolarSystemDetails::on_excentricityEdit_textChanged()
+{
+    isExenctricityValueChangedActive = false;
+
+    bool ok = true;
+    double currentExcentricity = ui->excentricityEdit->text().toDouble(&ok);
+
+    if (ok)
+    {
+        ui->excentricity->setValue(currentExcentricity * 100);
+    }
+
+    isExenctricityValueChangedActive = true;
+}
+
+/*!
  \brief Connect slider and text field.
 
 */
 void SolarSystemDetails::on_excentricity_valueChanged()
 {
-    ui->excentricityEdit->setText(QString::number(ui->excentricity->value() / 100.0));
+    if (isExenctricityValueChangedActive)
+    {
+        ui->excentricityEdit->setText(QString::number(ui->excentricity->value() / 100.0));
+    }
 }
 
 /*!

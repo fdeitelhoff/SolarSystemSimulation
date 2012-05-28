@@ -55,6 +55,7 @@ private:
     SolarSystemModel *solarSystemModel;
 
     bool isEdit;
+    bool isExenctricityValueChangedActive;
 
     void setPlanetManagementActive(bool isActive);
     bool updateOrCreateSolarSystem();
@@ -65,6 +66,7 @@ private slots:
     void on_ok_clicked();
     void on_cancel_clicked();
 
+    void on_excentricityEdit_textChanged();
     void on_excentricity_valueChanged();
 
     void on_addPlanet_clicked();
