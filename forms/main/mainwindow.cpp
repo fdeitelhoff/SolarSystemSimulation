@@ -325,8 +325,12 @@ void MainWindow::on_actionShowHelp_triggered()
 {
     QString defaultLocale = QLocale::system().name();
 
-    QString manualPath = QApplication::applicationDirPath();
-    manualPath.append(QString("/documentation/%1/manual.pdf").arg(defaultLocale));
+    QString path = QApplication::applicationDirPath();
+    QDir dir = QDir(path);
+    dir.cdUp();
+    dir.cdUp();
+    QString parentPath = dir.absolutePath();
+    QString manualPath = QString("%1/SolarSystemSimulation/documentation/%2/manual.pdf").arg(parentPath).arg(defaultLocale);
 
     QDesktopServices::openUrl(QUrl("file:///" + manualPath));
 }

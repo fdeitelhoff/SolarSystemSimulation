@@ -8,6 +8,7 @@
 #include <QLocale>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QDir>
 
 #include "forms/heavenlybody/heavenlybodyoverview.h"
 #include "forms/solarsystem/solarsystemoverview.h"

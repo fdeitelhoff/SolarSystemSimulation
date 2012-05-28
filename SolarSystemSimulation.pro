@@ -128,3 +128,13 @@ OTHER_FILES += \
 RESOURCES += \
     forms/ressources/Ressources.qrc
 
+#CONFIG(release, debug|release) {
+#    DESTDIR = release
+#} else {
+#    DESTDIR = debug
+#}
+
+#copyfiles.commands += $${QMAKE_COPY} ..\\$${TARGET}\\documentation\\de_DE\\manual.pdf $${DESTDIR}\\documentation\\de_DE\\manual.pdf
+
+#QMAKE_EXTRA_TARGETS += copyfiles
+#POST_TARGETDEPS += copyfiles
