@@ -327,8 +327,14 @@ void MainWindow::on_actionShowHelp_triggered()
 
     QString path = QApplication::applicationDirPath();
     QDir dir = QDir(path);
+    #ifdef WIN32
     dir.cdUp();
     dir.cdUp();
+
+    #else
+    dir.cdUp();
+    #endif
+
     QString parentPath = dir.absolutePath();
     QString manualPath = QString("%1/SolarSystemSimulation/documentation/%2/manual.pdf").arg(parentPath).arg(defaultLocale);
 
