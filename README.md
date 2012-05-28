@@ -15,3 +15,7 @@ Until now the project is created with the Qt-Creator and can be compiled with Qt
 The database connection can be established with ODBC or an native driver. Until now it is developed with a PostgreSQL database.
 
 The connection has to be changed directly in code. See the class _PostgreSQLDatabase_.  
+
+Installation
+------------
+There is a manual in german language in documentation/german/Manual.pdf
